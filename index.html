@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talha Farooq Awan — Product designer</title>
+<meta name="description" content="Product designer with six years across aviation, dispatch, edtech, crypto and fintech, turning messy problems into simple products.">
+<meta name="theme-color" content="#f2f3f0">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Inter is for the work card thumbnails only, where they show product type: the offer
+     card's counting totals (400–700), the compliance card's verdict chips (500, 600),
+     the SMS card's report (400, 600, 700), the instructor card's tablet (400–700) and
+     the training card's record (400, 600, 700). Plus Jakarta Sans (600, 700) and Geist
+     (400, 600) are the HX Insight card's product type; it also uses Geist Mono 500. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,600&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/offer-thumb.css">
+<link rel="stylesheet" href="css/compliance-thumb.css">
+<link rel="stylesheet" href="css/sms-thumb.css">
+<link rel="stylesheet" href="css/tablet-thumb.css">
+<link rel="stylesheet" href="css/training-thumb.css">
+<link rel="stylesheet" href="css/hx-thumb.css">
+<link rel="stylesheet" href="css/motion.css">
+<script>
+  /* Entrance states in motion.css are scoped to .motion, so the page renders in
+     full with scripting off or reduced motion on. If main.js hasn't started
+     within 2.5s, drop the class rather than leave anything hidden. */
+  (function (root) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    root.classList.add('motion');
+    setTimeout(function () { if (!window.__motion) root.classList.remove('motion'); }, 2500);
+  })(document.documentElement);
+</script>
+<script src="js/offer-thumb.js" defer></script>
+<script src="js/compliance-thumb.js" defer></script>
+<script src="js/sms-thumb.js" defer></script>
+<script src="js/tablet-thumb.js" defer></script>
+<script src="js/training-thumb.js" defer></script>
+<script src="js/hx-thumb.js" defer></script>
+<script src="js/main.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 16 16">
+    <path d="M4.5 11.5L11.5 4.5M11.5 10.5V4.5H5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================================================================
+     H1 · Nav — S5 sticky. Links S4; on Home no link is current.
+     Get in touch: S1. No entrance, so links work from frame one.
+     ================================================================ -->
+<header class="nav" data-nav>
+  <div class="container nav__inner">
+    <a class="brand" href="#top">
+      <span class="brand__avatar"><img src="assets/talha-avatar.jpg" alt="" width="36" height="36"></span>
+      <span class="brand__name">
+        <span class="brand__title">Talha Farooq Awan</span>
+        <span class="brand__role">Product designer</span>
+      </span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>Menu</button>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="#work">Work</a></li>
+        <li><a class="nav-link" href="#approach">Approach</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+      </ul>
+      <a class="btn-primary" href="#contact">
+        <span>Get in touch</span>
+        <span class="btn-primary__tile"><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================================================================
+       H2 · Hero intro — on load. Eyebrow fade; headline S11 per word,
+       line 1 then line 2; photo pops at 180ms; "simple" turns accent;
+       row rule S9 at 500ms; subtext + CTAs S6 at 600ms. Under 1.3s.
+       ================================================================ -->
+  <section class="hero container" aria-labelledby="hero-title" data-hero>
+    <div class="hero__head">
+      <p class="eyebrow mono-label" data-fade>
+        <span class="eyebrow__signal" aria-hidden="true"></span>
+        Product designer  ·  Hard problems, clear ideas
+      </p>
+
+      <h1 class="hero__title display-xl" id="hero-title" aria-label="I turn messy problems into simple products.">
+        <span class="hl-line" aria-hidden="true">
+          <span data-s11>I turn</span>
+          <span class="hero__photo" data-pop><img src="assets/talha-avatar.jpg" alt="" width="93" height="93"></span>
+          <span data-s11>messy problems</span>
+        </span>
+        <span class="hl-line hl-line--2" aria-hidden="true">
+          <span data-s11>into</span>
+          <em class="accent-word" data-s11="accent">simple</em>
+          <span data-s11>products.</span>
+        </span>
+      </h1>
+    </div>
+
+    <div class="hero__row" data-rule>
+      <p class="hero__sub body-l" data-s6>Six years of product design across aviation, dispatch, edtech, crypto and fintech, shaping hard problems into something people can use.</p>
+      <div class="hero__ctas">
+        <div data-s6>
+          <a class="btn-primary" href="#contact">
+            <span>Get in touch</span>
+            <span class="btn-primary__tile"><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          </a>
+        </div>
+        <div data-s6>
+          <a class="btn-text link-s3" href="#work">See the work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       H3 · My work — heading S6 as it enters, like Selected
+       work. The NGFT work follows straight after.
+       ================================================================ -->
+  <section class="my-work container" id="work" aria-labelledby="my-work-title">
+    <div class="section-head" data-outcomes-head>
+      <h2 class="display-l" id="my-work-title" data-s6>My work across six years</h2>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       H5 · Work cards — S7 per card; Info S6 after 120ms; in a row the
+       right card starts 100ms after the left. Hover S8; the whole card
+       is one link. Status chips never animate. Touch: no hover.
+       ================================================================ -->
+  <section class="work container" id="selected-work" aria-label="Selected work">
+    <div class="work__list">
+
+      <div class="work__row work__row--full" data-card-row>
+        <a class="card card--full" href="work/priced-offer.html" data-s7>
+          <div class="card__panel panel--tint">
+            <!-- Hover-to-play thumbnail (js/offer-thumb.js, mounted in main.js). At rest,
+                 and with reduced motion or no JS, it's the finished screen. The card title
+                 already names it, so alt is empty. -->
+            <div class="wt" data-wt="offer">
+              <div class="wt__screen">
+                <img class="wt__img wt__poster" src="assets/work/priced-offer/offer-final.webp" alt="" width="2100" height="1355" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </div>
+          <div class="card__info">
+            <div class="card__text">
+              <h3 class="card__title h3" data-s6><span class="card__title-text">Turning a phone call into a priced offer</span></h3>
+              <p class="card__outcome" data-s6>Dispatchers quote while the client is still on the line. One entry pass instead of two, and the paper notepad is gone.</p>
+            </div>
+            <div class="card__meta">
+              <span class="chip chip--solid mono-label">Shipped</span>
+              <span class="card__where mono-s" data-s6>B2B quoting  ·  Q2 2025</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="work__row" data-card-row>
+        <a class="card card--wide" href="work/compliance-check.html" data-s7>
+          <div class="card__panel panel--sunken">
+            <!-- Motion graphic (js/compliance-thumb.js, mounted in main.js). As authored it's
+                 the finished frame: that's the card at rest, with reduced motion or no JS.
+                 The card title already names it, so the SVG is hidden from assistive tech. -->
+            <div class="mg" data-mg="compliance">
+              <svg class="mg-svg" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <defs><filter id="mgc-shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#14171A" flood-opacity="0.10"/></filter></defs>
+              <rect class="mg-bg" width="800" height="520" fill="#E7E9E4"/>
+              <g class="mg-reg">
+              <rect x="48" y="60" width="220" height="364" rx="2" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#mgc-shadow)"/>
+              <rect x="64" y="80" width="6" height="6" fill="#E4521F"/>
+              <text class="mg-mono mg-head" x="78" y="87">EASA PART-ORO</text>
+              <text class="mg-mono mg-sub" x="64" y="103">REFERENCE · 140 REQUIREMENTS</text>
+              <line x1="64" x2="252" y1="114" y2="114" stroke="#E7E9E4"/>
+              <g class="mg-row" data-i="0">
+              <rect class="mg-row-hl" x="56" y="122" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="138">GEN.110</text>
+              <rect class="mg-bar" x="64" y="146" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="155" width="112" height="5" rx="2.5"/>
+              </g>
+              <g class="mg-row" data-i="1">
+              <rect class="mg-row-hl" x="56" y="178" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="194">GEN.115</text>
+              <rect class="mg-bar" x="64" y="202" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="211" width="132" height="5" rx="2.5"/>
+              </g>
+              <g class="mg-row" data-i="2">
+              <rect class="mg-row-hl" x="56" y="234" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="250">GEN.120</text>
+              <rect class="mg-bar" x="64" y="258" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="267" width="96" height="5" rx="2.5"/>
+              </g>
+              <g class="mg-row" data-i="3">
+              <rect class="mg-row-hl" x="56" y="290" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="306">GEN.130</text>
+              <rect class="mg-bar" x="64" y="314" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="323" width="120" height="5" rx="2.5"/>
+              </g>
+              <g class="mg-row" data-i="4">
+              <rect class="mg-row-hl" x="56" y="346" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="362">GEN.140</text>
+              <rect class="mg-bar" x="64" y="370" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="379" width="84" height="5" rx="2.5"/>
+              </g>
+              <rect class="mg-scan" x="48" y="122" width="3" height="44" fill="#E4521F"/>
+              </g>
+              <g class="mg-man">
+              <rect class="mg-layer mg-layer-2" x="532" y="60" width="220" height="364" rx="2" fill="#EEF0EB" stroke="#D7DAD3" filter="url(#mgc-shadow)"/>
+              <rect class="mg-layer mg-layer-1" x="532" y="60" width="220" height="364" rx="2" fill="#F5F6F3" stroke="#D7DAD3"/>
+              <rect x="532" y="60" width="220" height="364" rx="2" fill="#FBFBF9" stroke="#D7DAD3"/>
+              <rect x="548" y="80" width="6" height="6" fill="#0F1113"/>
+              <text class="mg-mono mg-head" x="562" y="87">TRAINING MANUAL 2026</text>
+              <text class="mg-mono mg-sub" x="548" y="103">YOURS · 214 PAGES</text>
+              <line x1="548" x2="736" y1="114" y2="114" stroke="#E7E9E4"/>
+              <rect class="mg-hl" data-t="p8" x="580" y="130" width="160" height="28" rx="2" fill="#EFFFD6"/>
+              <rect class="mg-bar mg-mbar" x="588" y="135" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="143" width="116" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="151" width="128" height="5" rx="2.5"/>
+              <g class="mg-tag" data-t="p8"><rect x="544" y="135" width="30" height="18" rx="2" fill="#0F1113"/><text class="mg-mono mg-tagt" x="559" y="147.5" text-anchor="middle">P.8</text></g>
+              <rect class="mg-hl" data-t="p11" x="580" y="186" width="160" height="28" rx="2" fill="#EFFFD6"/>
+              <rect class="mg-bar mg-mbar" x="588" y="191" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="199" width="116" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="207" width="128" height="5" rx="2.5"/>
+              <g class="mg-tag" data-t="p11"><rect x="544" y="191" width="30" height="18" rx="2" fill="#0F1113"/><text class="mg-mono mg-tagt" x="559" y="203.5" text-anchor="middle">P.11</text></g>
+              <rect class="mg-hl" data-t="p14" x="580" y="234" width="160" height="28" rx="2" fill="#EFFFD6"/>
+              <rect class="mg-bar mg-mbar" x="588" y="239" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="247" width="116" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="255" width="128" height="5" rx="2.5"/>
+              <g class="mg-tag" data-t="p14"><rect x="544" y="239" width="30" height="18" rx="2" fill="#0F1113"/><text class="mg-mono mg-tagt" x="559" y="251.5" text-anchor="middle">P.14</text></g>
+              <rect class="mg-hl" data-t="p19" x="580" y="278" width="160" height="28" rx="2" fill="#E9F2FE"/>
+              <rect class="mg-bar mg-mbar" x="588" y="283" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="291" width="116" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="299" width="128" height="5" rx="2.5"/>
+              <g class="mg-tag" data-t="p19"><rect x="544" y="283" width="30" height="18" rx="2" fill="#0F1113"/><text class="mg-mono mg-tagt" x="559" y="295.5" text-anchor="middle">P.19</text></g>
+              <rect class="mg-bar mg-mbar" x="588" y="336" width="140" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="344" width="120" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="352" width="132" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="372" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="380" width="96" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="396" width="128" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="404" width="110" height="5" rx="2.5"/>
+              <rect class="mg-sweep" x="540" y="116" width="204" height="18" fill="#FFECEB"/>
+              </g>
+              <g class="mg-threads" fill="none">
+              <path class="mg-thread" data-i="0" pathLength="1" d="M268 144 C400 144 400 144 532 144" stroke="#0F1113" stroke-opacity=".5" stroke-width="1.25"/>
+              <circle class="mg-dot" data-i="0" cx="532" cy="144" r="3" fill="#0F1113"/>
+              <path class="mg-thread" data-i="1" pathLength="1" d="M268 200 C400 200 400 200 532 200" stroke="#0F1113" stroke-opacity=".5" stroke-width="1.25"/>
+              <circle class="mg-dot" data-i="1" cx="532" cy="200" r="3" fill="#0F1113"/>
+              <path class="mg-thread" data-i="2" pathLength="1" d="M268 256 C400 256 400 292 532 292" stroke="#0F1113" stroke-opacity=".5" stroke-width="1.25"/>
+              <circle class="mg-dot" data-i="2" cx="532" cy="292" r="3" fill="#0F1113"/>
+              <path class="mg-thread mg-miss" data-i="3" d="M268 312 L498 312" stroke="#C9372C" stroke-opacity=".75" stroke-width="1.25" stroke-dasharray="4 4"/>
+              <path class="mg-miss-end" data-i="3" d="M503 308l8 8M511 308l-8 8" stroke="#C9372C" stroke-width="1.6" stroke-linecap="square"/>
+              <path class="mg-thread" data-i="4" pathLength="1" d="M268 368 C400 368 400 248 532 248" stroke="#0F1113" stroke-opacity=".5" stroke-width="1.25"/>
+              <circle class="mg-dot" data-i="4" cx="532" cy="248" r="3" fill="#0F1113"/>
+              </g>
+              <g transform="translate(280 134)"><g class="mg-chip" data-i="0" data-v="c">
+              <rect class="mg-chip-bg" width="78" height="20" rx="2" fill="#EFFFD6"/>
+              <path d="M7 10.4 9.6 13 14.6 7" fill="none" stroke="#5B7F24" stroke-width="1.8" stroke-linecap="square"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#37471F">COVERED</text>
+              </g></g>
+              <g transform="translate(280 190)"><g class="mg-chip" data-i="1" data-v="c">
+              <rect class="mg-chip-bg" width="78" height="20" rx="2" fill="#EFFFD6"/>
+              <path d="M7 10.4 9.6 13 14.6 7" fill="none" stroke="#5B7F24" stroke-width="1.8" stroke-linecap="square"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#37471F">COVERED</text>
+              </g></g>
+              <g transform="translate(280 246)"><g class="mg-chip" data-i="2" data-v="p">
+              <rect class="mg-chip-bg" width="146" height="20" rx="2" fill="#E9F2FE"/>
+              <circle cx="11" cy="10" r="4.4" fill="none" stroke="#1868DB" stroke-width="1.6"/><path d="M11 5.6a4.4 4.4 0 0 1 0 8.8z" fill="#1868DB"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#123263">PARTIALLY COVERED</text>
+              </g></g>
+              <g transform="translate(280 302)"><g class="mg-chip" data-i="3" data-v="n">
+              <rect class="mg-chip-bg" width="106" height="20" rx="2" fill="#FFECEB"/>
+              <path d="M7.6 6.6l6.8 6.8M14.4 6.6l-6.8 6.8" fill="none" stroke="#C9372C" stroke-width="1.8" stroke-linecap="square"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#5D1F1A">NOT COVERED</text>
+              </g></g>
+              <g transform="translate(280 358)"><g class="mg-chip" data-i="4" data-v="c">
+              <rect class="mg-chip-bg" width="78" height="20" rx="2" fill="#EFFFD6"/>
+              <path d="M7 10.4 9.6 13 14.6 7" fill="none" stroke="#5B7F24" stroke-width="1.8" stroke-linecap="square"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#37471F">COVERED</text>
+              </g></g>
+              <text class="mg-count" x="48" y="494">140</text>
+              <text class="mg-mono mg-cl" x="120" y="481">REQUIREMENTS</text>
+              <text class="mg-mono mg-cl" x="120" y="494">CHECKED</text>
+              <rect x="330" y="484" width="422" height="8" rx="1" fill="#D7DAD3"/>
+              <rect class="mg-seg" data-s="0" x="330" y="484" width="354" height="8" fill="#5B7F24"/>
+              <rect class="mg-seg" data-s="1" x="686" y="484" width="34" height="8" fill="#1868DB"/>
+              <rect class="mg-seg" data-s="2" x="722" y="484" width="16" height="8" fill="#C9372C"/>
+              <rect class="mg-seg" data-s="3" x="740" y="484" width="12" height="8" fill="#6B6E76"/>
+              <g class="mg-leg" data-k="0"><rect x="330" y="466" width="6" height="6" fill="#5B7F24"/><text class="mg-mono mg-legt" x="340" y="472.5">118</text></g>
+              <g class="mg-leg" data-k="1"><rect x="374" y="466" width="6" height="6" fill="#1868DB"/><text class="mg-mono mg-legt" x="384" y="472.5">12</text></g>
+              <g class="mg-leg" data-k="2"><rect x="408" y="466" width="6" height="6" fill="#C9372C"/><text class="mg-mono mg-legt" x="418" y="472.5">6</text></g>
+              <g class="mg-leg" data-k="3"><rect x="434" y="466" width="6" height="6" fill="#6B6E76"/><text class="mg-mono mg-legt" x="444" y="472.5">4</text></g>
+              <g transform="translate(642 372) rotate(-8)"><g class="mg-stamp">
+              <rect x="-80" y="-21" width="160" height="42" rx="2" fill="#FBFBF9" fill-opacity=".9" stroke="#E4521F" stroke-width="2.5"/>
+              <rect x="-75" y="-16" width="150" height="32" rx="1" fill="none" stroke="#E4521F" stroke-width="1"/>
+              <text class="mg-stamp-t" x="0" y="6" text-anchor="middle">REPORT READY</text>
+              </g></g>
+              </svg>
+            </div>
+          </div>
+          <div class="card__info">
+            <div class="card__text">
+              <h3 class="card__title h3" data-s6><span class="card__title-text">Manual compliance check</span></h3>
+              <p class="card__outcome" data-s6>A company manual checked against the regulation it has to meet, requirement by requirement, every AI verdict traced to a page.</p>
+            </div>
+            <div class="card__meta">
+              <span class="chip chip--solid mono-label">Shipped</span>
+              <span class="card__where mono-s" data-s6>AI review  ·  Q4 2025</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="card card--narrow" href="work/safety-report.html" data-s7>
+          <div class="card__panel panel--inverse">
+            <!-- Motion graphic (js/sms-thumb.js, mounted in main.js). As authored it's the
+                 closed report: that's the card at rest, with reduced motion or no JS. The
+                 card title already names it, so the SVG is hidden from assistive tech. -->
+            <div class="sd" data-sd="sms">
+              <svg class="sd-svg" viewBox="0 0 880 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <defs><filter id="sdc-lift" x="-10%" y="-40%" width="120%" height="200%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#14171A" flood-opacity="0.18"/></filter></defs>
+              <rect width="880" height="800" fill="#14171A"/>
+              <g class="sd-stepper">
+              <text class="sd-mono sd-step-t" data-i="0" x="64.0" y="72">INTAKE</text>
+              <rect x="64.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="0" x="64.0" y="84" width="144.0" height="4" fill="#F2F3F0"/>
+              <text class="sd-mono sd-step-t" data-i="1" x="216.0" y="72">REVIEW</text>
+              <rect x="216.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="1" x="216.0" y="84" width="144.0" height="4" fill="#F2F3F0"/>
+              <text class="sd-mono sd-step-t" data-i="2" x="368.0" y="72">ECCAIRS</text>
+              <rect x="368.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="2" x="368.0" y="84" width="144.0" height="4" fill="#F2F3F0"/>
+              <text class="sd-mono sd-step-t" data-i="3" x="520.0" y="72">RISK</text>
+              <rect x="520.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="3" x="520.0" y="84" width="144.0" height="4" fill="#F2F3F0"/>
+              <text class="sd-mono sd-step-t" data-i="4" x="672.0" y="72">CLOSE</text>
+              <rect x="672.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="4" x="672.0" y="84" width="144.0" height="4" fill="#E4521F"/>
+              </g>
+              <rect class="sd-card" x="64" y="116" width="752" height="628" rx="2" fill="#FBFBF9"/>
+              <g class="sd-inbox-head">
+              <text class="sd-h" x="96" y="166">Safety reports</text>
+              <text class="sd-mono sd-cap" x="96" y="190">12 OPEN · 3 NEED YOU TODAY · 2 OVERDUE</text>
+              </g>
+              <g class="sd-row" data-k="0" data-shift="92">
+              <rect x="72" y="215" width="736" height="91" fill="#FBFBF9"/>
+              <line x1="96" x2="784" y1="214" y2="214" stroke="#E7E9E4"/>
+              <text class="sd-mono sd-id" x="96" y="240">SR-2026-0150</text>
+              <text class="sd-title" x="96" y="268">Dangerous goods not declared on manifest</text>
+              <text class="sd-sub" x="96" y="290">Occurrence · Geneva</text>
+              <g class="sd-loz " data-right="784" ><rect x="675" y="228" width="109" height="22" fill="#F0F1F2"/><text class="sd-loz-t" x="684" y="243.5" fill="#505258">NOT ASSESSED</text></g>
+              </g>
+              <g class="sd-row" data-k="1" data-shift="92">
+              <rect x="72" y="307" width="736" height="91" fill="#FBFBF9"/>
+              <line x1="96" x2="784" y1="306" y2="306" stroke="#E7E9E4"/>
+              <text class="sd-mono sd-id" x="96" y="332">SR-2026-0149</text>
+              <text class="sd-title" x="96" y="360">Bird strike, main rotor blade</text>
+              <text class="sd-sub" x="96" y="382">Incident · Zurich</text>
+              <g class="sd-loz " data-right="784" ><rect x="675" y="320" width="109" height="22" fill="#FCE4A6"/><text class="sd-loz-t" x="684" y="335.5" fill="#9E4C00">2C TOLERABLE</text></g>
+              </g>
+              <g class="sd-row" data-k="2" data-shift="92">
+              <rect x="72" y="399" width="736" height="91" fill="#FBFBF9"/>
+              <line x1="96" x2="784" y1="398" y2="398" stroke="#E7E9E4"/>
+              <text class="sd-mono sd-id" x="96" y="424">SR-2026-0147</text>
+              <text class="sd-title" x="96" y="452">Laser illumination on approach</text>
+              <text class="sd-sub" x="96" y="474">Incident · Bern</text>
+              <g class="sd-loz " data-right="784" ><rect x="675" y="412" width="109" height="22" fill="#F0F1F2"/><text class="sd-loz-t" x="684" y="427.5" fill="#505258">NOT ASSESSED</text></g>
+              </g>
+              <g class="sd-row" data-k="3" data-shift="0">
+              <rect x="72" y="583" width="736" height="91" fill="#FBFBF9"/>
+              <line x1="96" x2="784" y1="582" y2="582" stroke="#E7E9E4"/>
+              <text class="sd-mono sd-id" x="96" y="608">SR-2026-0138</text>
+              <text class="sd-title" x="96" y="636">Hydraulic leak found on post-flight</text>
+              <text class="sd-sub" x="96" y="658">Observation · Bern</text>
+              <g class="sd-loz " data-right="784" ><rect x="675" y="596" width="109" height="22" fill="#FCE4A6"/><text class="sd-loz-t" x="684" y="611.5" fill="#9E4C00">3C TOLERABLE</text></g>
+              </g>
+              <g class="sd-head">
+              <rect class="sd-lift" x="72" y="135" width="736" height="91" rx="2" fill="#FBFBF9" filter="url(#sdc-lift)"/>
+              <rect x="72" y="135" width="736" height="91" fill="#FBFBF9"/>
+              <rect class="sd-attn" x="64" y="134" width="4" height="92" fill="#E4521F"/>
+              <text class="sd-mono sd-id" x="96" y="160">SR-2026-0142</text>
+              <text class="sd-title" x="96" y="188">Hard landing, nose gear collapse</text>
+              <text class="sd-sub" x="96" y="210">Incident · Lauterbrunnen · 12 Sep 2026</text>
+              <g class="sd-loz sd-risk" data-right="784" ><rect x="660" y="148" width="124" height="22" fill="#FFD5D2"/><text class="sd-loz-t" x="669" y="163.5" fill="#AE2E24">3A INTOLERABLE</text></g>
+              </g>
+              <line class="sd-divider" x1="96" x2="784" y1="232" y2="232" stroke="#D7DAD3"/>
+              <g class="sd-loz sd-status" data-right="784" data-s="review"><rect x="721" y="148" width="63" height="22" fill="#F8EEFE"/><text class="sd-loz-t" x="730" y="163.5" fill="#48245D">REVIEW</text></g>
+              <g class="sd-loz sd-status" data-right="784" data-s="eccairs"><rect x="713" y="148" width="71" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="722" y="163.5" fill="#123263">ECCAIRS</text></g>
+              <g class="sd-loz sd-status" data-right="784" data-s="risk"><rect x="736" y="148" width="48" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="745" y="163.5" fill="#123263">RISK</text></g>
+              <g class="sd-status sd-closed" data-s="close" data-right="784"><rect x="680" y="148" width="104" height="22" fill="#292A2E"/><g class="sd-lock-mini" transform="translate(689 152)"><rect x="0.5" y="6" width="10" height="8" rx="1" fill="#F2F3F0"/><path d="M2.5 6V4.2a3 3 0 0 1 6 0V6" fill="none" stroke="#F2F3F0" stroke-width="1.6"/></g><text class="sd-loz-t" x="704" y="163.5" fill="#F2F3F0">CLOSED</text></g>
+              <g class="sd-body" data-s="review">
+              <path class="sd-spark" d="M102 258 l2.2 5.3 5.3 2.2 -5.3 2.2 -2.2 5.3 -2.2 -5.3 -5.3 -2.2 5.3 -2.2z" fill="#964AC0"/>
+              <text class="sd-mono sd-cap" x="116" y="272">SYNOPSIS · EVERY LINE LINKS TO ITS SOURCE</text>
+              <g class="sd-syn" data-i="0">
+              <text class="sd-mono sd-lab" x="96" y="304">PHASE OF FLIGHT</text>
+              <text class="sd-val" x="96" y="328">Approach and landing at an unprepared helipad</text>
+              <g class="sd-loz sd-src" data-right="784" ><rect x="675" y="310" width="109" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="684" y="325.5" fill="#123263">Narrative ¶1</text></g>
+              </g>
+              <g class="sd-syn" data-i="1">
+              <text class="sd-mono sd-lab" x="96" y="362">LANDING SURFACE</text>
+              <text class="sd-val" x="96" y="386">Fresh snow on the helipad; markings not visible</text>
+              <g class="sd-loz sd-src" data-right="784" ><rect x="660" y="368" width="124" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="669" y="383.5" fill="#123263">NOTAM A1234/26</text></g>
+              </g>
+              <g class="sd-syn" data-i="2">
+              <text class="sd-mono sd-lab" x="96" y="420">DESCENT RATE</text>
+              <text class="sd-val" x="96" y="444">710 ft/min at touchdown</text>
+              <g class="sd-loz sd-src" data-right="784" ><rect x="675" y="426" width="109" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="684" y="441.5" fill="#123263">FDM 13:58:41</text></g>
+              </g>
+              <text class="sd-mono sd-cap" x="96" y="490">HAZARDS · 2 IDENTIFIED · 1 DUPLICATE MERGED</text>
+              <g class="sd-hz" data-i="0">
+              <rect x="96" y="506" width="688" height="50" rx="2" fill="#FFFFFF" stroke="#D7DAD3"/>
+              <rect x="110" y="522" width="18" height="18" rx="2" fill="#1868DB"/>
+              <path d="M114 531.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/>
+              <text class="sd-val sd-strong" x="142" y="537">Insufficient surface definition at landing site</text>
+              <text class="sd-mono sd-lab" x="768" y="536" text-anchor="end">HZ-AER-04 · 88%</text>
+              </g>
+              <g class="sd-hz" data-i="1">
+              <rect x="96" y="566" width="688" height="50" rx="2" fill="#FFFFFF" stroke="#D7DAD3"/>
+              <rect x="110" y="582" width="18" height="18" rx="2" fill="#1868DB"/>
+              <path d="M114 591.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/>
+              <text class="sd-val sd-strong" x="142" y="597">Hydraulic fluid release after hard landing</text>
+              <text class="sd-mono sd-lab" x="768" y="596" text-anchor="end">HZ-TEC-11 · 76%</text>
+              </g>
+              </g>
+              <g class="sd-body" data-s="eccairs">
+              <text class="sd-mono sd-cap" x="96" y="272">ECCAIRS · REVIEWED BY EXCEPTION</text>
+              <text class="sd-big" x="92" y="362">97</text>
+              <text class="sd-val sd-strong" x="196" y="330">attributes matched</text>
+              <text class="sd-mono sd-lab" x="196" y="354">13 ENTITIES · FROM THE REPORT ITSELF</text>
+              <g class="sd-tile" data-k="0">
+              <rect x="96.0" y="392" width="163.0" height="92" rx="2" fill="#FFFFFF" stroke="#D7DAD3" stroke-width="1"/>
+              <text class="sd-tnum" data-count="need" x="112.0" y="442" fill="#292A2E">0</text>
+              <text class="sd-sub" x="112.0" y="468">Need a decision</text>
+              </g>
+              <g class="sd-tile" data-k="1">
+              <rect x="271.0" y="392" width="163.0" height="92" rx="2" fill="#FFFFFF" stroke="#D7DAD3" stroke-width="1"/>
+              <text class="sd-tnum"  x="287.0" y="442" fill="#292A2E">9</text>
+              <text class="sd-sub" x="287.0" y="468">Not in report</text>
+              </g>
+              <g class="sd-tile" data-k="2">
+              <rect x="446.0" y="392" width="163.0" height="92" rx="2" fill="#FFFFFF" stroke="#D7DAD3" stroke-width="1"/>
+              <text class="sd-tnum"  x="462.0" y="442" fill="#4C6B1F">83</text>
+              <text class="sd-sub" x="462.0" y="468">Matched</text>
+              </g>
+              <g class="sd-tile" data-k="3">
+              <rect x="621.0" y="392" width="163.0" height="92" rx="2" fill="#FFFFFF" stroke="#1868DB" stroke-width="2"/>
+              <text class="sd-tnum" data-count="corr" x="637.0" y="442" fill="#1868DB">5</text>
+              <text class="sd-sub" x="637.0" y="468">Corrected</text>
+              </g>
+              <g class="sd-banner">
+              <rect x="96" y="506" width="688" height="58" rx="2" fill="#EFFFD6"/>
+              <rect x="96" y="506" width="4" height="58" fill="#5B7F24"/>
+              <circle cx="126" cy="535" r="10" fill="#5B7F24"/><path d="M121 535.5l3.5 3.5 6-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/>
+              <text class="sd-val sd-strong" x="148" y="532" fill="#37471F">All 97 values decided</text>
+              <text class="sd-sub" x="148" y="552" fill="#37471F">5 corrected · 2 kept</text>
+              </g>
+              </g>
+              <g class="sd-body" data-s="risk">
+              <text class="sd-mono sd-cap" x="96" y="272">RISK · ICAO 5×5 · HZ-AER-04</text>
+              <text class="sd-val sd-strong" x="96" y="300">Insufficient surface definition at landing site</text>
+              <text class="sd-mono sd-lab" x="151.0" y="334" text-anchor="middle">A</text>
+              <text class="sd-mono sd-lab" x="209.0" y="334" text-anchor="middle">B</text>
+              <text class="sd-mono sd-lab" x="267.0" y="334" text-anchor="middle">C</text>
+              <text class="sd-mono sd-lab" x="325.0" y="334" text-anchor="middle">D</text>
+              <text class="sd-mono sd-lab" x="383.0" y="334" text-anchor="middle">E</text>
+              <text class="sd-mono sd-lab" x="104" y="369" text-anchor="middle">5</text>
+              <g class="sd-cell" data-d="0"><rect x="124" y="344" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="151.0" y="369" text-anchor="middle" fill="#AE2E24">5A</text></g>
+              <g class="sd-cell" data-d="1"><rect x="182" y="344" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="209.0" y="369" text-anchor="middle" fill="#AE2E24">5B</text></g>
+              <g class="sd-cell" data-d="2"><rect x="240" y="344" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="267.0" y="369" text-anchor="middle" fill="#AE2E24">5C</text></g>
+              <g class="sd-cell" data-d="3"><rect x="298" y="344" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="325.0" y="369" text-anchor="middle" fill="#9E4C00">5D</text></g>
+              <g class="sd-cell" data-d="4"><rect x="356" y="344" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="383.0" y="369" text-anchor="middle" fill="#9E4C00">5E</text></g>
+              <text class="sd-mono sd-lab" x="104" y="413" text-anchor="middle">4</text>
+              <g class="sd-cell" data-d="1"><rect x="124" y="388" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="151.0" y="413" text-anchor="middle" fill="#AE2E24">4A</text></g>
+              <g class="sd-cell" data-d="2"><rect x="182" y="388" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="209.0" y="413" text-anchor="middle" fill="#AE2E24">4B</text></g>
+              <g class="sd-cell" data-d="3"><rect x="240" y="388" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="267.0" y="413" text-anchor="middle" fill="#9E4C00">4C</text></g>
+              <g class="sd-cell" data-d="4"><rect x="298" y="388" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="325.0" y="413" text-anchor="middle" fill="#9E4C00">4D</text></g>
+              <g class="sd-cell" data-d="5"><rect x="356" y="388" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="383.0" y="413" text-anchor="middle" fill="#9E4C00">4E</text></g>
+              <text class="sd-mono sd-lab" x="104" y="457" text-anchor="middle">3</text>
+              <g class="sd-cell" data-d="2"><rect x="124" y="432" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="151.0" y="457" text-anchor="middle" fill="#AE2E24">3A</text></g>
+              <g class="sd-cell" data-d="3"><rect x="182" y="432" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="209.0" y="457" text-anchor="middle" fill="#9E4C00">3B</text></g>
+              <g class="sd-cell" data-d="4"><rect x="240" y="432" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="267.0" y="457" text-anchor="middle" fill="#9E4C00">3C</text></g>
+              <g class="sd-cell" data-d="5"><rect x="298" y="432" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="325.0" y="457" text-anchor="middle" fill="#9E4C00">3D</text></g>
+              <g class="sd-cell" data-d="6"><rect x="356" y="432" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="383.0" y="457" text-anchor="middle" fill="#4C6B1F">3E</text></g>
+              <text class="sd-mono sd-lab" x="104" y="501" text-anchor="middle">2</text>
+              <g class="sd-cell" data-d="3"><rect x="124" y="476" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="151.0" y="501" text-anchor="middle" fill="#9E4C00">2A</text></g>
+              <g class="sd-cell" data-d="4"><rect x="182" y="476" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="209.0" y="501" text-anchor="middle" fill="#9E4C00">2B</text></g>
+              <g class="sd-cell" data-d="5"><rect x="240" y="476" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="267.0" y="501" text-anchor="middle" fill="#9E4C00">2C</text></g>
+              <g class="sd-cell" data-d="6"><rect x="298" y="476" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="325.0" y="501" text-anchor="middle" fill="#4C6B1F">2D</text></g>
+              <g class="sd-cell" data-d="7"><rect x="356" y="476" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="383.0" y="501" text-anchor="middle" fill="#4C6B1F">2E</text></g>
+              <text class="sd-mono sd-lab" x="104" y="545" text-anchor="middle">1</text>
+              <g class="sd-cell" data-d="4"><rect x="124" y="520" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="151.0" y="545" text-anchor="middle" fill="#9E4C00">1A</text></g>
+              <g class="sd-cell" data-d="5"><rect x="182" y="520" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="209.0" y="545" text-anchor="middle" fill="#4C6B1F">1B</text></g>
+              <g class="sd-cell" data-d="6"><rect x="240" y="520" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="267.0" y="545" text-anchor="middle" fill="#4C6B1F">1C</text></g>
+              <g class="sd-cell" data-d="7"><rect x="298" y="520" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="325.0" y="545" text-anchor="middle" fill="#4C6B1F">1D</text></g>
+              <g class="sd-cell" data-d="8"><rect x="356" y="520" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="383.0" y="545" text-anchor="middle" fill="#4C6B1F">1E</text></g>
+              <g class="sd-cross"><line x1="118" x2="124" y1="452.0" y2="452.0" stroke="#292A2E" stroke-dasharray="3 3"/><line x1="151.0" x2="151.0" y1="340" y2="432" stroke="#292A2E" stroke-dasharray="3 3"/></g>
+              <rect class="sd-ring" x="121" y="473" width="60" height="46" rx="3" fill="none" stroke="#292A2E" stroke-width="2.5"/>
+              <text class="sd-mono sd-lab" x="442" y="358">SEVERITY</text>
+              <text class="sd-val" x="442" y="382">A — Catastrophic</text>
+              <text class="sd-mono sd-lab" x="442" y="418">PROBABILITY</text>
+              <text class="sd-val" x="442" y="442">3 — Remote</text>
+              <g class="sd-verdict-a"><rect x="442" y="470" width="150" height="30" fill="#FFD5D2"/><text class="sd-loz-t sd-loz-l" x="452" y="490" fill="#AE2E24">3A INTOLERABLE</text></g>
+              <g class="sd-verdict-b"><rect x="442" y="470" width="138" height="30" fill="#FCE4A6"/><text class="sd-loz-t sd-loz-l" x="452" y="490" fill="#9E4C00">2A TOLERABLE</text></g>
+              <text class="sd-sub sd-mitig" x="442" y="526">Mitigation M-032 · accepted by M. Frei</text>
+              </g>
+              <g class="sd-body sd-body-close" data-s="close">
+              <text class="sd-mono sd-cap" x="96" y="272">READY TO CLOSE?</text>
+              <text class="sd-mono sd-cap sd-ok" x="784" y="272" text-anchor="end">6 OF 6</text>
+              <g class="sd-check" data-i="0">
+              <line x1="96" x2="784" y1="292" y2="292" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="315" r="11" fill="#5B7F24"/><path d="M102 315.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="321">Required information complete</text>
+              </g>
+              <g class="sd-check" data-i="1">
+              <line x1="96" x2="784" y1="338" y2="338" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="361" r="11" fill="#5B7F24"/><path d="M102 361.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="367">Synopsis confirmed</text>
+              </g>
+              <g class="sd-check" data-i="2">
+              <line x1="96" x2="784" y1="384" y2="384" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="407" r="11" fill="#5B7F24"/><path d="M102 407.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="413">All 97 ECCAIRS values decided</text>
+              </g>
+              <g class="sd-check" data-i="3">
+              <line x1="96" x2="784" y1="430" y2="430" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="453" r="11" fill="#5B7F24"/><path d="M102 453.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="459">All 3 hazards assessed</text>
+              </g>
+              <g class="sd-check" data-i="4">
+              <line x1="96" x2="784" y1="476" y2="476" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="499" r="11" fill="#5B7F24"/><path d="M102 499.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="505">Intolerable risk mitigated and accepted</text>
+              </g>
+              <g class="sd-check" data-i="5">
+              <line x1="96" x2="784" y1="522" y2="522" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="545" r="11" fill="#5B7F24"/><path d="M102 545.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="551">Feedback sent to the reporter</text>
+              </g>
+              <g class="sd-final">
+              <rect x="96" y="584" width="688" height="120" rx="2" fill="#292A2E"/>
+              <g transform="translate(124 614)"><g class="sd-lock"><path class="sd-shackle" d="M8 26V17a14 14 0 0 1 28 0v9" fill="none" stroke="#F2F3F0" stroke-width="5"/><rect x="0" y="26" width="44" height="34" rx="4" fill="#E4521F"/><circle cx="22" cy="41" r="4" fill="#292A2E"/><rect x="20" y="42" width="4" height="9" fill="#292A2E"/></g></g>
+              <text class="sd-final-t" x="192" y="638">Closed — read-only record</text>
+              <text class="sd-mono sd-final-s" x="192" y="664">ECCAIRS SENT TO FOCA · REOPENING NEEDS A REASON</text>
+              <text class="sd-mono sd-final-s" x="192" y="684">CLOSED AFTER 9 DAYS</text>
+              </g>
+              </g>
+              </svg>
+            </div>
+          </div>
+          <div class="card__info">
+            <div class="card__text">
+              <h3 class="card__title h3" data-s6><span class="card__title-text">A two-day safety report, in one guided flow</span></h3>
+              <p class="card__outcome" data-s6>Report analysis cut from almost two days to hours.</p>
+            </div>
+            <div class="card__meta">
+              <span class="chip chip--outline mono-label">Proof of concept</span>
+              <span class="card__where mono-s" data-s6>Incident management</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="work__row work__row--flip" data-card-row>
+        <a class="card card--narrow" href="work/instructors.html" data-s7>
+          <div class="card__panel panel--surface">
+            <!-- Motion graphic (js/tablet-thumb.js, mounted in main.js). As authored it's the
+                 signed tablet over the put-down paper: that's the card at rest, with reduced
+                 motion or no JS. The card title already names it, so the SVG is hidden from
+                 assistive tech. -->
+            <div class="tb" data-tb="tablet">
+              <svg class="tb-svg" viewBox="0 0 880 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <defs><filter id="tbc-paper" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#14171A" flood-opacity="0.12"/></filter><filter id="tbc-device" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#14171A" flood-opacity="0.22"/></filter><clipPath id="tbc-screen"><rect x="0" y="0" width="428" height="613" rx="14"/></clipPath></defs>
+              <rect width="880" height="800" fill="#FBFBF9"/>
+              <g transform="translate(232 438) rotate(-9)"><g class="tb-paper">
+              <g transform="translate(-150 -212)">
+              <rect width="300" height="424" fill="#FDFCF8" stroke="#E4E2DA" filter="url(#tbc-paper)"/>
+              <text class="tb-mono tb-p-h" x="22" y="34">SIM SESSION · GRADING SHEET</text>
+              <line x1="22" x2="278" y1="44" y2="44" stroke="#2D2F33" stroke-width="1.2"/>
+              <text class="tb-mono tb-p-s" x="22" y="64">TRAINEE</text><line x1="80" x2="278" y1="66" y2="66" stroke="#C9C7BE"/>
+              <path class="tb-ink" pathLength="1" d="M90 62c6-10 10-10 12 0s6 4 10-4 8-2 10 4 10-6 14-2 6 6 14 0" fill="none" stroke="#2B3A67" stroke-width="1.8" stroke-linecap="round"/>
+              <text class="tb-mono tb-p-s" x="198" y="92" text-anchor="middle">PASS</text>
+              <text class="tb-mono tb-p-s" x="230" y="92" text-anchor="middle">PART</text>
+              <text class="tb-mono tb-p-s" x="262" y="92" text-anchor="middle">REP</text>
+              <line x1="22" x2="278" y1="104" y2="104" stroke="#E4E2DA"/>
+              <text class="tb-mono tb-p-n" x="22" y="122">1.1</text>
+              <rect x="46" y="115" width="90" height="4" fill="#E4E2DA"/>
+              <rect x="190" y="110" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="222" y="110" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="254" y="110" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-tick" data-i="0" pathLength="1" d="M192 118 l5 6 l12 -16" fill="none" stroke="#2B3A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="22" x2="278" y1="132" y2="132" stroke="#E4E2DA"/>
+              <text class="tb-mono tb-p-n" x="22" y="150">1.2</text>
+              <rect x="46" y="143" width="107" height="4" fill="#E4E2DA"/>
+              <rect x="190" y="138" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="222" y="138" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="254" y="138" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-tick" data-i="1" pathLength="1" d="M224 146 l5 6 l12 -16" fill="none" stroke="#2B3A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="22" x2="278" y1="160" y2="160" stroke="#E4E2DA"/>
+              <text class="tb-mono tb-p-n" x="22" y="178">1.3</text>
+              <rect x="46" y="171" width="124" height="4" fill="#E4E2DA"/>
+              <rect x="190" y="166" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="222" y="166" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="254" y="166" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-tick" data-i="2" pathLength="1" d="M192 174 l5 6 l12 -16" fill="none" stroke="#2B3A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="22" x2="278" y1="188" y2="188" stroke="#E4E2DA"/>
+              <text class="tb-mono tb-p-n" x="22" y="206">2.1</text>
+              <rect x="46" y="199" width="101" height="4" fill="#E4E2DA"/>
+              <rect x="190" y="194" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="222" y="194" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="254" y="194" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-tick" data-i="3" pathLength="1" d="M192 202 l5 6 l12 -16" fill="none" stroke="#2B3A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="22" x2="278" y1="216" y2="216" stroke="#E4E2DA"/>
+              <text class="tb-mono tb-p-n" x="22" y="234">2.2</text>
+              <rect x="46" y="227" width="118" height="4" fill="#E4E2DA"/>
+              <rect x="190" y="222" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="222" y="222" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="254" y="222" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-tick" data-i="4" pathLength="1" d="M256 230 l5 6 l12 -16" fill="none" stroke="#2B3A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="22" x2="278" y1="244" y2="244" stroke="#E4E2DA"/>
+              <text class="tb-mono tb-p-n" x="22" y="262">3.1</text>
+              <rect x="46" y="255" width="95" height="4" fill="#E4E2DA"/>
+              <rect x="190" y="250" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="222" y="250" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="254" y="250" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-tick" data-i="5" pathLength="1" d="M192 258 l5 6 l12 -16" fill="none" stroke="#2B3A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="22" x2="278" y1="272" y2="272" stroke="#E4E2DA"/>
+              <text class="tb-mono tb-p-n" x="22" y="290">3.2</text>
+              <rect x="46" y="283" width="112" height="4" fill="#E4E2DA"/>
+              <rect x="190" y="278" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="222" y="278" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="254" y="278" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-tick" data-i="6" pathLength="1" d="M192 286 l5 6 l12 -16" fill="none" stroke="#2B3A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="22" x2="278" y1="300" y2="300" stroke="#E4E2DA"/>
+              <text class="tb-mono tb-p-n" x="22" y="318">3.3</text>
+              <rect x="46" y="311" width="129" height="4" fill="#E4E2DA"/>
+              <rect x="190" y="306" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="222" y="306" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="254" y="306" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-tick" data-i="7" pathLength="1" d="M224 314 l5 6 l12 -16" fill="none" stroke="#2B3A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="22" x2="278" y1="328" y2="328" stroke="#E4E2DA"/>
+              <text class="tb-mono tb-p-n" x="22" y="346">4.1</text>
+              <rect x="46" y="339" width="106" height="4" fill="#E4E2DA"/>
+              <rect x="190" y="334" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="222" y="334" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <rect x="254" y="334" width="16" height="16" fill="none" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-tick" data-i="8" pathLength="1" d="M192 342 l5 6 l12 -16" fill="none" stroke="#2B3A67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <text class="tb-mono tb-p-s" x="22" y="388">INSTRUCTOR SIGNATURE</text><line x1="22" x2="278" y1="404" y2="404" stroke="#C9C7BE"/>
+              <path class="tb-ink tb-p-sig" pathLength="1" d="M150 400c8-22 14-22 16-4s8 10 14-6 10-6 12 4 10 4 16-8 6 2 20 0" fill="none" stroke="#2B3A67" stroke-width="1.8" stroke-linecap="round"/>
+              </g></g></g>
+              <g class="tb-device">
+              <rect x="340" y="78" width="460" height="645" rx="30" fill="#1B1D21" filter="url(#tbc-device)"/>
+              <rect x="341" y="79" width="458" height="643" rx="29" fill="none" stroke="#3A3D43"/>
+              <circle cx="570.0" cy="86" r="2.5" fill="#33363C"/>
+              <g transform="translate(356 94)"><g clip-path="url(#tbc-screen)">
+              <rect width="428" height="613" fill="#FFFFFF"/>
+              <text class="tb-sb" x="14" y="15">08:52  Thu 24 Sep</text><text class="tb-sb" x="414" y="15" text-anchor="end">82%</text>
+              <g class="tb-scr-a">
+              <rect y="22" width="428" height="42" fill="#1868DB"/>
+              <circle cx="22" cy="43" r="6" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="22" cy="43" r="2.5" fill="#fff"/>
+              <text class="tb-run" x="34" y="47">RUNNING</text>
+              <text class="tb-run-s" x="96" y="47">Session 3 · Aisha Rahman</text>
+              <text class="tb-timer" x="414" y="49" text-anchor="end">00:42:18</text>
+              <rect x="12" y="76" width="404" height="62" rx="2" fill="#fff" stroke="#DCDDDA"/>
+              <text class="tb-b" x="26" y="100"><tspan class="tb-count">5</tspan> of 9 outcomes recorded</text>
+              <text class="tb-s" x="402" y="100" text-anchor="end">1 being flown now</text>
+              <rect class="tb-seg" data-i="0" x="26.0" y="114" width="38.2" height="8" fill="#4C6B1F"/>
+              <rect class="tb-seg" data-i="1" x="68.2" y="114" width="38.2" height="8" fill="#1868DB"/>
+              <rect class="tb-seg-fill" data-i="1" x="68.2" y="114" width="38.2" height="8" fill="#9E4C00"/>
+              <rect class="tb-seg" data-i="2" x="110.4" y="114" width="38.2" height="8" fill="#ECEDEA"/>
+              <rect class="tb-seg-fill" data-i="2" x="110.4" y="114" width="38.2" height="8" fill="#4C6B1F"/>
+              <rect class="tb-seg" data-i="3" x="152.7" y="114" width="38.2" height="8" fill="#4C6B1F"/>
+              <rect class="tb-seg" data-i="4" x="194.9" y="114" width="38.2" height="8" fill="#AE2E24"/>
+              <rect class="tb-seg" data-i="5" x="237.1" y="114" width="38.2" height="8" fill="#4C6B1F"/>
+              <rect class="tb-seg" data-i="6" x="279.3" y="114" width="38.2" height="8" fill="#4C6B1F"/>
+              <rect class="tb-seg" data-i="7" x="321.6" y="114" width="38.2" height="8" fill="#ECEDEA"/>
+              <rect class="tb-seg-fill" data-i="7" x="321.6" y="114" width="38.2" height="8" fill="#9E4C00"/>
+              <rect class="tb-seg" data-i="8" x="363.8" y="114" width="38.2" height="8" fill="#ECEDEA"/>
+              <rect class="tb-seg-fill" data-i="8" x="363.8" y="114" width="38.2" height="8" fill="#4C6B1F"/>
+              <g class="tb-fly"><rect x="12" y="150" width="404" height="138" rx="2" fill="#F4F8FE" stroke="#1868DB" stroke-width="2"/>
+              <circle cx="31" cy="172" r="6" fill="none" stroke="#1868DB" stroke-width="1.5"/><path d="M29 169v6l5-3z" fill="#1868DB"/>
+              <text class="tb-fly-l" x="44" y="176">FLYING NOW</text>
+              <text class="tb-s" x="402" y="176" text-anchor="end">Exercise 3 of 9</text>
+              <text class="tb-h" x="26" y="208">1.2  Hydraulic system failure in the cruise</text>
+              <rect x="26" y="224" width="99" height="22" fill="#EEF0F2"/><text class="tb-s" x="34" y="239">Heading <tspan class="tb-strong">± 10°</tspan></text>
+              <rect x="132.8" y="224" width="124" height="22" fill="#EEF0F2"/><text class="tb-s" x="140.8" y="239">Altitude <tspan class="tb-strong">± 100 ft</tspan></text>
+              <rect x="265.20000000000005" y="224" width="118" height="22" fill="#EEF0F2"/><text class="tb-s" x="273.20000000000005" y="239">Airspeed <tspan class="tb-strong">± 10 kt</tspan></text>
+              <text class="tb-s" x="26" y="272">Carried over from session 2 — this is the attempt that clears it.</text>
+              </g>
+              <text class="tb-mono tb-cap" x="14" y="314">ALL EXERCISES · TAP ANY ONE TO RECORD IT</text>
+              <line x1="14" x2="414" y1="324" y2="324" stroke="#EEEFEC"/>
+              <text class="tb-mono tb-num" x="14" y="348">1.1</text>
+              <text class="tb-row" x="50" y="348">Warning recognition</text>
+              <g class="tb-loz "><rect x="373.6" y="334" width="40.4" height="18" fill="#EFFFD6"/><text class="tb-loz-t" x="380.6" y="346.6" fill="#37471F">PASS</text></g>
+              <line x1="14" x2="414" y1="362" y2="362" stroke="#EEEFEC"/>
+              <text class="tb-mono tb-num" x="14" y="386">1.2</text>
+              <text class="tb-row" x="50" y="386">Failure in the cruise</text>
+              <g class="tb-row-fly"><rect x="338" y="372" width="76" height="18" fill="#E9F2FE"/><text class="tb-loz-t" x="345" y="384.6" fill="#123263">FLYING</text></g>
+              <g class="tb-loz tb-row-new"><rect x="353.8" y="372" width="60.199999999999996" height="18" fill="#FFF5DB"/><text class="tb-loz-t" x="360.8" y="384.6" fill="#693200">PARTIAL</text></g>
+              <line x1="14" x2="414" y1="400" y2="400" stroke="#EEEFEC"/>
+              <text class="tb-mono tb-num" x="14" y="424">1.3</text>
+              <text class="tb-row" x="50" y="424">Failure on approach</text>
+              <g class="tb-row-nr"><rect x="310" y="410" width="104" height="18" fill="#F0F1F2"/><text class="tb-loz-t" x="317" y="422.6" fill="#505258">NOT RECORDED</text></g>
+              <g class="tb-loz tb-row-new"><rect x="373.6" y="410" width="40.4" height="18" fill="#EFFFD6"/><text class="tb-loz-t" x="380.6" y="422.6" fill="#37471F">PASS</text></g>
+              <line x1="14" x2="414" y1="438" y2="438" stroke="#EEEFEC"/>
+              <text class="tb-mono tb-num" x="14" y="462">2.1</text>
+              <text class="tb-row" x="50" y="462">Engine failure in the hover</text>
+              <g class="tb-loz "><rect x="373.6" y="448" width="40.4" height="18" fill="#EFFFD6"/><text class="tb-loz-t" x="380.6" y="460.6" fill="#37471F">PASS</text></g>
+              <line x1="14" x2="414" y1="476" y2="476" stroke="#EEEFEC"/>
+              <text class="tb-mono tb-num" x="14" y="500">2.2</text>
+              <text class="tb-row" x="50" y="500">Failure after take-off</text>
+              <g class="tb-loz "><rect x="360.4" y="486" width="53.599999999999994" height="18" fill="#FFECEB"/><text class="tb-loz-t" x="367.4" y="498.6" fill="#5D1F1A">REPEAT</text></g>
+              <line x1="14" x2="414" y1="514" y2="514" stroke="#EEEFEC"/>
+              <text class="tb-mono tb-num" x="14" y="538">3.1</text>
+              <text class="tb-row" x="50" y="538">Tail rotor — loss of drive</text>
+              <g class="tb-loz "><rect x="373.6" y="524" width="40.4" height="18" fill="#EFFFD6"/><text class="tb-loz-t" x="380.6" y="536.6" fill="#37471F">PASS</text></g>
+              <line x1="14" x2="414" y1="552" y2="552" stroke="#EEEFEC"/>
+              <text class="tb-mono tb-num" x="14" y="576">3.2</text>
+              <text class="tb-row" x="50" y="576">Fixed pitch — high power</text>
+              <g class="tb-loz "><rect x="373.6" y="562" width="40.4" height="18" fill="#EFFFD6"/><text class="tb-loz-t" x="380.6" y="574.6" fill="#37471F">PASS</text></g>
+              </g>
+              <rect class="tb-scrim" y="22" width="428" height="591" fill="#14171A" fill-opacity="0.35"/>
+              <g class="tb-sheet">
+              <rect y="236" width="428" height="397" rx="14" fill="#FFFFFF"/>
+              <rect x="196.0" y="244" width="36" height="4" rx="2" fill="#D7DAD3"/>
+              <text class="tb-mono tb-cap" x="16" y="276">RECORD THE OUTCOME · EXERCISE 3 OF 9</text>
+              <text class="tb-h" x="16" y="300">1.2  Hydraulic system failure in the cruise</text>
+              <text class="tb-mono tb-cap" x="16" y="330">GRADE</text>
+              <rect x="16.0" y="340" width="126.7" height="46" fill="#fff" stroke="#D7DAD3"/>
+              <text class="tb-btn" x="79.3" y="368" text-anchor="middle">Pass</text>
+              <rect x="150.7" y="340" width="126.7" height="46" fill="#fff" stroke="#D7DAD3"/>
+              <text class="tb-btn" x="214.0" y="368" text-anchor="middle">Partial</text>
+              <rect x="285.3" y="340" width="126.7" height="46" fill="#fff" stroke="#D7DAD3"/>
+              <text class="tb-btn" x="348.7" y="368" text-anchor="middle">Repeat</text>
+              <g class="tb-partial"><rect x="150.7" y="340" width="126.7" height="46" fill="#FCE4A6" stroke="#9E4C00" stroke-width="2"/><circle cx="184.0" cy="363" r="6" fill="none" stroke="#9E4C00" stroke-width="1.6"/><circle cx="184.0" cy="363" r="2.4" fill="#9E4C00"/><text class="tb-btn" x="220.0" y="368" text-anchor="middle" fill="#9E4C00">Partial</text></g>
+              <text class="tb-mono tb-cap" x="16" y="414">WHAT HAPPENED</text>
+              <rect x="16" y="424" width="154" height="26" fill="#F0F1F2"/><text class="tb-s" x="27" y="441">Checklist from memory</text>
+              <g class="tb-chip"><rect x="16" y="424" width="154" height="26" fill="#E9F2FE" stroke="#1868DB"/><text class="tb-s" x="27" y="441" fill="#123263">✓ Checklist from memory</text></g>
+              <rect x="178" y="424" width="129" height="26" fill="#F0F1F2"/><text class="tb-s" x="189" y="441">Late on the calls</text>
+              <rect x="315" y="424" width="116" height="26" fill="#F0F1F2"/><text class="tb-s" x="326" y="441">Needed a prompt</text>
+              <line x1="0" x2="428" y1="556" y2="556" stroke="#EEEFEC"/>
+              <text class="tb-b" x="16" y="580">Saving takes you to 6 of 9</text>
+              <text class="tb-s" x="16" y="598">Nothing is signed yet.</text>
+              <rect class="tb-save" x="300" y="568" width="112" height="34" fill="#1868DB"/><text class="tb-btn tb-btn-w" x="356" y="590" text-anchor="middle">Save outcome</text>
+              </g>
+              <g class="tb-scr-c">
+              <rect y="22" width="428" height="591" fill="#F6F6F4"/>
+              <rect y="22" width="428" height="50" fill="#FFFFFF"/><line x1="0" x2="428" y1="72" y2="72" stroke="#EEEFEC"/>
+              <path d="M16 41l10 10M26 41l-10 10" stroke="#292A2E" stroke-width="1.8"/>
+              <text class="tb-h" x="40" y="46">Sign session 3</text>
+              <text class="tb-s" x="40" y="63">Step 2 of 2 · nothing is signed until you press the button</text>
+              <rect x="14" y="84" width="400" height="148" fill="#fff" stroke="#DCDDDA"/>
+              <text class="tb-mono tb-cap" x="28" y="106">YOU ARE SIGNING FOR</text>
+              <text class="tb-name" x="28" y="134">Aisha Rahman</text>
+              <text class="tb-s" x="28" y="152">Session 3 — Abnormal and emergency · AW139 · 24 Sep 2026</text>
+              <g class="tb-tile" data-k="0"><rect x="28.0" y="166" width="87.0" height="54" fill="#F6F6F4"/><text class="tb-tnum" x="38.0" y="192" fill="#4C6B1F">6</text><text class="tb-s tb-tl" x="38.0" y="210">pass</text></g>
+              <g class="tb-tile" data-k="1"><rect x="123.0" y="166" width="87.0" height="54" fill="#F6F6F4"/><text class="tb-tnum" x="133.0" y="192" fill="#9E4C00">2</text><text class="tb-s tb-tl" x="133.0" y="210">partial</text></g>
+              <g class="tb-tile" data-k="2"><rect x="218.0" y="166" width="87.0" height="54" fill="#F6F6F4"/><text class="tb-tnum" x="228.0" y="192" fill="#AE2E24">1</text><text class="tb-s tb-tl" x="228.0" y="210">repeat</text></g>
+              <g class="tb-tile" data-k="3"><rect x="313.0" y="166" width="87.0" height="54" fill="#F6F6F4"/><text class="tb-tnum" x="323.0" y="192" fill="#292A2E">3 h 52</text><text class="tb-s tb-tl" x="323.0" y="210">logged</text></g>
+              <rect x="14" y="244" width="400" height="156" fill="#fff" stroke="#DCDDDA"/>
+              <text class="tb-mono tb-cap" x="28" y="266">SIGN WITH YOUR FINGER</text>
+              <text class="tb-s" x="400" y="266" text-anchor="end" fill="#1868DB">Clear</text>
+              <rect x="15" y="276" width="398" height="94" fill="#F6F6F4"/>
+              <path class="tb-sig" pathLength="1" d="M66 332 C78 300 92 300 96 326 S110 352 124 322 S142 296 152 324 S170 350 184 318 S206 294 214 326 S236 348 252 316 S276 300 286 324 S308 338 326 312 S352 304 364 318" fill="none" stroke="#1F2124" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <text class="tb-s" x="28" y="390">Capt. Marek Novak · TRI(H) AW139</text>
+              <text class="tb-s" x="400" y="390" text-anchor="end">24 Sep 2026, 13:09</text>
+              <rect x="14" y="412" width="400" height="52" fill="#fff" stroke="#DCDDDA"/>
+              <g class="tb-cb"><rect x="28" y="429" width="18" height="18" rx="2" fill="#1868DB"/><path d="M32 438l3.5 3.5 6.5-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="tb-b" x="56" y="443">These are my own assessments</text>
+              <rect y="540" width="428" height="73" fill="#FFFFFF"/><line x1="0" x2="428" y1="540" y2="540" stroke="#EEEFEC"/>
+              <text class="tb-b" x="16" y="568">Signing closes this sheet for good</text>
+              <text class="tb-s" x="16" y="586">Aisha is notified before session 4.</text>
+              <g class="tb-signbtn"><rect x="288" y="556" width="124" height="38" fill="#1868DB"/><text class="tb-btn tb-btn-w" x="350" y="580" text-anchor="middle">Sign the sheet</text></g>
+              <g class="tb-signed"><rect x="288" y="556" width="124" height="38" fill="#5B7F24"/><path d="M310 575l4 4 8-9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="square"/><text class="tb-btn tb-btn-w" x="358" y="580" text-anchor="middle">Signed</text></g>
+              </g>
+              <g class="tb-touch"><circle class="tb-ripple" cx="0" cy="0" r="18" fill="none" stroke="#14171A" stroke-opacity="0.35" stroke-width="2"/><circle cx="0" cy="0" r="15" fill="#14171A" fill-opacity="0.18" stroke="#14171A" stroke-opacity="0.3"/></g>
+              </g></g>
+              </g>
+              </svg>
+            </div>
+          </div>
+          <div class="card__info">
+            <div class="card__text">
+              <h3 class="card__title h3" data-s6><span class="card__title-text">The instructors put the paper down</span></h3>
+              <p class="card__outcome" data-s6>Training outcomes recorded on a tablet mid-session, not typed up from paper afterwards.</p>
+            </div>
+            <div class="card__meta">
+              <span class="chip chip--outline mono-label">In trial</span>
+              <span class="card__where mono-s" data-s6>Field tablet app</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="card card--wide" href="work/training-record.html" data-s7>
+          <div class="card__panel panel--sunken">
+            <!-- Motion graphic (js/training-thumb.js, mounted in main.js). As authored it's the
+                 complete record, signed off and written to the roster: that's the card at rest,
+                 with reduced motion or no JS. The card title already names it, so the SVG is
+                 hidden from assistive tech. -->
+            <div class="tr" data-tr="training">
+              <svg class="tr-svg" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <defs><filter id="trc-sheet" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#14171A" flood-opacity="0.08"/></filter></defs>
+              <rect width="800" height="520" fill="#E7E9E4"/>
+              <g class="tr-rec">
+              <rect x="48" y="44" width="476" height="350" rx="2" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#trc-sheet)"/>
+              <rect x="66" y="64" width="6" height="6" fill="#E4521F"/>
+              <text class="tr-mono tr-head" x="80" y="71">TOMASZ BIELIK · AW139 TYPE RATING</text>
+              <line x1="66" x2="506" y1="84" y2="84" stroke="#E7E9E4"/>
+              <g class="tr-col" data-s="0">
+              <text class="tr-snum" x="104" y="124" text-anchor="middle">1</text>
+              <rect class="tr-slot" x="96.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="260" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="282" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="304" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="326" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="104" y="366" text-anchor="middle">SYSTEMS</text>
+              <text class="tr-mono tr-mode" x="104" y="380" text-anchor="middle">CLASSROOM</text>
+              </g>
+              <g class="tr-col" data-s="1">
+              <text class="tr-snum" x="174" y="124" text-anchor="middle">2</text>
+              <rect class="tr-slot" x="166.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="260" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="282" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="304" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="326" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="174" y="366" text-anchor="middle">NORMAL</text>
+              <text class="tr-mono tr-mode" x="174" y="380" text-anchor="middle">FSTD</text>
+              </g>
+              <g class="tr-col" data-s="2">
+              <text class="tr-snum" x="244" y="124" text-anchor="middle">3</text>
+              <rect class="tr-slot" x="236.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="260" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="282" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="304" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="326" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="244" y="366" text-anchor="middle">ABNORMAL</text>
+              <text class="tr-mono tr-mode" x="244" y="380" text-anchor="middle">FSTD</text>
+              </g>
+              <g class="tr-col" data-s="3">
+              <text class="tr-snum" x="314" y="124" text-anchor="middle">4</text>
+              <rect class="tr-slot" x="306.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="260" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="314" y="366" text-anchor="middle">NIGHT · IFR</text>
+              <text class="tr-mono tr-mode" x="314" y="380" text-anchor="middle">FSTD</text>
+              </g>
+              <g class="tr-col" data-s="4">
+              <text class="tr-snum" x="384" y="124" text-anchor="middle">5</text>
+              <rect class="tr-slot" x="376.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="376.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="376.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="376.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="376.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="384" y="366" text-anchor="middle">HANDLING</text>
+              <text class="tr-mono tr-mode" x="384" y="380" text-anchor="middle">AIRCRAFT</text>
+              </g>
+              <g class="tr-col" data-s="5">
+              <text class="tr-snum" x="454" y="124" text-anchor="middle">6</text>
+              <rect class="tr-slot" x="446.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="454" y="366" text-anchor="middle">SKILL TEST</text>
+              <text class="tr-mono tr-mode" x="454" y="380" text-anchor="middle">AIRCRAFT</text>
+              </g>
+              <rect class="tr-cell" data-s="0" data-r="0" data-o="P" x="96.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="1" data-o="P" x="96.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="2" data-o="P" x="96.0" y="194" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="3" data-o="P" x="96.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="4" data-o="P" x="96.0" y="238" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="5" data-o="P" x="96.0" y="260" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="6" data-o="P" x="96.0" y="282" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="7" data-o="P" x="96.0" y="304" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="8" data-o="P" x="96.0" y="326" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="0" data-o="P" x="166.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="1" data-o="P" x="166.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="2" data-o="R" x="166.0" y="194" width="16" height="16" rx="2" fill="#C9372C"/>
+              <rect class="tr-cell" data-s="1" data-r="3" data-o="P" x="166.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="4" data-o="P" x="166.0" y="238" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="5" data-o="P" x="166.0" y="260" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="6" data-o="R" x="166.0" y="282" width="16" height="16" rx="2" fill="#C9372C"/>
+              <rect class="tr-cell" data-s="1" data-r="7" data-o="P" x="166.0" y="304" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="8" data-o="P" x="166.0" y="326" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="0" data-o="P" x="236.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="1" data-o="P" x="236.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="2" data-o="P" x="236.0" y="194" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="3" data-o="P" x="236.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="4" data-o="R" x="236.0" y="238" width="16" height="16" rx="2" fill="#C9372C"/>
+              <rect class="tr-cell" data-s="2" data-r="5" data-o="P" x="236.0" y="260" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="6" data-o="P" x="236.0" y="282" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="7" data-o="P" x="236.0" y="304" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="8" data-o="P" x="236.0" y="326" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="0" data-o="P" x="306.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="1" data-o="P" x="306.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="2" data-o="P" x="306.0" y="194" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="3" data-o="P" x="306.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="4" data-o="P" x="306.0" y="238" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="5" data-o="P" x="306.0" y="260" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="0" data-o="P" x="376.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="1" data-o="P" x="376.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="2" data-o="P" x="376.0" y="194" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="3" data-o="P" x="376.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="4" data-o="P" x="376.0" y="238" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="5" data-r="0" data-o="P" x="446.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <path class="tr-arc" data-k="0" pathLength="1" d="M182.0 202.0 C199.0 176.0 219.0 176.0 236.0 202.0" fill="none" stroke="#5B7F24" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="tr-clear" data-k="0" d="M170.0 202.5l2.8 2.8 5-5.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="square"/>
+              <path class="tr-arc" data-k="1" pathLength="1" d="M182.0 290.0 C234.0 192.0 254.0 192.0 306.0 224.0" fill="none" stroke="#5B7F24" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="tr-clear" data-k="1" d="M170.0 290.5l2.8 2.8 5-5.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="square"/>
+              <path class="tr-arc" data-k="2" pathLength="1" d="M252.0 246.0 C304.0 142.0 324.0 142.0 376.0 180.0" fill="none" stroke="#5B7F24" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="tr-clear" data-k="2" d="M240.0 246.5l2.8 2.8 5-5.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="square"/>
+              <g class="tr-legend">
+              <rect x="352" y="63" width="8" height="8" rx="1.5" fill="#5B7F24"/><text class="tr-mono tr-sub" x="364" y="70.5">PASS</text>
+              <rect x="398" y="63" width="8" height="8" rx="1.5" fill="#C9372C"/><text class="tr-mono tr-sub" x="410" y="70.5">REPEAT</text>
+              <path d="M454 71 q8 -10 16 0" fill="none" stroke="#5B7F24" stroke-width="1.6"/><text class="tr-mono tr-sub" x="474" y="70.5">CLEARED</text>
+              </g>
+              </g>
+              <g class="tr-gate">
+              <rect x="544" y="44" width="208" height="350" rx="2" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#trc-sheet)"/>
+              <text class="tr-mono tr-head" x="562" y="71">SIGN-OFF</text>
+              <line x1="562" x2="734" y1="84" y2="84" stroke="#E7E9E4"/>
+              <text class="tr-big" x="560" y="156">0</text>
+              <text class="tr-mono tr-sub" x="562" y="178">CHECKS OUTSTANDING</text>
+              <text class="tr-small" x="562" y="196">Sign-off waits until this is zero</text>
+              <g transform="translate(624 214)"><g class="tr-lock">
+              <path class="tr-shackle" d="M10 26V16a14 14 0 0 1 28 0v10" fill="none" stroke="#292A2E" stroke-width="5"/>
+              <rect class="tr-body" x="0" y="26" width="48" height="36" rx="5" fill="#5B7F24"/>
+              <circle cx="24" cy="41" r="4" fill="#FBFBF9"/><rect x="22" y="42" width="4" height="9" fill="#FBFBF9"/>
+              </g></g>
+              <rect x="562" y="292" width="172" height="58" fill="#F2F3F0"/>
+              <path class="tr-sig" pathLength="1" d="M576 334c6-18 12-20 14-6s6 12 12-2 10-16 14-4 6 10 12 0 8-10 12 0 10 6 18-4 8-4 14 2" fill="none" stroke="#1F2124" stroke-width="2" stroke-linecap="round"/>
+              <text class="tr-small" x="562" y="366">Capt. H. Iqbal · examiner</text>
+              <text class="tr-mono tr-sub" x="562" y="381">16 SEP 2026 · 14:52</text>
+              </g>
+              <g class="tr-roster">
+              <rect x="48" y="408" width="704" height="84" rx="2" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#trc-sheet)"/>
+              <text class="tr-mono tr-head" x="64" y="430">WRITTEN TO THE ROSTER</text>
+              <rect x="64" y="447" width="520" height="6" rx="3" fill="#ECEDE9"/>
+              <line x1="64.0" x2="64.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="66.0" y="476">S</text>
+              <line x1="104.0" x2="104.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="106.0" y="476">O</text>
+              <line x1="144.0" x2="144.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="146.0" y="476">N</text>
+              <line x1="184.0" x2="184.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="186.0" y="476">D</text>
+              <line x1="224.0" x2="224.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="226.0" y="476">J</text>
+              <line x1="264.0" x2="264.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="266.0" y="476">F</text>
+              <line x1="304.0" x2="304.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="306.0" y="476">M</text>
+              <line x1="344.0" x2="344.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="346.0" y="476">A</text>
+              <line x1="384.0" x2="384.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="386.0" y="476">M</text>
+              <line x1="424.0" x2="424.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="426.0" y="476">J</text>
+              <line x1="464.0" x2="464.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="466.0" y="476">J</text>
+              <line x1="504.0" x2="504.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="506.0" y="476">A</text>
+              <line x1="544.0" x2="544.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="546.0" y="476">S</text>
+              <rect class="tr-bar" x="84.0" y="447" width="480.0" height="6" rx="3" fill="#5B7F24"/>
+              <g class="tr-reval"><line x1="446.8" x2="446.8" y1="440" y2="459" stroke="#292A2E" stroke-width="1.2"/><text class="tr-mono tr-sub" x="451.8" y="440">REVALIDATION 18 JUN</text></g>
+              <g class="tr-valid"><circle cx="564.0" cy="450" r="4" fill="#5B7F24"/><text class="tr-mono tr-sub" x="244" y="430">VALID 16 SEP 2026 → 16 SEP 2027</text></g>
+              <g class="tr-ok"><rect x="598" y="430" width="146" height="46" rx="2" fill="#EFFFD6"/><circle cx="615" cy="453" r="9" fill="#5B7F24"/><path d="M610.5 453.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/><text class="tr-ok-t" x="630" y="449">Can be rostered</text><text class="tr-ok-s" x="630" y="464">on AW139 from today</text></g>
+              </g>
+              </svg>
+            </div>
+          </div>
+          <div class="card__info">
+            <div class="card__text">
+              <h3 class="card__title h3" data-s6><span class="card__title-text">The record that decides who is allowed to fly</span></h3>
+              <p class="card__outcome" data-s6>Check outcomes recorded against the training syllabus, so sign-off cannot happen with gaps.</p>
+            </div>
+            <div class="card__meta">
+              <span class="chip chip--solid mono-label">Shipped</span>
+              <span class="card__where mono-s" data-s6>Compliance records</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="work__row work__row--full" data-card-row>
+        <a class="card card--full" href="work/hx-insight.html" data-s7>
+          <div class="card__panel panel--tint">
+            <!-- Motion graphic (js/hx-thumb.js, mounted in main.js). As authored it's the
+                 finished frame: four tiles on the HX navy, Leave approved, Zain confirmed,
+                 Hassan all ready and week 46 locked. Hover (or Tab) plays the four flows in
+                 turn, about 9.3s. The card title already names it, so it's hidden from
+                 assistive tech. -->
+            <div class="hx" data-hx="hx-insight">
+<svg class="hx-svg" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="hxc-glow" cx="50%" cy="-10%" r="85%"><stop offset="0" stop-color="#2A2FD0" stop-opacity="0.55"/><stop offset="1" stop-color="#2A2FD0" stop-opacity="0"/></radialGradient><filter id="hxc-tile" x="-10%" y="-10%" width="120%" height="135%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000016" flood-opacity="0.35"/></filter></defs>
+<rect width="800" height="520" fill="#060752"/>
+<rect width="800" height="520" fill="url(#hxc-glow)"/>
+<g class="hx-tile" data-f="1" transform="translate(32 32)"><g class="hx-tin">
+<rect width="360" height="220" rx="16" fill="#FFFFFF" filter="url(#hxc-tile)"/>
+<rect class="hx-badge-bg" x="18" y="16" width="30" height="22" rx="6" fill="#0070E0"/>
+<text class="hx-badge-t" x="33" y="31" fill="#FFFFFF" text-anchor="middle">01</text>
+<text class="hx-title" x="58" y="32" fill="#171B2E">Leave</text>
+<text class="hx-sub" x="18" y="58" fill="#5F6680">Ayesha Khan · Annual leave · Wed 14 to Fri 16 Oct</text>
+<g class="hx-pill hx-pre hx-p-pre" data-r="342">
+<rect class="hx-pill-bg" x="267" y="16" width="75" height="22" rx="11" fill="#FFFAEB"/>
+<circle class="hx-pill-dot" cx="279" cy="27" r="3" fill="#F79009"/>
+<text class="hx-pill-t" x="332" y="31" fill="#B54708" text-anchor="end">Pending</text>
+</g>
+<g class="hx-pill hx-p-post" data-r="342">
+<rect class="hx-pill-bg" x="261" y="16" width="81" height="22" rx="11" fill="#ECFDF3"/>
+<circle class="hx-pill-dot" cx="273" cy="27" r="3" fill="#12B76A"/>
+<text class="hx-pill-t" x="332" y="31" fill="#027A48" text-anchor="end">Approved</text>
+</g>
+<g class="hx-day" data-i="0">
+<rect class="hx-dbg" data-i="0" x="18" y="68" width="100" height="78" rx="10" fill="#F6F7FB" stroke="#F6F7FB"/>
+<text class="hx-mono hx-dw" x="30" y="86" fill="#8A91A7">WED</text>
+<text class="hx-date" x="30" y="107" fill="#171B2E">14 Oct</text>
+<g class="hx-cov" data-i="0">
+<text class="hx-t2" x="30" y="123" fill="#474D66">1 of 6 off</text>
+<circle cx="33" cy="134.5" r="3" fill="#12B76A"/>
+<text class="hx-t2b" x="41" y="138" fill="#027A48">Covered</text>
+</g></g>
+<g class="hx-day" data-i="1">
+<rect class="hx-dbg" data-i="1" x="130" y="68" width="100" height="78" rx="10" fill="#FFFAEB" stroke="#FEDF89"/>
+<text class="hx-mono hx-dw" x="142" y="86" fill="#8A91A7">THU</text>
+<text class="hx-date" x="142" y="107" fill="#171B2E">15 Oct</text>
+<g class="hx-cov" data-i="1">
+<text class="hx-t2" x="142" y="123" fill="#474D66">3 of 6 off</text>
+<circle cx="145" cy="134.5" r="3" fill="#F79009"/>
+<text class="hx-t2b" x="153" y="138" fill="#B54708">Low cover</text>
+</g></g>
+<g class="hx-day" data-i="2">
+<rect class="hx-dbg" data-i="2" x="242" y="68" width="100" height="78" rx="10" fill="#F6F7FB" stroke="#F6F7FB"/>
+<text class="hx-mono hx-dw" x="254" y="86" fill="#8A91A7">FRI</text>
+<text class="hx-date" x="254" y="107" fill="#171B2E">16 Oct</text>
+<g class="hx-cov" data-i="2">
+<text class="hx-t2" x="254" y="123" fill="#474D66">2 of 6 off</text>
+<circle cx="257" cy="134.5" r="3" fill="#12B76A"/>
+<text class="hx-t2b" x="265" y="138" fill="#027A48">Covered</text>
+</g></g>
+<g class="hx-pre hx-l-act">
+<text class="hx-t2" x="18" y="180" fill="#474D66">12 days available, 9 after</text>
+<rect x="182" y="161" width="64" height="30" rx="8" fill="#FFFFFF" stroke="#CDD2DF"/>
+<text class="hx-btn" x="214" y="180" fill="#474D66" text-anchor="middle">Reject</text>
+<g class="hx-l-ok">
+<rect x="252" y="161" width="90" height="30" rx="8" fill="#027A48"/>
+<path d="M265 176.2l2.6 2.6 5-5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="hx-btn" x="307" y="180" fill="#FFFFFF" text-anchor="middle">Approve</text>
+</g></g>
+<g class="hx-l-done">
+<rect x="18" y="160" width="324" height="32" rx="10" fill="#ECFDF3"/>
+<g class="hx-l-tick"><circle cx="35" cy="176" r="8" fill="#039855"/><path d="M30.8 176.2l2.6 2.6 5-5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text class="hx-t2b hx-fine hx-w-only" x="51" y="180" fill="#027A48">Approved 11:42 · HR and finance have the record</text>
+<text class="hx-c-only" x="52" y="181.5" fill="#027A48">Approved 11:42</text>
+</g>
+</g></g>
+<g class="hx-tile" data-f="2" transform="translate(408 32)"><g class="hx-tin">
+<rect width="360" height="220" rx="16" fill="#FFFFFF" filter="url(#hxc-tile)"/>
+<rect class="hx-badge-bg" x="18" y="16" width="30" height="22" rx="6" fill="#0070E0"/>
+<text class="hx-badge-t" x="33" y="31" fill="#FFFFFF" text-anchor="middle">02</text>
+<text class="hx-title" x="58" y="32" fill="#171B2E">Resourcing</text>
+<text class="hx-sub" x="18" y="58" fill="#5F6680">Frontend Engineer · Payroll revamp · 50% for 8 weeks</text>
+<g class="hx-pill hx-pre hx-p-pre" data-r="342">
+<rect class="hx-pill-bg" x="286" y="16" width="56" height="22" rx="11" fill="#EEF0F6"/>
+<circle class="hx-pill-dot" cx="298" cy="27" r="3" fill="#8A91A7"/>
+<text class="hx-pill-t" x="332" y="31" fill="#474D66" text-anchor="end">Open</text>
+</g>
+<g class="hx-pill hx-p-post" data-r="342">
+<rect class="hx-pill-bg" x="254" y="16" width="88" height="22" rx="11" fill="#ECFDF3"/>
+<circle class="hx-pill-dot" cx="266" cy="27" r="3" fill="#12B76A"/>
+<text class="hx-pill-t" x="332" y="31" fill="#027A48" text-anchor="end">Confirmed</text>
+</g>
+<g class="hx-row" data-i="1" opacity="0.5">
+<rect class="hx-rbg" x="10" y="110" width="340" height="38" rx="10" fill="#FFFFFF" stroke="#FFFFFF"/>
+<circle cx="32" cy="129" r="13" fill="#EBF5FF"/>
+<text class="hx-av-t" x="32" y="132.5" fill="#005BBF" text-anchor="middle">FN</text>
+<text class="hx-t1" x="53" y="126" fill="#171B2E">Fatima Noor</text>
+<text class="hx-t2b hx-verdict" x="53" y="141" fill="#B54708">Overbooks</text>
+<line x1="139" x2="237" y1="121.0" y2="121.0" stroke="#CDD2DF" stroke-dasharray="2 2"/>
+<rect x="142" y="132.0" width="8" height="11.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="1" data-k="0" x="142" y="121.0" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect x="154" y="132.0" width="8" height="11.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="1" data-k="1" x="154" y="121.0" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect x="166" y="132.0" width="8" height="11.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="1" data-k="2" x="166" y="121.0" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect x="178" y="126.5" width="8" height="16.5" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="1" data-k="3" x="178" y="115.5" width="8" height="10.0" rx="1.5" fill="#F79009"/>
+<rect x="190" y="126.5" width="8" height="16.5" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="1" data-k="4" x="190" y="115.5" width="8" height="10.0" rx="1.5" fill="#F79009"/>
+<rect x="202" y="132.0" width="8" height="11.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="1" data-k="5" x="202" y="121.0" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect x="214" y="132.0" width="8" height="11.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="1" data-k="6" x="214" y="121.0" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect x="226" y="132.0" width="8" height="11.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="1" data-k="7" x="226" y="121.0" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+</g>
+<g class="hx-row" data-i="2" opacity="0.5">
+<rect class="hx-rbg" x="10" y="152" width="340" height="38" rx="10" fill="#FFFFFF" stroke="#FFFFFF"/>
+<circle cx="32" cy="171" r="13" fill="#EBF5FF"/>
+<text class="hx-av-t" x="32" y="174.5" fill="#005BBF" text-anchor="middle">AR</text>
+<text class="hx-t1" x="53" y="168" fill="#171B2E">Ali Raza</text>
+<text class="hx-t2b hx-verdict" x="53" y="183" fill="#B42318">Fully booked</text>
+<line x1="139" x2="237" y1="163.0" y2="163.0" stroke="#CDD2DF" stroke-dasharray="2 2"/>
+<rect x="142" y="163.0" width="8" height="22.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="2" data-k="0" x="142" y="152.0" width="8" height="10.0" rx="1.5" fill="#D92D20"/>
+<rect x="154" y="163.0" width="8" height="22.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="2" data-k="1" x="154" y="152.0" width="8" height="10.0" rx="1.5" fill="#D92D20"/>
+<rect x="166" y="163.0" width="8" height="22.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="2" data-k="2" x="166" y="152.0" width="8" height="10.0" rx="1.5" fill="#D92D20"/>
+<rect x="178" y="163.0" width="8" height="22.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="2" data-k="3" x="178" y="152.0" width="8" height="10.0" rx="1.5" fill="#D92D20"/>
+<rect x="190" y="163.0" width="8" height="22.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="2" data-k="4" x="190" y="152.0" width="8" height="10.0" rx="1.5" fill="#D92D20"/>
+<rect x="202" y="163.0" width="8" height="22.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="2" data-k="5" x="202" y="152.0" width="8" height="10.0" rx="1.5" fill="#D92D20"/>
+<rect x="214" y="163.0" width="8" height="22.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="2" data-k="6" x="214" y="152.0" width="8" height="10.0" rx="1.5" fill="#D92D20"/>
+<rect x="226" y="163.0" width="8" height="22.0" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="2" data-k="7" x="226" y="152.0" width="8" height="10.0" rx="1.5" fill="#D92D20"/>
+</g>
+<g class="hx-row" data-i="0">
+<rect class="hx-rbg" x="10" y="68" width="340" height="38" rx="10" fill="#EBF5FF" stroke="#D6EBFF"/>
+<circle cx="32" cy="87" r="13" fill="#EBF5FF"/>
+<text class="hx-av-t" x="32" y="90.5" fill="#005BBF" text-anchor="middle">ZA</text>
+<text class="hx-t1" x="53" y="84" fill="#171B2E">Zain Abbas</text>
+<text class="hx-t2b hx-verdict" x="53" y="99" fill="#027A48">Best fit</text>
+<line x1="139" x2="237" y1="79.0" y2="79.0" stroke="#CDD2DF" stroke-dasharray="2 2"/>
+<rect x="142" y="95.5" width="8" height="5.5" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="0" data-k="0" x="142" y="84.5" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect x="154" y="95.5" width="8" height="5.5" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="0" data-k="1" x="154" y="84.5" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect class="hx-req" data-i="0" data-k="2" x="166" y="90.0" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect class="hx-req" data-i="0" data-k="3" x="178" y="90.0" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect x="190" y="95.5" width="8" height="5.5" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="0" data-k="4" x="190" y="84.5" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect x="202" y="95.5" width="8" height="5.5" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="0" data-k="5" x="202" y="84.5" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect x="214" y="95.5" width="8" height="5.5" rx="1.5" fill="#CDD2DF"/>
+<rect class="hx-req" data-i="0" data-k="6" x="214" y="84.5" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<rect class="hx-req" data-i="0" data-k="7" x="226" y="90.0" width="8" height="10.0" rx="1.5" fill="#12B76A"/>
+<g class="hx-pre hx-assign">
+<rect x="284" y="74" width="56" height="26" rx="8" fill="#0070E0"/>
+<text class="hx-btn" x="312" y="91" fill="#FFFFFF" text-anchor="middle">Assign</text>
+</g>
+<g class="hx-pill hx-booked" data-r="340">
+<rect class="hx-pill-bg" x="246" y="76" width="94" height="22" rx="11" fill="#ECFDF3"/>
+<circle class="hx-pill-dot" cx="258" cy="87" r="3" fill="#12B76A"/>
+<text class="hx-pill-t" x="330" y="91" fill="#027A48" text-anchor="end">From 2 Nov</text>
+</g>
+</g>
+</g></g>
+<g class="hx-tile" data-f="3" transform="translate(32 268)"><g class="hx-tin">
+<rect width="360" height="220" rx="16" fill="#FFFFFF" filter="url(#hxc-tile)"/>
+<rect class="hx-badge-bg" x="18" y="16" width="30" height="22" rx="6" fill="#0070E0"/>
+<text class="hx-badge-t" x="33" y="31" fill="#FFFFFF" text-anchor="middle">03</text>
+<text class="hx-title" x="58" y="32" fill="#171B2E">Onboarding</text>
+<text class="hx-sub" x="18" y="58" fill="#5F6680">Hassan Qureshi · Product Designer · starts Mon 16 Nov</text>
+<g class="hx-pre hx-nudge">
+<rect x="204" y="14" width="138" height="26" rx="8" fill="#0070E0"/>
+<path d="M216 31.5h10M217.5 31.5v-5a3.5 3.5 0 0 1 7 0v5M219.6 34h2.8" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+<text class="hx-btn" x="284" y="31" fill="#FFFFFF" text-anchor="middle">Nudge 3 owners</text>
+</g>
+<g class="hx-pill hx-p-post" data-r="342">
+<rect class="hx-pill-bg" x="254" y="16" width="88" height="22" rx="11" fill="#ECFDF3"/>
+<circle class="hx-pill-dot" cx="266" cy="27" r="3" fill="#12B76A"/>
+<text class="hx-pill-t" x="332" y="31" fill="#027A48" text-anchor="end">All ready</text>
+</g>
+<circle cx="66" cy="124" r="36" fill="none" stroke="#EEF0F6" stroke-width="8"/>
+<path class="hx-ring" pathLength="1" d="M66 88a36 36 0 1 1 0 72a36 36 0 1 1 0 -72" fill="none" stroke="#12B76A" stroke-width="8" stroke-linecap="round"/>
+<text class="hx-pre hx-pct" x="66" y="130" fill="#171B2E" text-anchor="middle">61%</text>
+<g class="hx-ring-av">
+<circle cx="66" cy="124" r="24" fill="#EBF5FF"/>
+<text class="hx-av-l" x="66" y="127.5" fill="#005BBF" text-anchor="middle">HQ</text>
+</g>
+<g class="hx-ring-ok"><circle cx="92" cy="150" r="9" fill="#039855"/><path d="M87.8 150.2l2.6 2.6 5-5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<circle cx="92" cy="150" r="9" fill="none" stroke="#fff" stroke-width="2" class="hx-ring-ok"/>
+<text class="hx-t2" x="66" y="188" fill="#5F6680" text-anchor="middle">Ready for day one</text>
+<g class="hx-task" data-i="0">
+<circle class="hx-pre hx-ping" data-i="0" cx="136" cy="85" r="12" fill="none" stroke="#0070E0" stroke-width="2"/>
+<circle cx="136" cy="85" r="12" fill="#EBF5FF"/>
+<text class="hx-av-t" x="136" y="88.5" fill="#005BBF" text-anchor="middle">FK</text>
+<text class="hx-t1" x="155" y="82" fill="#171B2E">Figma and Jira accounts</text>
+<text class="hx-t2" x="155" y="97" fill="#5F6680">Faisal · IT</text>
+<g class="hx-pre hx-st-pre" data-i="0">
+<text class="hx-t2b" x="318" y="97" fill="#B42318" text-anchor="end">Late</text>
+<circle cx="332" cy="85" r="9" fill="#FEF3F2"/><path d="M332 80v6" stroke="#D92D20" stroke-width="2" stroke-linecap="round"/><circle cx="332" cy="89.5" r="1.2" fill="#D92D20"/>
+</g>
+<g class="hx-st-post" data-i="0">
+<text class="hx-t2b" x="318" y="97" fill="#027A48" text-anchor="end">Done</text>
+<g><circle cx="332" cy="85" r="9" fill="#039855"/><path d="M327.8 85.2l2.6 2.6 5-5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g></g>
+<g class="hx-task" data-i="1">
+<circle class="hx-pre hx-ping" data-i="1" cx="136" cy="125" r="12" fill="none" stroke="#0070E0" stroke-width="2"/>
+<circle cx="136" cy="125" r="12" fill="#EBF5FF"/>
+<text class="hx-av-t" x="136" y="128.5" fill="#005BBF" text-anchor="middle">BA</text>
+<text class="hx-t1" x="155" y="122" fill="#171B2E">Plan the first week</text>
+<text class="hx-t2" x="155" y="137" fill="#5F6680">Bilal · manager</text>
+<g class="hx-pre hx-st-pre" data-i="1">
+<text class="hx-t2b" x="318" y="137" fill="#B54708" text-anchor="end">In progress</text>
+<circle cx="332" cy="125" r="8" fill="#FFFAEB" stroke="#F79009" stroke-width="1.5"/><path d="M332 120a5 5 0 0 1 0 10z" fill="#F79009"/>
+</g>
+<g class="hx-st-post" data-i="1">
+<text class="hx-t2b" x="318" y="137" fill="#027A48" text-anchor="end">Done</text>
+<g><circle cx="332" cy="125" r="9" fill="#039855"/><path d="M327.8 125.2l2.6 2.6 5-5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g></g>
+<g class="hx-task" data-i="2">
+<circle class="hx-pre hx-ping" data-i="2" cx="136" cy="165" r="12" fill="none" stroke="#0070E0" stroke-width="2"/>
+<circle cx="136" cy="165" r="12" fill="#EBF5FF"/>
+<text class="hx-av-t" x="136" y="168.5" fill="#005BBF" text-anchor="middle">AK</text>
+<text class="hx-t1" x="155" y="162" fill="#171B2E">Book a welcome lunch</text>
+<text class="hx-t2" x="155" y="177" fill="#5F6680">Ayesha · buddy</text>
+<g class="hx-pre hx-st-pre" data-i="2">
+<text class="hx-t2b" x="318" y="177" fill="#8A91A7" text-anchor="end">To do</text>
+<circle cx="332" cy="165" r="8" fill="none" stroke="#CDD2DF" stroke-width="1.5" stroke-dasharray="2.5 2"/>
+</g>
+<g class="hx-st-post" data-i="2">
+<text class="hx-t2b" x="318" y="177" fill="#027A48" text-anchor="end">Done</text>
+<g><circle cx="332" cy="165" r="9" fill="#039855"/><path d="M327.8 165.2l2.6 2.6 5-5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g></g>
+</g></g>
+<g class="hx-tile" data-f="4" transform="translate(408 268)"><g class="hx-tin">
+<rect width="360" height="220" rx="16" fill="#FFFFFF" filter="url(#hxc-tile)"/>
+<rect class="hx-badge-bg" x="18" y="16" width="30" height="22" rx="6" fill="#0070E0"/>
+<text class="hx-badge-t" x="33" y="31" fill="#FFFFFF" text-anchor="middle">04</text>
+<text class="hx-title" x="58" y="32" fill="#171B2E">Attendance</text>
+<text class="hx-sub" x="18" y="58" fill="#5F6680">Week 46 · Mon 9 to Fri 13 Nov · reviewed by Bilal Ahmed</text>
+<g class="hx-pill hx-pre hx-p-pre" data-r="342">
+<rect class="hx-pill-bg" x="242" y="16" width="100" height="22" rx="11" fill="#FFFAEB"/>
+<circle class="hx-pill-dot" cx="254" cy="27" r="3" fill="#F79009"/>
+<text class="hx-pill-t" x="332" y="31" fill="#B54708" text-anchor="end">Locks 18:00</text>
+</g>
+<g class="hx-pill hx-p-post" data-r="342">
+<rect class="hx-pill-bg" x="274" y="16" width="68" height="22" rx="11" fill="#ECFDF3"/>
+<circle class="hx-pill-dot" cx="286" cy="27" r="3" fill="#12B76A"/>
+<text class="hx-pill-t" x="332" y="31" fill="#027A48" text-anchor="end">Locked</text>
+</g>
+<rect x="18" y="68" width="108" height="80" rx="10" fill="#F6F7FB"/>
+<text class="hx-t2" x="30" y="87" fill="#5F6680">Ready to lock</text>
+<text class="hx-big" x="30" y="117" fill="#171B2E">6 of 6</text>
+<text class="hx-t2" x="30" y="137" fill="#5F6680">3h 00m overtime</text>
+<g class="hx-exc" data-i="0">
+<circle cx="148" cy="81" r="11" fill="#EBF5FF"/>
+<text class="hx-av-t" x="148" y="84.5" fill="#005BBF" text-anchor="middle">AK</text>
+<text class="hx-t1" x="166" y="85" fill="#171B2E">Ayesha Khan<tspan class="hx-t2" fill="#5F6680" dx="6">Correction</tspan></text>
+<g class="hx-pre hx-ex-pre" data-i="0"><circle cx="332" cy="81" r="9" fill="#FFFAEB"/><path d="M332 76v6" stroke="#F79009" stroke-width="2" stroke-linecap="round"/><circle cx="332" cy="85.5" r="1.2" fill="#F79009"/></g>
+<g class="hx-ex-post"><circle cx="332" cy="81" r="9" fill="#039855"/><path d="M327.8 81.2l2.6 2.6 5-5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="hx-exc" data-i="1">
+<circle cx="148" cy="109" r="11" fill="#EBF5FF"/>
+<text class="hx-av-t" x="148" y="112.5" fill="#005BBF" text-anchor="middle">IJ</text>
+<text class="hx-t1" x="166" y="113" fill="#171B2E">Iqra Javed<tspan class="hx-t2" fill="#5F6680" dx="6">Late 14 min</tspan></text>
+<g class="hx-pre hx-ex-pre" data-i="1"><circle cx="332" cy="109" r="9" fill="#FFFAEB"/><path d="M332 104v6" stroke="#F79009" stroke-width="2" stroke-linecap="round"/><circle cx="332" cy="113.5" r="1.2" fill="#F79009"/></g>
+<g class="hx-ex-post"><circle cx="332" cy="109" r="9" fill="#039855"/><path d="M327.8 109.2l2.6 2.6 5-5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="hx-exc" data-i="2">
+<circle cx="148" cy="137" r="11" fill="#EBF5FF"/>
+<text class="hx-av-t" x="148" y="140.5" fill="#005BBF" text-anchor="middle">SM</text>
+<text class="hx-t1" x="166" y="141" fill="#171B2E">Sara Malik<tspan class="hx-t2" fill="#5F6680" dx="6">Off site</tspan></text>
+<g class="hx-pre hx-ex-pre" data-i="2"><circle cx="332" cy="137" r="9" fill="#FFFAEB"/><path d="M332 132v6" stroke="#F79009" stroke-width="2" stroke-linecap="round"/><circle cx="332" cy="141.5" r="1.2" fill="#F79009"/></g>
+<g class="hx-ex-post"><circle cx="332" cy="137" r="9" fill="#039855"/><path d="M327.8 137.2l2.6 2.6 5-5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="hx-pre hx-lockbtn">
+<rect x="18" y="160" width="324" height="32" rx="8" fill="#0070E0"/>
+<text class="hx-btn" x="180" y="180.5" fill="#FFFFFF" text-anchor="middle">Approve and lock week 46</text>
+</g>
+<g class="hx-locked">
+<rect x="18" y="160" width="324" height="32" rx="10" fill="#060752"/>
+<path class="hx-shackle" d="M32.5 175v-3.5a4.5 4.5 0 0 1 9 0v3.5" fill="none" stroke="#fff" stroke-width="1.8"/>
+<rect x="30" y="174.5" width="14" height="10.5" rx="2" fill="#fff"/>
+<text class="hx-btn hx-w-only" x="54" y="180.5" fill="#FFFFFF">Locked · 218h 56m to payroll at 18:00</text>
+<text class="hx-c-only" x="54" y="181.5" fill="#FFFFFF">Locked · to payroll</text>
+</g>
+</g></g>
+<circle class="hx-pre hx-rip" data-k="0" cx="335" cy="207" r="16" fill="#fff"/>
+<circle class="hx-pre hx-rip" data-k="1" cx="719" cy="119" r="16" fill="#fff"/>
+<circle class="hx-pre hx-rip" data-k="2" cx="314" cy="295" r="16" fill="#fff"/>
+<circle class="hx-pre hx-rip" data-k="3" cx="588" cy="444" r="16" fill="#fff"/>
+<g class="hx-pre hx-cur"><g class="hx-cur-i"><path d="M0 0v18.5l4.6-4.3 3.2 7.1 3.3-1.4-3.2-6.9h6.4z" fill="#171B2E" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></g></g>
+</svg>
+            </div>
+          </div>
+          <div class="card__info">
+            <div class="card__text">
+              <h3 class="card__title h3" data-s6><span class="card__title-text">Taking HR off email and spreadsheets</span></h3>
+              <p class="card__outcome" data-s6>Four everyday HR flows for Punjab Group&rsquo;s 8,700 people in 32 companies. Leave is decided in hours, not days, and nothing is retyped for payroll.</p>
+            </div>
+            <div class="card__meta">
+              <span class="chip chip--solid mono-label">Shipped</span>
+              <span class="card__where mono-s" data-s6>HR platform  ·  June 2024</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="work__row" data-card-row>
+        <a class="card card--wide" href="work/hx-timer.html" data-s7>
+          <div class="card__panel panel--sunken">
+            <div class="screenshot screenshot--card">
+              <img src="assets/work/hx-timer/timer-02.webp" alt="" width="2560" height="1760" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="card__info">
+            <div class="card__text">
+              <h3 class="card__title h3" data-s6><span class="card__title-text">One button, always in reach</span></h3>
+              <p class="card__outcome" data-s6>A small Mac app for tracking time against projects. Start, switch, take a break and end the day, with every entry already in the clock sheet.</p>
+            </div>
+            <div class="card__meta">
+              <span class="card__where mono-s" data-s6>Desktop app  ·  HX Insight</span>
+            </div>
+          </div>
+        </a>
+        <a class="card card--narrow" href="work/hx-mobile.html" data-s7>
+          <div class="card__panel panel--tint">
+            <div class="phones phones--card">
+              <div class="phone"><img src="assets/work/hx-mobile/tab-home.webp" alt="" width="804" height="1748" loading="lazy" decoding="async"></div>
+              <div class="phone"><img src="assets/work/hx-mobile/tab-leave.webp" alt="" width="804" height="1748" loading="lazy" decoding="async"></div>
+              <div class="phone"><img src="assets/work/hx-mobile/tab-inbox.webp" alt="" width="804" height="1748" loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="card__info">
+            <div class="card__text">
+              <h3 class="card__title h3" data-s6><span class="card__title-text">The quick jobs, in your pocket</span></h3>
+              <p class="card__outcome" data-s6>Clock in, fix a missed punch, ask for leave and approve from a notification, on iOS 26.</p>
+            </div>
+            <div class="card__meta">
+              <span class="card__where mono-s" data-s6>Mobile app  ·  iOS</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       H7 · Approach — head S6. Each principle: ink rule S9, then
+       number, title, body S6; rows 100ms apart.
+       ================================================================ -->
+  <section class="approach container split" id="approach" aria-labelledby="approach-title">
+    <div class="approach__head" data-approach-head>
+      <h2 class="display-l" id="approach-title" data-s6>Complex tools fail in the details. So I design the details.</h2>
+      <p class="body-l muted" data-s6>Three habits from six years inside data-heavy B2B software.</p>
+    </div>
+
+    <ol class="principles" data-principles>
+      <li class="principle" data-rule>
+        <span class="principle__num mono-s" data-s6>01</span>
+        <div class="principle__text">
+          <h3 class="h3" data-s6>Diagnose before pixels</h3>
+          <p class="body-l" data-s6>I map the tasks people actually run, in the order they run them, before a single screen changes.</p>
+        </div>
+      </li>
+      <li class="principle" data-rule>
+        <span class="principle__num mono-s" data-s6>02</span>
+        <div class="principle__text">
+          <h3 class="h3" data-s6>Design every state</h3>
+          <p class="body-l" data-s6>Empty, blocked, conflicted, offline. Each one gets a screen and a route out, drawn before build.</p>
+        </div>
+      </li>
+      <li class="principle" data-rule>
+        <span class="principle__num mono-s" data-s6>03</span>
+        <div class="principle__text">
+          <h3 class="h3" data-s6>Ship inside your system</h3>
+          <p class="body-l" data-s6>New patterns only when the work earns them. Tokens and components engineers can build without guessing.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ================================================================
+       H8 · About — portrait wipes up (clip-path), --dur-slow,
+       --ease-in-out. Heading and paragraphs S6, --stagger. Experience:
+       each rule S9 first, then its row S6, --stagger. Buttons S2.
+       ================================================================ -->
+  <section class="about container split" id="about" aria-labelledby="about-title">
+    <div class="about__portrait" data-clip>
+      <img src="assets/talha-portrait.jpg" alt="Talha Farooq Awan" width="1033" height="1254" loading="lazy" decoding="async">
+    </div>
+
+    <div class="about__text">
+      <div class="about__intro" data-about-intro>
+        <h2 class="h2" id="about-title" data-s6>Six years in the dense end of software.</h2>
+        <p class="body-l" data-s6>I&rsquo;m Talha. I design the software teams run their work on: quoting, scheduling, compliance reviews, incident handling, the records an audit depends on. Most recently that&rsquo;s been an operations suite at NGFT, in aviation, a regulated industry where a missed field has real consequences.</p>
+        <p class="body-l muted" data-s6>I work across research, product decisions and the design system, and I prototype in code so engineers see the real behaviour, not a picture of it.</p>
+      </div>
+
+      <div class="experience" data-experience>
+        <h3 class="experience__label mono-label" data-s6>Experience</h3>
+        <ol class="jobs">
+          <li class="job" data-rule>
+            <div class="job__row" data-s6>
+              <span class="job__dates mono-s">Sep 2024 - Now</span>
+              <span class="job__company">NGFT</span>
+              <span class="job__role">Product Designer</span>
+            </div>
+          </li>
+          <li class="job" data-rule>
+            <div class="job__row" data-s6>
+              <span class="job__dates mono-s">Dec 2023 - Sep 2024</span>
+              <span class="job__company">Punjab Group</span>
+              <span class="job__role">Product Designer</span>
+            </div>
+          </li>
+          <li class="job" data-rule>
+            <div class="job__row" data-s6>
+              <span class="job__dates mono-s">Nov 2021 - Dec 2023</span>
+              <span class="job__company">Decklaration</span>
+              <span class="job__role">Junior UX/UI Designer</span>
+            </div>
+          </li>
+          <li class="job" data-rule>
+            <div class="job__row" data-s6>
+              <span class="job__dates mono-s">Jan 2020 - Oct 2021</span>
+              <span class="job__company">Tenx</span>
+              <span class="job__role">UX Intern</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="about__actions" data-about-actions>
+        <div data-s6>
+          <a class="btn-secondary" href="assets/talha-farooq-awan-resume.pdf" download="Talha-Farooq-Awan-Resume.pdf">
+            <span>Resume (PDF)</span>
+            <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+        <div data-s6>
+          <a class="btn-secondary" href="#todo-linkedin">
+            <span>LinkedIn</span>
+            <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       H9 · Contact — section rule S9 first. Headline S11 when 40% in
+       view; "avoids?" is the accent word. Button S1 (mailto). Email S3:
+       click copies; the label reads "Copied" for 1.6s.
+       ================================================================ -->
+  <section class="contact" id="contact" aria-labelledby="contact-title" data-rule data-contact>
+    <div class="container contact__inner">
+      <h2 class="contact__title display-xl" id="contact-title" aria-label="Got a screen your team avoids?">
+        <span class="hl-line" aria-hidden="true">
+          <span data-s11>Got a screen your</span>
+        </span>
+        <span class="hl-line hl-line--2" aria-hidden="true">
+          <span data-s11>team</span>
+          <em class="accent-word" data-s11="accent">avoids?</em>
+        </span>
+      </h2>
+
+      <div class="contact__row">
+        <div data-s6>
+          <a class="btn-primary" href="mailto:talhafawan@gmail.com">
+            <span>Get in touch</span>
+            <span class="btn-primary__tile"><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          </a>
+        </div>
+        <div data-s6>
+          <button class="email" type="button" data-copy-email="talhafawan@gmail.com" aria-describedby="email-hint">
+            <span class="email__label mono-label" data-copy-label>Email</span>
+            <span class="email__address link-s3 link-s3--quiet">talhafawan@gmail.com</span>
+          </button>
+          <span class="visually-hidden" id="email-hint">Copies the address to your clipboard</span>
+        </div>
+        <p class="contact__note" data-s6>Send the screen. I will reply with what I would fix first.</p>
+      </div>
+
+      <p class="visually-hidden" role="status" data-copy-status></p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================================================================
+     H10 · Footer — links S3. No entrance animation.
+     ================================================================ -->
+<footer class="footer">
+  <div class="container footer__inner mono-s">
+    <p class="footer__credit">Designed and built by Talha Farooq Awan, 2026</p>
+    <ul class="footer__links">
+      <li><a class="link-s3 link-s3--quiet" href="#todo-linkedin">LinkedIn</a></li>
+      <li><a class="link-s3 link-s3--quiet" href="mailto:talhafawan@gmail.com">Email</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A two-day safety report, redesigned as one guided flow — Talha Farooq Awan</title>
+<meta name="description" content="Helicopter operators investigate every safety report by hand across a spreadsheet, Word files and a legacy system. I designed a single flow where the AI does the first pass and the safety manager makes the decisions.">
+<meta name="theme-color" content="#f2f3f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,600&display=swap">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/motion.css">
+<script>
+  /* Entrance states in motion.css are scoped to .motion, so the page renders in
+     full with scripting off or reduced motion on (S12). If main.js hasn't
+     started within 2.5s, drop the class rather than leave anything hidden. */
+  (function (root) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    root.classList.add('motion');
+    setTimeout(function () { if (!window.__motion) root.classList.remove('motion'); }, 2500);
+  })(document.documentElement);
+</script>
+<script src="../js/main.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 16 16">
+    <path d="M4.5 11.5L11.5 4.5M11.5 10.5V4.5H5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 16 16">
+    <path d="M13 8H3M7.5 12.5L3 8L7.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right-s" viewBox="0 0 16 16">
+    <path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 16 16">
+    <path d="M8 13V3M3.5 7.5L8 3L12.5 7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 28 28">
+    <path d="M5.25 14H22.75M14.875 21.875L22.75 14L14.875 6.125" fill="none" stroke="currentColor" stroke-width="2.45" stroke-linecap="square"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================================================================
+     SM1 · Nav — S5 sticky. Links S4; "Work" is current. Get in touch: S1.
+     ================================================================ -->
+<header class="nav" data-nav>
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html">
+      <span class="brand__avatar"><img src="../assets/talha-avatar.jpg" alt="" width="36" height="36"></span>
+      <span class="brand__name">
+        <span class="brand__title">Talha Farooq Awan</span>
+        <span class="brand__role">Product designer</span>
+      </span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>Menu</button>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../index.html#work" aria-current="true">Work</a></li>
+        <li><a class="nav-link" href="../index.html#approach">Approach</a></li>
+        <li><a class="nav-link" href="../index.html#about">About</a></li>
+      </ul>
+      <a class="btn-primary" href="../index.html#contact">
+        <span>Get in touch</span>
+        <span class="btn-primary__tile"><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" data-case>
+
+  <!-- ================================================================
+       SM2 · Header — Back: arrow nudges left, label S3. Title S11 on load,
+       two lines, break after "report,". Lede S6 at 200ms. Meta: top rule
+       S9, then columns S6, --stagger.
+       ================================================================ -->
+  <section class="cs-header cs-header--long container" aria-labelledby="cs-title" data-cs-header>
+    <a class="back" href="../index.html#work">
+      <svg class="arrow-back" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+      <span class="mono-label link-s3 link-s3--quiet">All work</span>
+    </a>
+
+    <p class="eyebrow mono-label">
+      <span class="eyebrow__signal" aria-hidden="true"></span>
+      <span class="cs-eyebrow__text">Incident management  ·  Safety reporting  ·  Proof of concept</span>
+    </p>
+
+    <h1 class="cs-title display-xl" id="cs-title" aria-label="A two-day safety report, redesigned as one guided flow"><span class="cs-title__line" data-s11 aria-hidden="true">A two-day safety report,</span> <span class="cs-title__line" data-s11 aria-hidden="true">redesigned as one guided flow</span></h1>
+
+    <p class="cs-lede body-l" data-s6>Helicopter operators investigate every safety report by hand across a spreadsheet, Word files and a legacy system. I designed a single flow where the AI does the first pass and the safety manager makes the decisions.</p>
+
+    <div class="cs-meta" data-rule>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Role</p>
+        <p class="cs-meta__value">Sole product designer</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Team</p>
+        <p class="cs-meta__value">Me, with a BA on research</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Timeline</p>
+        <p class="cs-meta__value">2 months</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Research</p>
+        <p class="cs-meta__value">12 safety managers</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Status</p>
+        <p class="cs-meta__value">Proof of concept, not yet built</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SM3 · Hero image — S7 at 300ms, on load; the screen drifts up 40px
+       while its panel crosses the viewport (CSS scroll timeline; off under
+       S12). The panel shows the top 680 of the 1120 x 796 frame, so the
+       export is that visible part and keeps its height at the top
+       (slot__img--top).
+       ================================================================ -->
+  <section class="cs-hero cs-hero--long container" aria-label="Screen 12: the ECCAIRS record with every value decided" data-s7 data-cs-hero>
+    <div class="cs-hero__panel panel--tint">
+      <div class="slot slot--hero-long slot--hero-tall" data-zoom>
+        <img class="slot__img--top" src="../assets/work/safety-report/hero.png" alt="Screen 12: the ECCAIRS step for SR-2026-0142 with every matched value decided: 0 need a decision, 9 not in report, 83 matched, 5 corrected. A green banner confirms every value has a decision, above the corrections listed by entity." width="2240" height="1360">
+      </div>
+    </div>
+    <p class="cs-hero__caption mono-s" data-s6>Screen 12  ·  ECCAIRS, all decided</p>
+  </section>
+
+  <div class="cs-body container">
+
+    <!-- ==============================================================
+         SM4 · Side nav — sticky at 96px; the section crossing the middle
+         of the viewport is current, and one accent bar slides to it.
+         Below 1024px it becomes a chip bar stuck under the Nav.
+         ============================================================== -->
+    <nav class="toc" aria-label="On this page" data-toc>
+      <p class="toc__label mono-label">On this page</p>
+      <div class="toc__track">
+      <ol class="toc__list">
+        <li><a class="toc__link" href="#problem" aria-current="true"><span class="toc__num">01</span><span class="toc__text">The problem</span></a></li>
+        <li><a class="toc__link" href="#research"><span class="toc__num">02</span><span class="toc__text">Research</span></a></li>
+        <li><a class="toc__link" href="#decisions"><span class="toc__num">03</span><span class="toc__text">Key decisions</span></a></li>
+        <li><a class="toc__link" href="#response"><span class="toc__num">04</span><span class="toc__text">Response</span></a></li>
+        <li><a class="toc__link" href="#next"><span class="toc__num">05</span><span class="toc__text">Next</span></a></li>
+      </ol>
+      <span class="toc__indicator" aria-hidden="true" data-toc-indicator></span>
+      </div>
+
+      <div class="toc__next">
+        <p class="toc__next-label mono-label">Next case study</p>
+        <a class="toc__next-link" href="priced-offer.html">
+          <span class="link-s3 link-s3--quiet">Redesigning the offer page</span>
+          <svg class="arrow-small" aria-hidden="true"><use href="#i-arrow-right-s"/></svg>
+        </a>
+      </div>
+
+      <a class="toc__top mono-s" href="#top" data-to-top>
+        <span>Back to top</span>
+        <svg class="arrow-small" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+      </a>
+    </nav>
+
+    <div class="cs-content">
+
+      <!-- ============================================================
+           SM5 · Sections — each: top ink rule S9 first; overline,
+           heading, lede S6 (--stagger); rows, columns, quotes and claims
+           S6, 40ms apart; tint, dark and accent-bordered blocks S6 as one
+           unit.
+           ============================================================ -->
+
+      <!-- 01 The problem -->
+      <section class="cs-section" id="problem" aria-labelledby="problem-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">01</span><span class="cs-section__label mono-label">The problem</span></p>
+        <h2 class="cs-section__title h2" id="problem-title" tabindex="-1" data-s6>Every report is rebuilt by hand, three times</h2>
+        <p class="cs-section__lede body-l" data-s6>A safety report arrives as free text. The safety manager then reads it, rates the risk, keeps a record in Excel and Word, and re-enters it field by field into a legacy system to produce the ECCAIRS record the authority needs.</p>
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>Nothing connects those steps, so the same facts are typed again at every one.</p>
+
+        <!-- SM6 · Pull quote — the accent bar draws top to bottom; the quote
+             S6 once it's halfway; the source line fades after, --dur-fast -->
+        <figure class="callout" data-block="callout">
+          <blockquote class="callout__quote" data-s6>“A normal report takes about two days.”</blockquote>
+          <figcaption class="callout__source text-s" data-fade-fast>Safety manager, during research</figcaption>
+        </figure>
+
+        <div class="cols" style="--col-measure: 307px" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">Re-typed into ECCAIRS</h3>
+            <p class="col__text">Dozens of attributes entered one by one, from a report that already contains most of the answers.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Risk rated differently</h3>
+            <p class="col__text">Each manager applies the matrix their own way, so the same hazard gets different ratings.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">No view of what is open</h3>
+            <p class="col__text">Nothing shows which reports are overdue, who owns them, or which carry an intolerable risk.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 Research
+           SM7 · Numbers — tiles S6, --stagger, left to right; 12, 12 and 1
+           count up (S10). -->
+      <section class="cs-section" id="research" aria-labelledby="research-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">02</span><span class="cs-section__label mono-label">Research</span></p>
+        <h2 class="cs-section__title h2" id="research-title" tabindex="-1" data-s6>Twelve operators, watched as well as asked</h2>
+
+        <div class="numbers numbers--section numbers--research" data-block="numbers">
+          <div class="numbers__row">
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value"><span class="count" data-count="12">12</span></p>
+              <h3 class="numbers__title">Safety managers interviewed</h3>
+              <p class="numbers__label">A BA visited twelve operators and interviewed the safety manager at each one.</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value"><span class="count" data-count="12">12</span></p>
+              <h3 class="numbers__title">Procedures observed</h3>
+              <p class="numbers__label">The BA also observed each procedure closely, which shows the steps people skip when they describe their work.</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value"><span class="count" data-count="1">1</span></p>
+              <h3 class="numbers__title">Legacy system, first-hand</h3>
+              <p class="numbers__label">I had access to the old system and a recording of a manager using it, which showed exactly where time goes.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SM6 · Brief — the accent bar draws top to bottom; text S6 once
+             it's halfway -->
+        <div class="callout" data-block="callout">
+          <p class="callout__text body-l" data-s6>The same three pains came up across the operators. They set the brief: remove the re-typing, make risk consistent, and show what is open.</p>
+        </div>
+      </section>
+
+      <!-- 03 Key decisions
+           SM8 · Each decision: top rule S9, then label, title and body S6;
+           then its panel S7; the caption fades in after the screen,
+           --dur-fast. Below 1024 the title and body stack. -->
+      <section class="cs-section" id="decisions" aria-labelledby="decisions-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">03</span><span class="cs-section__label mono-label">Key decisions</span></p>
+        <h2 class="cs-section__title h2" id="decisions-title" tabindex="-1" data-s6>Five decisions that carry the flow</h2>
+
+        <div class="design-decisions">
+          <article class="design-decision" aria-labelledby="decision-1">
+            <div class="design-decision__text" data-block="decision" data-rule>
+              <div class="design-decision__head">
+                <p class="design-decision__label mono-label" data-s6>Decision 1</p>
+                <h3 class="h3" id="decision-1" data-s6>Start with what’s urgent</h3>
+              </div>
+              <div class="design-decision__body" data-s6>
+                <p>The inbox puts what needs the safety manager first. Every row shows the risk level, days open, owner and due date.</p>
+                <p>Counts for overdue reports and intolerable risks sit on top, so the riskiest report is never buried.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/safety-report/inbox.png" alt="Safety reports inbox: counts for Need you, Overdue, Intolerable risk open and Closed this month on top, then a table of open reports with stage, risk level, owner and days open." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>01 — Inbox</figcaption>
+            </figure>
+          </article>
+
+          <article class="design-decision" aria-labelledby="decision-2">
+            <div class="design-decision__text" data-block="decision" data-rule>
+              <div class="design-decision__head">
+                <p class="design-decision__label mono-label" data-s6>Decision 2</p>
+                <h3 class="h3" id="decision-2" data-s6>The AI does the first pass. The manager decides.</h3>
+              </div>
+              <div class="design-decision__body" data-s6>
+                <p>Analysis starts when the report opens. It writes a synopsis linked to the source sentences and suggests hazards from the taxonomy.</p>
+                <p>Nothing is accepted without the manager. Every suggestion can be kept, corrected or removed.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/safety-report/review-synopsis.png" alt="Review step: a synopsis where every line links to its source in the narrative or flight data, one value flagged as only in the flight data, and two suggested hazards from the taxonomy with a duplicate merged." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>06 — Review · synopsis and hazards</figcaption>
+            </figure>
+          </article>
+
+          <article class="design-decision" aria-labelledby="decision-3">
+            <div class="design-decision__text" data-block="decision" data-rule>
+              <div class="design-decision__head">
+                <p class="design-decision__label mono-label" data-s6>Decision 3</p>
+                <h3 class="h3" id="decision-3" data-s6>Review ECCAIRS by exception</h3>
+              </div>
+              <div class="design-decision__body" data-s6>
+                <p>The system matches every ECCAIRS attribute from the report. The manager only sees the values it is unsure of, with its reason.</p>
+                <p>Keep or correct it, with a one-tap reason for the audit trail. This replaces the re-typing that research named as the biggest pain.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel screen-panel--tint" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/safety-report/eccairs-exceptions.png" alt="ECCAIRS step: 97 attributes matched, 7 need a decision. Each uncertain value shows its confidence and the reason, such as a narrative that contradicts the database, with Keep it and Correct." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>09 — ECCAIRS · review by exception</figcaption>
+            </figure>
+          </article>
+
+          <article class="design-decision" aria-labelledby="decision-4">
+            <div class="design-decision__text" data-block="decision" data-rule>
+              <div class="design-decision__head">
+                <p class="design-decision__label mono-label" data-s6>Decision 4</p>
+                <h3 class="h3" id="decision-4" data-s6>One screen for risk, one rule for everyone</h3>
+              </div>
+              <div class="design-decision__body" data-s6>
+                <p>Severity and probability sit side by side with the ICAO 5×5 matrix, so every manager reaches a rating the same way.</p>
+                <p>Similar risks from the register appear alongside. A recurring hazard is linked instead of assessed again from scratch.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/safety-report/risk-assessment.png" alt="Risk step: severity and probability beside the ICAO 5×5 matrix with 3A marked intolerable, AI suggestions under each field, and similar risks from the register to link or use as a template." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>13 — Risk · assessing a hazard</figcaption>
+            </figure>
+          </article>
+
+          <article class="design-decision" aria-labelledby="decision-5">
+            <div class="design-decision__text" data-block="decision" data-rule>
+              <div class="design-decision__head">
+                <p class="design-decision__label mono-label" data-s6>Decision 5</p>
+                <h3 class="h3" id="decision-5" data-s6>A real finish line</h3>
+              </div>
+              <div class="design-decision__body" data-s6>
+                <p>Closing shows what was decided, what is still open and one final action. It stays blocked until an intolerable risk has an accepted mitigation.</p>
+                <p>A closed report locks, with every change and correction in its audit trail.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/safety-report/close-ready.png" alt="Close step: hazards with their risk and treatment, the ECCAIRS record summary, a Ready to close checklist at 6 of 6, and what happens on closing, with one Close report action." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>17 — Close · ready to close</figcaption>
+            </figure>
+          </article>
+        </div>
+
+        <!-- SM10 · States grid — cells S7 in reading order, 60ms apart.
+             Lightbox as SM9, with previous / next through all four. Cell 4,
+             the irreversible close, is tinted. -->
+        <div class="states-block">
+          <h3 class="h3" data-block data-s6>Every state designed, not only the happy path</h3>
+          <p class="states-block__text" data-block data-s6>19 states across six steps, including the ones that usually get left to engineering.</p>
+
+          <ol class="states-grid" data-block="grid">
+            <li class="states-cell" data-s7="cell">
+              <div class="states-cell__panel">
+                <div class="screen" data-zoom data-zoom-group="states">
+                  <img src="../assets/work/safety-report/state-analysis-running.png" alt="Analysing the report: a checklist of reading the narrative, extracting flight facts, identifying hazards and writing the synopsis, with a note that the manager can leave and will be notified." width="844" height="600" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <p class="states-cell__title">AI analysis running</p>
+            </li>
+            <li class="states-cell" data-s7="cell">
+              <div class="states-cell__panel">
+                <div class="screen" data-zoom data-zoom-group="states">
+                  <img src="../assets/work/safety-report/state-analysis-failed.png" alt="The analysis finished without the flight data: the file could not be read at row 212, everything else was analysed, with Upload a new file, Retry and Continue without it." width="844" height="600" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <p class="states-cell__title">Analysis partly failed</p>
+            </li>
+            <li class="states-cell" data-s7="cell">
+              <div class="states-cell__panel">
+                <div class="screen" data-zoom data-zoom-group="states">
+                  <img src="../assets/work/safety-report/state-rerun-warning.png" alt="Re-run matching dialog: the manager has already decided 3 values, and chooses between keeping their decisions (recommended) or starting over." width="844" height="600" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <p class="states-cell__title">Re-run would overwrite decisions</p>
+            </li>
+            <li class="states-cell" data-s7="cell">
+              <div class="states-cell__panel states-cell__panel--tint">
+                <div class="screen" data-zoom data-zoom-group="states">
+                  <img src="../assets/work/safety-report/state-close-confirm.png" alt="Close report dialog: closing is final and reopening needs a reason; it lists the ECCAIRS submission, the recorded hazards, the tracked mitigation and the outcome sent to the reporter." width="844" height="600" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <p class="states-cell__title">Irreversible close, confirmed</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 04 Response -->
+      <section class="cs-section" id="response" aria-labelledby="response-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">04</span><span class="cs-section__label mono-label">Response</span></p>
+        <h2 class="cs-section__title h2" id="response-title" tabindex="-1" data-s6>Leadership first, then the people<br> who do the work</h2>
+        <p class="cs-section__lede body-l" data-s6>I presented the concept to leadership, then to the safety managers it was designed for.</p>
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>The reaction was immediate, from safety managers and leadership alike.</p>
+
+        <!-- SM6 · Big quote — the bar draws; the quote rises word by word
+             (S11) once it's halfway; the source line fades after -->
+        <figure class="callout callout--big" data-block="callout">
+          <blockquote class="callout__big display-l" aria-label="“This is revolutionary.”"><span data-s11 aria-hidden="true">“This is revolutionary.”</span></blockquote>
+          <figcaption class="callout__source text-s" data-fade-fast>Safety manager, at the concept review (paraphrased)</figcaption>
+        </figure>
+      </section>
+
+      <!-- 05 Next
+           SM11 · Measures — each row: top rule S9, then both cells S6; rows
+           --stagger apart. Not links, so no hover. -->
+      <section class="cs-section" id="next" aria-labelledby="next-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">05</span><span class="cs-section__label mono-label">Next</span></p>
+        <h2 class="cs-section__title h2" id="next-title" tabindex="-1" data-s6>Proving it against the two-day baseline</h2>
+        <p class="cs-section__lede body-l" data-s6>This is a proof of concept. Nothing is built or measured yet, so the next step is to test it on real reports with the same operators.</p>
+
+        <dl class="measures" data-block="measures">
+          <div class="measure" data-rule>
+            <dt data-s6>Time to close</dt>
+            <dd data-s6>From report received to closed, against the “about two days” reported today.</dd>
+          </div>
+          <div class="measure" data-rule>
+            <dt data-s6>ECCAIRS corrections</dt>
+            <dd data-s6>How many matched values a manager changes per report. This is the AI’s real accuracy.</dd>
+          </div>
+          <div class="measure" data-rule>
+            <dt data-s6>Rating agreement</dt>
+            <dd data-s6>Two managers rate the same report. The matrix should make them agree.</dd>
+          </div>
+        </dl>
+
+        <p class="prose text-s" data-block data-s6>Screens use invented data. Names, registrations and reference numbers are not real.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ================================================================
+       SM12 · Next case study — the whole card is one link, to the offer
+       page. Hover: tile slides 6px, title turns accent. Press: scale 0.99.
+       Enter: S6.
+       ================================================================ -->
+  <section class="cs-next container" aria-label="Next case study">
+    <div data-s6 data-next>
+      <a class="next-card" href="priced-offer.html">
+        <span class="next-card__text">
+          <span class="next-card__label mono-label">Next case study</span>
+          <span class="next-card__title display-l">Redesigning the offer page</span>
+          <span class="next-card__meta mono-s">B2B quoting  ·  Shipped Q2 2025</span>
+        </span>
+        <span class="next-card__tile"><svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================================================================
+     SM13 · Footer — links S3. No entrance animation.
+     ================================================================ -->
+<footer class="footer">
+  <div class="container footer__inner mono-s">
+    <p class="footer__credit">Designed and built by Talha Farooq Awan, 2026</p>
+    <ul class="footer__links">
+      <li><a class="link-s3 link-s3--quiet" href="#todo-linkedin">LinkedIn</a></li>
+      <li><a class="link-s3 link-s3--quiet" href="mailto:talhafawan@gmail.com">Email</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- SM9 / SM10 · Lightbox (one, shared by every screen). The pager shows
+     only for a grouped set: previous / next and "2 of 4". -->
+<dialog class="lightbox" aria-label="Enlarged screen" data-lightbox>
+  <button class="lightbox__close" type="button" data-lightbox-close>Close <span aria-hidden="true">✕</span></button>
+  <div class="lightbox__frame" data-lightbox-frame></div>
+  <div class="lightbox__pager" data-lightbox-pager hidden>
+    <button class="lightbox__step" type="button" aria-label="Previous screen" data-lightbox-prev><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+    <p class="lightbox__count mono-label" aria-live="polite" data-lightbox-count></p>
+    <button class="lightbox__step" type="button" aria-label="Next screen" data-lightbox-next><svg aria-hidden="true"><use href="#i-arrow-right-s"/></svg></button>
+  </div>
+</dialog>
+
+</body>
+</html>

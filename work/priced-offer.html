@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redesigning the offer page — Talha Farooq Awan</title>
+<meta name="description" content="A dispatch platform used by helicopter operators across Europe. The offer page is where a dispatcher turns a phone call into a priced, sendable quote — and the screen they were avoiding, in favour of a notepad.">
+<meta name="theme-color" content="#f2f3f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,600&display=swap">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/motion.css">
+<script>
+  /* Entrance states in motion.css are scoped to .motion, so the page renders in
+     full with scripting off or reduced motion on (S12). If main.js hasn't
+     started within 2.5s, drop the class rather than leave anything hidden. */
+  (function (root) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    root.classList.add('motion');
+    setTimeout(function () { if (!window.__motion) root.classList.remove('motion'); }, 2500);
+  })(document.documentElement);
+</script>
+<script src="../js/main.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 16 16">
+    <path d="M4.5 11.5L11.5 4.5M11.5 10.5V4.5H5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 16 16">
+    <path d="M13 8H3M7.5 12.5L3 8L7.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right-s" viewBox="0 0 16 16">
+    <path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 16 16">
+    <path d="M8 13V3M3.5 7.5L8 3L12.5 7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 28 28">
+    <path d="M5.25 14H22.75M14.875 21.875L22.75 14L14.875 6.125" fill="none" stroke="currentColor" stroke-width="2.45" stroke-linecap="square"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================================================================
+     CS1 · Nav — S5 sticky. Links S4; "Work" is current. Get in touch: S1.
+     ================================================================ -->
+<header class="nav" data-nav>
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html">
+      <span class="brand__avatar"><img src="../assets/talha-avatar.jpg" alt="" width="36" height="36"></span>
+      <span class="brand__name">
+        <span class="brand__title">Talha Farooq Awan</span>
+        <span class="brand__role">Product designer</span>
+      </span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>Menu</button>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../index.html#work" aria-current="true">Work</a></li>
+        <li><a class="nav-link" href="../index.html#approach">Approach</a></li>
+        <li><a class="nav-link" href="../index.html#about">About</a></li>
+      </ul>
+      <a class="btn-primary" href="../index.html#contact">
+        <span>Get in touch</span>
+        <span class="btn-primary__tile"><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" data-case>
+
+  <!-- ================================================================
+       CS2 · Header — Back: arrow nudges left, label S3. Title S11 on load.
+       Lede S6 at 200ms. Meta: top rule S9, then columns S6, --stagger.
+       ================================================================ -->
+  <section class="cs-header cs-header--long container" aria-labelledby="cs-title" data-cs-header>
+    <a class="back" href="../index.html#work">
+      <svg class="arrow-back" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+      <span class="mono-label link-s3 link-s3--quiet">All work</span>
+    </a>
+
+    <p class="eyebrow mono-label">
+      <span class="eyebrow__signal" aria-hidden="true"></span>
+      <span class="cs-eyebrow__text">Case study  ·  Product design</span>
+    </p>
+
+    <h1 class="cs-title display-xl" id="cs-title" aria-label="Redesigning the offer page"><span data-s11 aria-hidden="true">Redesigning the offer page</span></h1>
+
+    <p class="cs-lede body-l" data-s6>A dispatch platform used by helicopter operators across Europe. The offer page is where a dispatcher turns a phone call into a priced, sendable quote — and the screen they were avoiding, in favour of a notepad.</p>
+
+    <div class="cs-meta" data-rule>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Role</p>
+        <p class="cs-meta__value">Sole designer, end to end</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Scope</p>
+        <p class="cs-meta__value">Diagnosis → shipped build</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Team</p>
+        <p class="cs-meta__value">PM · engineering lead · me</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Duration</p>
+        <p class="cs-meta__value">3 months</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       CS3 · Hero image — S7 at 300ms, on load; the screen drifts up 40px
+       while its panel crosses the viewport (CSS scroll timeline; off under
+       S12). The screen is shorter than its 1120 x 722 frame, so it keeps its
+       own height at the top (slot__img--top).
+       ================================================================ -->
+  <section class="cs-hero cs-hero--long container" aria-label="The redesigned offer page" data-s7 data-cs-hero>
+    <div class="cs-hero__panel panel--tint">
+      <div class="slot slot--hero-long" data-zoom>
+        <img class="slot__img--top" src="../assets/work/priced-offer/hero.png" alt="The redesigned offer page, Job &amp; client context: a left rail with the offer, its flights and the document; the job, client and people on the job in the centre; and the commercials with the running total on the right." width="2240" height="1360">
+      </div>
+    </div>
+    <p class="cs-hero__caption mono-s" data-s6>The redesigned offer page — Job &amp; client context. Left rail carries structure and readiness; centre canvas shows one context at a time; right ledger holds the commercials.</p>
+  </section>
+
+  <!-- ================================================================
+       CS4 · By the numbers — row rules S9; tiles S6, --stagger, row 1 then
+       row 2. 8, 60, 16 and 50 count up (S10); ranges and arrows don't.
+       ================================================================ -->
+  <section class="numbers container" aria-labelledby="numbers-title" data-numbers>
+    <h2 class="eyebrow mono-label" id="numbers-title">
+      <span class="eyebrow__signal" aria-hidden="true"></span>
+      By the numbers
+    </h2>
+    <div class="numbers__row" data-rule>
+      <div class="numbers__tile" data-s6>
+        <p class="numbers__value"><span class="count" data-count="8">8</span></p>
+        <p class="numbers__label">operator companies</p>
+      </div>
+      <div class="numbers__tile" data-s6>
+        <p class="numbers__value">50–60</p>
+        <p class="numbers__label">dispatchers on the platform</p>
+      </div>
+      <div class="numbers__tile" data-s6>
+        <p class="numbers__value">10–20</p>
+        <p class="numbers__label">calls per dispatcher per day</p>
+      </div>
+      <div class="numbers__tile" data-s6>
+        <p class="numbers__value"><span class="count" data-count="60">60</span>+</p>
+        <p class="numbers__label">fields, across 12 parallel tables</p>
+      </div>
+    </div>
+    <div class="numbers__row" data-rule>
+      <div class="numbers__tile" data-s6>
+        <p class="numbers__value">4 → 1</p>
+        <p class="numbers__label">lifecycle stages the page serves</p>
+      </div>
+      <div class="numbers__tile" data-s6>
+        <p class="numbers__value">2 → 1</p>
+        <p class="numbers__label">entry passes per offer</p>
+      </div>
+      <div class="numbers__tile" data-s6>
+        <p class="numbers__value"><span class="count" data-count="16">16</span></p>
+        <p class="numbers__label">states designed, with recovery routes</p>
+      </div>
+      <div class="numbers__tile" data-s6>
+        <p class="numbers__value numbers__value--accent">~<span class="count" data-count="50">50</span>%</p>
+        <p class="numbers__label">less time from call to sent offer</p>
+      </div>
+    </div>
+    <p class="numbers__note mono-s">Offers passing through this one screen: roughly 500–1,200 a day across the platform (arithmetic from the two figures above).</p>
+  </section>
+
+  <div class="cs-body container">
+
+    <!-- ==============================================================
+         CS5 · Side nav — sticky at 96px; the section crossing the middle
+         of the viewport is current, and one accent bar slides to it.
+         Below 1024px it becomes a chip bar stuck under the Nav.
+         ============================================================== -->
+    <nav class="toc" aria-label="On this page" data-toc>
+      <p class="toc__label mono-label">On this page</p>
+      <div class="toc__track">
+      <ol class="toc__list">
+        <li><a class="toc__link" href="#problem" aria-current="true"><span class="toc__num">01</span><span class="toc__text">The problem</span></a></li>
+        <li><a class="toc__link" href="#research"><span class="toc__num">02</span><span class="toc__text">The research</span></a></li>
+        <li><a class="toc__link" href="#diagnosis"><span class="toc__num">03</span><span class="toc__text">The diagnosis</span></a></li>
+        <li><a class="toc__link" href="#reframing"><span class="toc__num">04</span><span class="toc__text">Reframing</span></a></li>
+        <li><a class="toc__link" href="#design"><span class="toc__num">05</span><span class="toc__text">The design</span></a></li>
+        <li><a class="toc__link" href="#failure-states"><span class="toc__num">06</span><span class="toc__text">Failure states</span></a></li>
+        <li><a class="toc__link" href="#system-work"><span class="toc__num">07</span><span class="toc__text">System work</span></a></li>
+        <li><a class="toc__link" href="#outcomes"><span class="toc__num">08</span><span class="toc__text">Outcomes</span></a></li>
+        <li><a class="toc__link" href="#reflection"><span class="toc__num">09</span><span class="toc__text">Reflection</span></a></li>
+      </ol>
+      <span class="toc__indicator" aria-hidden="true" data-toc-indicator></span>
+      </div>
+
+      <div class="toc__next">
+        <p class="toc__next-label mono-label">Next case study</p>
+        <a class="toc__next-link" href="compliance-check.html">
+          <span class="link-s3 link-s3--quiet">Proving a manual answers the regulation</span>
+          <svg class="arrow-small" aria-hidden="true"><use href="#i-arrow-right-s"/></svg>
+        </a>
+      </div>
+
+      <a class="toc__top mono-s" href="#top" data-to-top>
+        <span>Back to top</span>
+        <svg class="arrow-small" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+      </a>
+    </nav>
+
+    <div class="cs-content">
+
+      <!-- ============================================================
+           CS6 · Sections — each: top ink rule S9 first; overline,
+           heading, lede S6 (--stagger); columns and table rows S6, 40ms
+           apart; tint, dark and accent-bordered blocks S6 as one unit.
+           ============================================================ -->
+
+      <!-- 01 The problem -->
+      <section class="cs-section" id="problem" aria-labelledby="problem-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">01</span><span class="cs-section__label mono-label">The problem</span></p>
+        <h2 class="cs-section__title h2" id="problem-title" tabindex="-1" data-s6>Three complaints that turned out to be one complaint</h2>
+        <p class="cs-section__lede body-l" data-s6>The redesign was triggered by customers, not by a roadmap. The operators who use this screen every day told us it was the problem, and they said three things.</p>
+
+        <div class="cols" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">It's error-prone</h3>
+            <p class="col__text">Mistakes were being made on a screen where mistakes are expensive.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">It's too hard to train on</h3>
+            <p class="col__text">A new dispatcher could not simply be handed this page.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Too much is updated by hand</h3>
+            <p class="col__text">State the system already knew was being maintained manually. “A lot of work,” as they put it.</p>
+          </div>
+        </div>
+
+        <div class="note-panel" data-block data-s6>
+          <p class="body-l">A screen that shows four lifecycle stages at once is necessarily a screen where a dispatcher hand-maintains fields belonging to stages they aren't in — which is both the manual-work burden and the error surface, and why the page can't be taught in a sitting: you can't explain it without explaining the whole job lifecycle.</p>
+          <p class="h3">Two moves answered all three: separate the offer stage from the execution stages, and derive everything the system already knew.</p>
+        </div>
+
+        <h3 class="subhead mono-label" data-block data-s6>Fixed before I started</h3>
+        <div class="cols" data-block="stagger">
+          <div class="col" data-s6>
+            <h4 class="h4">Legacy data model stays</h4>
+            <p class="col__text">No schema changes.</p>
+          </div>
+          <div class="col" data-s6>
+            <h4 class="h4">Backend stays</h4>
+            <p class="col__text">No new services, no re-architecture.</p>
+          </div>
+          <div class="col" data-s6>
+            <h4 class="h4">Ships inside the existing app</h4>
+            <p class="col__text">Same chrome, same navigation, same browser.</p>
+          </div>
+        </div>
+        <p class="prose text-s" data-block data-s6>These are why the redesign is a restructuring rather than a rebuild — and the reason most of the value was still available without a single backend change.</p>
+      </section>
+
+      <!-- 02 The research -->
+      <section class="cs-section" id="research" aria-labelledby="research-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">02</span><span class="cs-section__label mono-label">The research</span></p>
+        <h2 class="cs-section__title h2" id="research-title" tabindex="-1" data-s6>They were not using the software during the call</h2>
+        <p class="cs-section__lede body-l" data-s6>Five dispatchers, each interviewed on a separate call rather than together — so nobody was agreeing with the loudest voice in a group session. All five described the same workaround.</p>
+
+        <figure class="aside" data-block data-s6>
+          <blockquote class="aside__quote">“When I'm taking the call I need to know where to put the information. The way it works now, I write it on paper and fill in the details afterwards. It would be much better if I could write straight into the system. And when I do enter it, I have to find things — everything is on one page and it's tiny.”</blockquote>
+          <figcaption class="aside__note text-s">A summary of what the five described, not a verbatim quote from one person. It's here because all five said a version of it — which makes it a finding rather than an anecdote.</figcaption>
+        </figure>
+
+        <h3 class="subhead mono-label" data-block data-s6>What the paper step explains</h3>
+        <div class="cols" data-block="stagger">
+          <div class="col" data-s6>
+            <h4 class="h4">The errors</h4>
+            <p class="col__text">Every offer was entered twice — once by hand, once into the system. Double entry is a transcription-error machine, and validation on the second pass cannot catch a number copied correctly from a notepad that was written down wrong.</p>
+          </div>
+          <div class="col" data-s6>
+            <h4 class="h4">The manual work</h4>
+            <p class="col__text">The first transcription was itself manual work: an entire duplicate pass the software had made necessary by being unusable at the one moment it was most needed.</p>
+          </div>
+          <div class="col" data-s6>
+            <h4 class="h4">The training difficulty</h4>
+            <p class="col__text">You cannot learn a screen you don't use live. Dispatchers learned the page in a slow, after-the-fact mode, then were expected to perform on it under pressure.</p>
+          </div>
+        </div>
+
+        <div class="note-panel note-panel--dark" data-block data-s6>
+          <p class="h3">The software was competent at the phase where the dispatcher had time, and useless at the phase where they had none.</p>
+          <p class="body-l">A dense 2,000px form is survivable when you're transcribing from notes at your own pace. It is unusable while a client is talking, because the cost isn't typing — it's searching. “I have to find things” is the whole problem in four words. I had gone into those calls expecting a density problem I could solve by reorganising the page; what I got was a page that wasn't being used at the moment it existed for.</p>
+        </div>
+      </section>
+
+      <!-- 03 The diagnosis -->
+      <section class="cs-section" id="diagnosis" aria-labelledby="diagnosis-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">03</span><span class="cs-section__label mono-label">The diagnosis</span></p>
+        <h2 class="cs-section__title h2" id="diagnosis-title" tabindex="-1" data-s6>The brief was “everything is on one page.” That's the symptom.</h2>
+        <p class="cs-section__lede body-l" data-s6>I found five causes and ranked them by what each one cost the dispatcher. The first is the one that removed a third of the interface.</p>
+
+        <table class="tbl" data-block="stagger">
+          <colgroup><col style="width:21%"><col style="width:32.6%"><col style="width:24.9%"><col style="width:21.5%"></colgroup>
+          <thead>
+            <tr data-s6><th class="mono-label" scope="col">Column group</th><th class="mono-label" scope="col">Meaning</th><th class="mono-label" scope="col">When it's filled</th><th class="mono-label" scope="col">By whom</th></tr>
+          </thead>
+          <tbody>
+            <tr class="is-highlight" data-s6><th scope="row">OFFER</th><td data-label="Meaning">What we quote</td><td data-label="When">Now</td><td data-label="By">Dispatcher</td></tr>
+            <tr data-s6><th scope="row">PLANNED</th><td data-label="Meaning">Estimated flight / extra time</td><td data-label="When">Later</td><td data-label="By">Ops</td></tr>
+            <tr data-s6><th scope="row">WORK</th><td data-label="Meaning">Billing units</td><td data-label="When">After the job</td><td data-label="By">Billing</td></tr>
+            <tr data-s6><th scope="row">FLOWN</th><td data-label="Meaning">Recorded actuals</td><td data-label="When">After the flight</td><td data-label="By">Pilot / ops</td></tr>
+          </tbody>
+        </table>
+
+        <p class="prose prose--ink" data-block data-s6>Three of the four column groups — three quarters of the widest, most cognitively expensive table on the page — were irrelevant to the person writing an offer, and sat there full of 00000 placeholders. Removing them deleted roughly a third of the interface before a pixel was redesigned.</p>
+
+        <ol class="causes" data-block="stagger">
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">01</span>
+            <h3 class="h4">The page served three lifecycle stages at once</h3>
+            <p class="cause__text">An offer is a commercial proposal; a job is an operational record. They share a data spine but are edited by different people, at different times, with different failure modes.</p>
+          </li>
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">02</span>
+            <h3 class="h4">The hierarchy was flattened into parallel tables</h3>
+            <p class="cause__text">Crew Assignment sat at the bottom as a flat table with no flight column at all. The dispatcher held parent-child relationships in working memory, on a 2,000px page, while someone talked in their ear.</p>
+          </li>
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">03</span>
+            <h3 class="h4">Nothing had primacy</h3>
+            <p class="cause__text">Every region carried identical weight. The total — the number the client asks about — was a small cell mid-table, below the fold. Three near-identical contact columns took ~30% of the first screen.</p>
+          </li>
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">04</span>
+            <h3 class="h4">Colour was overloaded</h3>
+            <p class="cause__text">Six-plus hues carrying at least four kinds of meaning, with no legend. When red means both “this field is invalid” and “this location is an area”, red stops meaning anything.</p>
+          </li>
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">05</span>
+            <h3 class="h4">The spatial task was trapped behind a button</h3>
+            <p class="cause__text">The map was a modal. Every location entry was: click icon → modal → find → confirm → close → context lost → repeat. Twelve times per job.</p>
+          </li>
+        </ol>
+
+        <p class="prose text-s" data-block data-s6>The evidence behind this is behavioural and reported, not instrumented: three standing complaints and five independent accounts of the same workaround. A user who invents a paper process to avoid your software has already told you it failed — more reliably than any satisfaction score would.</p>
+      </section>
+
+      <!-- 04 Reframing -->
+      <section class="cs-section" id="reframing" aria-labelledby="reframing-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">04</span><span class="cs-section__label mono-label">Reframing</span></p>
+        <h2 class="cs-section__title h2" id="reframing-title" tabindex="-1" data-s6>One form, four tasks — and the users had already separated them</h2>
+        <p class="cs-section__lede body-l" data-s6>The old page was built for one phase — Shape — and made the other three fit around it. Capture, the phase with zero friction tolerance, was the one it served worst. That is exactly why it got replaced by paper.</p>
+
+        <div class="phases" data-block="stagger">
+          <div class="phase phase--capture" data-s6>
+            <h3 class="phase__name mono-label">Capture</h3>
+            <p class="h3">30–90 s</p>
+            <p class="phase__when">On the call</p>
+            <div class="phase__friction">
+              <p class="phase__friction-label mono-s">Friction tolerance</p>
+              <p class="phase__friction-text text-s">Zero. Any friction loses information.</p>
+            </div>
+          </div>
+          <div class="phase" data-s6>
+            <h3 class="phase__name mono-label">Shape</h3>
+            <p class="h3">3–10 min</p>
+            <p class="phase__when">On or after the call</p>
+            <div class="phase__friction">
+              <p class="phase__friction-label mono-s">Friction tolerance</p>
+              <p class="phase__friction-text text-s">Low — this is the craft work</p>
+            </div>
+          </div>
+          <div class="phase" data-s6>
+            <h3 class="phase__name mono-label">Resource</h3>
+            <p class="h3">2–5 min</p>
+            <p class="phase__when">Later, possibly someone else</p>
+            <div class="phase__friction">
+              <p class="phase__friction-label mono-s">Friction tolerance</p>
+              <p class="phase__friction-text text-s">Medium — depends on the roster</p>
+            </div>
+          </div>
+          <div class="phase" data-s6>
+            <h3 class="phase__name mono-label">Compose &amp; send</h3>
+            <p class="h3">1–3 min</p>
+            <p class="phase__when">Once, at the end</p>
+            <div class="phase__friction">
+              <p class="phase__friction-label mono-s">Friction tolerance</p>
+              <p class="phase__friction-text text-s">Low, but must feel safe — it's client-facing</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="aside" data-block data-s6>
+          <h3 class="h3">The decision this forced: not a wizard</h3>
+          <p class="body-l">A wizard is the obvious answer to “too much on one page”, and it's wrong here. Wizards enforce an order the phone call doesn't have — clients volunteer the return date before the aircraft type, the passenger count halfway through describing the site — and they punish the most common real case: cloning last month's job for a repeat client and changing the date. A wizard turns a 40-second edit into a nine-screen walk.</p>
+          <p class="body-l muted">But a flat 2,000px form was equally wrong. What people want from a wizard is rarely enforced order; it's knowing what's left and not facing everything at once. Those are separable from sequencing — a navigable structure with a completeness ledger delivers both without the cost.</p>
+        </div>
+      </section>
+
+      <!-- 05 The design -->
+      <section class="cs-section" id="design" aria-labelledby="design-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">05</span><span class="cs-section__label mono-label">The design</span></p>
+        <h2 class="cs-section__title h2" id="design-title" tabindex="-1" data-s6>One rail, one canvas, one ledger</h2>
+
+        <div class="cols" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">Left rail</h3>
+            <p class="col__text">Structure and validation state in one column. Every node carries a completeness marker, and a live “Ready to send: N items left” expands into a click-through list. This answers “what's missing?” — a question the old page could not answer at all.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Centre canvas</h3>
+            <p class="col__text">One context at a time: Job &amp; client, a Flight, or the Document. Not a wizard — you can jump anywhere, in any order, at any level of completeness.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Right ledger</h3>
+            <p class="col__text">Currency, VAT, discount, terms, a per-flight breakdown and the running total. Cause sits directly above effect.</p>
+          </div>
+        </div>
+
+        <div class="aside" data-block data-s6>
+          <h3 class="h3">Capture gets its own front door</h3>
+          <p class="body-l muted">Because the diagnosis was that the page failed during the call, the design starts there: a quick-capture path that takes client, date, route and passenger count in one pass, and opens the full structure behind it. The test I held it to was the notepad — can a dispatcher type into this as fast as they'd scribble? Anything that failed that test moved to Shape.</p>
+        </div>
+
+        <figure class="figure" data-block="screen">
+          <div class="screen-panel" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/priced-offer/flight.png" alt="The Flight context: aircraft, timing, crew, sequence and vehicles under one flight, with a banner flagging that Allen Johnson is also assigned to FL2 and a Reassign action." width="1928" height="1414" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption class="figure__caption text-s" data-s6>A flight, with a crew conflict surfaced inline. Crew, vehicles, points of interest and special requirements are re-parented under the flight they belong to — which is what turns an invisible scheduling error into a visible one: the logging specialist is already committed to FL2 at 16:00, and the row says so at the moment of assignment, with a Reassign route out.</figcaption>
+        </figure>
+
+        <h3 class="lead-in h3" data-block data-s6>Derive everything the system already knows</h3>
+        <table class="tbl" data-block="stagger">
+          <colgroup><col style="width:23%"><col style="width:28.7%"><col style="width:48.3%"></colgroup>
+          <thead>
+            <tr data-s6><th class="mono-label" scope="col">Field</th><th class="mono-label" scope="col">Was</th><th class="mono-label" scope="col">Became</th></tr>
+          </thead>
+          <tbody>
+            <tr data-s6><th scope="row">Offer number</th><td data-label="Was">Typed by hand</td><td class="is-ink" data-label="Became">Derived: client number + sequence (44532/10)</td></tr>
+            <tr data-s6><th scope="row">Overflight legs</th><td data-label="Was">Hand-entered</td><td class="is-ink" data-label="Became">Generated from the legs either side, marked AUTO</td></tr>
+            <tr data-s6><th scope="row">Unit and price</th><td data-label="Was">Retyped each time</td><td class="is-ink" data-label="Became">Filled from the product, contract rate where one exists</td></tr>
+            <tr data-s6><th scope="row">Crew</th><td data-label="Was">Re-selected per flight</td><td class="is-ink" data-label="Became">Defaulted from the aircraft's roster, with availability</td></tr>
+            <tr data-s6><th scope="row">Crew call time</th><td data-label="Was">Worked out mentally</td><td class="is-ink" data-label="Became">Derived: requested time − lead time</td></tr>
+          </tbody>
+        </table>
+        <p class="prose prose--ink" data-block data-s6>The offer number is my favourite finding: the old form already showed 44532 beside the contact columns and 44532/10 in the header. It was client number + sequence all along — the form just never said so, and presented the result as a field you could type into. Every row here is also a row removed from the notepad.</p>
+
+        <div class="cols cols--2" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">One location field, three kinds</h3>
+            <p class="col__text">The old form made the dispatcher choose a type — saved site, coordinates, or area — before entering anything. The new field auto-detects: type a name → saved site; paste 46.94, 7.44 → coordinates; draw → area. The glyph reports what it resolved to rather than asking.</p>
+            <p class="col__result">~12 type-decisions and ~12 modal round-trips removed per job.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">A locked skeleton with one free zone</h3>
+            <p class="col__text">Dispatchers need to vary wording job to job, but a freely rearrangeable document stops being an offer — a client who reads twenty of these a year should find the price in the same place every time. So: a fixed skeleton with exactly one arrangeable zone.</p>
+            <p class="col__result">Locked means unmovable, not uneditable. Only the extra blocks carry drag handles, so the affordance teaches the rule and no error message is needed.</p>
+          </div>
+        </div>
+
+        <figure class="figure" data-block="screen">
+          <div class="screen-panel" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/priced-offer/compose.png" alt="Compose &amp; send: the offer document assembled from the library and previewed as the client will receive it, with Send on the same screen." width="1928" height="1532" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption class="figure__caption text-s" data-s6>Compose &amp; send. The document is assembled from the library, previewed as the client will receive it, and sent from the same screen — one of the two capabilities the business wanted, alongside the PDF.</figcaption>
+        </figure>
+      </section>
+
+      <!-- 06 Failure states -->
+      <section class="cs-section" id="failure-states" aria-labelledby="failure-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">06</span><span class="cs-section__label mono-label">Failure states</span></p>
+        <h2 class="cs-section__title h2" id="failure-title" tabindex="-1" data-s6>Sixteen states, each with a route out</h2>
+        <p class="cs-section__lede body-l" data-s6>Most of the design work was not the happy path: empty, healthy, no aircraft, aircraft unavailable, crew double-booked, dangerous goods with an uncertified pilot, leg missing product, leg missing price, unresolved location, autosave failed, edited by someone else, send blocked, block untranslated, send failed, sent, accepted. Specifying failure at design time — when the answer is still a design decision — is most of what separates a screen that survives real use from one that demos well.</p>
+
+        <div class="scenarios">
+          <figure class="scenario" data-block="screen">
+            <div class="screen-panel" data-s7="screen">
+              <div class="screen" data-zoom>
+                <img src="../assets/work/priced-offer/state-no-aircraft.png" alt="Flight with no aircraft selected: a red banner explains the flight cannot be priced or crewed until one is chosen, and the crew rows are empty." width="1928" height="1412" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <figcaption class="scenario__caption" data-s6>
+              <span class="scenario__label h4">No aircraft selected</span>
+              <span class="scenario__text">The banner explains the consequence, never repeats the label: “this flight cannot be priced or crewed until one is chosen.” The crew rows empty at the same time — showing the cause, because roster defaults come from the aircraft.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="scenario" data-block="screen">
+            <div class="screen-panel" data-s7="screen">
+              <div class="screen" data-zoom>
+                <img src="../assets/work/priced-offer/state-crew-double-booked.png" alt="Crew double-booked: the logging specialist row is flagged as already assigned to another flight, with a Reassign action." width="1928" height="1412" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <figcaption class="scenario__caption" data-s6>
+              <span class="scenario__label h4">Crew double-booked</span>
+              <span class="scenario__text">The conflict existed in the old build too; it was simply unseeable, because crew rows sat detached from any flight. Re-parenting crew under the flight is what makes it visible.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="scenario" data-block="screen">
+            <div class="screen-panel" data-s7="screen">
+              <div class="screen" data-zoom>
+                <img src="../assets/work/priced-offer/state-autosave-offline.png" alt="Autosave failed while offline: an amber banner says changes since 12:30 have not been saved, nothing is lost and edits are queued locally, with Retry now." width="1928" height="1412" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <figcaption class="scenario__caption" data-s6>
+              <span class="scenario__label h4">Autosave failed · offline</span>
+              <span class="scenario__text">A system failure, so the rail goes amber rather than red and every field stays clean. The message leads with “nothing is lost” before offering Retry — on a twenty-call day, the first fear is losing the call you just took.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="cols cols--2" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">A missing price shows —, never 0</h3>
+            <p class="col__text">A zero is a number; it sums silently into the offer as free work. A dash reads as unanswered. The cheapest error-prevention decision in the design, and it cost one character.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Send is never a dead button</h3>
+            <p class="col__text">Pressing it with problems outstanding names the count and expands the checklist, each row jumping to the offending field. A disabled Send with no explanation withholds both the reason and the route.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 System work -->
+      <section class="cs-section" id="system-work" aria-labelledby="system-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">07</span><span class="cs-section__label mono-label">System work</span></p>
+        <h2 class="cs-section__title h2" id="system-title" tabindex="-1" data-s6>Extending a system without fragmenting it</h2>
+        <p class="cs-section__lede body-l" data-s6>The design system already existed. My job was not to build one — it was to add what this screen genuinely needed and nothing else, which is the harder discipline of the two.</p>
+
+        <table class="tbl" data-block="stagger">
+          <colgroup><col style="width:26.8%"><col style="width:73.2%"></colgroup>
+          <thead>
+            <tr data-s6><th class="mono-label" scope="col">Component</th><th class="mono-label" scope="col">Why it had to exist</th></tr>
+          </thead>
+          <tbody>
+            <tr data-s6><th scope="row">Field cell</th><td data-label="Why">Dense grid input at a row height the existing text field couldn't reach</td></tr>
+            <tr data-s6><th scope="row">Location cell</th><td data-label="Why">The three-kinds-of-location behaviour</td></tr>
+            <tr data-s6><th scope="row">Sequence leg row</th><td data-label="Why">The offer-stage leg: type, product, price, derived state</td></tr>
+            <tr data-s6><th scope="row">Crew row</th><td data-label="Why">Crew under a flight, with availability and certification</td></tr>
+            <tr data-s6><th scope="row">Result row</th><td data-label="Why">Search results for client, product and contact pickers</td></tr>
+          </tbody>
+        </table>
+
+        <div class="cols cols--2" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">A border-subtlest token</h3>
+            <p class="col__text">Existing borders were too heavy at this density — fine on a form with twelve fields, oppressive on a grid with sixty. Rather than override strokes locally I added the token the system was missing, bound it in both themes, and repointed the components. The local override would have been faster and would have started the fragmentation this system had so far avoided.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Squaring every corner</h3>
+            <p class="col__text">Auditing components for this screen, I found the system was square-cornered by convention — buttons, fields, selects, tags, menus, modals — but a handful had drifted to pills and circles. I did a full pass to bring them back, including rebuilding the readiness rings as linear meters. The value wasn't the corners; it was that the convention became enforced rather than merely prevalent.</p>
+          </div>
+        </div>
+
+        <h3 class="subhead mono-label" data-block data-s6>Validation</h3>
+        <div class="cols" data-block="stagger">
+          <div class="col" data-s6>
+            <h4 class="h4">Before</h4>
+            <p class="col__text">Five interviews, which produced the finding the whole design rests on — and killed my density-reorganisation instinct before it cost anything to build.</p>
+          </div>
+          <div class="col" data-s6>
+            <h4 class="h4">During</h4>
+            <p class="col__text">A full interactive prototype in light and dark, pressure-tested against real job shapes rather than a happy path: multi-flight jobs, overflight legs, area locations, repeat clients.</p>
+          </div>
+          <div class="col" data-s6>
+            <h4 class="h4">After</h4>
+            <p class="col__text">Shipped, and in daily use across the eight operators.</p>
+          </div>
+        </div>
+        <p class="prose" data-block data-s6>What the project traded away: with three months and one designer, I chose breadth of specification — every state, every scenario, every component — over a formal moderated testing round between prototype and build. Given that the interviews had already produced an unambiguous finding I'd make the same call again, but it is the first thing I'd add with more time. “The users told us what was wrong” and “we watched them succeed at the new thing” are not the same evidence.</p>
+      </section>
+
+      <!-- 08 Outcomes -->
+      <section class="cs-section" id="outcomes" aria-labelledby="outcomes-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">08</span><span class="cs-section__label mono-label">Outcomes</span></p>
+        <h2 class="cs-section__title h2" id="outcomes-title" tabindex="-1" data-s6>The notepad step stops being necessary</h2>
+
+        <!-- CS8 · Outcome claim — panel S6; 50 counts up (S10); "~" and "%" hold still -->
+        <div class="claim" data-block data-s6 data-claim>
+          <p class="claim__value">~<span class="count" data-count="50">50</span>%</p>
+          <p class="claim__text h3">Dispatchers report the time from call to sent offer roughly halved.</p>
+        </div>
+
+        <p class="prose prose--wide body-l" data-block data-s6>That figure is worth interrogating, because a 50% claim usually means an interface got incrementally faster and someone rounded generously. Here it has a mechanical explanation: every offer used to be entered twice — once onto paper during the call, once into the system afterwards — and the redesign removes one of those two passes outright. A halving is not the optimistic reading of that change; it is the arithmetic of it, and any interface speed-up sits on top.</p>
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>The same applies to errors: removing a transcription pass doesn't lower the transcription error rate, it takes that error population to zero.</p>
+
+        <table class="tbl" data-block="stagger">
+          <colgroup><col style="width:23%"><col style="width:40.2%"><col style="width:36.8%"></colgroup>
+          <thead>
+            <tr data-s6><th class="mono-label" scope="col">The complaint</th><th class="mono-label" scope="col">What changed</th><th class="mono-label" scope="col">Result</th></tr>
+          </thead>
+          <tbody>
+            <tr data-s6><th scope="row">Error-prone</th><td data-label="Changed">Lifecycle stages separated; derived fields replaced retyped ones; conflicts surfaced on the flight</td><td class="is-ink" data-label="Result">Fewer places to be wrong, and the errors that remain are visible where they happen</td></tr>
+            <tr data-s6><th scope="row">Too hard to train on</th><td data-label="Changed">One context at a time, a rail that states what's left, affordances that teach the rule</td><td class="is-ink" data-label="Result">Dispatchers learn it by using it — training is no longer a prerequisite</td></tr>
+            <tr data-s6><th scope="row">Too much manual updating</th><td data-label="Changed">Execution-stage fields removed; the system derives what it already knows</td><td class="is-ink" data-label="Result">The dispatcher maintains the offer, not the whole job lifecycle</td></tr>
+          </tbody>
+        </table>
+
+        <figure class="figure" data-block="screen">
+          <div class="screen-panel" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/priced-offer/sent.png" alt="A sent offer: read-only, with fields disabled, actions removed and the sent version frozen and labelled v1." width="1928" height="1606" loading="lazy" decoding="async">
+            </div>
+          </div>
+        </figure>
+
+        <div class="pair" data-block data-s6>
+          <div class="pair__main">
+            <h3 class="h3">Once sent, the offer is a fact</h3>
+            <p>Delivered offers go read-only: fields disabled, actions removed, the version frozen and labelled. A document the client is holding is not a draft, and the interface should stop pretending otherwise.</p>
+          </div>
+          <div class="aside">
+            <p>The training outcome is the one I did not design for directly and value most. It was a by-product of two decisions taken for other reasons — showing one context at a time, and making completeness explicit in the rail. Together they mean a new dispatcher is never looking at a field whose purpose isn't established by what's around it. That is what “self-teaching” means in practice.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 Reflection -->
+      <section class="cs-section" id="reflection" aria-labelledby="reflection-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">09</span><span class="cs-section__label mono-label">Reflection</span></p>
+        <h2 class="cs-section__title h2" id="reflection-title" tabindex="-1" data-s6>What I'd do differently, and what I learned</h2>
+
+        <div class="note-panel" data-block data-s6>
+          <p class="h3">I'd run the interviews before doing any layout thinking at all.</p>
+          <p class="body-l">I spent real time reorganising a page whose actual failure was that it went unused during the call — and the fix for that isn't reorganisation. The order was recoverable here because the project was three months, not three weeks. The lesson is that “the page is too dense” is a description of a screen, not a description of a task, and I started from the screen.</p>
+        </div>
+
+        <div class="cols" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">Their workarounds are the spec</h3>
+            <p class="col__text">The notepad wasn't a complaint, it was a design already in production. Users who do a task twenty times a day will have solved your problem for you, badly, in a way that tells you exactly what the software owes them.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Speed for experts is retrieval, not input</h3>
+            <p class="col__text">They type quickly and know the domain cold. What costs them is finding where things go — which makes layout stability, predictable position and derivation worth far more than shortcuts or clever input.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Density is not the enemy</h3>
+            <p class="col__text">Undifferentiated density is. This is still a dense screen — these are professionals who want information on screen, not a spacious wizard. What changed is that the density is ordered by phase and hierarchy, so three quarters of it can be ignored at any moment.</p>
+          </div>
+        </div>
+
+        <h3 class="subhead mono-label" data-block data-s6>Still unresolved</h3>
+        <ul class="unresolved" data-block="stagger">
+          <li class="unresolved__item" data-s6>The read-only sent state is designed for the document but not fully specified across every screen.</li>
+          <li class="unresolved__item" data-s6>Only one of the two flight layouts has a complete scenario set; the second still leans on the first.</li>
+          <li class="unresolved__item" data-s6>One legacy component remains circular by necessity rather than convention — a documented exception in a system that otherwise has none, which is the kind of small debt that quietly becomes a precedent.</li>
+          <li class="unresolved__item" data-s6>Some domain abbreviations inherited from the old table were carried forward on the operators' terms rather than renamed. Renaming them touches a vocabulary ops and billing also use, so it belongs in a wider conversation than this screen.</li>
+        </ul>
+      </section>
+
+      <aside class="artefacts" aria-label="Artefacts" data-block data-s6>
+        <p class="artefacts__label mono-label">Artefacts</p>
+        <p>Original screen · annotated diagnosis · interactive prototype in light and dark · Figma: 4 screens, 16 labelled scenario frames, 5 overlays, 5 new components · a field-accounting table showing every original field kept, moved or deferred.</p>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ================================================================
+       CS9 · Next case study — the whole card is one link. Hover: tile
+       slides 6px, title turns accent. Press: scale 0.99. Enter: S6.
+       ================================================================ -->
+  <section class="cs-next container" aria-label="Next case study">
+    <div data-s6 data-next>
+      <a class="next-card" href="compliance-check.html">
+        <span class="next-card__text">
+          <span class="next-card__label mono-label">Next case study</span>
+          <span class="next-card__title display-l">Proving a manual answers<br> the regulation</span>
+          <span class="next-card__meta mono-s">AI review  ·  MVP live, in beta</span>
+        </span>
+        <span class="next-card__tile"><svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================================================================
+     CS10 · Footer — links S3. No entrance animation.
+     ================================================================ -->
+<footer class="footer">
+  <div class="container footer__inner mono-s">
+    <p class="footer__credit">Designed and built by Talha Farooq Awan, 2026</p>
+    <ul class="footer__links">
+      <li><a class="link-s3 link-s3--quiet" href="#todo-linkedin">LinkedIn</a></li>
+      <li><a class="link-s3 link-s3--quiet" href="mailto:talhafawan@gmail.com">Email</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- CS7 · Lightbox (one, shared by every screen) -->
+<dialog class="lightbox" aria-label="Enlarged screen" data-lightbox>
+  <button class="lightbox__close" type="button" data-lightbox-close>Close <span aria-hidden="true">✕</span></button>
+  <div class="lightbox__frame" data-lightbox-frame></div>
+</dialog>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Work thumbnail · Instructor tablet app
+   Inline SVG, 880 x 800 user units, on a light panel.
+   At rest: the signed tablet lying over the put-down paper sheet.
+   ========================================================================== */
+
+.tb {
+  /* portfolio tokens (css/tokens.css), with their values as a fallback */
+  --tb-panel: var(--color-surface, #FBFBF9);
+  --tb-line: var(--color-line, #D7DAD3);
+  --tb-accent: var(--color-accent, #E4521F);
+  --tb-mono: var(--font-mono, "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace);
+  --tb-app: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  position: relative;
+  display: block;
+  aspect-ratio: 880 / 800;
+  max-width: 100%;
+  background: var(--tb-panel);
+  box-shadow: inset 0 0 0 1px var(--tb-line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.tb-svg { display: block; width: 100%; height: 100%; }
+.tb-svg g, .tb-svg rect, .tb-svg path, .tb-svg circle, .tb-svg text { transform-box: fill-box; }
+
+/* paper */
+.tb-mono { font-family: var(--tb-mono); font-weight: 500; letter-spacing: 0.08em; }
+.tb-p-h { font-size: 10.5px; fill: #2D2F33; }
+.tb-p-s { font-size: 8px; fill: #8A8F96; }
+.tb-p-n { font-size: 10px; fill: #2D2F33; }
+.tb-ink, .tb-sig { stroke-dasharray: 1; stroke-dashoffset: 0; }
+
+/* product (tablet) type */
+.tb-sb { font: 500 9.5px var(--tb-app); fill: #292A2E; }
+.tb-run { font: 600 10.5px var(--tb-mono); letter-spacing: 0.08em; fill: #FFFFFF; }
+.tb-run-s { font: 400 11.5px var(--tb-app); fill: #FFFFFF; fill-opacity: 0.9; }
+.tb-timer { font: 700 17px var(--tb-app); fill: #FFFFFF; font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.tb-b { font: 600 13px var(--tb-app); fill: #292A2E; }
+.tb-s { font: 400 11px var(--tb-app); fill: #505258; }
+.tb-strong { font-weight: 600; fill: #292A2E; }
+.tb.is-compact .tb-tl { font-size: 13px; }
+.tb-h { font: 600 15.5px var(--tb-app); fill: #292A2E; letter-spacing: -0.005em; }
+.tb-fly-l { font: 600 10.5px var(--tb-mono); letter-spacing: 0.08em; fill: #1868DB; }
+.tb-cap { font-size: 9.5px; fill: #8A8F96; }
+.tb-num { font-size: 11px; fill: #505258; }
+.tb-row { font: 400 13px var(--tb-app); fill: #292A2E; }
+.tb-loz-t { font: 600 9.5px var(--tb-app); letter-spacing: 0.06em; }
+.tb-btn { font: 500 13px var(--tb-app); fill: #292A2E; }
+.tb-btn-w { fill: #FFFFFF; font-weight: 600; }
+.tb-name { font: 700 21px var(--tb-app); fill: #292A2E; letter-spacing: -0.01em; }
+.tb-tnum { font: 700 19px var(--tb-app); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+
+/* not part of the finished frame */
+.tb-scr-a, .tb-scrim, .tb-sheet, .tb-touch, .tb-ripple, .tb-signbtn { opacity: 0; }
+
+/* transform origins */
+.tb-paper, .tb-device, .tb-touch, .tb-ripple, .tb-partial, .tb-chip, .tb-tile, .tb-cb, .tb-signed, .tb-row-new { transform-origin: center; }
+.tb-seg-fill { transform-origin: left center; }
+
+/* small cards: drop the smallest type */
+.tb.is-compact .tb-s:not(.tb-tl),
+.tb.is-compact .tb-cap,
+.tb.is-compact .tb-p-s,
+.tb.is-compact .tb-sb { visibility: hidden; }
+
+a:focus-visible > .tb { outline: 2px solid var(--tb-accent); outline-offset: 3px; }

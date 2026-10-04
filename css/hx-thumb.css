@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Work thumbnail · HX Insight ("Taking HR off email and spreadsheets")
+   Inline SVG, 800 x 520 user units, on the product's navy.
+   At rest: all four flows finished (approved, confirmed, all ready, locked).
+   ========================================================================== */
+
+.hx {
+  --hx-panel: #060752;      /* HX navy/950 */
+  --hx-focus: var(--color-accent, #E4521F);   /* portfolio accent (css/tokens.css), for the focus ring */
+  --hx-display: "Plus Jakarta Sans", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --hx-body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --hx-mono: var(--font-mono, "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace);
+
+  position: relative;
+  display: block;
+  aspect-ratio: 800 / 520;
+  max-width: 100%;
+  background: var(--hx-panel);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.hx-svg { display: block; width: 100%; height: 100%; }
+.hx-svg g, .hx-svg rect, .hx-svg path, .hx-svg circle, .hx-svg text { transform-box: fill-box; }
+
+/* type: colours live on the SVG elements, only fonts here */
+.hx-title { font: 700 15px var(--hx-display); letter-spacing: -0.01em; }
+.hx-date  { font: 700 16px var(--hx-display); letter-spacing: -0.01em; }
+.hx-big   { font: 700 26px var(--hx-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.hx-pct   { font: 700 17px var(--hx-display); font-variant-numeric: tabular-nums; }
+.hx-sub   { font: 400 11px var(--hx-body); }
+.hx-t1    { font: 600 11.5px var(--hx-body); }
+.hx-t2    { font: 400 10.5px var(--hx-body); }
+.hx-t2b   { font: 600 10.5px var(--hx-body); }
+.hx-btn   { font: 600 11px var(--hx-body); }
+.hx-fine  { font-size: 10px; }
+.hx-pill-t { font: 600 11px var(--hx-body); }
+.hx-av-t  { font: 600 9.5px var(--hx-body); }
+.hx-av-l  { font: 700 14px var(--hx-display); }
+.hx-mono, .hx-badge-t { font-family: var(--hx-mono); font-weight: 500; letter-spacing: 0.06em; }
+.hx-badge-t { font-size: 11px; }
+.hx-dw { font-size: 9.5px; }
+
+/* story-only pieces (the pending pills, buttons, pointer, before-states) */
+.hx-pre { opacity: 0; }
+
+.hx-ring { stroke-dasharray: 1; stroke-dashoffset: 0; }
+
+/* transform origins */
+.hx-pill, .hx-cov, .hx-l-ok, .hx-l-tick, .hx-assign, .hx-nudge, .hx-ring-av, .hx-ring-ok,
+.hx-st-pre, .hx-st-post, .hx-ex-pre, .hx-ex-post, .hx-ping, .hx-rip, .hx-lockbtn,
+.hx-badge-bg, .hx-badge-t { transform-origin: center; }
+.hx-req { transform-origin: center bottom; }
+.hx-cur-i { transform-origin: 0 0; }
+
+/* small cards: drop the smallest type, keep the shapes and the headline states */
+.hx.is-compact .hx-sub,
+.hx.is-compact .hx-t2,
+.hx.is-compact .hx-verdict,
+.hx.is-compact .hx-st-pre text,
+.hx.is-compact .hx-st-post text { visibility: hidden; }
+.hx.is-compact .hx-title { font-size: 19px; }
+/* the two result bars carry a short label on small cards */
+.hx-c-only { display: none; font: 600 14px var(--hx-body); }
+.hx.is-compact .hx-c-only { display: inline; }
+.hx.is-compact .hx-w-only { display: none; }
+
+a:focus-visible > .hx { outline: 2px solid var(--hx-focus); outline-offset: 3px; }

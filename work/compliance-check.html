@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proving a manual answers the regulation — Talha Farooq Awan</title>
+<meta name="description" content="European helicopter operators have to show that their operations manual answers every requirement in the relevant EASA reference document. I designed the feature that does the comparison and records why each answer was accepted.">
+<meta name="theme-color" content="#f2f3f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,600&display=swap">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/motion.css">
+<script>
+  /* Entrance states in motion.css are scoped to .motion, so the page renders in
+     full with scripting off or reduced motion on (S12). If main.js hasn't
+     started within 2.5s, drop the class rather than leave anything hidden. */
+  (function (root) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    root.classList.add('motion');
+    setTimeout(function () { if (!window.__motion) root.classList.remove('motion'); }, 2500);
+  })(document.documentElement);
+</script>
+<script src="../js/main.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 16 16">
+    <path d="M4.5 11.5L11.5 4.5M11.5 10.5V4.5H5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 16 16">
+    <path d="M13 8H3M7.5 12.5L3 8L7.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right-s" viewBox="0 0 16 16">
+    <path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 16 16">
+    <path d="M8 13V3M3.5 7.5L8 3L12.5 7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 28 28">
+    <path d="M5.25 14H22.75M14.875 21.875L22.75 14L14.875 6.125" fill="none" stroke="currentColor" stroke-width="2.45" stroke-linecap="square"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================================================================
+     MC1 · Nav — S5 sticky. Links S4; "Work" is current. Get in touch: S1.
+     ================================================================ -->
+<header class="nav" data-nav>
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html">
+      <span class="brand__avatar"><img src="../assets/talha-avatar.jpg" alt="" width="36" height="36"></span>
+      <span class="brand__name">
+        <span class="brand__title">Talha Farooq Awan</span>
+        <span class="brand__role">Product designer</span>
+      </span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>Menu</button>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../index.html#work" aria-current="true">Work</a></li>
+        <li><a class="nav-link" href="../index.html#approach">Approach</a></li>
+        <li><a class="nav-link" href="../index.html#about">About</a></li>
+      </ul>
+      <a class="btn-primary" href="../index.html#contact">
+        <span>Get in touch</span>
+        <span class="btn-primary__tile"><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" data-case>
+
+  <!-- ================================================================
+       MC2 · Header — Back: arrow nudges left, label S3. Title S11 on load,
+       two lines, break after "answers". Lede S6 at 200ms. Meta: top rule
+       S9, then columns S6, --stagger.
+       ================================================================ -->
+  <section class="cs-header cs-header--long container" aria-labelledby="cs-title" data-cs-header>
+    <a class="back" href="../index.html#work">
+      <svg class="arrow-back" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+      <span class="mono-label link-s3 link-s3--quiet">All work</span>
+    </a>
+
+    <p class="eyebrow mono-label">
+      <span class="eyebrow__signal" aria-hidden="true"></span>
+      <span class="cs-eyebrow__text">AI review  ·  Manual compliance check</span>
+    </p>
+
+    <div class="cs-title-block">
+      <h1 class="cs-title display-xl" id="cs-title" aria-label="Proving a manual answers the regulation"><span class="cs-title__line" data-s11 aria-hidden="true">Proving a manual answers</span> <span class="cs-title__line" data-s11 aria-hidden="true">the regulation</span></h1>
+      <p class="cs-subtitle h2" data-s6>Without five days of reading two documents side by side</p>
+    </div>
+
+    <p class="cs-lede body-l" data-s6>European helicopter operators have to show that their operations manual answers every requirement in the relevant EASA reference document. They do it by hand, page against page, and the operators I spoke to put a single pass at five to six days. I designed the feature that does the comparison and — more importantly — records why each answer was accepted.</p>
+
+    <div class="cs-meta" data-rule>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Role</p>
+        <p class="cs-meta__value">Product designer · end to end</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Team</p>
+        <p class="cs-meta__value">Me and a domain expert</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Time</p>
+        <p class="cs-meta__value">1 month to design and validate · 3 months to ship</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Status</p>
+        <p class="cs-meta__value">MVP live, in beta</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       MC3 · Hero image — S7 at 300ms, on load; the screen drifts up 40px
+       while its panel crosses the viewport (CSS scroll timeline; off under
+       S12). The panel shows the top 680 of the 1120 x 796 frame, so the
+       export is that visible part and keeps its height at the top
+       (slot__img--top).
+       ================================================================ -->
+  <section class="cs-hero cs-hero--long container" aria-label="The compliance check after the manual was revised mid-review" data-s7 data-cs-hero>
+    <div class="cs-hero__panel panel--tint">
+      <div class="slot slot--hero-long slot--hero-tall" data-zoom>
+        <img class="slot__img--top" src="../assets/work/compliance-check/hero.png" alt="Check 10: a banner says revision 3 of the manual was uploaded, 11 requirements changed verdict and 4 already reviewed are affected, with Show only changes. Below, the requirement list marks what is now covered or changed, and GEN.120 is open beside the rewritten passage on page 19." width="2240" height="1360">
+      </div>
+    </div>
+    <p class="cs-hero__caption mono-s" data-s6>Check 10 · The manual was revised mid-review.</p>
+  </section>
+
+  <div class="cs-body container">
+
+    <!-- ==============================================================
+         MC4 · Side nav — sticky at 96px; the section crossing the middle
+         of the viewport is current, and one accent bar slides to it.
+         Below 1024px it becomes a chip bar stuck under the Nav.
+         ============================================================== -->
+    <nav class="toc" aria-label="On this page" data-toc>
+      <p class="toc__label mono-label">On this page</p>
+      <div class="toc__track">
+      <ol class="toc__list">
+        <li><a class="toc__link" href="#numbers" aria-current="true"><span class="toc__num">01</span><span class="toc__text">By the numbers</span></a></li>
+        <li><a class="toc__link" href="#context"><span class="toc__num">02</span><span class="toc__text">Context</span></a></li>
+        <li><a class="toc__link" href="#the-user"><span class="toc__num">03</span><span class="toc__text">The user</span></a></li>
+        <li><a class="toc__link" href="#the-finding"><span class="toc__num">04</span><span class="toc__text">The finding</span></a></li>
+        <li><a class="toc__link" href="#diagnosis"><span class="toc__num">05</span><span class="toc__text">Diagnosis</span></a></li>
+        <li><a class="toc__link" href="#design"><span class="toc__num">06</span><span class="toc__text">The design</span></a></li>
+        <li><a class="toc__link" href="#decisions"><span class="toc__num">07</span><span class="toc__text">The decisions</span></a></li>
+        <li><a class="toc__link" href="#failure-states"><span class="toc__num">08</span><span class="toc__text">Failure states</span></a></li>
+        <li><a class="toc__link" href="#system-work"><span class="toc__num">09</span><span class="toc__text">System work</span></a></li>
+        <li><a class="toc__link" href="#validation"><span class="toc__num">10</span><span class="toc__text">Validation</span></a></li>
+        <li><a class="toc__link" href="#where-it-stands"><span class="toc__num">11</span><span class="toc__text">Where it stands</span></a></li>
+        <li><a class="toc__link" href="#reflection"><span class="toc__num">12</span><span class="toc__text">Reflection</span></a></li>
+        <li><a class="toc__link" href="#whats-next"><span class="toc__num">13</span><span class="toc__text">What is next</span></a></li>
+        <li><a class="toc__link" href="#full-flow"><span class="toc__num">14</span><span class="toc__text">The full flow</span></a></li>
+      </ol>
+      <span class="toc__indicator" aria-hidden="true" data-toc-indicator></span>
+      </div>
+
+      <div class="toc__next">
+        <p class="toc__next-label mono-label">Next case study</p>
+        <a class="toc__next-link" href="#todo-ai-chat-widget">
+          <span class="link-s3 link-s3--quiet">Bringing the answer to the work</span>
+          <svg class="arrow-small" aria-hidden="true"><use href="#i-arrow-right-s"/></svg>
+        </a>
+      </div>
+
+      <a class="toc__top mono-s" href="#top" data-to-top>
+        <span>Back to top</span>
+        <svg class="arrow-small" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+      </a>
+    </nav>
+
+    <div class="cs-content">
+
+      <!-- ============================================================
+           MC5 · Sections — each: top ink rule S9 first; overline,
+           heading, lede S6 (--stagger); rows, columns, quotes and claims
+           S6, 40ms apart; tint, dark and accent-bordered blocks S6 as one
+           unit.
+           ============================================================ -->
+
+      <!-- 01 By the numbers
+           MC6 · Tiles S6, --stagger, row 1 then row 2. 10, 5, 4, 15, 1 and 2
+           count up (S10); "5–6" and "Zero" only fade (S6). -->
+      <section class="cs-section" id="numbers" aria-labelledby="numbers-title" data-rule>
+        <h2 class="cs-section__overline cs-section__title" id="numbers-title" tabindex="-1" data-s6><span class="cs-section__num">01</span><span class="cs-section__label mono-label">By the numbers</span></h2>
+
+        <div class="numbers numbers--section" data-block="numbers">
+          <div class="numbers__row">
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value numbers__value--unit numbers__value--accent">5–6 <span class="numbers__unit">days</span></p>
+              <p class="numbers__label">what one check takes today, as described by operators</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value numbers__value--unit"><span class="count" data-count="10">10</span> <span class="numbers__unit">people</span></p>
+              <p class="numbers__label">interviewed and observed, across 8 helicopter operators</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value numbers__value--unit"><span class="count" data-count="5">5</span> <span class="numbers__unit">steps</span></p>
+              <p class="numbers__label">from reference document to a report that can be handed over</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value numbers__value--unit"><span class="count" data-count="4">4</span> <span class="numbers__unit">verdicts</span></p>
+              <p class="numbers__label">covered, partially, not covered, not applicable</p>
+            </div>
+          </div>
+          <div class="numbers__row">
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value numbers__value--unit"><span class="count" data-count="15">15</span> <span class="numbers__unit">screens</span></p>
+              <p class="numbers__label">the whole flow including every failure state</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value">Zero</p>
+              <p class="numbers__label">new components added while designing the feature — it is built entirely from the existing design system</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value numbers__value--unit"><span class="count" data-count="1">1</span> <span class="numbers__unit">month</span></p>
+              <p class="numbers__label">to design, prototype and test before development started</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value numbers__value--unit"><span class="count" data-count="2">2</span> <span class="numbers__unit">people</span></p>
+              <p class="numbers__label">the whole team — one designer, one domain expert</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 Context and constraints -->
+      <section class="cs-section" id="context" aria-labelledby="context-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">02</span><span class="cs-section__label mono-label">Context and constraints</span></p>
+        <h2 class="cs-section__title h2" id="context-title" tabindex="-1" data-s6>A brief from inside the building</h2>
+        <p class="cs-section__lede body-l" data-s6>NGFT builds software for eight helicopter operators across Europe. It also runs pilot training, which means it writes and revises its own manuals under exactly the rules its customers work to. The brief did not arrive as a customer ticket — leadership had lived the problem and believed there was a product in it. The commercial goals were to reduce support load and to win new accounts.</p>
+
+        <table class="tbl" data-block="stagger">
+          <colgroup><col style="width:32.6%"><col style="width:67.4%"></colgroup>
+          <thead>
+            <tr data-s6><th class="mono-label" scope="col">What was fixed</th><th class="mono-label" scope="col">What that meant</th></tr>
+          </thead>
+          <tbody>
+            <tr data-s6><th scope="row">Three months from brief to shipped MVP</th><td data-label="What it meant">I spent the first month on design and validation, and treated the tested prototype as the specification handed to engineering.</td></tr>
+            <tr data-s6><th scope="row">It had to live inside the existing AI product</th><td data-label="What it meant">No new navigation model and no new visual language. The check is a section of a product these people already have open.</td></tr>
+            <tr data-s6><th scope="row">The existing design system</th><td data-label="What it meant">I set myself a harder version of this constraint: build the entire feature without adding a single component to the library.</td></tr>
+            <tr data-s6><th scope="row">Nothing else</th><td data-label="What it meant">No frozen data model, no backend limit, no legacy screen to preserve. Worth saying plainly — the constraints here were time and coherence, not technology.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 03 Understanding the user -->
+      <section class="cs-section" id="the-user" aria-labelledby="user-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">03</span><span class="cs-section__label mono-label">Understanding the user</span></p>
+        <h2 class="cs-section__title h2" id="user-title" tabindex="-1" data-s6>Ten people at eight operators</h2>
+        <p class="cs-section__lede body-l" data-s6>I spoke to ten people across the eight operators the company already works with. Later in the month I went back to the same ten with rough prototypes and watched them try to use it, which turned out to be the more useful half of the research.</p>
+
+        <div class="cols cols--cards" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="col__label mono-label">Who does this</h3>
+            <div class="col__body">
+              <p>Accountable Managers, Chief Pilots, Safety Managers, Maintenance Managers. Usually one person owns a manual; on a long one a team splits the parts between them.</p>
+              <p>They are pilots and seasoned safety managers — expert in the regulation in a way I will never be, and not a software audience. They open the product to discharge a legal responsibility, not to explore a tool.</p>
+            </div>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="col__label mono-label">What they do today</h3>
+            <div class="col__body">
+              <p>Download the reference document from the EASA website. Write the manual. Then read both documents side by side and verify the manual question by question, requirement by requirement.</p>
+              <p>When they are satisfied, they send it to the authority. Five to six days per pass, repeated every time a manual is written or revised.</p>
+            </div>
+          </div>
+          <div class="col col--tint" data-s6>
+            <h3 class="col__label mono-label">What goes wrong</h3>
+            <div class="col__body">
+              <p>Back and forth with the authority, and rework whenever a requirement turns out not to be covered.</p>
+              <p>The expensive part is not the reading. It is discovering the gap after submission, when the fix costs a revision cycle instead of an afternoon — and nobody can reconstruct why the requirement was ticked in the first place.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 The finding that moved the design -->
+      <section class="cs-section" id="the-finding" aria-labelledby="finding-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">04</span><span class="cs-section__label mono-label">The finding that moved the design</span></p>
+        <h2 class="cs-section__title h2" id="finding-title" tabindex="-1" data-s6>One sentence changed what I was building</h2>
+
+        <!-- MC7 · Pull quote — the accent bar draws top to bottom; the quote
+             S6 once it's halfway; the source line fades after, --dur-fast -->
+        <figure class="callout" data-block="callout">
+          <blockquote class="callout__quote" data-s6>“I know the system you are building is good, but I would also like a report at the end of the process, so I can keep it as evidence if the higher-ups ask for it.”</blockquote>
+          <figcaption class="callout__source text-s" data-fade-fast>Paraphrased from a research session, not a verbatim quote.</figcaption>
+        </figure>
+
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>I had been designing a comparison tool. He was describing an evidence tool. The comparison is only the means — the thing these people are actually accountable for is a document they can hand to someone else and defend months later.</p>
+        <p class="prose prose--wide body-l" data-block data-s6>That moved the report out of the "export" menu and into the flow as a designed step. It also changed the compare screen, because if the report is the deliverable then every verdict on it has to carry the passage that justifies it. Otherwise the report is an opinion with a percentage on top.</p>
+
+        <!-- MC9 · Screens — the panel fades, the screen rises 40px inside it -->
+        <figure class="scenario" data-block="screen">
+          <div class="screen-panel" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/compliance-check/report.png" alt="The compliance report, ready to print: operator, reference and manual details, counts of 118 covered, 12 partially covered, 6 not covered and 4 not applicable, then every requirement that is not fully covered with the section and page or a note." width="1928" height="1370" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption class="scenario__caption" data-s6>
+            <span class="scenario__label h4">What the quote produced</span>
+            <span class="scenario__text">The report is a step of the flow rather than an export in a menu. Counts first, then every requirement that is not fully covered, each with the section and page that answers it or the note saying why it does not — and a signature block, because someone has to sign it.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- 05 Diagnosis -->
+      <section class="cs-section" id="diagnosis" aria-labelledby="diagnosis-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">05</span><span class="cs-section__label mono-label">Diagnosis</span></p>
+        <h2 class="cs-section__title h2" id="diagnosis-title" tabindex="-1" data-s6>Three symptoms, one cause</h2>
+        <p class="cs-section__lede body-l" data-s6>The operators named three problems. They are not three problems.</p>
+
+        <div class="cols" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">Five to six days</h3>
+            <p class="col__text">of reading two documents against each other</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Back and forth</h3>
+            <p class="col__text">with the authority after submission</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Rework</h3>
+            <p class="col__text">whenever a requirement turns out not to be covered</p>
+          </div>
+        </div>
+
+        <div class="note-panel" data-block data-s6>
+          <p class="body-l">The cause is that the requirement and the evidence never sit in the same place. The reference document is in one window, the manual is in another, and the judgement joining them exists only in one person's head until it is typed into a submission. Nothing records why a requirement was considered answered — so nothing can be re-checked, handed over, or defended.</p>
+          <p class="body-l">That is also why the cost lands after submission rather than during the reading. A person can read carefully for five days and still have no artefact proving they did.</p>
+          <p class="h3">So the problem is not “compare two documents faster”. It is “make every judgement traceable to the passage that supports it” — and the speed follows from that, rather than the other way round.</p>
+        </div>
+      </section>
+
+      <!-- 06 The design -->
+      <section class="cs-section" id="design" aria-labelledby="design-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">06</span><span class="cs-section__label mono-label">The design</span></p>
+        <h2 class="cs-section__title h2" id="design-title" tabindex="-1" data-s6>Five steps, and an argument about which one comes second</h2>
+        <p class="cs-section__lede body-l" data-s6>The obvious flow is upload, upload, compare, report. I put a verification step second instead, before the manual is even uploaded.</p>
+
+        <!-- MC8 · Five steps — each row's top rule S9, then number, title
+             and body S6; rows --stagger apart. Not links, so no hover. -->
+        <ol class="flow-steps" data-block="steps">
+          <li class="flow-step" data-rule>
+            <span class="flow-step__num mono-s" data-s6>01</span>
+            <h3 class="h4" data-s6>Upload the reference document</h3>
+            <p class="flow-step__text" data-s6>The EASA document that lists what the manual has to answer. Previously used ones can be picked instead of uploaded again.</p>
+          </li>
+          <li class="flow-step" data-rule>
+            <span class="flow-step__num mono-s" data-s6>02</span>
+            <h3 class="h4" data-s6>Check what was found</h3>
+            <p class="flow-step__text" data-s6>The system extracts every requirement and shows them, grouped by section, before anything is compared. The user corrects them here.</p>
+          </li>
+          <li class="flow-step" data-rule>
+            <span class="flow-step__num mono-s" data-s6>03</span>
+            <h3 class="h4" data-s6>Upload your manual</h3>
+            <p class="flow-step__text" data-s6>Their own document, with a reminder of what it is about to be measured against.</p>
+          </li>
+          <li class="flow-step" data-rule>
+            <span class="flow-step__num mono-s" data-s6>04</span>
+            <h3 class="h4" data-s6>Compare, side by side</h3>
+            <p class="flow-step__text" data-s6>Requirements on the left, the manual on the right. Clicking a requirement scrolls the manual to the passage that matched it.</p>
+          </li>
+          <li class="flow-step" data-rule>
+            <span class="flow-step__num mono-s" data-s6>05</span>
+            <h3 class="h4" data-s6>Report</h3>
+            <p class="flow-step__text" data-s6>Counts, then every requirement that is not fully covered, with the section and page that answers it or the note saying why it does not.</p>
+          </li>
+        </ol>
+
+        <!-- MC8 · "Step 04" enters S7 after the last row -->
+        <figure class="scenario" data-block="screen" data-follows>
+          <div class="screen-panel screen-panel--tint" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/compliance-check/compare.png" alt="Step 04, compare side by side: requirements with their verdicts on the left; on the right the manual scrolled to Section 2.1, page 19, with the matched passage highlighted and a bar holding the verdict, Accept and Reject, a note field and Save and next." width="1928" height="1370" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption class="scenario__caption" data-s6>
+            <span class="scenario__label h4">Step 04 · Compare, side by side</span>
+            <span class="scenario__text">Requirements on the left, the manual on the right. Selecting a requirement scrolls the manual to the passage that matched it and highlights it. The verdict, the evidence, the accept/reject and the comment all sit in one bar, so the judgement and the thing justifying it are never in different places.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- 07 The decisions -->
+      <section class="cs-section" id="decisions" aria-labelledby="decisions-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">07</span><span class="cs-section__label mono-label">The decisions</span></p>
+        <h2 class="cs-section__title h2" id="decisions-title" tabindex="-1" data-s6>Five decisions that shaped every screen</h2>
+
+        <ol class="decisions" data-block="stagger">
+          <li class="decision" data-s6>
+            <h3 class="h4">Verify before you compare</h3>
+            <p class="decision__text">Extraction is the step most likely to be silently wrong, so step 02 exists only to let a person correct the requirements before anything is measured against them. A requirement filed under the wrong section gets checked against the wrong part of the manual — and the result still looks confident.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">The evidence sits next to the verdict</h3>
+            <p class="decision__text">Clicking a requirement scrolls the manual to the passage that matched and highlights it. Verdict, passage and comment live in one bar. Nothing about a judgement is more than a glance away from the thing that justifies it.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">Four verdicts, not two</h3>
+            <p class="decision__text">Covered, Partially covered, Not covered, Not applicable. Pass/fail would have been simpler and useless — "partially covered" is where the actual work is, and "not applicable" is how an operator says a requirement belongs to someone else without pretending it passed.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">Confidence is a sentence, not a score</h3>
+            <p class="decision__text">"Closest match in Section 2.1, page 19 · medium confidence" tells you what to do next. "0.62" does not. These are people who will be asked to defend the answer, not to tune a model.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">The person decides, always</h3>
+            <p class="decision__text">Every verdict can be changed, every match accepted or rejected, and when the system finds nothing the user can point at the passage themselves. The system brings the candidate and the evidence together. The signature at the bottom of the report is human.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- 08 Failure states -->
+      <section class="cs-section" id="failure-states" aria-labelledby="failure-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">08</span><span class="cs-section__label mono-label">Failure states</span></p>
+        <h2 class="cs-section__title h2" id="failure-title" tabindex="-1" data-s6>Six states where things go wrong</h2>
+        <p class="cs-section__lede body-l" data-s6>This is a document that gets submitted to a regulator. What the product does when it is unsure matters more than what it does when it is right — so the failure states were designed at the same time as the happy path, not bolted on after.</p>
+
+        <!-- MC10 · Failure table — head row rule S9, labels S6; rows S6 in
+             order, 40ms apart. Not links, so no hover. -->
+        <table class="tbl tbl--ruled" data-block="table" data-rule>
+          <colgroup><col style="width:24.9%"><col style="width:38.7%"><col style="width:36.4%"></colgroup>
+          <thead>
+            <tr><th class="mono-label" scope="col" data-s6>When</th><th class="mono-label" scope="col" data-s6>What the person sees</th><th class="mono-label" scope="col" data-s6>The way out</th></tr>
+          </thead>
+          <tbody>
+            <tr data-s6><th scope="row">The document cannot be read</th><td data-label="They see">Named plainly: the file is a photo of the pages, not text. Nothing was lost and nothing was charged.</td><td class="is-ink" data-label="Way out">Three routes, each a real option: use the published EASA version, run text recognition with an honest warning about accuracy, or upload a different file.</td></tr>
+            <tr data-s6><th scope="row">Nothing matched a requirement</th><td data-label="They see">"No matching passage found in 214 pages" — the scope of the search is stated, so the absence means something.</td><td class="is-ink" data-label="Way out">Point at the passage yourself. The verdict updates from the person, not the system.</td></tr>
+            <tr data-s6><th scope="row">The match is weak</th><td data-label="They see">Said in words on the row: closest match, section, page, medium or low confidence.</td><td class="is-ink" data-label="Way out">Accept, reject, or select a different passage.</td></tr>
+            <tr data-s6><th scope="row">The manual was revised mid-review</th><td data-label="They see">A banner naming how many verdicts changed and how many of those you had already reviewed.</td><td class="is-ink" data-label="Way out">Show only the changes. Regressions are marked as clearly as improvements.</td></tr>
+            <tr data-s6><th scope="row">Nothing to review yet</th><td data-label="They see">An empty reports list that explains what will appear here.</td><td class="is-ink" data-label="Way out">The one action that matters: start a check.</td></tr>
+            <tr data-s6><th scope="row">The report has been sent</th><td data-label="They see">The check locks. Actions are removed rather than greyed out, and the record of what was submitted stays intact.</td><td class="is-ink" data-label="Way out">Start a new revision — the old report survives as evidence.</td></tr>
+          </tbody>
+        </table>
+
+        <!-- MC10 · "When the document cannot be read" follows S7 -->
+        <figure class="scenario" data-block="screen" data-follows>
+          <div class="screen-panel" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/compliance-check/state-unreadable.png" alt="We could not read this document: a red banner says the EASA PDF is a photo of the pages, not text, and that nothing was lost or charged. Three routes follow: use the published version from EASA, run text recognition first, or upload a different file." width="1928" height="1370" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption class="scenario__caption" data-s6>
+            <span class="scenario__label h4">When the document cannot be read</span>
+            <span class="scenario__text">A scanned PDF has no text layer, so no requirement can be pulled out of it and no passage can be matched later. The screen says that plainly, states that nothing was lost and nothing was charged, and offers three routes that are all real options rather than one greyed-out retry.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- 09 System work -->
+      <section class="cs-section" id="system-work" aria-labelledby="system-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">09</span><span class="cs-section__label mono-label">System work</span></p>
+        <h2 class="cs-section__title h2" id="system-title" tabindex="-1" data-s6>Nothing new in the library</h2>
+        <p class="cs-section__lede body-l" data-s6>Fifteen screens, and not one new component while the feature was being designed. That was a constraint I set for myself, and it is the reason the feature looks like the rest of the product rather than like a bolt-on.</p>
+
+        <div class="cols" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">The seven-column problem</h3>
+            <p class="col__text">The reports table needs seven columns. The library's Table row has five fixed cells. I composed the row from existing atoms — Avatar, Lozenge, Button — instead of forking the component. Forking would have been faster and would have started the fragmentation the library had so far avoided.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Tokens, not values</h3>
+            <p class="col__text">Every colour is bound to a theme variable and every gap to a spacing token, so the whole feature re-themes in dark mode without a single manual edit.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">One component, added afterwards</h3>
+            <p class="col__text">Five screens were each hand-drawing their own step rail. That is the moment a pattern has earned a component, so a Stepper went into the library and replaced every hand-built rail. Adding it during the design would have been premature; adding it once five screens repeated it was maintenance.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 Validation -->
+      <section class="cs-section" id="validation" aria-labelledby="validation-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">10</span><span class="cs-section__label mono-label">Validation</span></p>
+        <h2 class="cs-section__title h2" id="validation-title" tabindex="-1" data-s6>The same ten people, twice</h2>
+        <p class="cs-section__lede body-l" data-s6>I interviewed them at the start of the month. At the end of it I went back to the same ten with something they could click.</p>
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>The prototypes were rough and assembled quickly with AI — enough to be operable, not enough to be admired. I put them in front of the same ten people on calls and asked them to do the task while I watched and took notes: what they clicked, where they hesitated, what they expected to happen next.</p>
+
+        <!-- MC7 · Method — the accent bar draws top to bottom; text S6 once
+             it's halfway -->
+        <div class="callout" data-block="callout">
+          <p class="callout__text body-l" data-s6>That is the part I would defend hardest. Asking someone whether they like a screen produces a compliment. Asking them to complete a job produces a design change. The improved prototype then went to development as the specification.</p>
+        </div>
+      </section>
+
+      <!-- 11 Where it stands
+           MC11 · "What shipped" enters first, then "What is not measured
+           yet" 120ms later. Items S6, 60ms apart; markers scale in after
+           their row. -->
+      <section class="cs-section" id="where-it-stands" aria-labelledby="stands-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">11</span><span class="cs-section__label mono-label">Where it stands</span></p>
+        <h2 class="cs-section__title h2" id="stands-title" tabindex="-1" data-s6>What I can claim, and what I cannot</h2>
+        <p class="cs-section__lede body-l" data-s6>The MVP is live inside the product and in beta with the operators who described the problem. Here is the honest split.</p>
+
+        <div class="claim-lists" data-block="lists">
+          <div class="claim-list">
+            <h3 class="claim-list__label mono-label" data-s6>What shipped</h3>
+            <ul>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span>The full five-step flow, live in beta.</li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span>The report the research asked for — not an export tucked in a menu, a designed step of the flow.</li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span>Fifteen screens covering the whole path including every failure state.</li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span>Reception has been positive. There was no pushback on the approach from users or from the team, and feedback collection is ongoing.</li>
+            </ul>
+          </div>
+          <div class="claim-list claim-list--open">
+            <h3 class="claim-list__label mono-label" data-s6>What is not measured yet</h3>
+            <ul>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span>Whether it actually removes the five to six days. There is no instrumentation and no before-and-after measurement.</li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span>Whether it reduces the back-and-forth with the authority. That needs a full submission cycle to play out.</li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span>Whether it wins accounts. Far too early to say.</li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span>I would rather name these three gaps than borrow a number. They are what the next quarter is for.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12 Reflection -->
+      <section class="cs-section" id="reflection" aria-labelledby="reflection-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">12</span><span class="cs-section__label mono-label">Reflection</span></p>
+        <h2 class="cs-section__title h2" id="reflection-title" tabindex="-1" data-s6>What I would do differently</h2>
+
+        <div class="cols cols--2" style="--col-measure: 486px" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">The order of the work</h3>
+            <p class="col__text">Design and validation ran a month ahead of engineering, and the tested prototype became the specification. For a fixed three-month window that was the right trade — ten sessions happened before a line of code was written, so what shipped had already been shaped by the people who would use it.</p>
+            <p class="col__text">What it cost was a loop during the build. Things I would have changed after seeing them running had to wait for the next release. Next time I would hold a week of design capacity back for the build phase instead of spending all of it up front.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">The report was not my idea</h3>
+            <p class="col__text">I had designed a comparison tool. One sentence from one participant showed me I had designed the middle of the job and stopped before the end of it.</p>
+            <p class="col__text">What users ask for often names the outcome they are accountable for rather than the feature they want. He asked for a report; what he meant was that he is the person who has to answer for the manual. That is worth listening for.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 What is next -->
+      <section class="cs-section" id="whats-next" aria-labelledby="next-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">13</span><span class="cs-section__label mono-label">What is next</span></p>
+        <h2 class="cs-section__title h2" id="next-title" tabindex="-1" data-s6>The other half of the loop</h2>
+        <p class="cs-section__lede body-l" data-s6>Today the operator produces the report and the authority signs it outside the system, on paper or as a PDF. That is the seam the MVP deliberately left alone.</p>
+
+        <div class="cols" style="--col-measure: 307px" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">The authority side</h3>
+            <p class="col__text">I am designing a way for the authority to receive the report and sign it inside the product, so the submission and the signature stop being two different systems.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Beta feedback</h3>
+            <p class="col__text">Beta users are using it now and telling us what is missing. That queue is what the next release is built from.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">The report page itself</h3>
+            <p class="col__text">It is deliberately temporary. It lives inside the product as an MVP and will be revisited once there is evidence of how people actually use the output.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 14 The rest of the flow
+           MC12 · Cells S7 in reading order, --stagger apart. Lightbox as
+           MC9, with previous / next through all six. Cells 03 and 10 are
+           tinted: the list you check and the key screen. -->
+      <section class="cs-section" id="full-flow" aria-labelledby="flow-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">14</span><span class="cs-section__label mono-label">The rest of the flow</span></p>
+        <h2 class="cs-section__title h2" id="flow-title" tabindex="-1" data-s6>Fifteen screens, start to finish</h2>
+        <p class="cs-section__lede body-l" data-s6>The three screens above carry the argument. These are the rest of the path a person walks, from an empty upload box to a list of every check the company has ever run.</p>
+
+        <ol class="flow-grid" data-block="grid">
+          <li class="flow-cell" data-s7="cell">
+            <div class="flow-cell__panel">
+              <div class="screen" data-zoom data-zoom-group="flow">
+                <img src="../assets/work/compliance-check/flow-01-upload-reference.png" alt="Start a new compliance check: a name field, a manual type, a drop zone for the reference document and a list of reference documents used before." width="1848" height="1315" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <h3 class="h4">01 · Upload the reference document</h3>
+            <p class="flow-cell__text text-s">Name the check, pick a manual type, drop the EASA document. Documents used before can be picked instead of uploaded again.</p>
+          </li>
+          <li class="flow-cell" data-s7="cell">
+            <div class="flow-cell__panel flow-cell__panel--tint">
+              <div class="screen" data-zoom data-zoom-group="flow">
+                <img src="../assets/work/compliance-check/flow-03-check-found.png" alt="Check what was found before we compare: 140 extracted requirements grouped by section, each editable, with a warning that 3 requirements split across a page break need a second look." width="1848" height="1315" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <h3 class="h4">03 · Check what was found</h3>
+            <p class="flow-cell__text text-s">Every extracted requirement, grouped by section, editable — before anything is compared against it.</p>
+          </li>
+          <li class="flow-cell" data-s7="cell">
+            <div class="flow-cell__panel">
+              <div class="screen" data-zoom data-zoom-group="flow">
+                <img src="../assets/work/compliance-check/flow-05-comparing.png" alt="Comparing your manual against 140 requirements: 86 checked, with live counts of 71 covered, 9 partially covered, 4 not covered and 2 not applicable." width="1848" height="1315" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <h3 class="h4">05 · Comparing</h3>
+            <p class="flow-cell__text text-s">Live counts by verdict while it runs. You can leave and come back; nothing is final until a person reviews it.</p>
+          </li>
+          <li class="flow-cell" data-s7="cell">
+            <div class="flow-cell__panel">
+              <div class="screen" data-zoom data-zoom-group="flow">
+                <img src="../assets/work/compliance-check/flow-09-needs-review.png" alt="The compare screen filtered to the 18 requirements that are partially covered or not covered, with the manual open beside them." width="1848" height="1315" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <h3 class="h4">09 · Filtered to what needs review</h3>
+            <p class="flow-cell__text text-s">Eighteen requirements that are partially covered or not covered, and nothing else. The filter is the working view.</p>
+          </li>
+          <li class="flow-cell" data-s7="cell">
+            <div class="flow-cell__panel flow-cell__panel--tint">
+              <div class="screen" data-zoom data-zoom-group="flow">
+                <img src="../assets/work/compliance-check/flow-10-manual-revised.png" alt="A banner says revision 3 of the manual was uploaded, 11 requirements changed verdict and 4 already reviewed are affected, with Show only changes; changed rows carry Changed and Now covered tags." width="1848" height="1315" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <h3 class="h4">10 · The manual was revised mid-review</h3>
+            <p class="flow-cell__text text-s">Eleven verdicts changed and four you had already reviewed are affected. Improvements and regressions are marked equally.</p>
+          </li>
+          <li class="flow-cell" data-s7="cell">
+            <div class="flow-cell__panel">
+              <div class="screen" data-zoom data-zoom-group="flow">
+                <img src="../assets/work/compliance-check/flow-14-reports.png" alt="Compliance reports: every check the operator has run, with manual, type, who compared it, when, coverage and status such as Ready to review, In review and Sent to LBA." width="1848" height="1315" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <h3 class="h4">14 · Every check the company has run</h3>
+            <p class="flow-cell__text text-s">Who compared it, when, how much is covered, and whether the report is ready to review or already with the authority.</p>
+          </li>
+        </ol>
+
+        <p class="prose text-s" data-block data-s6>Built in Figma from the company&rsquo;s design system. Every screen above is a real frame in the file, not a mockup of one.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MC13 · Next case study — the whole card is one link. Hover: tile
+       slides 6px, title turns accent. Press: scale 0.99. Enter: S6.
+       The AI chat widget case study isn't built yet, so the link is a
+       #todo placeholder (see README).
+       ================================================================ -->
+  <section class="cs-next container" aria-label="Next case study">
+    <div data-s6 data-next>
+      <a class="next-card" href="#todo-ai-chat-widget">
+        <span class="next-card__text">
+          <span class="next-card__label mono-label">Next case study</span>
+          <span class="next-card__title display-l">Bringing the answer to the work</span>
+          <span class="next-card__meta mono-s">AI assistant  ·  Approved concept</span>
+        </span>
+        <span class="next-card__tile"><svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================================================================
+     MC14 · Footer — links S3. No entrance animation.
+     ================================================================ -->
+<footer class="footer">
+  <div class="container footer__inner mono-s">
+    <p class="footer__credit">Designed and built by Talha Farooq Awan, 2026</p>
+    <ul class="footer__links">
+      <li><a class="link-s3 link-s3--quiet" href="#todo-linkedin">LinkedIn</a></li>
+      <li><a class="link-s3 link-s3--quiet" href="mailto:talhafawan@gmail.com">Email</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- MC9 / MC12 · Lightbox (one, shared by every screen). The pager shows
+     only for a grouped set: previous / next and "3 of 6". -->
+<dialog class="lightbox" aria-label="Enlarged screen" data-lightbox>
+  <button class="lightbox__close" type="button" data-lightbox-close>Close <span aria-hidden="true">✕</span></button>
+  <div class="lightbox__frame" data-lightbox-frame></div>
+  <div class="lightbox__pager" data-lightbox-pager hidden>
+    <button class="lightbox__step" type="button" aria-label="Previous screen" data-lightbox-prev><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+    <p class="lightbox__count mono-label" aria-live="polite" data-lightbox-count></p>
+    <button class="lightbox__step" type="button" aria-label="Next screen" data-lightbox-next><svg aria-hidden="true"><use href="#i-arrow-right-s"/></svg></button>
+  </div>
+</dialog>
+
+</body>
+</html>

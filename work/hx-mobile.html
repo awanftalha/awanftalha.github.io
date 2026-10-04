@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The quick jobs, in your pocket — Talha Farooq Awan</title>
+<meta name="description" content="An iOS 26 app for HX Insight: clock in, fix a missed punch, ask for leave, approve from a notification and get through the first week.">
+<meta name="theme-color" content="#f2f3f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,600&display=swap">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/motion.css">
+<script>
+  /* Entrance states in motion.css are scoped to .motion, so the page renders in
+     full with scripting off or reduced motion on (S12). If main.js hasn't
+     started within 2.5s, drop the class rather than leave anything hidden. */
+  (function (root) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    root.classList.add('motion');
+    setTimeout(function () { if (!window.__motion) root.classList.remove('motion'); }, 2500);
+  })(document.documentElement);
+</script>
+<script src="../js/main.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 16 16">
+    <path d="M4.5 11.5L11.5 4.5M11.5 10.5V4.5H5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 16 16">
+    <path d="M13 8H3M7.5 12.5L3 8L7.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right-s" viewBox="0 0 16 16">
+    <path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 16 16">
+    <path d="M8 13V3M3.5 7.5L8 3L12.5 7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 28 28">
+    <path d="M5.25 14H22.75M14.875 21.875L22.75 14L14.875 6.125" fill="none" stroke="currentColor" stroke-width="2.45" stroke-linecap="square"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================================================================
+     MA1 · Nav — S5 sticky. Links S4; "Work" is current. Get in touch: S1.
+     ================================================================ -->
+<header class="nav" data-nav>
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html">
+      <span class="brand__avatar"><img src="../assets/talha-avatar.jpg" alt="" width="36" height="36"></span>
+      <span class="brand__name">
+        <span class="brand__title">Talha Farooq Awan</span>
+        <span class="brand__role">Product designer</span>
+      </span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>Menu</button>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../index.html#work" aria-current="true">Work</a></li>
+        <li><a class="nav-link" href="../index.html#approach">Approach</a></li>
+        <li><a class="nav-link" href="../index.html#about">About</a></li>
+      </ul>
+      <a class="btn-primary" href="../index.html#contact">
+        <span>Get in touch</span>
+        <span class="btn-primary__tile"><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" data-case>
+
+  <!-- ================================================================
+       MA2 · Header — Back: arrow nudges left, label S3. Title S11 on
+       load, two lines. Lede S6 at 200ms. Meta: top rule S9, then columns
+       S6, --stagger.
+       ================================================================ -->
+  <section class="cs-header cs-header--long container" aria-labelledby="cs-title" data-cs-header>
+    <a class="back" href="../index.html#work">
+      <svg class="arrow-back" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+      <span class="mono-label link-s3 link-s3--quiet">All work</span>
+    </a>
+
+    <p class="eyebrow mono-label">
+      <span class="eyebrow__signal" aria-hidden="true"></span>
+      <span class="cs-eyebrow__text">HX Insight  ·  Mobile app</span>
+    </p>
+
+    <h1 class="cs-title cs-title--balance display-xl" id="cs-title" aria-label="The quick jobs, in your pocket"><span class="cs-title__line" data-s11 aria-hidden="true">The quick jobs,</span> <span class="cs-title__line" data-s11 aria-hidden="true">in your pocket</span></h1>
+
+    <p class="cs-lede body-l" data-s6>An iOS 26 app for what employees do between meetings: clock in, fix a missed punch, ask for leave, approve from a notification and get through the first week. Liquid Glass for the controls, HX Insight for the content.</p>
+
+    <div class="cs-meta" data-rule>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Role</p>
+        <p class="cs-meta__value">Lead product designer</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Product</p>
+        <p class="cs-meta__value">HX Insight for iPhone</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Platform</p>
+        <p class="cs-meta__value">iOS 26</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">People</p>
+        <p class="cs-meta__value">Employee, line manager, new hire</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       MA3 · Hero image — S7 at 300ms, on load. The five tabs, 220 x 478
+       each and 24 apart, 80px down in a 1344 x 638 panel.
+       ================================================================ -->
+  <section class="cs-hero cs-hero--long container" aria-label="The five tabs of HX Insight for iPhone" data-s7 data-cs-hero>
+    <div class="cs-hero__panel cs-hero__panel--phones panel--tint">
+      <div class="phones phones--5">
+            <div class="phone" data-zoom data-zoom-group="tabs">
+              <img src="../assets/work/hx-mobile/tab-home.webp" alt="Home: Good morning, Ayesha, with the clock card at 08:52 and Clock in, her annual and sick leave balances, and what is coming up." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="tabs">
+              <img src="../assets/work/hx-mobile/tab-time.webp" alt="Time: week 47 at 24h 10m of 40h, then each day with its hours." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="tabs">
+              <img src="../assets/work/hx-mobile/tab-leave.webp" alt="Leave: 9 days of annual leave left, other balances, Request leave, and her requests with their status." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="tabs">
+              <img src="../assets/work/hx-mobile/tab-inbox.webp" alt="Inbox: leave approved, a teammate off tomorrow, a payslip ready, a correction approved and a new joiner, with new items marked." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="tabs">
+              <img src="../assets/work/hx-mobile/tab-me.webp" alt="Me: Ayesha&rsquo;s profile with her manager, team, shift and employee ID, and pay and documents." width="804" height="1748" decoding="async">
+            </div>
+          </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       MA4 · Flow stepper — a real tablist: click, arrow keys, Home and
+       End. The screen and caption swap together (fade + 16px); the accent
+       bar slides to the active step. No autoplay. Screens open in the
+       lightbox.
+       ================================================================ -->
+  <section class="cs-flow container" aria-labelledby="flow-title">
+    <h2 class="cs-flow__title h2" id="flow-title">Four jobs, each start to finish</h2>
+    <div class="flow" data-stepper>
+      <div class="stepper" role="tablist" aria-label="Four jobs, step by step">
+          <button class="step" type="button" role="tab" id="step-1" aria-selected="true" aria-controls="flow-panel">
+            <span class="step__num mono-s">01</span>
+            <span class="step__title">Clock in</span>
+            <span class="step__desc">From the lock screen, kept in view by a Live Activity, fixed in a sheet.</span>
+          </button>
+          <button class="step" type="button" role="tab" id="step-2" aria-selected="false" aria-controls="flow-panel" tabindex="-1">
+            <span class="step__num mono-s">02</span>
+            <span class="step__title">Apply for leave</span>
+            <span class="step__desc">Balance first, then dates, then who else is off.</span>
+          </button>
+          <button class="step" type="button" role="tab" id="step-3" aria-selected="false" aria-controls="flow-panel" tabindex="-1">
+            <span class="step__num mono-s">03</span>
+            <span class="step__title">Approve</span>
+            <span class="step__desc">Bilal decides from the notification, or opens it for the full picture.</span>
+          </button>
+          <button class="step" type="button" role="tab" id="step-4" aria-selected="false" aria-controls="flow-panel" tabindex="-1">
+            <span class="step__num mono-s">04</span>
+            <span class="step__title">First week</span>
+            <span class="step__desc">A calm welcome, Face ID to sign, and a day one of people.</span>
+          </button>
+      </div>
+      <div class="flow__panel" role="tabpanel" id="flow-panel" aria-labelledby="step-1">
+        <div class="flow__stage panel--sunken">
+          <div class="phones phones--5 step-screen is-active" data-step-screen>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/clock-1.webp" alt="Lock screen at 8:55: a notification that Ayesha is at the Gulberg office and her shift starts at 9:00, expanded to Clock in now, Not now and Open HX Insight." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/clock-2.webp" alt="Lock screen at 13:04 with a Live Activity: working at the Gulberg office for 4h 08m, with Start break and Clock out." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/clock-3.webp" alt="Home the next morning, leading with &ldquo;You did not clock out yesterday&rdquo;: the clock stopped at 18:00, with a Fix Tue 10 Nov button." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/clock-4.webp" alt="The Fix Tue 10 Nov sheet over Home: what is on record, the actual clock-out time of 19:40, a reason, the 1h 40m of overtime it adds, and Send to Bilal." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/clock-5.webp" alt="The Time tab with Tuesday shown as pending at the new hours, and a confirmation that it was sent to Bilal Ahmed." width="804" height="1748" decoding="async">
+            </div>
+          </div>
+          <div class="phones phones--4 step-screen" data-step-screen>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/leave-1.webp" alt="The request leave sheet over Ayesha&rsquo;s balance: the leave type and dates dragged across the calendar, working days counted and the public holiday skipped, and what will be left." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/leave-2.webp" alt="The request before sending: the dates in one place and who else in Product is off on those days, with a note for Bilal about cover." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/leave-3.webp" alt="Her leave list with the new request at the top as pending, and the balance showing the three days as booked." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/leave-4.webp" alt="Lock screen the next morning: Bilal approved her annual leave, with her new balance." width="804" height="1748" decoding="async">
+            </div>
+          </div>
+          <div class="phones phones--4 step-screen" data-step-screen>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/approve-1.webp" alt="Bilal&rsquo;s lock screen with Ayesha&rsquo;s leave request: how many days and whether anyone else is off." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/approve-2.webp" alt="The expanded notification with the facts behind the request and Approve and Reject buttons." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/approve-3.webp" alt="The request opened in the app: the facts and the day-by-day cover, with Approve and Reject fixed within thumb reach." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/approve-4.webp" alt="Bilal&rsquo;s inbox with the request moved to Done and a few seconds to undo." width="804" height="1748" decoding="async">
+            </div>
+          </div>
+          <div class="phones phones--4 step-screen" data-step-screen>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/week-1.webp" alt="Hassan&rsquo;s Home a week before he starts: a countdown to his first morning, the few tasks that are his, and the three people who will look after him." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/week-2.webp" alt="The code of conduct sheet: the four points that matter most, a link to the full text, and Sign with Face ID." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/week-3.webp" alt="Home on his first Monday: where he needs to be next and who he is meeting, already clocked in at reception." width="804" height="1748" decoding="async">
+            </div>
+            <div class="phone" data-zoom data-zoom-group="mobile">
+              <img src="../assets/work/hx-mobile/week-4.webp" alt="The Me tab by Friday: onboarding complete, with his leave balance, shift, first payday, equipment and buddy." width="804" height="1748" decoding="async">
+            </div>
+          </div>
+        </div>
+        <div class="flow__captions" aria-live="polite">
+          <p class="flow__caption mono-s is-active" data-step-caption>01  Clock in. Lock screen prompt, Live Activity, a missed punch flagged, fixed in a sheet and sent as pending.</p>
+          <p class="flow__caption mono-s" data-step-caption>02  Apply for leave. A sheet over the balance, working days counted, who else in Product is off, then sent and shown as pending.</p>
+          <p class="flow__caption mono-s" data-step-caption>03  Approve. The request on Bilal&rsquo;s lock screen, decided from the notification or opened in full, then done with a way to undo.</p>
+          <p class="flow__caption mono-s" data-step-caption>04  First week. A countdown to day one, a task signed with Face ID, a first morning of people, and a profile that is ready.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       MA9 · Next case study — the whole card is one link. Hover: tile
+       slides 6px, title turns accent. Press: scale 0.99. Enter: S6.
+       ================================================================ -->
+  <section class="cs-next container" aria-label="Next case study">
+    <div data-s6 data-next>
+      <a class="next-card" href="training-record.html">
+        <span class="next-card__text">
+          <span class="next-card__label mono-label">Next case study</span>
+          <span class="next-card__title display-l">The record that decides who is allowed to fly</span>
+          <span class="next-card__meta mono-s">Compliance records  ·  Training management</span>
+        </span>
+        <span class="next-card__tile"><svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================================================================
+     MA10 · Footer — links S3. No entrance animation.
+     ================================================================ -->
+<footer class="footer">
+  <div class="container footer__inner mono-s">
+    <p class="footer__credit">Designed and built by Talha Farooq Awan, 2026</p>
+    <ul class="footer__links">
+      <li><a class="link-s3 link-s3--quiet" href="#todo-linkedin">LinkedIn</a></li>
+      <li><a class="link-s3 link-s3--quiet" href="mailto:talhafawan@gmail.com">Email</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- MA6 · Lightbox (one, shared by every screen). The pager shows
+     only for a grouped set: previous / next and "2 of 4". -->
+<dialog class="lightbox" aria-label="Enlarged screen" data-lightbox>
+  <button class="lightbox__close" type="button" data-lightbox-close>Close <span aria-hidden="true">✕</span></button>
+  <div class="lightbox__frame" data-lightbox-frame></div>
+  <div class="lightbox__pager" data-lightbox-pager hidden>
+    <button class="lightbox__step" type="button" aria-label="Previous screen" data-lightbox-prev><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+    <p class="lightbox__count mono-label" aria-live="polite" data-lightbox-count></p>
+    <button class="lightbox__step" type="button" aria-label="Next screen" data-lightbox-next><svg aria-hidden="true"><use href="#i-arrow-right-s"/></svg></button>
+  </div>
+</dialog>
+
+</body>
+</html>

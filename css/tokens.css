@@ -1,0 +1,73 @@
+/* =========================================================================
+   Tokens
+   Colour and type mirror the Figma variables in "talha's portfolio final".
+   Motion tokens are referenced by the build notes but live on a
+   "Foundations > Motion system" page that isn't in the file, so the values
+   below are this build's own. Tune them here; every S-code in motion.css and
+   every timeline in main.js reads from them.
+   ========================================================================= */
+
+:root {
+  /* Colour ---------------------------------------------------------------- */
+  --color-bg: #f2f3f0;
+  --color-surface: #fbfbf9;
+  --color-surface-sunken: #e7e9e4;
+  --color-surface-inverse: #14171a;
+  --color-ink: #0f1113;
+  --color-ink-muted: #555a62;
+  --color-ink-faint: #8a8f96;
+  --color-ink-inverse: #f2f3f0;
+  --color-accent: #e4521f;
+  --color-accent-tint: #fbe6dc;
+  --color-line: #d7dad3;
+
+  /* Shape and depth ------------------------------------------------------- */
+  --radius: 2px;
+  --shadow-screen: 0 30px 60px -18px rgb(20 23 26 / 0.14);
+  --shadow-screen-lift: 0 44px 72px -20px rgb(20 23 26 / 0.22);
+
+  /* Type ------------------------------------------------------------------ */
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Figma sizes at 1440, scaled down fluidly below that. */
+  --fs-display-xl: clamp(2.5rem, 6.39vw, 5.75rem);    /* Display/XL 92 */
+  --fs-display-l: clamp(2.25rem, 4.45vw, 4rem);       /* Display/L 64 */
+  --fs-h2: clamp(1.875rem, 3.06vw, 2.75rem);          /* Heading/H2 44 */
+  --fs-number-xl: clamp(2.5rem, 3.62vw, 3.25rem);     /* Number/XL 52 */
+  --fs-h3: clamp(1.375rem, 1.81vw, 1.625rem);         /* Heading/H3 26 */
+  --fs-body-l: clamp(1.125rem, 1.39vw, 1.25rem);      /* Body/L 20 */
+  --fs-body-m: 1rem;                                  /* Body/M 16 */
+  --fs-mono-s: 0.8125rem;                             /* Mono/S 13 */
+  --fs-mono-label: 0.75rem;                           /* Mono/Label 12 */
+
+  /* Layout ---------------------------------------------------------------- */
+  --container: 1344px;
+  --gutter: 48px;
+  --nav-h: 81px;
+  --section-end: clamp(96px, 11.1vw, 160px);
+
+  /* Motion ---------------------------------------------------------------- */
+  --dur-instant: 90ms;   /* press */
+  --dur-fast: 160ms;     /* colour and underline changes */
+  --dur-base: 240ms;     /* hover movement */
+  --dur-slow: 560ms;     /* entrances: S6, S9, S11 */
+  --dur-slower: 800ms;   /* S7 card entrance */
+  --dur-count: 900ms;    /* S10 count-up */
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-press: cubic-bezier(0.3, 0, 0.6, 1);
+
+  --stagger: 60ms;       /* between siblings in a group */
+  --stagger-word: 50ms;  /* between words in S11 */
+  --rule-lead: 100ms;    /* a rule starts this far ahead of the content under it */
+}
+
+@media (max-width: 899px) {
+  :root { --gutter: 32px; }
+}
+
+@media (max-width: 599px) {
+  :root { --gutter: 20px; }
+}

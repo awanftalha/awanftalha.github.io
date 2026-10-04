@@ -1,0 +1,662 @@
+/* =========================================================================
+   Motion system — the S-codes used by the Home build notes
+   (Figma: "Build notes / Motion / Home" and the Interaction annotations on
+   each layer in Dev Mode).
+
+   Defined in the file's annotations, built as written:
+     S1   Button / Primary    hover: arrow translate(2px,-2px), --dur-base, --ease-out
+                              press: scale(0.98), --dur-instant, --ease-press
+                              focus: outline 2px accent, offset 3px
+     S2   Button / Secondary  hover: fill to ink, label + arrow to ink-inverse,
+                              --dur-fast; arrow translate(2px,-2px), --dur-base
+                              press: scale(0.98), --dur-instant
+     S3   Button / Text       hover: underline ink to accent, offset 3px to 5px,
+                              --dur-fast
+
+   Referenced by the notes but defined on a "Foundations > Motion system"
+   page that isn't in the file. Defined here:
+     S4   Nav link            hover: 1px underline draws in from the left,
+                              --dur-base, --ease-out. aria-current keeps it drawn.
+     S5   Sticky nav          sticks to the top; once the page scrolls the
+                              background frosts, --dur-base
+     S6   Enter               opacity 0 to 1 + rise 16px, --dur-slow, --ease-out
+     S7   Card enter          panel: opacity + rise 40px, --dur-slower, --ease-out;
+                              screen inside rises 32px, 80ms behind the panel
+     S8   Card hover          screen lifts 8px and its shadow deepens, --dur-base;
+                              title underline fades in, --dur-fast.
+                              Hover-capable pointers only.
+     S9   Rule                scaleX 0 to 1 from the left, --dur-slow, --ease-in-out
+     S10  Count              0 to the number, --dur-count, cubic ease-out (main.js)
+     S11  Word rise           each word rises out of its own mask, --dur-slow,
+                              --ease-out, --stagger-word apart. Accent word enters
+                              in ink and turns accent 200ms after it lands,
+                              --dur-base.
+     S12  Reduced motion      prefers-reduced-motion: reduce. No entrances,
+                              count-ups or scroll-linked motion; content shows in
+                              its final state. The stepper swap keeps its fade
+                              but drops the slide.
+
+   The Home notes (H1–H10) and the Case study notes (C1–C10) both use these
+   codes. Page-specific motion sits at the end, under its C-code.
+
+   Entrance states are scoped to .motion. The <head> script only adds it when
+   the visitor hasn't asked for reduced motion, so nothing is hidden unless
+   main.js is there to bring it back.
+   ========================================================================= */
+
+
+/* S1 · Button / Primary -------------------------------------------------- */
+
+.btn-primary {
+  transition: transform var(--dur-instant) var(--ease-press);
+}
+
+.btn-primary .arrow {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.btn-primary:focus-visible .arrow { transform: translate(2px, -2px); }
+
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .btn-primary:hover .arrow { transform: translate(2px, -2px); }
+}
+
+
+/* S2 · Button / Secondary ------------------------------------------------ */
+
+.btn-secondary {
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-instant) var(--ease-press);
+}
+
+.btn-secondary .arrow {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.btn-secondary:active { transform: scale(0.98); }
+
+@media (hover: hover) {
+  .btn-secondary:hover {
+    background-color: var(--color-ink);
+    color: var(--color-ink-inverse);
+  }
+
+  .btn-secondary:hover .arrow { transform: translate(2px, -2px); }
+}
+
+
+/* S3 · Button / Text ----------------------------------------------------- */
+
+.link-s3 {
+  transition:
+    text-decoration-color var(--dur-fast) var(--ease-out),
+    text-underline-offset var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .link-s3:hover,
+  .email:hover .link-s3,
+  .back:hover .link-s3 {
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 5px;
+  }
+}
+
+.email:focus-visible .link-s3,
+.back:focus-visible .link-s3 {
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 5px;
+}
+
+
+/* S4 · Nav link ---------------------------------------------------------- */
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 5px; /* where the font's own underline sits */
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+/* "page" for the page itself; "true" for the section a page lives under
+   (C1: on a case study, Work is current). */
+.nav-link[aria-current="page"]::after,
+.nav-link[aria-current="true"]::after {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+@media (max-width: 899px) {
+  .nav-link::after { display: none; }
+
+  .nav-link[aria-current="page"],
+  .nav-link[aria-current="true"] {
+    text-decoration: underline;
+    text-decoration-thickness: from-font;
+    text-underline-offset: 4px;
+  }
+}
+
+
+/* S5 · Sticky nav -------------------------------------------------------- */
+
+.nav {
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+.nav.is-stuck:not(.is-open) {
+  background-color: rgb(242 243 240 / 0.86);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+
+
+/* S8 · Card hover -------------------------------------------------------- */
+
+.card .slot,
+.card .wt__screen,
+.card .screenshot,
+.card .phones {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.card__title-text {
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.16em;
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .slot,
+  .card:hover .wt__screen {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-screen-lift);
+  }
+
+  /* screens with their own rounded corners lift without a boxed shadow */
+  .card:hover :is(.screenshot, .phones) { transform: translateY(-8px); }
+
+  .card:hover .card__title-text {
+    text-decoration-color: currentColor;
+  }
+}
+
+
+/* ==== Entrances (only with .motion) ===================================== */
+
+/* S6 · Enter */
+.motion [data-s6] {
+  opacity: 0;
+  translate: 0 16px;
+  transition:
+    opacity var(--dur-slow) var(--ease-out) var(--d, 0ms),
+    translate var(--dur-slow) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-s6].is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Hero eyebrow: opacity only, --dur-slow */
+.motion [data-fade] {
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-fade].is-in { opacity: 1; }
+
+/* Hero inline photo: scale 0.6 to 1 + opacity, --dur-slow, --ease-out */
+.motion [data-pop] {
+  opacity: 0;
+  scale: 0.6;
+  transition:
+    opacity var(--dur-slow) var(--ease-out) var(--d, 0ms),
+    scale var(--dur-slow) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-pop].is-in {
+  opacity: 1;
+  scale: 1;
+}
+
+/* "Was" line: fades in once its count ends, --dur-fast */
+.motion [data-after-count] {
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-after-count].is-in { opacity: 1; }
+
+/* S7 · Card enter */
+.motion [data-s7] :is(.card__panel, .cs-hero__panel) {
+  opacity: 0;
+  translate: 0 40px;
+  transition:
+    opacity var(--dur-slower) var(--ease-out) var(--d, 0ms),
+    translate var(--dur-slower) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-s7] :is(.slot, .wt__screen) {
+  translate: 0 32px;
+  transition:
+    translate var(--dur-slower) var(--ease-out) calc(var(--d, 0ms) + 80ms),
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.motion [data-s7].is-in :is(.card__panel, .cs-hero__panel),
+.motion [data-s7].is-in :is(.slot, .wt__screen) {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* S7 on something with no panel (C5 Before image, C7 state cards):
+   the element itself rises 40px, --dur-slower */
+.motion [data-s7="solo"] {
+  opacity: 0;
+  translate: 0 40px;
+  transition:
+    opacity var(--dur-slower) var(--ease-out) var(--d, 0ms),
+    translate var(--dur-slower) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-s7="solo"].is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* S9 · Rule */
+.motion [data-rule]::before {
+  transform: scaleX(0);
+  transition: transform var(--dur-slow) var(--ease-in-out) var(--rule-d, 0ms);
+}
+
+.motion [data-rule].rule-in::before { transform: scaleX(1); }
+
+/* H8 · About portrait: clip-path inset(100% 0 0 0) to inset(0),
+   --dur-slow, --ease-in-out */
+.motion [data-clip] {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path var(--dur-slow) var(--ease-in-out) var(--d, 0ms);
+}
+
+.motion [data-clip].is-in { clip-path: inset(0); }
+
+/* S11 · Word rise. main.js wraps each word in .w > span. The mask is padded
+   and pulled back with negative margins so descenders and italic overhang
+   stay visible without moving the layout. */
+.motion [data-s11]:not(.is-split) { visibility: hidden; }
+
+.motion [data-s11] .w {
+  display: inline-block;
+  margin: -0.12em -0.1em -0.2em;
+  padding: 0.12em 0.1em 0.2em;
+  clip-path: inset(0);
+}
+
+.motion [data-s11] .w > span {
+  display: inline-block;
+  translate: 0 1.35em;
+  transition: translate var(--dur-slow) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-s11] .w.is-in > span { translate: 0 0; }
+.motion [data-s11] .w.is-done { clip-path: none; }
+
+.motion [data-s11="accent"] {
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.motion [data-s11="accent"]:not(.is-accent) { color: var(--color-ink); }
+
+
+/* ==== Case study (C-codes) ============================================== */
+
+/* C2 · Back: arrow nudges left, --dur-base; label is S3 */
+.back .arrow-back {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.back:focus-visible .arrow-back { transform: translateX(-4px); }
+
+@media (hover: hover) {
+  .back:hover .arrow-back { transform: translateX(-4px); }
+}
+
+/* C3 · Hero parallax: the screen drifts up 40px while its panel crosses the
+   viewport. Scroll-driven CSS only; browsers without animation-timeline
+   simply don't get it (no JS fallback, per the notes). Off under S12. */
+@keyframes cs-parallax {
+  from { transform: translateY(0); }
+  to { transform: translateY(-40px); }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cs-hero__panel {
+      view-timeline-name: --cs-hero;
+      view-timeline-axis: block;
+    }
+
+    .cs-hero .slot {
+      animation: cs-parallax linear both;
+      animation-timeline: --cs-hero;
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+/* C6 · Stepper
+   Active: accent bar scaleX 0 to 1 from the left, --dur-base, --ease-in-out;
+   title muted to ink, --dur-fast.
+   Swap: the old screen and caption leave (fade + 16px left, --dur-fast), then
+   the new ones arrive (fade + 16px from the right, --dur-base, --ease-out). */
+.step::after {
+  transition: transform var(--dur-base) var(--ease-in-out);
+}
+
+.step__num,
+.step__title {
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .step:hover .step__title { color: var(--color-ink); }
+}
+
+.step:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.step-screen,
+.flow__caption {
+  opacity: 0;
+  visibility: hidden;
+  translate: 16px 0;
+}
+
+.step-screen.is-active,
+.flow__caption.is-active {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    translate var(--dur-base) var(--ease-out);
+}
+
+.step-screen.is-leaving,
+.flow__caption.is-leaving {
+  opacity: 0;
+  visibility: visible;
+  translate: -16px 0;
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    translate var(--dur-fast) var(--ease-out);
+}
+
+/* C7 · State markers: scale 0 to 1 once their card lands, --dur-fast */
+.motion [data-marker] {
+  scale: 0;
+  transition: scale var(--dur-fast) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-marker].is-in { scale: 1; }
+
+/* C9 · Next case study
+   Hover: tile slides 6px right, title ink-inverse to accent, --dur-base,
+   --ease-out. Press: scale(0.99), --dur-instant. */
+.next-card {
+  transition: transform var(--dur-instant) var(--ease-press);
+}
+
+.next-card__title {
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.next-card__tile {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.next-card:active { transform: scale(0.99); }
+
+.next-card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.next-card:focus-visible .next-card__title { color: var(--color-accent); }
+.next-card:focus-visible .next-card__tile { transform: translateX(6px); }
+
+@media (hover: hover) {
+  .next-card:hover .next-card__title { color: var(--color-accent); }
+  .next-card:hover .next-card__tile { transform: translateX(6px); }
+}
+
+/* S12 · Reduced motion. Entrances and count-ups are already off, because
+   .motion is never added. This covers what runs without it. */
+@media (prefers-reduced-motion: reduce) {
+  .step-screen,
+  .flow__caption,
+  .step-screen.is-leaving,
+  .flow__caption.is-leaving {
+    translate: none;
+  }
+}
+
+
+/* ==== Long-form case study (CS-codes) ==================================== */
+
+/* CS5 · Side nav
+   Indicator: one 2px accent bar slides and resizes to the active item,
+   --dur-base, --ease-in-out. Hover: inactive label muted to ink, --dur-fast.
+   Next link: S3 + arrow 4px right. Top link: arrow 2px up. */
+.toc__indicator {
+  transition:
+    transform var(--dur-base) var(--ease-in-out),
+    height var(--dur-base) var(--ease-in-out);
+}
+
+.toc__text {
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.toc__next-link .arrow-small,
+.toc__top .arrow-small {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .toc__link:not([aria-current="true"]):hover .toc__text { color: var(--color-ink); }
+  .toc__next-link:hover .link-s3,
+  .toc__top:hover .link-s3 {
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 5px;
+  }
+  .toc__next-link:hover .arrow-small { transform: translateX(4px); }
+  .toc__top:hover .arrow-small { transform: translateY(-2px); }
+}
+
+.toc__next-link:focus-visible .arrow-small { transform: translateX(4px); }
+.toc__top:focus-visible .arrow-small { transform: translateY(-2px); }
+
+/* CS7 · Screens enter: the panel fades, the screen rises 40px inside it */
+.motion [data-s7="screen"] {
+  opacity: 0;
+  transition: opacity var(--dur-slower) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-s7="screen"] .screen {
+  translate: 0 40px;
+  transition: translate var(--dur-slower) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-s7="screen"].is-in { opacity: 1; }
+.motion [data-s7="screen"].is-in .screen { translate: 0 0; }
+
+/* CS7 · Lightbox: scale 0.96 to 1 + fade, --dur-base; closes over --dur-fast */
+.lightbox {
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.lightbox::backdrop {
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.lightbox__img {
+  scale: 0.96;
+  transition: scale var(--dur-base) var(--ease-out);
+}
+
+.lightbox.is-open,
+.lightbox.is-open::backdrop { opacity: 1; }
+.lightbox.is-open .lightbox__img { scale: 1; }
+
+.lightbox.is-closing,
+.lightbox.is-closing::backdrop {
+  opacity: 0;
+  transition-duration: var(--dur-fast);
+}
+
+.lightbox.is-closing .lightbox__img {
+  scale: 0.96;
+  transition-duration: var(--dur-fast);
+}
+
+/* CS5 / CS7 under S12: jumps are instant, the indicator moves without a
+   transition, and the lightbox appears without scaling. */
+@media (prefers-reduced-motion: reduce) {
+  .toc__indicator,
+  .lightbox,
+  .lightbox::backdrop,
+  .lightbox__img { transition: none; }
+
+  .lightbox__img { scale: 1; }
+}
+
+
+/* ==== Long-form case studies, later pages (MC-, SM-, IT-codes) ============ */
+
+/* MC7 / SM6 · Callouts: the 3px accent bar draws top to bottom, scaleY 0 to
+   1, --dur-slow, --ease-out. The text is S6 (the SM6 big quote S11) once the
+   bar is halfway, and the source line fades in after it (timed in main.js).
+   Under S12 the bar and text are static. */
+.motion [data-block="callout"]::before {
+  transform: scaleY(0);
+  transition: transform var(--dur-slow) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-block="callout"].is-in::before { transform: scaleY(1); }
+
+/* A line that fades in after the thing above it, --dur-fast: a callout's
+   source (MC7, SM6), a screen's caption (SM8, IT3) */
+.motion [data-fade-fast] {
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-fade-fast].is-in { opacity: 1; }
+
+/* MC12 · Grid cells enter S7: the cell rises 40px, the screen in its panel
+   settles 80ms behind it */
+.motion [data-s7="cell"] {
+  opacity: 0;
+  translate: 0 40px;
+  transition:
+    opacity var(--dur-slower) var(--ease-out) var(--d, 0ms),
+    translate var(--dur-slower) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-s7="cell"] .screen {
+  translate: 0 32px;
+  transition: translate var(--dur-slower) var(--ease-out) calc(var(--d, 0ms) + 80ms);
+}
+
+.motion [data-s7="cell"].is-in,
+.motion [data-s7="cell"].is-in .screen {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* IT3 · Hero triptych: each screen rises 40px, --dur-slow, --ease-out (the
+   panel itself fades with [data-fade]) */
+.motion [data-rise] {
+  translate: 0 40px;
+  transition: translate var(--dur-slow) var(--ease-out) var(--d, 0ms);
+}
+
+.motion [data-rise].is-in { translate: 0 0; }
+
+/* MC12 · Lightbox pager buttons */
+.lightbox__step {
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .lightbox__step:hover { background: rgb(255 255 255 / 0.12); }
+}
+
+
+/* Print: show everything in its final state */
+@media print {
+  .motion [data-s6],
+  .motion [data-fade],
+  .motion [data-pop],
+  .motion [data-after-count],
+  .motion [data-s7] :is(.card__panel, .cs-hero__panel),
+  .motion [data-s7] :is(.slot, .wt__screen),
+  .motion [data-s7="solo"],
+  .motion [data-s7="screen"],
+  .motion [data-s7="screen"] .screen,
+  .motion [data-marker],
+  .motion [data-clip],
+  .motion [data-s11] .w > span,
+  .motion [data-s7="cell"],
+  .motion [data-s7="cell"] .screen,
+  .motion [data-fade-fast],
+  .motion [data-rise] {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+    clip-path: none !important;
+  }
+
+  .motion [data-s11] { visibility: visible !important; }
+  .motion [data-rule]::before,
+  .motion [data-block="callout"]::before { transform: none !important; }
+  .nav { position: static; }
+}

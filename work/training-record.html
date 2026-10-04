@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The record that decides who is allowed to fly — Talha Farooq Awan</title>
+<meta name="description" content="Helicopter operators have to prove that every pilot on every flight is trained, current and signed off. I designed the training management module, inside an existing operations platform, that replaced the spreadsheet.">
+<meta name="theme-color" content="#f2f3f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,600&display=swap">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/motion.css">
+<script>
+  /* Entrance states in motion.css are scoped to .motion, so the page renders in
+     full with scripting off or reduced motion on (S12). If main.js hasn't
+     started within 2.5s, drop the class rather than leave anything hidden. */
+  (function (root) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    root.classList.add('motion');
+    setTimeout(function () { if (!window.__motion) root.classList.remove('motion'); }, 2500);
+  })(document.documentElement);
+</script>
+<script src="../js/main.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 16 16">
+    <path d="M4.5 11.5L11.5 4.5M11.5 10.5V4.5H5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 16 16">
+    <path d="M13 8H3M7.5 12.5L3 8L7.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right-s" viewBox="0 0 16 16">
+    <path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 16 16">
+    <path d="M8 13V3M3.5 7.5L8 3L12.5 7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 28 28">
+    <path d="M5.25 14H22.75M14.875 21.875L22.75 14L14.875 6.125" fill="none" stroke="currentColor" stroke-width="2.45" stroke-linecap="square"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================================================================
+     TM1 · Nav — S5 sticky. Links S4; "Work" is current. Get in touch: S1.
+     ================================================================ -->
+<header class="nav" data-nav>
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html">
+      <span class="brand__avatar"><img src="../assets/talha-avatar.jpg" alt="" width="36" height="36"></span>
+      <span class="brand__name">
+        <span class="brand__title">Talha Farooq Awan</span>
+        <span class="brand__role">Product designer</span>
+      </span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>Menu</button>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../index.html#work" aria-current="true">Work</a></li>
+        <li><a class="nav-link" href="../index.html#approach">Approach</a></li>
+        <li><a class="nav-link" href="../index.html#about">About</a></li>
+      </ul>
+      <a class="btn-primary" href="../index.html#contact">
+        <span>Get in touch</span>
+        <span class="btn-primary__tile"><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" data-case>
+
+  <!-- ================================================================
+       TM2 · Header — Back: arrow nudges left, label S3. Title S11 on load,
+       two lines, break after "decides". Lede S6 at 200ms. Meta: top rule
+       S9, then columns S6, --stagger.
+       ================================================================ -->
+  <section class="cs-header cs-header--long container" aria-labelledby="cs-title" data-cs-header>
+    <a class="back" href="../index.html#work">
+      <svg class="arrow-back" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+      <span class="mono-label link-s3 link-s3--quiet">All work</span>
+    </a>
+
+    <p class="eyebrow mono-label">
+      <span class="eyebrow__signal" aria-hidden="true"></span>
+      <span class="cs-eyebrow__text">Compliance records  ·  Training management</span>
+    </p>
+
+    <h1 class="cs-title display-xl" id="cs-title" aria-label="The record that decides who is allowed to fly"><span class="cs-title__line" data-s11 aria-hidden="true">The record that decides</span> <span class="cs-title__line" data-s11 aria-hidden="true">who is allowed to fly</span></h1>
+
+    <p class="cs-lede body-l" data-s6>Helicopter operators have to prove that every pilot on every flight is trained, current and signed off. Two of them were keeping that proof in Excel — written first on paper, in the air, while the instructor was also teaching. I designed the training management module, inside an existing operations platform, that replaced the spreadsheet. It has been live for two months.</p>
+
+    <div class="cs-meta" data-rule>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Role</p>
+        <p class="cs-meta__value">Solo designer and product owner</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Team</p>
+        <p class="cs-meta__value">Me, one frontend, one backend</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Timeline</p>
+        <p class="cs-meta__value">2 months design, 2 months build</p>
+      </div>
+      <div class="cs-meta__item" data-s6>
+        <p class="cs-meta__label mono-label">Status</p>
+        <p class="cs-meta__value">Shipped · in evaluation at two operators</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       TM3 · Hero image — S7 at 300ms, on load; the screen drifts up 40px
+       while its panel crosses the viewport (CSS scroll timeline; off under
+       S12).
+       ================================================================ -->
+  <section class="cs-hero cs-hero--long container" aria-label="The training dashboard" data-s7 data-cs-hero>
+    <div class="cs-hero__panel panel--tint">
+      <div class="slot slot--hero-long slot--hero-tall" data-zoom>
+        <img class="slot__img--top" src="../assets/work/training-record/hero.png" alt="The training dashboard: a banner naming a blocked enrollment, three counts with the action beside each (countersigns waiting, sessions running today, enrollments blocked), today’s sessions, sheets waiting for a countersign, and validity written back to the roster." width="2240" height="1360">
+      </div>
+    </div>
+    <p class="cs-hero__caption mono-s" data-s6>01 · Dashboard. The front door leads with what needs a person: countersigns waiting, sessions today, enrollments blocked. Four equal panels became three counts with the action beside each.</p>
+  </section>
+
+  <div class="cs-body container">
+
+    <!-- ==============================================================
+         TM4 · Side nav — sticky at 96px; the section crossing the middle
+         of the viewport is current, and one accent bar slides to it.
+         Below 1024px it becomes a chip bar stuck under the Nav.
+         ============================================================== -->
+    <nav class="toc" aria-label="On this page" data-toc>
+      <p class="toc__label mono-label">On this page</p>
+      <div class="toc__track">
+      <ol class="toc__list">
+        <li><a class="toc__link" href="#numbers" aria-current="true"><span class="toc__num">01</span><span class="toc__text">By the numbers</span></a></li>
+        <li><a class="toc__link" href="#context"><span class="toc__num">02</span><span class="toc__text">Context</span></a></li>
+        <li><a class="toc__link" href="#the-user"><span class="toc__num">03</span><span class="toc__text">The user</span></a></li>
+        <li><a class="toc__link" href="#the-finding"><span class="toc__num">04</span><span class="toc__text">The finding</span></a></li>
+        <li><a class="toc__link" href="#diagnosis"><span class="toc__num">05</span><span class="toc__text">Diagnosis</span></a></li>
+        <li><a class="toc__link" href="#reframing"><span class="toc__num">06</span><span class="toc__text">Reframing</span></a></li>
+        <li><a class="toc__link" href="#design"><span class="toc__num">07</span><span class="toc__text">The design</span></a></li>
+        <li><a class="toc__link" href="#decisions"><span class="toc__num">08</span><span class="toc__text">The decisions</span></a></li>
+        <li><a class="toc__link" href="#failure-states"><span class="toc__num">09</span><span class="toc__text">Failure states</span></a></li>
+        <li><a class="toc__link" href="#system-work"><span class="toc__num">10</span><span class="toc__text">System work</span></a></li>
+        <li><a class="toc__link" href="#validation"><span class="toc__num">11</span><span class="toc__text">Validation</span></a></li>
+        <li><a class="toc__link" href="#where-it-stands"><span class="toc__num">12</span><span class="toc__text">Where it stands</span></a></li>
+        <li><a class="toc__link" href="#reflection"><span class="toc__num">13</span><span class="toc__text">Reflection</span></a></li>
+        <li><a class="toc__link" href="#whats-next"><span class="toc__num">14</span><span class="toc__text">What is next</span></a></li>
+        <li><a class="toc__link" href="#full-set"><span class="toc__num">15</span><span class="toc__text">The full set</span></a></li>
+      </ol>
+      <span class="toc__indicator" aria-hidden="true" data-toc-indicator></span>
+      </div>
+
+      <div class="toc__next">
+        <p class="toc__next-label mono-label">Next case study</p>
+        <a class="toc__next-link" href="instructors.html">
+          <span class="link-s3 link-s3--quiet">The instructors put the paper down</span>
+          <svg class="arrow-small" aria-hidden="true"><use href="#i-arrow-right-s"/></svg>
+        </a>
+      </div>
+
+      <a class="toc__top mono-s" href="#top" data-to-top>
+        <span>Back to top</span>
+        <svg class="arrow-small" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+      </a>
+    </nav>
+
+    <div class="cs-content">
+
+      <!-- ============================================================
+           TM5 · Sections — each: top ink rule S9 first; overline,
+           heading, lede S6 (--stagger); rows, columns, quotes and claims
+           S6, 40ms apart; tint, dark and accent-bordered blocks S6 as one
+           unit.
+           ============================================================ -->
+
+      <!-- 01 By the numbers
+           TM6 · Tiles S6, --stagger, row 1 then row 2. 2, 6 and 15 count up
+           (S10); "30–40 → 10–12" (accent), "2 of 3" and "14 of 16" only
+           fade: ranges and ratios never count. -->
+      <section class="cs-section" id="numbers" aria-labelledby="numbers-title" data-rule>
+        <h2 class="cs-section__overline cs-section__title" id="numbers-title" tabindex="-1" data-s6><span class="cs-section__num">01</span><span class="cs-section__label mono-label">By the numbers</span></h2>
+
+        <div class="numbers numbers--section numbers--compact" data-block="numbers">
+          <div class="numbers__row">
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value"><span class="count" data-count="2">2</span></p>
+              <p class="numbers__label">helicopter operators</p>
+              <p class="numbers__detail">Using it now and feeding back</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value"><span class="count" data-count="6">6</span></p>
+              <p class="numbers__label">instructors</p>
+              <p class="numbers__detail">Three from each operator</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value"><span class="count" data-count="15">15</span></p>
+              <p class="numbers__label">people interviewed</p>
+              <p class="numbers__detail">8 instructors, 7 trainees</p>
+            </div>
+          </div>
+          <div class="numbers__row">
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value numbers__value--accent">30–40 → 10–12</p>
+              <p class="numbers__label">minutes per trainee</p>
+              <p class="numbers__detail">Write-up time. The before figure is reported, the after is logged.</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value">2 of 3</p>
+              <p class="numbers__label">months of evaluation done</p>
+              <p class="numbers__detail">Both operators run a three-month trial before adopting a system</p>
+            </div>
+            <div class="numbers__tile" data-s6>
+              <p class="numbers__value">14 of 16</p>
+              <p class="numbers__label">screens shipped</p>
+              <p class="numbers__detail">Mobile and tablet are the next release</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 Context and constraints -->
+      <section class="cs-section" id="context" aria-labelledby="context-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">02</span><span class="cs-section__label mono-label">Context and constraints</span></p>
+        <h2 class="cs-section__title h2" id="context-title" tabindex="-1" data-s6>A training system that had to live inside dispatch</h2>
+        <p class="cs-section__lede body-l" data-s6>NGFT builds dispatch and operations software for helicopter operators. Training was not part of it. The two operators in this project kept their training records in Excel: an instructor wrote remarks on paper during the flight, next to a printed question sheet, and typed them into a spreadsheet afterwards. Nothing connected that spreadsheet to the roster the same company used to decide who flew tomorrow.</p>
+
+        <ol class="decisions" data-block="stagger">
+          <li class="decision" data-s6>
+            <h3 class="h4">Two months of design</h3>
+            <p class="decision__text">The window was fixed before the scope was. Everything below is a consequence of deciding what fitted inside it.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">It had to live inside the existing operations platform</h3>
+            <p class="decision__text">Training flights are also operational flights — same aircraft, same crew, same duty hours. A training record kept outside the operations system is a record nobody checks before rostering someone. This single constraint is why the module writes validity back to the crew roster instead of storing it on its own.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">The authority signs on paper</h3>
+            <p class="decision__text">Licence endorsements leave the system and come back as a scan. No design decision could pretend that loop was closed, so the screens say so on their face.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">The company&rsquo;s design system already existed</h3>
+            <p class="decision__text">I did not build the library. Anything new had to earn its place against what was already there.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- 03 Understanding the user -->
+      <section class="cs-section" id="the-user" aria-labelledby="user-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">03</span><span class="cs-section__label mono-label">Understanding the user</span></p>
+        <h2 class="cs-section__title h2" id="user-title" tabindex="-1" data-s6>Fifteen people, and a stack of session recordings</h2>
+        <p class="cs-section__lede body-l" data-s6>I interviewed eight instructors and seven trainees across the two operators by video call. Separately I watched recordings of real training sessions, and the business analysis team ran a requirements pass with each client. Three sources: what people say, what they do, and what the company says it needs. They did not agree, which is the useful part.</p>
+
+        <div class="cols" style="--col-measure: 213px" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">8 instructors</h3>
+            <p class="col__text">Line and type-rating instructors at both operators. Interviewed by video call. They are the people who hold the record while it is being made — and the people who were writing on paper.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">7 trainees</h3>
+            <p class="col__text">The other end of the same record. They never saw it until it was finished, and could not tell you what they had been marked down on until the next session.</p>
+          </div>
+          <div class="col col--tint" data-s6>
+            <h3 class="h4">Recordings of real sessions</h3>
+            <p class="col__text">The most useful source, and the one that contradicted the interviews. What people described doing and what they were doing were not the same thing.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">BA requirements, per client</h3>
+            <p class="col__text">What each operator said it needed, gathered independently of me. Useful as a boundary — it told me what could not be dropped, not what should be built.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 The finding that moved the design -->
+      <section class="cs-section" id="the-finding" aria-labelledby="finding-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">04</span><span class="cs-section__label mono-label">The finding that moved the design</span></p>
+        <h2 class="cs-section__title h2" id="finding-title" tabindex="-1" data-s6>I was designing the wrong platform</h2>
+
+        <figure class="callout" data-block="callout">
+          <blockquote class="callout__quote" data-s6>“During flight our attention is divided between the trainee and the writing.”</blockquote>
+          <figcaption class="callout__source text-s" data-fade-fast>Instructor, paraphrased from interview</figcaption>
+        </figure>
+
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>I had assumed a web application. The instructors were already filling in their records at a desk afterwards, so a web form seemed to match the behaviour exactly. Then I watched the recordings.</p>
+        <p class="prose prose--wide body-l" data-block data-s6>In the session, the instructor had a printed question sheet in front of him and was writing his remarks in the margin beside each item, while flying and while teaching. The spreadsheet came later, at a desk, from those notes. The behaviour I had designed for — sitting down afterwards and typing — was not the behaviour. It was the second half of a behaviour whose first half was happening in the air, on paper, under load.</p>
+
+        <div class="note-panel note-panel--dark" data-block data-s6>
+          <p class="h3">That reframed the problem. The record was being written twice. Any system that only replaced the second pass would make the typing faster and leave the real cost — a divided cockpit — exactly where it was.</p>
+        </div>
+
+        <div class="cols cols--2" data-block="stagger">
+          <div class="col" data-s6>
+            <h3 class="h4">Not everyone wanted it changed</h3>
+            <p class="col__text">Several instructors defended the paper and asked, plainly, why we were changing something that worked. Paper does not crash, does not need a login, and does not run out of battery at 1,500 feet.</p>
+          </div>
+          <div class="col" data-s6>
+            <h3 class="h4">Two of them changed their minds</h3>
+            <p class="col__text">Two of the instructors who pushed back hardest now say they prefer the system, and the reason they give is that it is less hassle — one pass instead of two. I did not persuade them; using it did.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 Diagnosis -->
+      <section class="cs-section" id="diagnosis" aria-labelledby="diagnosis-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">05</span><span class="cs-section__label mono-label">Diagnosis</span></p>
+        <h2 class="cs-section__title h2" id="diagnosis-title" tabindex="-1" data-s6>Four symptoms, one cause</h2>
+        <p class="cs-section__lede body-l" data-s6>The operators described four separate problems. They are not four problems. They are one structural fact with four faces: the training record lived somewhere the rest of the operation could not see, in a format that could not hold what the regulation asks of it.</p>
+
+        <ol class="decisions" data-block="stagger">
+          <li class="decision" data-s6>
+            <h3 class="h4">“It takes half an hour per trainee”</h3>
+            <p class="decision__text">Because the record is written twice — once on paper in the air, once into Excel at a desk. The complaint is about typing. The cause is duplication.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">“We cannot find what someone was marked down on”</h3>
+            <p class="decision__text">Because a spreadsheet cell holds a sentence, not a graded outcome against a named exercise. There is nothing to search, so the answer lives in the instructor’s memory.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">“We only find out a rating expired when someone chases it”</h3>
+            <p class="decision__text">Because the file that knows a pilot’s validity and the system that rosters that pilot tomorrow are different files, owned by different people.</p>
+          </li>
+          <li class="decision" data-s6>
+            <h3 class="h4">“Every instructor grades slightly differently”</h3>
+            <p class="decision__text">Because nothing enforces a vocabulary. Pass, partial and repeat mean whatever the person typing them meant that day, and a later examiner has to guess.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- 06 Reframing -->
+      <section class="cs-section" id="reframing" aria-labelledby="reframing-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">06</span><span class="cs-section__label mono-label">Reframing</span></p>
+        <h2 class="cs-section__title h2" id="reframing-title" tabindex="-1" data-s6>It is not a training database. It is a gate on the roster.</h2>
+        <p class="cs-section__lede body-l" data-s6>The brief said training management. Treated as training management, the job is to store syllabi and record outcomes, and a spreadsheet does most of that badly but adequately. That framing produces a filing cabinet, and a filing cabinet is exactly what they already had.</p>
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>The constraint pointed somewhere else. Training flights are operational flights. The same aircraft, the same crew, the same duty hours, rostered by the same dispatcher, in the same system. So the question the module actually has to answer is not “what training has this pilot done?” but “is this pilot allowed on tomorrow’s flight, and can the operator prove it?”</p>
+
+        <div class="note-panel" data-block data-s6>
+          <p class="body-l">That is a different product. It makes validity — not the syllabus, not the session — the thing the system exists to produce. Everything upstream is the chain of custody for one date on a crew roster: a syllabus is a promise about what validity requires, an enrollment is a claim that someone is eligible to attempt it, a session is evidence, and a signature is the moment the evidence becomes a permission. Design the chain and the filing cabinet comes free. Design the filing cabinet and the chain never appears.</p>
+        </div>
+      </section>
+
+      <!-- 07 The design
+           TM7 · Each design step: top rule S9, then number, title and body
+           S6; then its panel S7; the caption fades in after the screen,
+           --dur-fast. Below 1024 the title and body stack. -->
+      <section class="cs-section" id="design" aria-labelledby="design-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">07</span><span class="cs-section__label mono-label">The design</span></p>
+        <h2 class="cs-section__title h2" id="design-title" tabindex="-1" data-s6>One loop, six moves</h2>
+        <p class="cs-section__lede body-l" data-s6>The module is one loop that runs from a syllabus to a date on the roster. Each step below is a screen in the product, and each exists because of something in the diagnosis rather than because a training system usually has one.</p>
+
+        <div class="design-decisions">
+          <article class="design-decision" aria-labelledby="step-1">
+            <div class="design-decision__text design-decision__text--numbered" data-block="decision" data-rule>
+              <span class="design-decision__num mono-s" data-s6>01</span>
+              <h3 class="h3" id="step-1" data-s6>Build and version a syllabus</h3>
+              <div class="design-decision__body" data-s6>
+                <p>A syllabus is a promise about what validity requires, so it has to be versioned and approved like a document, not edited like a spreadsheet. Validity and the revalidation window can be changed until it is approved and not after — because the moment a trainee is enrolled, those two numbers are what the roster will eventually be told.</p>
+                <p>The outline marks incomplete items, and a panel names the three things standing between this version and approval, each with a route to fix it.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/training-record/syllabus-builder.png" alt="Syllabus builder: a versioned outline with incomplete items marked, and a panel naming the three things standing between this version and approval." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>05 · Syllabus builder</figcaption>
+            </figure>
+          </article>
+
+          <article class="design-decision" aria-labelledby="step-2">
+            <div class="design-decision__text design-decision__text--numbered" data-block="decision" data-rule>
+              <span class="design-decision__num mono-s" data-s6>02</span>
+              <h3 class="h3" id="step-2" data-s6>Approve a version by its diff</h3>
+              <div class="design-decision__body" data-s6>
+                <p>The approver’s real question is not “is this syllabus correct” but “what changed since the last one I approved”. The screen answers that question instead of asking them to read the whole thing again.</p>
+                <p>Comments anchor to the item they are about and stay on the version record, so a disagreement from six months ago is still attached to the line it was about.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/training-record/syllabus-approval.png" alt="Syllabus approval: the changes since the last approved version, with comments anchored to the items they are about." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>09 · Syllabus approval</figcaption>
+            </figure>
+          </article>
+
+          <article class="design-decision" aria-labelledby="step-3">
+            <div class="design-decision__text design-decision__text--numbered" data-block="decision" data-rule>
+              <span class="design-decision__num mono-s" data-s6>03</span>
+              <h3 class="h3" id="step-3" data-s6>Enrol against checks, not a sentence</h3>
+              <div class="design-decision__body" data-s6>
+                <p>Eligibility used to be free text in a table cell. It is now five named checks — licence, medical, prerequisites, recency, duplicate enrollment — each pass, watch or blocking.</p>
+                <p>A blocking check can be overridden only by a named person who types a reason, and the reason is stored on the enrollment where the approver and the auditor can see it. The override is not hidden; it is the loudest thing on the screen.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/training-record/enrollment-eligibility.png" alt="Enrollment eligibility: five named checks, licence, medical, prerequisites, recency and duplicate enrollment, each pass, watch or blocking, with an override that needs a named person and a reason." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>10 · Enrollment eligibility</figcaption>
+            </figure>
+          </article>
+
+          <article class="design-decision" aria-labelledby="step-4">
+            <div class="design-decision__text design-decision__text--numbered" data-block="decision" data-rule>
+              <span class="design-decision__num mono-s" data-s6>04</span>
+              <h3 class="h3" id="step-4" data-s6>Schedule in the mode the lesson demands</h3>
+              <div class="design-decision__body" data-s6>
+                <p>One screen, not five. The delivery mode — classroom, FSTD, aircraft, web — decides which fields are required, and the screen states which fields a switch would replace so nobody loses typing.</p>
+                <p>Because the module lives inside OPS, the same pass can check the device, the instructor, the trainee and duty-and-rest. The rest shortfall on the right is ten minutes, and the fix is one tap.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/training-record/schedule-session.png" alt="Schedule a session: the delivery mode decides the required fields, and checks on the device, instructor, trainee and duty-and-rest show a ten-minute rest shortfall with a one-tap fix." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>11 · Schedule a session</figcaption>
+            </figure>
+          </article>
+
+          <article class="design-decision" aria-labelledby="step-5">
+            <div class="design-decision__text design-decision__text--numbered" data-block="decision" data-rule>
+              <span class="design-decision__num mono-s" data-s6>05</span>
+              <h3 class="h3" id="step-5" data-s6>Record outcomes in fixed columns</h3>
+              <div class="design-decision__body" data-s6>
+                <p>This is the screen the whole thing exists for. Statuses are columns, not loose chips, so an instructor can read down one column and find everyone who was deferred.</p>
+                <p>A rail counts what is recorded, names what is missing and on which item, and disables the end-session button with the reason written next to it. In the old spreadsheet there was no way to know you had missed one until someone asked.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel screen-panel--tint" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/training-record/running-session.png" alt="Running the session: outcomes recorded in fixed status columns, and a rail that counts what is recorded and names what is missing, with End session disabled and the reason beside it." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>06 · Running the session</figcaption>
+            </figure>
+          </article>
+
+          <article class="design-decision" aria-labelledby="step-6">
+            <div class="design-decision__text design-decision__text--numbered" data-block="decision" data-rule>
+              <span class="design-decision__num mono-s" data-s6>06</span>
+              <h3 class="h3" id="step-6" data-s6>Sign, and watch validity land</h3>
+              <div class="design-decision__body" data-s6>
+                <p>Sign-off is its own screen with exactly one actionable step, because it is the irreversible moment in this product.</p>
+                <p>Beside the cascade sits a statement of what is about to be written to the roster and the fact that it cannot be undone from here. A correction afterwards becomes a second, linked entry — not an edit.</p>
+              </div>
+            </div>
+            <figure class="design-decision__figure" data-block="screen" data-follows>
+              <div class="screen-panel" data-s7="screen">
+                <div class="screen" data-zoom>
+                  <img src="../assets/work/training-record/sign-off.png" alt="Sign-off: a signature cascade with one actionable step, beside a statement of what is about to be written to the roster and that it cannot be undone from here." width="1928" height="1372" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <figcaption class="design-decision__caption mono-s" data-fade-fast>07 · Sign-off</figcaption>
+            </figure>
+          </article>
+        </div>
+      </section>
+
+      <!-- 08 The decisions -->
+      <section class="cs-section" id="decisions" aria-labelledby="decisions-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">08</span><span class="cs-section__label mono-label">The decisions</span></p>
+        <h2 class="cs-section__title h2" id="decisions-title" tabindex="-1" data-s6>Five decisions that shaped every screen</h2>
+
+        <ol class="causes" data-block="stagger">
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">01</span>
+            <h3 class="h4">A disabled button must say why it is disabled</h3>
+            <p class="cause__text">There are four places in this module where the system refuses to continue: a syllabus that is not complete, an enrollment with a blocking check, a session with an unacknowledged brief, a sign-off with ungraded outcomes. In every one of them the reason sits beside the button in a sentence, with the route to fix it. A greyed-out control with no explanation is the design equivalent of hanging up.</p>
+          </li>
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">02</span>
+            <h3 class="h4">Name the irreversible moment, once</h3>
+            <p class="cause__text">Almost nothing in this product is destructive. Two things are: approving a syllabus version, and signing a session. Both get a full-width statement of what is about to become unchangeable — and, on the session, the fact that a correction afterwards becomes a second linked entry rather than an edit. Spending that much space on two moments is only affordable because everything else is quiet.</p>
+          </li>
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">03</span>
+            <h3 class="h4">Show what the system will write, before it writes it</h3>
+            <p class="cause__text">Every screen that causes a record to exist says what record it will be. The enrollment screen lists the six sessions it is about to create. The completion screen lists the four records it created. This is the habit that makes an operations system trustworthy — the alternative is a success toast and a user who checks the spreadsheet anyway.</p>
+          </li>
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">04</span>
+            <h3 class="h4">Repeats stay on the record</h3>
+            <p class="cause__text">A repeated exercise is not a failure, and hiding it would make the record useless to the next examiner. The design shows repeats in the session, in the review, and on the completed record — with the session that cleared each one. The regulation wants the history; an instructor wants to know what to watch.</p>
+          </li>
+          <li class="cause" data-s6>
+            <span class="cause__num mono-s">05</span>
+            <h3 class="h4">Do not pretend the loop is closed</h3>
+            <p class="cause__text">The authority signs licence endorsements on paper. The design could have shown a tidy green tick. Instead the completion screen carries a lozenge that reads OUTSIDE NGFT and a line explaining that the roster entry is provisional in the regulator’s eyes until the scan comes back. Honest beats tidy in any system someone gets audited on.</p>
+          </li>
+        </ol>
+
+        <figure class="scenario" data-block="screen">
+          <div class="screen-panel screen-panel--tint" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/training-record/session-before-start.png" alt="A session before it starts: Start session is disabled, and the bar under it names the unmet item and offers the way past it." width="1928" height="1370" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption class="scenario__caption" data-s6>
+            <span class="scenario__label h4">12 · Session, before it starts</span>
+            <span class="scenario__text">Decision 1 in practice. Start session is disabled, and the bar under it names the unmet item and offers the way past it. A greyed-out control with no explanation is the design equivalent of hanging up.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- 09 Failure states -->
+      <section class="cs-section" id="failure-states" aria-labelledby="failure-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">09</span><span class="cs-section__label mono-label">Failure states</span></p>
+        <h2 class="cs-section__title h2" id="failure-title" tabindex="-1" data-s6>Where a training record goes wrong</h2>
+        <p class="cs-section__lede body-l" data-s6>This is a record an operator gets audited on. What the screens do when things go wrong matters more than what they do when everything is fine.</p>
+
+        <table class="tbl" data-block="stagger">
+          <colgroup><col style="width:30.7%"><col style="width:69.3%"></colgroup>
+          <thead>
+            <tr><th class="mono-label" scope="col">When</th><th class="mono-label" scope="col">What the system does</th></tr>
+          </thead>
+          <tbody>
+            <tr data-s6><th scope="row">A blocking eligibility check</th><td data-label="System">The enrollment stops. Continue is disabled, the blocking check is named, and the only way past is a manager typing a reason that is stored on the record and shown to the approver.</td></tr>
+            <tr data-s6><th scope="row">The trainee has not read the brief</th><td data-label="System">The session can still start — an instructor is not going to stand in a sim bay arguing with software — but the reason is recorded on the session and shown to the approver.</td></tr>
+            <tr data-s6><th scope="row">Outcomes are missing at the end</th><td data-label="System">End session is disabled and the three missing exercises are named. Ending early is allowed, and marks them not flown rather than silently blank.</td></tr>
+            <tr data-s6><th scope="row">An instructor disagrees with the plan mid-session</th><td data-label="System">They cannot edit an approved syllabus from inside a running session. They file a suggestion against the exercise, with the session attached, and it reaches the syllabus owner as a comment on the version.</td></tr>
+            <tr data-s6><th scope="row">A signed outcome turns out to be wrong</th><td data-label="System">It is not edited. A correction becomes a second, linked entry stating what changed and why, and the original stays visible. This is the difference between a record and a document.</td></tr>
+            <tr data-s6><th scope="row">The rating lapses before revalidation</th><td data-label="System">The system proposes the longer renewal syllabus instead of the revalidation one, because a lapsed rating is legally a different training requirement — not the same one, late.</td></tr>
+          </tbody>
+        </table>
+
+        <figure class="scenario" data-block="screen">
+          <div class="screen-panel" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/training-record/lesson-plan.png" alt="The lesson plan opened as a sheet over a running session, with a way to file a suggestion against an exercise instead of editing the approved syllabus." width="1928" height="1370" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption class="scenario__caption" data-s6>
+            <span class="scenario__label h4">13 · Lesson plan, opened mid-session</span>
+            <span class="scenario__text">An instructor who disagrees with the plan cannot edit an approved syllabus from inside a running session. They file a suggestion against the exercise, with the session attached, and the running session stays visible behind the sheet.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- 10 System work -->
+      <section class="cs-section" id="system-work" aria-labelledby="system-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">10</span><span class="cs-section__label mono-label">System work</span></p>
+        <h2 class="cs-section__title h2" id="system-title" tabindex="-1" data-s6>Three components, and a reason for each</h2>
+        <p class="cs-section__lede body-l" data-s6>The company&rsquo;s design system already existed — I did not build it, and this module is not an excuse to fork it. Sixteen screens produced three new components. Everything else is existing Button, Text field, Textarea, Select, Checkbox, Toggle, Lozenge, Badge, Tag, Avatar, Side nav, Top nav, and the Stepper.</p>
+
+        <div class="cols" data-block="stagger">
+          <div class="col" data-s6>
+            <p class="col__label col__label--accent mono-label">6 states</p>
+            <h3 class="h4">Outcome row</h3>
+            <p class="col__text">One trainee’s outcome for one item, with the five statuses in fixed columns. The library had a table row, but forking it to hold five mutually exclusive controls would have made it a different component wearing the same name.</p>
+          </div>
+          <div class="col" data-s6>
+            <p class="col__label col__label--accent mono-label">4 states</p>
+            <h3 class="h4">Sign-off step</h3>
+            <p class="col__text">One link in the signature cascade. Only the current step carries a button — a rule that is easier to enforce in a component than to remember on every screen.</p>
+          </div>
+          <div class="col" data-s6>
+            <p class="col__label col__label--accent mono-label">9 variants</p>
+            <h3 class="h4">Outline node</h3>
+            <p class="col__text">Section, lesson and item, each with a selected and an incomplete state. The incomplete state is the point: it is what lets the syllabus outline answer “why can I not submit this?”</p>
+          </div>
+        </div>
+
+        <figure class="scenario" data-block="screen">
+          <div class="screen-panel screen-panel--tint" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/training-record/outcome-row.png" alt="The outcome row component in its six states, with the five statuses in fixed columns." width="1928" height="704" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption class="scenario__caption" data-s6>
+            <span class="scenario__label h4">Outcome row · six states</span>
+            <span class="scenario__text">The component the whole module turns on. The library had a table row; forking it to hold five mutually exclusive controls would have made it a different component wearing the same name.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- 11 Validation -->
+      <section class="cs-section" id="validation" aria-labelledby="validation-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">11</span><span class="cs-section__label mono-label">Validation</span></p>
+        <h2 class="cs-section__title h2" id="validation-title" tabindex="-1" data-s6>Fifteen people before, six instructors after</h2>
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>Before the design: eight instructors and seven trainees interviewed, plus recordings of real sessions and a requirements pass by the BA team at each client. That is where the paper finding came from, and it is the only reason the module is shaped around removing a duplicate pass rather than around making a form nicer.</p>
+        <p class="prose prose--wide body-l" data-block data-s6>After the build: it went live at two operators with six instructors, three from each. Both companies run a mandatory three-month evaluation before adopting any new system, so the Excel sheets are still being filled in alongside. Two of those three months are done.</p>
+
+        <div class="callout" data-block="callout">
+          <h3 class="h3" data-s6>What this is not</h3>
+          <p class="callout__text body-l muted" data-s6>Six instructors at two operators over two months is a pilot, not a proof. Both companies chose to evaluate this software, which makes them a friendly sample. Nothing here has been tested against an operator that did not want it, and no auditor has yet looked at a record the system produced. Those are the two tests that matter and neither has happened.</p>
+        </div>
+      </section>
+
+      <!-- 12 Where it stands
+           TM9 · "Measured and reported" enters first, then "Not yet true"
+           120ms later. Items S6, 60ms apart; markers scale in after their
+           row. -->
+      <section class="cs-section" id="where-it-stands" aria-labelledby="stands-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">12</span><span class="cs-section__label mono-label">Where it stands</span></p>
+        <h2 class="cs-section__title h2" id="stands-title" tabindex="-1" data-s6>What I can claim, and what I cannot</h2>
+
+        <div class="claim-lists claim-lists--detailed" data-block="lists">
+          <div class="claim-list">
+            <h3 class="claim-list__label mono-label" data-s6>Measured and reported</h3>
+            <ul>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span><span class="claim-list__body"><span class="claim-list__title">Write-up fell from 30–40 minutes to a logged average of 10–12</span><span class="claim-list__text">The before figure is what instructors reported about the Excel process; it could not be measured, because a spreadsheet does not have timestamps. The after figure is the average logged by the system across two months. Instructors independently describe it as “ten to fifteen minutes”, which is close enough to the log to be worth saying.</span></span></li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span><span class="claim-list__body"><span class="claim-list__title">The size of the drop is arithmetic, not optimism</span><span class="claim-list__text">The Excel route was two passes over the same information: paper in the air, then typing at a desk. The module removes the second pass and structures the first. Removing one of two passes over the same data is a roughly threefold change, which is what the log shows.</span></span></li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span><span class="claim-list__body"><span class="claim-list__title">Two instructors who resisted it now prefer it</span><span class="claim-list__text">Both had asked why anything was being changed. Both now say they would not go back, and the reason they give is less hassle. Reported, in their words, not measured.</span></span></li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span><span class="claim-list__body"><span class="claim-list__title">It is live and being evaluated at two operators</span><span class="claim-list__text">Fourteen of the sixteen screens are in the product. Mobile and tablet are the next release.</span></span></li>
+            </ul>
+          </div>
+          <div class="claim-list claim-list--open">
+            <h3 class="claim-list__label mono-label" data-s6>Not yet true</h3>
+            <ul>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span><span class="claim-list__body"><span class="claim-list__title">The spreadsheet is not dead</span><span class="claim-list__text">Instructors are still filling in Excel alongside the system. That is company policy for the three-month evaluation, not a verdict on the software — but until month three ends, nobody has actually stopped doing the old thing.</span></span></li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span><span class="claim-list__body"><span class="claim-list__title">The paper pass is gone — in release two</span><span class="claim-list__text">This module removed the Excel pass, not the cockpit pass, and instructors said so: “we still have to do it on paper and then on the web.” The tablet release now in trial answers it — the paper has stopped. Credit for that belongs to release two, not to this one.</span></span></li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span><span class="claim-list__body"><span class="claim-list__title">No auditor has seen a record from it</span><span class="claim-list__text">The whole argument for the design is that it produces a record that survives an audit. That claim is untested. The first real test is an authority looking at one.</span></span></li>
+              <li class="claim-list__item" data-s6><span class="claim-list__marker" data-marker aria-hidden="true"></span><span class="claim-list__body"><span class="claim-list__title">No trainee-side outcome</span><span class="claim-list__text">Seven trainees were interviewed and the design gives them a record they can read. None of them has one yet — the trainee app is the next release.</span></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <figure class="scenario" data-block="screen">
+          <div class="screen-panel" data-s7="screen">
+            <div class="screen" data-zoom>
+              <img src="../assets/work/training-record/validity-written.png" alt="Validity written: the four records the loop produced, with the licence endorsement marked OUTSIDE NGFT because the authority still signs on paper." width="1928" height="1370" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption class="scenario__caption" data-s6>
+            <span class="scenario__label h4">14 · Validity written</span>
+            <span class="scenario__text">What the loop produces. Four records, and the licence endorsement marked OUTSIDE NGFT because the authority still signs on paper — the screen does not pretend the loop is closed.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- 13 Reflection -->
+      <section class="cs-section" id="reflection" aria-labelledby="reflection-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">13</span><span class="cs-section__label mono-label">Reflection</span></p>
+        <h2 class="cs-section__title h2" id="reflection-title" tabindex="-1" data-s6>I shipped the wrong half first</h2>
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>The strongest finding in the research was that instructors write on paper in the air because their attention is divided. I then built a web module that is used at a desk afterwards, and put the fix for that finding in release two.</p>
+        <p class="prose prose--wide body-l" data-block data-s6>There was a reason, and it is not a bad one. I wanted a solid base — a proven data model, a record structure the operators had signed off, and instructors who already knew the vocabulary — before putting anything in a cockpit. Familiarity first, then the harder surface. As product owner I made that call deliberately.</p>
+
+        <div class="callout" data-block="callout">
+          <p class="callout__text body-l" data-s6>What I would do differently is the shape of release one, not the order of the releases. I would have built the web module responsively for tablets from the start — the same product, usable in the hand on day one — and then designed the dedicated tablet app properly as release two. That would have let instructors stop writing on paper months earlier, on a rougher tool, instead of waiting for the right one. The complaint I am hearing now — paper, then web — is the cost of that decision, and it was avoidable.</p>
+        </div>
+      </section>
+
+      <!-- 14 What is next -->
+      <section class="cs-section" id="whats-next" aria-labelledby="next-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">14</span><span class="cs-section__label mono-label">What is next</span></p>
+        <h2 class="cs-section__title h2" id="next-title" tabindex="-1" data-s6>The half of the finding that is still open</h2>
+        <p class="prose prose--wide prose--ink body-l" data-block data-s6>Release two is the instructor tablet app: outcome capture in the aircraft and the sim, at the moment it happens, on a device held in one hand. It is now in trial with the same six instructors, and the paper has stopped. It has its own case study. The trainee app follows.</p>
+        <p class="prose prose--wide body-l" data-block data-s6>After that, the open question is the one the completion screen already admits to: the authority signs licence endorsements on paper, and until that changes the roster entry the system produces is provisional in the regulator’s eyes. Closing that loop is a conversation with a regulator, not a design problem — but the two screens that would change are already marked.</p>
+      </section>
+
+      <!-- 15 The full set
+           TM10 · Cells S7 in reading order, 40ms apart (sixteen cells).
+           Lightbox with previous / next through all sixteen and a "6 of 16"
+           counter. Cells 06, 15 and 16 are tinted: the key screen and the
+           next release. -->
+      <section class="cs-section" id="full-set" aria-labelledby="set-title" data-rule>
+        <p class="cs-section__overline" data-s6><span class="cs-section__num">15</span><span class="cs-section__label mono-label">The full set</span></p>
+        <h2 class="cs-section__title h2" id="set-title" tabindex="-1" data-s6>Sixteen screens</h2>
+        <p class="cs-section__lede body-l" data-s6>Fourteen are in the product. The last two — the trainee phone and the instructor tablet — are the next release and have their own case study.</p>
+
+        <ol class="states-grid states-grid--full" data-block="grid" data-stagger="40">
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-01-dashboard.png" alt="01 Dashboard: counts with actions, today’s sessions, countersigns waiting and validity written back." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">01 Dashboard</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-02-syllabi.png" alt="02 Syllabi: the list of syllabi and their versions." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">02 Syllabi</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-03-enrollments.png" alt="03 Enrollments: the list of enrollments and their status." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">03 Enrollments</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-04-sessions.png" alt="04 Sessions: the list of scheduled and completed sessions." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">04 Sessions</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-05-syllabus-builder.png" alt="05 Syllabus builder: a versioned outline with incomplete items marked." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">05 Syllabus builder</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel states-cell__panel--tint"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-06-running-session.png" alt="06 Running the session: outcomes in fixed status columns and a rail naming what is missing." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">06 Running the session</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-07-sign-off.png" alt="07 Sign-off: the signature cascade and what will be written to the roster." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">07 Sign-off</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-08-new-syllabus.png" alt="08 New syllabus: starting a new syllabus." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">08 New syllabus</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-09-approval.png" alt="09 Approval: what changed since the last approved version." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">09 Approval</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-10-eligibility.png" alt="10 Eligibility: five named checks, each pass, watch or blocking." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">10 Eligibility</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-11-schedule.png" alt="11 Schedule: scheduling a session in the mode the lesson demands." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">11 Schedule</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-12-session-scheduled.png" alt="12 Session scheduled: a scheduled session before it starts." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">12 Session scheduled</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-13-lesson-plan.png" alt="13 Lesson plan: the plan opened as a sheet over a running session." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">13 Lesson plan</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-14-validity-written.png" alt="14 Validity written: the records the loop produced." width="844" height="600" loading="lazy" decoding="async"></div></div><p class="states-cell__title">14 Validity written</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel states-cell__panel--tint"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-15-trainee-phone.png" alt="15 Trainee phone: the trainee’s record on a phone, the next release." width="844" height="612" loading="lazy" decoding="async"></div></div><p class="states-cell__title">15 Trainee phone · next release</p></li>
+          <li class="states-cell" data-s7="cell"><div class="states-cell__panel states-cell__panel--tint"><div class="screen" data-zoom data-zoom-group="set"><img src="../assets/work/training-record/set-16-instructor-tablet.png" alt="16 Instructor tablet: outcome capture on a tablet, the next release." width="844" height="612" loading="lazy" decoding="async"></div></div><p class="states-cell__title">16 Instructor tablet · next release</p></li>
+        </ol>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ================================================================
+       TM11 · Next case study — the whole card is one link, to the
+       instructor tablet app. Hover: tile slides 6px, title turns accent.
+       Press: scale 0.99. Enter: S6.
+       ================================================================ -->
+  <section class="cs-next container" aria-label="Next case study">
+    <div data-s6 data-next>
+      <a class="next-card" href="instructors.html">
+        <span class="next-card__text">
+          <span class="next-card__label mono-label">Next case study</span>
+          <span class="next-card__title display-l">The instructors put the paper down</span>
+          <span class="next-card__meta mono-s">Field tablet app  ·  Release two  ·  In trial</span>
+        </span>
+        <span class="next-card__tile"><svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================================================================
+     TM12 · Footer — links S3. No entrance animation.
+     ================================================================ -->
+<footer class="footer">
+  <div class="container footer__inner mono-s">
+    <p class="footer__credit">Designed and built by Talha Farooq Awan, 2026</p>
+    <ul class="footer__links">
+      <li><a class="link-s3 link-s3--quiet" href="#todo-linkedin">LinkedIn</a></li>
+      <li><a class="link-s3 link-s3--quiet" href="mailto:talhafawan@gmail.com">Email</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- TM8 / TM10 · Lightbox (one, shared by every screen). The pager shows
+     only for the full set: previous / next and "6 of 16". -->
+<dialog class="lightbox" aria-label="Enlarged screen" data-lightbox>
+  <button class="lightbox__close" type="button" data-lightbox-close>Close <span aria-hidden="true">✕</span></button>
+  <div class="lightbox__frame" data-lightbox-frame></div>
+  <div class="lightbox__pager" data-lightbox-pager hidden>
+    <button class="lightbox__step" type="button" aria-label="Previous screen" data-lightbox-prev><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+    <p class="lightbox__count mono-label" aria-live="polite" data-lightbox-count></p>
+    <button class="lightbox__step" type="button" aria-label="Next screen" data-lightbox-next><svg aria-hidden="true"><use href="#i-arrow-right-s"/></svg></button>
+  </div>
+</dialog>
+
+</body>
+</html>

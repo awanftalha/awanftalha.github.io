@@ -1,0 +1,267 @@
+/* ==========================================================================
+   Work thumbnail · Offer page ("Turning a phone call into a priced offer")
+   Layered replay: poster image on top at rest; on play it fades out and the
+   empty form underneath fills in beat by beat. All screen geometry is in the
+   screen's native 1680 x 1084 px space, converted with --u (1 native px).
+   ========================================================================== */
+
+.wt {
+  /* portfolio tokens (css/tokens.css), with their values as a fallback */
+  --wt-tint: var(--color-accent-tint, #FBE6DC);
+  --wt-ink: var(--color-ink, #0F1113);
+  --wt-ink-inv: var(--color-ink-inverse, #F2F3F0);
+  --wt-accent: var(--color-accent, #E4521F);
+  --wt-line: var(--color-line, #D7DAD3);
+  --wt-mono: var(--font-mono, "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace);
+
+  /* product (SENTRY OPS) values, read from the Figma screen */
+  --wt-app-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --wt-app-text: #292A2E;
+  --wt-app-subtle: #505258;
+  --wt-app-caret: #1868DB;
+
+  /* panel geometry (desktop): the Selected work card's panel, with the screen
+     where .slot--2080x1320 puts it (77.381% wide, centred, 11.613% down) */
+  --wt-ratio: 1344 / 620;
+  --wt-screen-left: 11.3095%;
+  --wt-screen-width: 77.381%;
+  --wt-screen-top: 11.613%;
+  --wt-chip-top: 3.2%;
+  --wt-chip-size: clamp(10px, 0.8vw, 11.5px);
+
+  position: relative;
+  display: block;
+  aspect-ratio: var(--wt-ratio);
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--wt-tint);
+  border-radius: 2px;
+  isolation: isolate;
+}
+
+/* the card's own breakpoints (styles.css): the panel goes 7 / 4 under 900px
+   and the screen 86% wide, 12% down */
+@media (max-width: 899px) {
+  .wt {
+    --wt-ratio: 7 / 4;
+    --wt-screen-left: 7%;
+    --wt-screen-width: 86%;
+    --wt-screen-top: 12%;
+    --wt-chip-top: 2%;
+    --wt-chip-size: clamp(9.5px, 1.6vw, 10.5px);
+  }
+}
+
+/* phones: the strip above the screen is too short for the chip, so the
+   screen sits a little lower (the card itself keeps its size) */
+@media (max-width: 599px) {
+  .wt {
+    --wt-screen-top: 17%;
+    --wt-chip-top: 2.6%;
+    --wt-chip-size: clamp(8px, 2.4vw, 10px);
+  }
+}
+
+/* the narrowest phones: the chip starts where the screen does, so the screen
+   widens a little to give the longest label room */
+@media (max-width: 359px) {
+  .wt {
+    --wt-screen-left: 5%;
+    --wt-screen-width: 90%;
+    --wt-chip-top: 1.8%;
+  }
+}
+
+/* ---------- the screen ---------- */
+.wt__screen {
+  position: absolute;
+  left: var(--wt-screen-left);
+  top: var(--wt-screen-top);
+  width: var(--wt-screen-width);
+  aspect-ratio: 1680 / 1084;
+  container-type: inline-size;
+  background: #fff;
+  box-shadow: 0 24px 48px -16px rgb(20 23 26 / 0.18), 0 0 0 1px rgb(15 17 19 / 0.06);
+  overflow: hidden;
+}
+.wt__screen { --u: calc(100cqw / 1680); }
+
+.wt__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+.wt__poster { z-index: 3; }           /* rest state: the finished screen */
+.wt__layer { position: absolute; inset: 0; z-index: 1; }
+
+/* a rectangle cut from the finished screen, placed over the empty one */
+.wt__r {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: calc(var(--h) * var(--u));
+  background-image: var(--wt-final);
+  background-repeat: no-repeat;
+  background-size: 100cqw auto;
+  background-position: calc(var(--x) * var(--u) * -1) calc(var(--y) * var(--u) * -1);
+}
+
+.wt__caret {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top: calc((var(--y) + 2) * var(--u));
+  width: calc(1.5 * var(--u));
+  height: calc((var(--h) - 4) * var(--u));
+  background: var(--wt-app-caret);
+  opacity: 0;
+}
+
+/* live numbers (count up) */
+.wt__num {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: calc(6 * var(--u));
+  font-family: var(--wt-app-font);
+  font-variant-numeric: tabular-nums;
+  color: var(--wt-app-text);
+  white-space: nowrap;
+}
+.wt__num--hdr {
+  left: calc(1300 * var(--u));
+  top: calc(76 * var(--u));
+  width: calc(130 * var(--u));
+  height: calc(24 * var(--u));
+  font-size: calc(20 * var(--u));
+  font-weight: 700;
+  line-height: calc(24 * var(--u));
+}
+.wt__num--hdr small {
+  font-size: calc(12 * var(--u));
+  font-weight: 500;
+  color: var(--wt-app-subtle);
+}
+.wt__num--total {
+  left: calc(1540 * var(--u));
+  top: calc(546 * var(--u));
+  width: calc(124 * var(--u));
+  height: calc(28 * var(--u));
+  font-size: calc(24 * var(--u));
+  font-weight: 700;
+  line-height: calc(28 * var(--u));
+  letter-spacing: calc(-0.5 * var(--u));
+}
+
+/* status lozenge, DRAFT → SENT (product component: Status lozenge, Subtle) */
+.wt__loz {
+  position: absolute;
+  left: calc(461 * var(--u));
+  top: calc(78 * var(--u));
+  height: calc(20 * var(--u));
+  width: calc(57 * var(--u));
+  background: #F0F1F2;
+  overflow: hidden;
+}
+.wt__loz span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--wt-app-font);
+  font-size: calc(12 * var(--u));
+  font-weight: 600;
+  letter-spacing: calc(1 * var(--u));
+  text-transform: uppercase;
+}
+.wt__loz .is-from { color: #505258; }
+.wt__loz .is-to { color: #123263; transform: translateY(100%); }
+
+/* composition meter */
+.wt__seg {
+  position: absolute;
+  top: calc(405 * var(--u));
+  height: calc(8 * var(--u));
+  transform-origin: left center;
+}
+
+/* Send button press */
+.wt__press {
+  position: absolute;
+  left: calc(1605 * var(--u));
+  top: calc(72 * var(--u));
+  width: calc(59 * var(--u));
+  height: calc(32 * var(--u));
+  background: rgb(0 0 0 / 0.24);
+  box-shadow: 0 0 0 calc(3 * var(--u)) rgb(24 104 219 / 0.35);
+  opacity: 0;
+}
+
+/* ---------- the call chip (portfolio narration, not product UI) ---------- */
+.wt__chip {
+  position: absolute;
+  z-index: 4;
+  left: var(--wt-screen-left);
+  top: var(--wt-chip-top);
+  height: 2.6em;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 1.05em 0 0.9em;
+  background: var(--wt-ink);
+  color: var(--wt-ink-inv);
+  font: 500 var(--wt-chip-size) / 1 var(--wt-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  opacity: 0;
+  white-space: nowrap;
+}
+.wt__chip-labels { display: grid; }
+.wt__chip-label {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  width: max-content;
+  opacity: 0;
+}
+.wt__mark {
+  position: relative;
+  width: 0.55em;
+  height: 0.55em;
+  background: var(--wt-accent);
+  flex: none;
+}
+.wt__mark::after {
+  content: "";
+  position: absolute;
+  inset: -0.35em;
+  border: 1px solid var(--wt-accent);
+  opacity: 0;
+}
+.wt.is-playing .wt__chip-label--ring .wt__mark::after { animation: wt-ring 700ms cubic-bezier(0.16, 1, 0.3, 1) infinite; }
+@keyframes wt-ring { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+
+.wt__wave { display: inline-flex; align-items: center; gap: 0.18em; height: 1em; }
+.wt__wave i { width: 0.16em; height: 100%; background: currentColor; opacity: 0.8; transform-origin: center; transform: scaleY(0.35); }
+.wt.is-playing .wt__wave i { animation: wt-wave 820ms cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.wt__wave i:nth-child(2) { animation-delay: -300ms !important; }
+.wt__wave i:nth-child(3) { animation-delay: -560ms !important; }
+.wt__wave i:nth-child(4) { animation-delay: -150ms !important; }
+@keyframes wt-wave { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
+
+.wt__check { width: 0.95em; height: 0.95em; flex: none; color: var(--wt-accent); }
+
+/* keyboard focus on the card link */
+a:focus-visible > .wt { outline: 2px solid var(--wt-accent); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wt__chip, .wt__layer { display: none; }
+}
