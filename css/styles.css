@@ -968,6 +968,11 @@ button {
 
   .my-work { padding-bottom: 48px; }
 
+  /* the contact headline's hand-set lines would leave a word alone on a
+     phone, so they run together as one block of text here */
+  .contact__title { display: block; }
+  .contact__title .hl-line { display: inline; }
+
   .principle { gap: 20px; padding-bottom: 36px; }
 
   .job__row {

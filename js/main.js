@@ -610,7 +610,7 @@
     onEnter(title, () => {
       startRule();
       const lead = Math.max(0, T.ruleLead - (performance.now() - ruleStartedAt));
-      const landed = playWords(title, lead);              // S11; "avoid?" is the accent word
+      const landed = playWords(title, lead);              // S11; "usable" is the accent word
       $$('[data-s6]', contact).forEach((el, i) => {
         play(el, landed - T.slow / 2 + i * T.stagger);
       });
