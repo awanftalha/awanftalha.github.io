@@ -43,12 +43,8 @@ assets/work/      Screens exported from NGFT_design, one folder per case study
 
 ## Filling in your data
 
-Every placeholder link uses an `href` that starts with `#todo`, so you can search for
-it. Until you replace one, clicking it does nothing.
-
-| Search for                  | Where                                     | Replace with                 |
-| --------------------------- | ----------------------------------------- | ---------------------------- |
-| `#todo-ai-chat-widget`      | Manual compliance check: next case study  | the AI assistant case study  |
+There are no placeholder links left. If you add one, give it an `href` that starts with
+`#todo`: `main.js` keeps those from jumping the page, and you can search for them.
 
 The LinkedIn links (About button, and the footer on every page) go to
 https://www.linkedin.com/in/talha-f-5145611b2/ in a new tab.
@@ -74,13 +70,11 @@ timer page two "rest of the day" screens in a C7 states row. Their screens were 
 Mac" and "Mobile app / Employee self-service") and converted to WebP (quality 90):
 `assets/work/hx-timer/timer-01…07.webp` (2560 × 1760) and `assets/work/hx-mobile/*.webp`
 (804 × 1748). They are `.screenshot` and `.phone` images, which keep the Figma corners
-(12 and 24) and a soft shadow. The old template's `.shot` is a different thing. Next-case
-order: HX Insight → timer → mobile app → training record.
+(12 and 24) and a soft shadow. The old template's `.shot` is a different thing.
 
 **HX Insight case study.** Built from the Figma frame "Case study / HX Insight, four
 flows / Desktop 1440" in talha-s-portfolio-final, with the same blocks as the other case
-studies: header, hero, outcomes (`.numbers`), side nav, sections, a constraints table and
-the next card (to the training record). Each flow is a `.beats` grid: four screens, two
+studies: header, hero, outcomes (`.numbers`), side nav, sections and a constraints table. Each flow is a `.beats` grid: four screens, two
 across, each with a time-and-person label and one line of text; the screens open in the
 lightbox and page through their flow. Its 16 screens are in `assets/work/hx-insight/` as WebP
 (quality 90) at 2× (2880 × 2096), exported from the "Screen" frames on the Flow 1 to
@@ -212,18 +206,19 @@ Keep both values in sync when you change the number.
 `work/` holds one page per Home card. The Home cards link to them. Every page is built
 from its NGFT_design frame, with all copy as written there.
 
-| Page                          | Figma frame                  | Next card leads to     | Hero                 |
-| ----------------------------- | ---------------------------- | ---------------------- | -------------------- |
-| `work/priced-offer.html`      | Offer page                   | compliance check       | added                |
-| `work/compliance-check.html`  | Manual compliance check      | AI chat widget (`#todo`) | added              |
-| `work/safety-report.html`     | SMS safety manager flow      | offer page             | added                |
-| `work/instructors.html`       | Instructor tablet app        | safety report          | three screens, added |
-| `work/training-record.html`   | Training management          | instructors            | added                |
+| Page                          | Figma frame                  | Hero                 |
+| ----------------------------- | ---------------------------- | -------------------- |
+| `work/priced-offer.html`      | Offer page                   | added                |
+| `work/compliance-check.html`  | Manual compliance check      | added                |
+| `work/safety-report.html`     | SMS safety manager flow      | added                |
+| `work/instructors.html`       | Instructor tablet app        | three screens, added |
+| `work/training-record.html`   | Training management          | added                |
 
 ### Long-form case studies
 
 All five share one layout: header, hero, then a sticky side nav beside numbered
-sections, then the Next card.
+sections. Pages end on their last section, then the footer: the "Next case study" card
+and the side nav's next link were removed from every page (2026-10-05).
 
 **Hero screen.** Every page has its hero, at `assets/work/<page>/hero.png`, and it's
 click-to-enlarge on its own. Each is the screen inside the Figma frame named `img/hero —
@@ -259,12 +254,6 @@ A grid can set its own entrance gap with `data-stagger` (training management use
 **Side nav.** It's written by hand: each link's `href` must match a section's `id`, and
 the section's heading needs `tabindex="-1"` so a click can move focus to it. Below
 1024px the same list becomes a chip bar under the Nav.
-
-**Next case study.** Each page leads where its Figma Next card does (table above). The
-compliance check's Next card (and its side-nav link) say "Bringing the answer to the
-work · NGFT · Approved concept": the AI chat widget case study in the Figma file. That
-page doesn't exist yet, so both links are `#todo-ai-chat-widget`. Point them at the
-page once it's built.
 
 ### The case study template
 
@@ -322,7 +311,7 @@ them. Change a token in `css/tokens.css` and both the CSS and the JS timelines f
 
 The case study notes (C1–C10) also define their own motion in full, built as written:
 the back link's arrow nudge, the hero's scroll-linked parallax, sticky section heads, the
-stepper's active bar and swap, the state markers and the Next card's hover and press.
+stepper's active bar and swap, and the state markers.
 The parallax uses CSS `animation-timeline: view()`, which is in Chrome and Safari 26 but
 not yet Firefox. Per the notes there's no JS fallback, so those browsers just don't get it.
 
