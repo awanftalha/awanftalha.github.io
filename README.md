@@ -48,14 +48,13 @@ it. Until you replace one, clicking it does nothing.
 
 | Search for                  | Where                                     | Replace with                 |
 | --------------------------- | ----------------------------------------- | ---------------------------- |
-| `#todo-linkedin`            | About button, footer (2 places)           | your LinkedIn URL            |
+| `#todo-ai-chat-widget`      | Manual compliance check: next case study  | the AI assistant case study  |
 
-The same `#todo-linkedin` link also appears in each case study's footer.
+The LinkedIn links (About button, and the footer on every page) go to
+https://www.linkedin.com/in/talha-f-5145611b2/ in a new tab.
 
 The About section's "Resume (PDF)" button downloads `assets/talha-farooq-awan-resume.pdf`.
 To update the resume, replace that file and keep its name.
-
-Consider adding `target="_blank" rel="noopener"` to the LinkedIn links.
 
 **My work.** Under "My work across six years" (`#work`, where the Work link, "See the
 work" and every case study's back link land) comes the work (`#selected-work`): the six case
