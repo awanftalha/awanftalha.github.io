@@ -1325,7 +1325,18 @@ button {
 
 /* C9 · Next case study --------------------------------------------------- */
 
-.cs-next { padding-bottom: clamp(80px, 8.3vw, 120px); }
+.cs-next {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 41px;
+  padding-bottom: clamp(80px, 8.3vw, 120px);
+  border-top: 1px solid var(--color-line);
+}
+
+.cs-next__title { max-width: 18ch; text-wrap: balance; }
+.cs-next__note { max-width: 48ch; color: var(--color-ink-muted); }
+.cs-next__cta { padding-bottom: 20px; }
 
 .next-card {
   display: flex;
