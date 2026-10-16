@@ -1,0 +1,47 @@
+{
+  "home": {
+    "label": "Product designer  ·  B2B SaaS and AI features",
+    "title": "I design complex B2B SaaS and AI features people trust.",
+    "metric": "Dispatch, compliance, safety and HR tools — research through to a shipped design system."
+  },
+  "priced-offer": {
+    "label": "Case study  ·  Product design",
+    "title": "Redesigning the offer page",
+    "metric": "Call-to-offer time roughly halved. 500–1,200 offers a day across 8 operators."
+  },
+  "compliance-check": {
+    "label": "AI review  ·  Manual compliance check",
+    "title": "Proving a manual answers the regulation",
+    "metric": "140 EASA requirements checked in place of a 5–6 day manual review."
+  },
+  "training-record": {
+    "label": "Compliance records  ·  Training management",
+    "title": "The record that decides who is allowed to fly",
+    "metric": "Check outcomes recorded against the syllabus, so sign-off cannot happen with gaps."
+  },
+  "hx-insight": {
+    "label": "HR platform  ·  Punjab Group of Companies",
+    "title": "Taking HR off email and spreadsheets",
+    "metric": "Four HR flows for 8,700 people in 32 companies. Leave decided in hours, not days."
+  },
+  "hx-timer": {
+    "label": "HX Insight  ·  Desktop timer",
+    "title": "One button, always in reach",
+    "metric": "Time tracked against projects, with every entry already in the clock sheet."
+  },
+  "hx-mobile": {
+    "label": "HX Insight  ·  Mobile app",
+    "title": "The quick jobs, in your pocket",
+    "metric": "Clock in, fix a missed punch, ask for leave and approve from a notification."
+  },
+  "instructors": {
+    "label": "Field tablet app  ·  Training  ·  Release two",
+    "title": "The instructors put the paper down",
+    "metric": "Training outcomes recorded on a tablet mid-session, not typed up afterwards."
+  },
+  "safety-report": {
+    "label": "Incident management  ·  Safety reporting",
+    "title": "A two-day safety report, redesigned as one guided flow",
+    "metric": "Designed to cut safety report analysis from almost two days to hours."
+  }
+}
