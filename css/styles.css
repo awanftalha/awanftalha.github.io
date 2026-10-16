@@ -93,7 +93,7 @@ button {
 .display-xl {
   font-size: var(--fs-display-xl);
   font-weight: 600;
-  line-height: 0.96;
+  line-height: 1.05;
   letter-spacing: -0.035em;
 }
 
