@@ -47,7 +47,7 @@ There are no placeholder links left. If you add one, give it an `href` that star
 `#todo`: `main.js` keeps those from jumping the page, and you can search for them.
 
 The LinkedIn links (About button, and the footer on every page) go to
-https://www.linkedin.com/in/talha-f-5145611b2/ in a new tab.
+https://www.linkedin.com/in/talhafawan/ in a new tab.
 
 The About section's "Resume (PDF)" button downloads `assets/talha-farooq-awan-resume.pdf`.
 To update the resume, replace that file and keep its name.
