@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Build-time share-card template, not a page.
+Disallow: /og/
+
+Sitemap: https://www.talha.design/sitemap.xml

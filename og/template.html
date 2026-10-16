@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Share cover template</title>
+<!--
+  Build-time only. Renders a 1200x627 share card from query params so the
+  og:image for every page comes out of the same type and colour as the site.
+  Params: label, title, metric. Rendered to assets/og/<slug>.png by og/build.js.
+  Not linked from anywhere and excluded in robots.txt.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,600&display=swap">
+<link rel="stylesheet" href="../css/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 627px; }
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 72px 80px;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .og-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+  .og-label__signal {
+    flex: none;
+    width: 11px;
+    height: 11px;
+    background: var(--color-accent);
+  }
+
+  .og-body { display: flex; flex-direction: column; gap: 28px; }
+
+  .og-title {
+    max-width: 19ch;
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .og-title--long { font-size: 60px; max-width: 22ch; }
+
+  .og-metric {
+    max-width: 58ch;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: var(--color-accent);
+  }
+
+  .og-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 26px;
+    border-top: 1px solid var(--color-line);
+    font-family: var(--font-mono);
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-muted);
+  }
+  .og-foot__name { color: var(--color-ink); }
+</style>
+</head>
+<body>
+  <p class="og-label"><span class="og-label__signal"></span><span data-og="label"></span></p>
+
+  <div class="og-body">
+    <h1 class="og-title" data-og="title"></h1>
+    <p class="og-metric" data-og="metric"></p>
+  </div>
+
+  <div class="og-foot">
+    <span class="og-foot__name">Talha Farooq Awan</span>
+    <span>talha.design</span>
+  </div>
+
+<script>
+  var q = new URLSearchParams(location.search);
+  document.querySelectorAll('[data-og]').forEach(function (el) {
+    el.textContent = q.get(el.dataset.og) || '';
+  });
+  var t = document.querySelector('.og-title');
+  if (t.textContent.length > 34) t.classList.add('og-title--long');
+  if (!document.querySelector('.og-metric').textContent) {
+    document.querySelector('.og-body').style.gap = '0';
+  }
+</script>
+</body>
+</html>
