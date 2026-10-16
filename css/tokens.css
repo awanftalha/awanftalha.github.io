@@ -51,6 +51,7 @@
   --dur-instant: 90ms;   /* press */
   --dur-fast: 160ms;     /* colour and underline changes */
   --dur-base: 240ms;     /* hover movement */
+  --dur-enter: 250ms;    /* media entrances: images and thumbnails only */
   --dur-slow: 560ms;     /* entrances: S6, S9, S11 */
   --dur-slower: 800ms;   /* S7 card entrance */
   --dur-count: 900ms;    /* S10 count-up */

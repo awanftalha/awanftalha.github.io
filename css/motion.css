@@ -215,15 +215,10 @@
 /* ==== Entrances (only with .motion) ===================================== */
 
 /* S6 · Enter */
+/* Text is never hidden: headings, paragraphs, stats, tables, lists and
+   labels render on first paint. The hook stays so main.js can keep adding
+   .is-in without effect. */
 .motion [data-s6] {
-  opacity: 0;
-  translate: 0 16px;
-  transition:
-    opacity var(--dur-slow) var(--ease-out) var(--d, 0ms),
-    translate var(--dur-slow) var(--ease-out) var(--d, 0ms);
-}
-
-.motion [data-s6].is-in {
   opacity: 1;
   translate: 0 0;
 }
@@ -231,7 +226,7 @@
 /* Hero eyebrow: opacity only, --dur-slow */
 .motion [data-fade] {
   opacity: 0;
-  transition: opacity var(--dur-slow) var(--ease-out) var(--d, 0ms);
+  transition: opacity var(--dur-enter) var(--ease-out);
 }
 
 .motion [data-fade].is-in { opacity: 1; }
@@ -239,21 +234,21 @@
 /* Hero inline photo: scale 0.6 to 1 + opacity, --dur-slow, --ease-out */
 .motion [data-pop] {
   opacity: 0;
-  scale: 0.6;
+  translate: 0 8px;
   transition:
-    opacity var(--dur-slow) var(--ease-out) var(--d, 0ms),
-    scale var(--dur-slow) var(--ease-out) var(--d, 0ms);
+    opacity var(--dur-enter) var(--ease-out),
+    translate var(--dur-enter) var(--ease-out);
 }
 
 .motion [data-pop].is-in {
   opacity: 1;
-  scale: 1;
+  translate: 0 0;
 }
 
 /* "Was" line: fades in once its count ends, --dur-fast */
 .motion [data-after-count] {
-  opacity: 0;
-  transition: opacity var(--dur-fast) var(--ease-out) var(--d, 0ms);
+  opacity: 1;
+  transition: none;
 }
 
 .motion [data-after-count].is-in { opacity: 1; }
@@ -261,16 +256,15 @@
 /* S7 · Card enter */
 .motion [data-s7] :is(.card__panel, .cs-hero__panel) {
   opacity: 0;
-  translate: 0 40px;
+  translate: 0 8px;
   transition:
-    opacity var(--dur-slower) var(--ease-out) var(--d, 0ms),
-    translate var(--dur-slower) var(--ease-out) var(--d, 0ms);
+    opacity var(--dur-enter) var(--ease-out) var(--d, 0ms),
+    translate var(--dur-enter) var(--ease-out) var(--d, 0ms);
 }
 
 .motion [data-s7] :is(.slot, .wt__screen) {
-  translate: 0 32px;
+  translate: 0 0;
   transition:
-    translate var(--dur-slower) var(--ease-out) calc(var(--d, 0ms) + 80ms),
     transform var(--dur-base) var(--ease-out),
     box-shadow var(--dur-base) var(--ease-out);
 }
@@ -285,10 +279,10 @@
    the element itself rises 40px, --dur-slower */
 .motion [data-s7="solo"] {
   opacity: 0;
-  translate: 0 40px;
+  translate: 0 8px;
   transition:
-    opacity var(--dur-slower) var(--ease-out) var(--d, 0ms),
-    translate var(--dur-slower) var(--ease-out) var(--d, 0ms);
+    opacity var(--dur-enter) var(--ease-out) var(--d, 0ms),
+    translate var(--dur-enter) var(--ease-out) var(--d, 0ms);
 }
 
 .motion [data-s7="solo"].is-in {
@@ -316,7 +310,7 @@
 /* S11 · Word rise. main.js wraps each word in .w > span. The mask is padded
    and pulled back with negative margins so descenders and italic overhang
    stay visible without moving the layout. */
-.motion [data-s11]:not(.is-split) { visibility: hidden; }
+.motion [data-s11]:not(.is-split) { visibility: visible; }
 
 .motion [data-s11] .w {
   display: inline-block;
@@ -327,8 +321,7 @@
 
 .motion [data-s11] .w > span {
   display: inline-block;
-  translate: 0 1.35em;
-  transition: translate var(--dur-slow) var(--ease-out) var(--d, 0ms);
+  translate: 0 0;
 }
 
 .motion [data-s11] .w.is-in > span { translate: 0 0; }
@@ -338,7 +331,7 @@
   transition: color var(--dur-base) var(--ease-out);
 }
 
-.motion [data-s11="accent"]:not(.is-accent) { color: var(--color-ink); }
+/* the accent word is accent-coloured from first paint */
 
 
 /* ==== Case study (C-codes) ============================================== */
@@ -515,7 +508,10 @@
 /* CS7 · Screens enter: the panel fades, the screen rises 40px inside it */
 .motion [data-s7="screen"] {
   opacity: 0;
-  transition: opacity var(--dur-slower) var(--ease-out) var(--d, 0ms);
+  translate: 0 8px;
+  transition:
+    opacity var(--dur-enter) var(--ease-out) var(--d, 0ms),
+    translate var(--dur-enter) var(--ease-out) var(--d, 0ms);
 }
 
 .motion [data-s7="screen"] .screen {

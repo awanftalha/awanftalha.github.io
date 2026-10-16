@@ -1300,6 +1300,46 @@ button {
   color: var(--color-ink-muted);
 }
 
+/* C1b · Case study summary — four rows for anyone who will not read 3,000
+   words. Mono labels, hairline rules, square corners, existing tokens. */
+.cs-summary {
+  display: flex;
+  flex-direction: column;
+  margin-block: 8px 48px;
+  border-top: 1px solid var(--color-line);
+}
+
+.cs-summary__row {
+  display: flex;
+  align-items: baseline;
+  gap: 40px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.cs-summary__label {
+  flex: 0 0 132px;
+  max-width: 132px;
+  color: var(--color-ink-muted);
+}
+
+.cs-summary__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 62ch;
+}
+
+@media (max-width: 760px) {
+  .cs-summary__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-block: 14px;
+  }
+
+  .cs-summary__label { flex: none; max-width: none; }
+}
+
 /* C8 · Constraints ------------------------------------------------------- */
 
 .constraint { padding-top: 1px; }
