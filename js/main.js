@@ -421,7 +421,7 @@
   }
 
   // Fire once, when an element comes into view.
-  function onEnter(el, fn, { threshold = 0, rootMargin = '0px 0px -12% 0px' } = {}) {
+  function onEnter(el, fn, { threshold = 0, rootMargin = '0px 0px 15% 0px' } = {}) {
     if (!el) return;
     const io = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
@@ -476,10 +476,20 @@
 
   // S10 · count up from 0. Width is held at the final number so nothing shifts.
   // Only the site's own .count spans: the SMS card's SVG has data-count hooks too.
-  $$('.count[data-count]').forEach((el) => { el.textContent = '0'; });
+  $$('.count[data-count]').forEach((el) => {
+    // the real figure stays the accessible name, so assistive tech never
+    // hears an intermediate number
+    if (!el.hasAttribute('aria-label')) el.setAttribute('aria-label', el.textContent.trim());
+    const box = el.getBoundingClientRect();
+    const onScreen = box.top < window.innerHeight && box.bottom > 0;
+    if (onScreen) { el.dataset.countSkip = '1'; return; }   // visible at load: leave it alone
+    el.textContent = '0';
+  });
 
   function countUp(el) {
     if (!el) return Promise.resolve();
+    // already readable when the page loaded: leave the real number alone
+    if (el.dataset.countSkip) return Promise.resolve();
     const target = parseInt(el.dataset.count, 10);
     el.textContent = String(target);
     el.style.minWidth = `${el.getBoundingClientRect().width}px`;
@@ -525,13 +535,12 @@
   // H2 · Hero intro — on load, above the fold
   const hero = $('[data-hero]');
   if (hero) {
+    // The headline, eyebrow and subline are text, so they are already on
+    // screen. Only the inline photo fades, and the rule still draws.
     afterFonts(() => {
-      play($('[data-fade]', hero), 0);                    // Eyebrow: opacity, --dur-slow, delay 0
-      playWords($('h1', hero), 0);                        // Headline: S11 per word, line 1 then 2
-      play($('[data-pop]', hero), 180);                   // Photo: scale 0.6 → 1 + opacity, 180ms
-      const row = $('.hero__row', hero);
-      drawRule(row, 500);                                 // Row: top rule S9 at 500ms
-      $$('[data-s6]', row).forEach((el, i) => play(el, 600 + i * T.stagger)); // Subtext, CTAs: S6 at 600ms
+      play($('[data-fade]', hero), 0);
+      play($('[data-pop]', hero), 0);
+      drawRule($('.hero__row', hero), 0);
     });
   }
 
