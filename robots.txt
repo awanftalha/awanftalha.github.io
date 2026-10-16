@@ -1,0 +1,8 @@
+# Every URL here redirects to https://www.talha.design/.
+# Crawling is left open on purpose: a blocked URL cannot be crawled, so the
+# redirect and the canonical would never be read and this host could stay
+# indexed on its own. The stub pages carry noindex themselves.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.talha.design/sitemap.xml
