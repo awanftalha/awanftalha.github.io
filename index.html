@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="css/tablet-thumb.css">
 <link rel="stylesheet" href="css/training-thumb.css">
 <link rel="stylesheet" href="css/hx-thumb.css">
+<link rel="stylesheet" href="css/snapgrid-thumb.css">
 <link rel="stylesheet" href="css/motion.css">
 <script>
   /* Entrance states in motion.css are scoped to .motion, so the page renders in
@@ -50,6 +51,7 @@
 <script src="js/tablet-thumb.js" defer></script>
 <script src="js/training-thumb.js" defer></script>
 <script src="js/hx-thumb.js" defer></script>
+<script src="js/snapgrid-thumb.js" defer></script>
 <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -1370,10 +1372,182 @@
 
       <div class="work__row work__row--full" data-card-row>
         <a class="card card--full" href="work/snapgrid.html" data-s7>
-          <!-- No artwork yet: the panel holds the row's height until the
-               thumbnail for this one is designed. -->
-          <div class="card__panel card__panel--empty panel--sunken">
-            <span class="chip chip--client chip--snapgrid mono-label">SnapGrid</span></div>
+          <!-- Motion graphic (js/snapgrid-thumb.js, mounted in main.js). As authored
+               it's the loop finished: four photos reviewed, consent on file, the $25
+               reward queued and the post scheduled. Hover (or Tab) replays capture to
+               publish, about 9.2s. The card title already names it, so it is hidden
+               from assistive tech. -->
+          <div class="card__panel panel--sunken">
+            <span class="chip chip--client chip--snapgrid mono-label">SnapGrid</span>
+            <div class="sg" data-sg="snapgrid">
+            <svg class="sg-svg" viewBox="0 0 1344 620" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+            <filter id="sgc-card" x="-8%" y="-8%" width="116%" height="124%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#14171A" flood-opacity="0.10"/></filter>
+            <filter id="sgc-phone" x="-14%" y="-8%" width="128%" height="118%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#14171A" flood-opacity="0.16"/></filter>
+            <clipPath id="sgc-view"><rect x="78" y="196" width="176" height="236" rx="6"/></clipPath>
+            <linearGradient id="sgc-s0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E2A26"/><stop offset="1" stop-color="#2E2A26" stop-opacity="0.78"/></linearGradient>
+            <linearGradient id="sgc-s1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D9D7D1"/><stop offset="1" stop-color="#D9D7D1" stop-opacity="0.78"/></linearGradient>
+            <linearGradient id="sgc-s2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9794A"/><stop offset="1" stop-color="#A9794A" stop-opacity="0.78"/></linearGradient>
+            <linearGradient id="sgc-s3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6E3DC"/><stop offset="1" stop-color="#E6E3DC" stop-opacity="0.78"/></linearGradient>
+            </defs>
+            <rect class="sg-ground" width="1344" height="620" fill="#E7E9E4"/>
+            <g class="sg-rail">
+            <g class="sg-step" data-i="0">
+            <rect class="sg-step-track" x="56.0" y="56" width="192.0" height="2" fill="#D7DAD3"/>
+            <rect class="sg-step-fill" x="56.0" y="55" width="192.0" height="3" fill="#4338CA"/>
+            <text class="sg-mono sg-step-t" x="56.0" y="80">CAPTURE</text>
+            </g>
+            <g class="sg-step" data-i="1">
+            <rect class="sg-step-track" x="264.0" y="56" width="192.0" height="2" fill="#D7DAD3"/>
+            <rect class="sg-step-fill" x="264.0" y="55" width="192.0" height="3" fill="#4338CA"/>
+            <text class="sg-mono sg-step-t" x="264.0" y="80">ASK</text>
+            </g>
+            <g class="sg-step" data-i="2">
+            <rect class="sg-step-track" x="472.0" y="56" width="192.0" height="2" fill="#D7DAD3"/>
+            <rect class="sg-step-fill" x="472.0" y="55" width="192.0" height="3" fill="#4338CA"/>
+            <text class="sg-mono sg-step-t" x="472.0" y="80">UPLOAD</text>
+            </g>
+            <g class="sg-step" data-i="3">
+            <rect class="sg-step-track" x="680.0" y="56" width="192.0" height="2" fill="#D7DAD3"/>
+            <rect class="sg-step-fill" x="680.0" y="55" width="192.0" height="3" fill="#4338CA"/>
+            <text class="sg-mono sg-step-t" x="680.0" y="80">REVIEW</text>
+            </g>
+            <g class="sg-step" data-i="4">
+            <rect class="sg-step-track" x="888.0" y="56" width="192.0" height="2" fill="#D7DAD3"/>
+            <rect class="sg-step-fill" x="888.0" y="55" width="192.0" height="3" fill="#4338CA"/>
+            <text class="sg-mono sg-step-t" x="888.0" y="80">REWARD</text>
+            </g>
+            <g class="sg-step" data-i="5">
+            <rect class="sg-step-track" x="1096.0" y="56" width="192.0" height="2" fill="#D7DAD3"/>
+            <rect class="sg-step-fill" x="1096.0" y="55" width="192.0" height="3" fill="#4338CA"/>
+            <text class="sg-mono sg-step-t" x="1096.0" y="80">PUBLISH</text>
+            </g>
+            </g>
+            <g class="sg-phone">
+            <rect x="56" y="130" width="200" height="430" rx="24" fill="#0F1113" filter="url(#sgc-phone)"/>
+            <rect x="62" y="136" width="188" height="418" rx="19" fill="#FBFBF9"/>
+            <rect x="136" y="148" width="40" height="4" rx="2" fill="#D7DAD3"/>
+            <text class="sg-mono sg-ph-t" x="78" y="178">LOPEZ KITCHEN</text>
+            <rect x="78" y="196" width="176" height="236" rx="6" fill="#23262A"/>
+            <g clip-path="url(#sgc-view)">
+            <rect class="sg-shot" x="78" y="196" width="176" height="236" fill="url(#sgc-s0)"/>
+            <line class="sg-grid" x1="136.6" x2="136.6" y1="196" y2="432" stroke="#FFFFFF" stroke-opacity="0.16"/>
+            <line class="sg-grid" x1="195.2" x2="195.2" y1="196" y2="432" stroke="#FFFFFF" stroke-opacity="0.16"/>
+            <line class="sg-grid" x1="78" x2="254" y1="274.6" y2="274.6" stroke="#FFFFFF" stroke-opacity="0.16"/>
+            <line class="sg-grid" x1="78" x2="254" y1="353.2" y2="353.2" stroke="#FFFFFF" stroke-opacity="0.16"/>
+            <rect class="sg-ghost" x="100" y="226" width="132" height="176" rx="4" fill="none" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1.5" stroke-dasharray="6 5"/>
+            </g>
+            <text class="sg-mono sg-ph-s" x="88" y="420">LINE UP WITH THE BEFORE</text>
+            <circle class="sg-shutter-r" cx="166" cy="470" r="21" fill="none" stroke="#0F1113" stroke-width="2"/>
+            <circle class="sg-shutter" cx="166" cy="470" r="15.5" fill="#0F1113"/>
+            <g class="sg-strip">
+            <rect class="sg-striptile" data-i="0" x="78" y="508" width="36" height="30" rx="3" fill="url(#sgc-s0)"/>
+            <rect class="sg-striptile" data-i="1" x="123" y="508" width="36" height="30" rx="3" fill="url(#sgc-s1)"/>
+            <rect class="sg-striptile" data-i="2" x="168" y="508" width="36" height="30" rx="3" fill="url(#sgc-s2)"/>
+            <rect class="sg-striptile" data-i="3" x="213" y="508" width="36" height="30" rx="3" fill="url(#sgc-s3)"/>
+            </g>
+            </g>
+            <g class="sg-link">
+            <rect x="268" y="168" width="104" height="26" rx="13" fill="#4338CA"/>
+            <text class="sg-mono sg-link-t" x="320" y="185" text-anchor="middle">LINK SENT</text>
+            </g>
+            <g class="sg-review">
+            <rect x="296" y="130" width="640" height="430" rx="4" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#sgc-card)"/>
+            <rect x="314" y="152" width="7" height="7" fill="#4338CA"/>
+            <text class="sg-mono sg-hd" x="330" y="159">INBOX  ·  MARIA LOPEZ</text>
+            <text class="sg-mono sg-cnt" x="918" y="159" text-anchor="end"><tspan class="sg-cnt-n">4</tspan> OF 4 REVIEWED</text>
+            <line x1="314" x2="918" y1="174" y2="174" stroke="#D7DAD3"/>
+            <rect class="sg-upbar-t" x="314" y="184" width="604" height="3" rx="1.5" fill="#D7DAD3"/>
+            <rect class="sg-upbar" x="314" y="184" width="604" height="3" rx="1.5" fill="#4338CA"/>
+            <g class="sg-tile" data-i="0">
+            <rect class="sg-tile-img" x="314" y="206" width="140" height="118" rx="3" fill="url(#sgc-s0)"/>
+            <g class="sg-verdict" data-i="0">
+            <rect x="314" y="330" width="140" height="22" rx="2" fill="#15703A" fill-opacity="0.12"/>
+            <circle cx="328" cy="341" r="5" fill="#15703A"/>
+            <text class="sg-mono sg-vd" x="340" y="345" fill="#15703A">APPROVED</text>
+            </g>
+            </g>
+            <g class="sg-tile" data-i="1">
+            <rect class="sg-tile-img" x="466" y="206" width="140" height="118" rx="3" fill="url(#sgc-s1)"/>
+            <g class="sg-verdict" data-i="1">
+            <rect x="466" y="330" width="140" height="22" rx="2" fill="#15703A" fill-opacity="0.12"/>
+            <circle cx="480" cy="341" r="5" fill="#15703A"/>
+            <text class="sg-mono sg-vd" x="492" y="345" fill="#15703A">APPROVED</text>
+            </g>
+            </g>
+            <g class="sg-tile" data-i="2">
+            <rect class="sg-tile-img" x="618" y="206" width="140" height="118" rx="3" fill="url(#sgc-s2)"/>
+            <g class="sg-verdict" data-i="2">
+            <rect x="618" y="330" width="140" height="22" rx="2" fill="#B3402F" fill-opacity="0.12"/>
+            <circle cx="632" cy="341" r="5" fill="#B3402F"/>
+            <text class="sg-mono sg-vd" x="644" y="345" fill="#B3402F">BLURRY</text>
+            </g>
+            </g>
+            <g class="sg-tile" data-i="3">
+            <rect class="sg-tile-img" x="770" y="206" width="140" height="118" rx="3" fill="url(#sgc-s3)"/>
+            <g class="sg-verdict" data-i="3">
+            <rect x="770" y="330" width="140" height="22" rx="2" fill="#15703A" fill-opacity="0.12"/>
+            <circle cx="784" cy="341" r="5" fill="#15703A"/>
+            <text class="sg-mono sg-vd" x="796" y="345" fill="#15703A">APPROVED</text>
+            </g>
+            </g>
+            <g class="sg-consent">
+            <rect x="314" y="378" width="604" height="40" rx="2" fill="#15703A" fill-opacity="0.10"/>
+            <circle cx="336" cy="398" r="7" fill="#15703A"/>
+            <text class="sg-mono sg-cs" x="352" y="402">CONSENT  ·  WEBSITE + SOCIAL GRANTED</text>
+            </g>
+            <g class="sg-tiers">
+            <g class="sg-tier" data-i="0">
+            <rect x="314" y="436" width="604" height="24" rx="2" fill="#4338CA" fill-opacity="0"/>
+            <circle cx="328" cy="448" r="5" fill="none" stroke="#D7DAD3" stroke-width="1.5"/>
+            <text class="sg-mono sg-tr" x="342" y="452">1 PHOTO</text>
+            <text class="sg-mono sg-tr" x="906" y="452" text-anchor="end">$10</text>
+            </g>
+            <g class="sg-tier" data-i="1">
+            <rect x="314" y="466" width="604" height="24" rx="2" fill="#4338CA" fill-opacity="0"/>
+            <circle cx="328" cy="478" r="5" fill="none" stroke="#D7DAD3" stroke-width="1.5"/>
+            <text class="sg-mono sg-tr" x="342" y="482">2 PHOTOS</text>
+            <text class="sg-mono sg-tr" x="906" y="482" text-anchor="end">$25</text>
+            </g>
+            <g class="sg-tier" data-i="2">
+            <rect x="314" y="496" width="604" height="24" rx="2" fill="#4338CA" fill-opacity="0"/>
+            <circle cx="328" cy="508" r="5" fill="none" stroke="#D7DAD3" stroke-width="1.5"/>
+            <text class="sg-mono sg-tr" x="342" y="512">2 + VIDEO</text>
+            <text class="sg-mono sg-tr" x="906" y="512" text-anchor="end">$40</text>
+            </g>
+            </g>
+            <g class="sg-btn">
+            <rect x="686" y="502" width="232" height="38" rx="2" fill="#0F1113"/>
+            <text class="sg-mono sg-btn-t" x="802" y="526" text-anchor="middle">APPROVE 3  ·  QUEUE $25</text>
+            </g>
+            </g>
+            <g class="sg-coin">
+            <rect x="900" y="300" width="64" height="30" rx="15" fill="#4338CA"/>
+            <text class="sg-mono sg-coin-t" x="932" y="319" text-anchor="middle">$25</text>
+            </g>
+            <g class="sg-publish">
+            <rect x="976" y="130" width="312" height="430" rx="4" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#sgc-card)"/>
+            <rect x="994" y="152" width="7" height="7" fill="#4338CA"/>
+            <text class="sg-mono sg-hd" x="1010" y="159">PUBLISH</text>
+            <line x1="994" x2="1270" y1="174" y2="174" stroke="#D7DAD3"/>
+            <rect class="sg-post-img" x="994" y="192" width="276" height="178" rx="3" fill="url(#sgc-s0)"/>
+            <g class="sg-caption">
+            <rect x="994" y="386" width="276" height="7" rx="3.5" fill="#D7DAD3"/>
+            <rect x="994" y="400" width="220" height="7" rx="3.5" fill="#D7DAD3"/>
+            </g>
+            <g class="sg-badge">
+            <rect x="994" y="426" width="276" height="34" rx="2" fill="#15703A" fill-opacity="0.10"/>
+            <circle cx="1013" cy="443" r="6" fill="#15703A"/>
+            <text class="sg-mono sg-cs" x="1027" y="447">CONSENT ON FILE</text>
+            </g>
+            <g class="sg-sched">
+            <rect x="994" y="490" width="276" height="38" rx="2" fill="#4338CA"/>
+            <text class="sg-mono sg-sched-t" x="1132" y="514" text-anchor="middle">SCHEDULED  ·  SUN 10:00</text>
+            </g>
+            </g>
+            </svg>
+            </div>
+          </div>
           <div class="card__info">
             <div class="card__text">
               <h3 class="card__title h3" data-s6><span class="card__title-text">From finished job to first post</span></h3>
