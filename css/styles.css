@@ -652,6 +652,20 @@ button {
   color: var(--color-ink);
 }
 
+/* Client chip — names the company or product, pinned to the top left of a work
+   thumbnail. Same shape and type as the status chip; only the colour differs. */
+.chip--client {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  color: var(--color-ink-inverse);
+}
+
+.chip--ngft { background: var(--color-client-ngft); }
+.chip--hx { background: var(--color-client-hx); }
+.chip--snapgrid { background: var(--color-client-snapgrid); }
+
 /* Shared two-column split (Approach, About): 560 | 96 | 688 at 1440 --------- */
 
 .split {

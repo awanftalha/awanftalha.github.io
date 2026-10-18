@@ -21,6 +21,13 @@
   --color-accent-tint: #fbe6dc;
   --color-line: #d7dad3;
 
+  /* Client chips on the work thumbnails. Not part of the Figma palette; added
+     so each card names the company or product behind it. All three clear AA
+     for 12px text on --color-ink-inverse: 6.0, 5.5 and 7.1 to 1. */
+  --color-client-ngft: #1d4ed8;      /* blue   · NGFT */
+  --color-client-hx: #15703a;        /* green  · HX Insight */
+  --color-client-snapgrid: #4338ca;  /* indigo · SnapGrid */
+
   /* Shape and depth ------------------------------------------------------- */
   --radius: 2px;
   --shadow-screen: 0 30px 60px -18px rgb(20 23 26 / 0.14);
