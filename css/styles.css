@@ -578,7 +578,7 @@ button {
    (css/compliance-thumb.css, sms-thumb.css, tablet-thumb.css, training-thumb.css)
    fill the panel; each SVG centres itself on the panel's own ground where the
    ratios differ. */
-.card__panel > :is(.mg, .sd, .tb, .tr, .hx) {
+.card__panel > :is(.mg, .sd, .tb, .tr, .hx, .sg) {
   position: absolute;
   inset: 0;
   aspect-ratio: auto;
@@ -3088,9 +3088,6 @@ h2.cs-section__overline { font: inherit; }
 /* The walk sections keep their ids as shareable links, so they still need to
    land clear of the sticky nav, matching .cs-section. */
 .sg-walk { scroll-margin-top: calc(96px - (var(--nav-h) + 16px)); }
-
-/* This card has no artwork yet; the panel keeps the row's height. */
-.card__panel--empty { background: var(--color-surface-sunken); }
 
 @media (max-width: 899px) {
   .sg-panel { gap: 3%; padding: 40px 24px; }

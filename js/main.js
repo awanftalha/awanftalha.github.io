@@ -402,6 +402,14 @@
   const hxThumb = $('[data-hx="hx-insight"]');
   if (hxThumb && window.HxThumb) HxThumb.mount(hxThumb);
 
+  // H5 · SnapGrid card motion graphic — at rest the loop has finished; hover
+  // (or Tab) plays capture, ask, upload, review, reward and publish in turn.
+  // speed 1.25 is about 11.5s, slow enough that each screen can be read.
+  // Leaving fast-forwards to the end; touch plays it once in view. Mounted
+  // under S12 too, for the compact layout on narrow cards.
+  const snapgridThumb = $('[data-sg="snapgrid"]');
+  if (snapgridThumb && window.SnapgridThumb) SnapgridThumb.mount(snapgridThumb, { speed: 1.25 });
+
   if (!MOTION) return;
 
   /* ==== Motion helpers ================================================== */
