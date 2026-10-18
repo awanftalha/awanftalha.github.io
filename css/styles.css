@@ -855,20 +855,25 @@ button {
   min-width: 0;
 }
 
+/* Sized for a real testimonial rather than a one-line pull quote: people
+   write a paragraph, so this has to stay readable at about 350 characters
+   without turning into a wall. */
 .tm__quote {
-  max-width: 24ch;
+  max-width: 54ch;
   margin: 0;
-  font-size: var(--fs-h2);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
+  font-size: clamp(1.1875rem, 1.6vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.42;
+  letter-spacing: -0.01em;
 }
 
 .tm__person {
   display: flex;
   align-items: center;
   gap: 16px;
+  /* the rail is as tall as its longest quote, so pin the attribution to the
+     bottom and it lands in the same place on every slide */
+  margin-top: auto;
 }
 
 .tm__avatar {
