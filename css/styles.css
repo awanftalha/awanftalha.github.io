@@ -816,13 +816,18 @@ button {
    swipeable, keyboard-scrollable list of all three. The script only advances
    it on a timer, and stops the moment a pointer, focus or touch arrives. */
 
-.testimonials { padding-bottom: var(--section-end); }
+/* The one section on the page that is not on the page's own ground: a very
+   light wash of the accent, full width, so it reads as a different kind of
+   content from the work above and the ask below. */
+.testimonials {
+  background: var(--color-accent-tint);
+  padding-block: clamp(72px, 7.6vw, 104px);
+}
 
 .testimonials__head {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding-top: 41px; /* 1px rule + 40 */
 }
 
 .tm {
@@ -837,9 +842,6 @@ button {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  /* the rail bleeds to the gutter so a part-scrolled quote reads as more */
-  margin-inline: calc(-1 * var(--gutter));
-  padding-inline: var(--gutter);
 }
 
 .tm__viewport::-webkit-scrollbar { display: none; }
@@ -851,7 +853,6 @@ button {
   gap: 32px;
   scroll-snap-align: start;
   min-width: 0;
-  padding-right: var(--gutter);
 }
 
 .tm__quote {
@@ -876,7 +877,8 @@ button {
   height: 56px;
   overflow: hidden;
   border-radius: 50%;
-  background: var(--color-surface-sunken);
+  /* translucent, so the well picks up whatever the section is sitting on */
+  background: rgb(15 17 19 / 0.07);
 }
 
 .tm__avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -918,7 +920,7 @@ button {
   height: 3px;
   padding: 0;
   border: 0;
-  background: var(--color-line);
+  background: rgb(15 17 19 / 0.18);
   transition: background var(--dur-fast) var(--ease-out);
 }
 
