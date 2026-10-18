@@ -810,6 +810,126 @@ button {
 
 /* H9 · Contact ----------------------------------------------------------- */
 
+/* H8b · Testimonials ------------------------------------------------------
+   A horizontal rail of quotes. The viewport is a real scroll container with
+   snap points, so with scripting off, or under reduced motion, it is still a
+   swipeable, keyboard-scrollable list of all three. The script only advances
+   it on a timer, and stops the moment a pointer, focus or touch arrives. */
+
+.testimonials { padding-bottom: var(--section-end); }
+
+.testimonials__head {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 41px; /* 1px rule + 40 */
+}
+
+.tm {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 48px;
+}
+
+.tm__viewport {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* the rail bleeds to the gutter so a part-scrolled quote reads as more */
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+}
+
+.tm__viewport::-webkit-scrollbar { display: none; }
+
+.tm__item {
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: column;
+  gap: 32px;
+  scroll-snap-align: start;
+  min-width: 0;
+  padding-right: var(--gutter);
+}
+
+.tm__quote {
+  max-width: 24ch;
+  margin: 0;
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.tm__person {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tm__avatar {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--color-surface-sunken);
+}
+
+.tm__avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.tm__who {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tm__name { font-weight: 600; }
+.tm__bio { color: var(--color-ink-muted); font-size: var(--fs-mono-s); }
+
+/* LinkedIn mark, at its own brand colour; the label is for screen readers */
+.tm__li {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-left: 4px;
+  color: #0A66C2;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.tm__li:hover { opacity: 0.7; }
+.tm__li svg { display: block; width: 20px; height: 20px; fill: currentColor; }
+
+/* position, and a way to jump between the three */
+.tm__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.tm__dot {
+  width: 28px;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  background: var(--color-line);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.tm__dot[aria-current="true"] { background: var(--color-ink); }
+.tm__dot:hover { background: var(--color-ink-muted); }
+
+@media (max-width: 899px) {
+  .tm__quote { max-width: none; }
+  .tm { margin-top: 32px; }
+}
+
 .contact {
   --rule-color: var(--color-ink);
   padding-block: 121px 120px; /* 1px rule + 120 */

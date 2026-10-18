@@ -410,6 +410,71 @@
   const snapgridThumb = $('[data-sg="snapgrid"]');
   if (snapgridThumb && window.SnapgridThumb) SnapgridThumb.mount(snapgridThumb, { speed: 1.25 });
 
+  // H8b · Testimonials — the rail is a native scroll-snap container, so it is
+  // already usable with scripting off: swipe, trackpad, or Tab to it and use
+  // the arrow keys. This only advances it on a timer and keeps the dots in
+  // step. It never runs under reduced motion, and it stops for good the first
+  // time someone takes hold of it, so it cannot fight the reader.
+  const tm = $('[data-tm]');
+  if (tm) {
+    const viewport = $('[data-tm-viewport]', tm);
+    const items = $$('[data-tm-item]', tm);
+    const dots = $$('[data-tm-dot]', tm);
+    const HOLD = 6500;
+    let timer = 0;
+    let stopped = REDUCE || items.length < 2;
+
+    // The rail is padded and bleeds into the gutter, so the distance between
+    // slides is not the viewport width. Measure it off the items themselves.
+    const pitch = () => (items.length > 1
+      ? items[1].offsetLeft - items[0].offsetLeft
+      : viewport.clientWidth) || 1;
+
+    const indexNow = () =>
+      Math.max(0, Math.min(items.length - 1, Math.round(viewport.scrollLeft / pitch())));
+
+    const markDots = () => {
+      const i = indexNow();
+      dots.forEach((d, n) => d.setAttribute('aria-current', n === i ? 'true' : 'false'));
+    };
+
+    const goTo = (i, smooth = true) => {
+      viewport.scrollTo({
+        left: items[i].offsetLeft - items[0].offsetLeft,
+        behavior: smooth && !REDUCE ? 'smooth' : 'auto',
+      });
+    };
+
+    const tick = () => { if (!stopped) goTo((indexNow() + 1) % items.length); };
+    const start = () => { if (!stopped && !timer) timer = setInterval(tick, HOLD); };
+    const pause = () => { clearInterval(timer); timer = 0; };
+    const stop = () => { stopped = true; pause(); };
+
+    viewport.addEventListener('scroll', markDots, { passive: true });
+    dots.forEach((d, n) => d.addEventListener('click', () => { stop(); goTo(n); }));
+
+    // hover and focus pause; a real interaction stops it for the session
+    tm.addEventListener('pointerenter', pause);
+    tm.addEventListener('pointerleave', start);
+    tm.addEventListener('focusin', pause);
+    tm.addEventListener('focusout', start);
+    viewport.addEventListener('pointerdown', stop);
+    viewport.addEventListener('keydown', stop);
+    viewport.addEventListener('wheel', stop, { passive: true });
+
+    // only run it while the section is actually on screen
+    if ('IntersectionObserver' in window) {
+      const seen = new IntersectionObserver((entries) => {
+        entries.forEach((e) => (e.isIntersecting ? start() : pause()));
+      }, { threshold: 0.4 });
+      seen.observe(tm);
+    } else {
+      start();
+    }
+
+    markDots();
+  }
+
   if (!MOTION) return;
 
   /* ==== Motion helpers ================================================== */
