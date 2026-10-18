@@ -3054,6 +3054,19 @@ h2.cs-section__overline { font: inherit; }
 .cs-hero__panel--sg .screenshot { flex: 0 1 776px; min-width: 0; }
 .cs-hero__panel--sg .phone { flex: 0 0 22%; min-width: 0; }
 
+/* The story rail jumps to each step's screens rather than swapping one panel,
+   so its steps are links. They need the affordance the C6 tablist gets from
+   being buttons; :focus-visible is already handled globally. */
+a.step { cursor: pointer; }
+
+a.step:hover::before { background: var(--color-ink); }
+a.step:hover .step__title { color: var(--color-ink); }
+a.step:hover .step__num { color: var(--color-ink-muted); }
+a.step--current:hover .step__num { color: var(--color-accent); }
+
+/* Land the screens clear of the sticky nav, matching .cs-section. */
+.sg-walk { scroll-margin-top: calc(96px - (var(--nav-h) + 16px)); }
+
 /* This card has no artwork yet; the panel keeps the row's height. */
 .card__panel--empty { background: var(--color-surface-sunken); }
 
