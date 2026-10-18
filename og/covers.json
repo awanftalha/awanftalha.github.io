@@ -43,5 +43,10 @@
     "label": "Incident management  ·  Safety reporting",
     "title": "A two-day safety report, redesigned as one guided flow",
     "metric": "Designed to cut safety report analysis from almost two days to hours."
+  },
+  "snapgrid": {
+    "label": "SnapGrid  ·  Web and mobile app",
+    "title": "From finished job to first post",
+    "metric": "Photos asked for when the job is done, rewarded on approval, published with consent."
   }
 }
