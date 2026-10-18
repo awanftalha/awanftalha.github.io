@@ -666,6 +666,23 @@ button {
 .chip--hx { background: var(--color-client-hx); }
 .chip--snapgrid { background: var(--color-client-snapgrid); }
 
+/* The chip is a fixed physical size while the thumbnail art scales with the
+   panel, so on narrower cards the art rises to meet it. Shrink the chip and
+   pull it further into the corner as the panels get smaller. */
+@media (max-width: 1199px) {
+  .chip--client {
+    top: 12px;
+    left: 12px;
+    padding: 4px 7px;
+    font-size: 11px;
+    letter-spacing: 0.055em;
+  }
+}
+
+@media (max-width: 599px) {
+  .chip--client { top: 10px; left: 10px; }
+}
+
 /* Shared two-column split (Approach, About): 560 | 96 | 688 at 1440 --------- */
 
 .split {
