@@ -2960,3 +2960,125 @@ h2.cs-section__overline { font: inherit; }
    the mobile card shows three tabs */
 .card__panel > .screenshot--card { position: absolute; top: 11.2%; left: 8.5%; width: 83%; }
 .card__panel > .phones--card { --n: 3; --top: 10%; --left: 5%; --w: 90%; --gap: 4%; }
+
+/* =========================================================================
+   C10 · SnapGrid showcase
+   A story rail followed by walk-through panels. The pieces inside the panels
+   are the existing .screenshot, .phone, .step and .stepper; everything here
+   is the layout they sit in.
+   ========================================================================= */
+
+/* The rail on this page is a static list, not a tablist, so the current step
+   is a class instead of aria-selected. Same three marks as C6. */
+.step--current::after { transform: scaleX(1); }
+.step--current .step__num { color: var(--color-accent); }
+.step--current .step__title { color: var(--color-ink); }
+
+.sg-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: var(--section-end);
+}
+
+.sg-section__head {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sg-section__title { max-width: 1000px; }
+.sg-section__lede { max-width: 780px; }
+
+.sg-walks {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+/* A walk panel holds either three phones or one wide screen, centred. */
+.sg-panel {
+  display: flex;
+  gap: 4%;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 40px;
+  border-radius: var(--radius);
+  background: var(--color-surface-sunken);
+}
+
+.sg-panel .phone { flex: 0 1 264px; min-width: 0; }
+.sg-panel .screenshot { flex: 0 1 960px; min-width: 0; }
+
+/* Labelled cards: two wide screens, or four phones. */
+.sg-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.sg-grid--2 { --n: 2; }
+.sg-grid--4 { --n: 4; }
+
+.sg-card {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.sg-card__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+}
+
+.sg-card__text {
+  max-width: 540px;
+  color: var(--color-ink-muted);
+  font-size: 15px;
+  line-height: 1.47;
+}
+
+/* Hero: the office web app beside the crew's phone, on tint. */
+.cs-hero__panel--sg {
+  display: flex;
+  gap: 3%;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 6%;
+  aspect-ratio: 1344 / 806;
+}
+
+.cs-hero__panel--sg .screenshot { flex: 0 1 776px; min-width: 0; }
+.cs-hero__panel--sg .phone { flex: 0 0 22%; min-width: 0; }
+
+/* This card has no artwork yet; the panel keeps the row's height. */
+.card__panel--empty { background: var(--color-surface-sunken); }
+
+@media (max-width: 899px) {
+  .sg-panel { gap: 3%; padding: 40px 24px; }
+  .sg-grid--4 { --n: 2; }
+  .cs-hero__panel--sg { padding-inline: 4%; aspect-ratio: 1344 / 900; }
+}
+
+@media (max-width: 599px) {
+  .sg-grid--2,
+  .sg-grid--4 { --n: 1; }
+
+  .sg-panel { padding: 24px 16px; }
+  .sg-walks { gap: 40px; }
+
+  /* Stacked, so the panel grows with its contents instead of holding a ratio */
+  .cs-hero__panel--sg {
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 24px;
+    aspect-ratio: auto;
+  }
+
+  .cs-hero__panel--sg .screenshot,
+  .cs-hero__panel--sg .phone { flex: 0 0 auto; width: 100%; }
+  .cs-hero__panel--sg .phone { max-width: 190px; }
+}
