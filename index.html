@@ -57,6 +57,10 @@
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- LinkedIn mark, used on the testimonial profile links -->
+  <symbol id="i-linkedin" viewBox="0 0 24 24">
+    <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/>
+  </symbol>
   <symbol id="i-arrow" viewBox="0 0 16 16">
     <path d="M4.5 11.5L11.5 4.5M11.5 10.5V4.5H5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>
   </symbol>
@@ -1662,6 +1666,79 @@
           </a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       H8b · Testimonials — the rail is a native scroll-snap container,
+       so it works with scripting off; js/main.js only advances it on a
+       timer and stops on hover, focus or touch. Under reduced motion it
+       never advances.
+       ================================================================ -->
+  <section class="testimonials" id="testimonials" aria-labelledby="testimonials-title">
+    <div class="container testimonials__inner">
+    <div class="testimonials__head">
+      <h2 class="mono-label" id="testimonials-title" data-s6>What people say</h2>
+    </div>
+
+    <div class="tm" data-tm>
+      <ul class="tm__viewport" data-tm-viewport tabindex="0" aria-label="Testimonials, scrollable">
+        <li class="tm__item" data-tm-item>
+          <blockquote class="tm__quote" data-s6>&ldquo;Working with Talha was a pleasure. He designed our Dispatch system and cut offer planning from hours to about 20 minutes, moved Techlog from paper to digital, brought SMS report analysis down from two days to a few hours, and built the design system that made every team faster. He listens well and really cares about the details. I&rsquo;d happily work with him again.&rdquo;</blockquote>
+          <div class="tm__person" data-s6>
+            <span class="tm__avatar">
+              <img src="assets/testimonials/christian-muller.webp" alt="" width="224" height="224" loading="lazy" decoding="async">
+            </span>
+            <span class="tm__who">
+              <span class="tm__name">Christian Müller</span>
+              <span class="tm__bio mono-s">Chairman · NGFT Solutions</span>
+            </span>
+            <a class="tm__li" href="https://www.linkedin.com/in/christian-m%C3%BCller-57728866/" target="_blank" rel="noopener">
+              <span class="visually-hidden">Christian Müller on LinkedIn</span>
+              <svg aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg>
+            </a>
+          </div>
+        </li>
+        <li class="tm__item" data-tm-item>
+          <blockquote class="tm__quote" data-s6>&ldquo;Talha&rsquo;s software engineering background made him easy to build with. He always talked through technical constraints with us before finalizing a design, and he adapted quickly whenever plans changed. That saved our team a lot of back and forth.&rdquo;</blockquote>
+          <div class="tm__person" data-s6>
+            <span class="tm__avatar">
+              <img src="assets/testimonials/ali-almustufa.webp" alt="" width="224" height="224" loading="lazy" decoding="async">
+            </span>
+            <span class="tm__who">
+              <span class="tm__name">Ali AlMustufa</span>
+              <span class="tm__bio mono-s">Senior Technical Lead</span>
+            </span>
+            <a class="tm__li" href="https://www.linkedin.com/in/alialmustafade/" target="_blank" rel="noopener">
+              <span class="visually-hidden">Ali AlMustufa on LinkedIn</span>
+              <svg aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg>
+            </a>
+          </div>
+        </li>
+        <li class="tm__item" data-tm-item>
+          <blockquote class="tm__quote" data-s6>&ldquo;I had the pleasure of managing Talha, an exceptional UX/UI Designer. His impeccable eye for design and dedication to user experience made him stand out. A true team player who consistently delivered stunning interfaces.&rdquo;</blockquote>
+          <div class="tm__person" data-s6>
+            <span class="tm__avatar">
+              <img src="assets/testimonials/ahmed-afzal.webp" alt="" width="224" height="224" loading="lazy" decoding="async">
+            </span>
+            <span class="tm__who">
+              <span class="tm__name">Ahmed Afzal</span>
+              <span class="tm__bio mono-s">Product Lead, Agent Fabric · Open Innovation AI</span>
+            </span>
+            <a class="tm__li" href="https://www.linkedin.com/in/mahfzal/" target="_blank" rel="noopener">
+              <span class="visually-hidden">Ahmed Afzal on LinkedIn</span>
+              <svg aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg>
+            </a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tm__dots" role="tablist" aria-label="Choose a testimonial">
+        <button class="tm__dot" type="button" role="tab" aria-current="true" aria-label="Testimonial 1" data-tm-dot="0"></button>
+        <button class="tm__dot" type="button" role="tab" aria-current="false" aria-label="Testimonial 2" data-tm-dot="1"></button>
+        <button class="tm__dot" type="button" role="tab" aria-current="false" aria-label="Testimonial 3" data-tm-dot="2"></button>
+      </div>
+    </div>
     </div>
   </section>
 
