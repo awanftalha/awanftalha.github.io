@@ -14,7 +14,7 @@
   --wt-line: var(--color-line, #D7DAD3);
   --wt-mono: var(--font-mono, "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace);
 
-  /* product (SENTRY OPS) values, read from the Figma screen */
+  /* product (NGFT OPS) values, read from the Figma screen */
   --wt-app-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --wt-app-text: #292A2E;
   --wt-app-subtle: #505258;

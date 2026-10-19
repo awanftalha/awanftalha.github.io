@@ -1,7 +1,7 @@
 /* ==========================================================================
    Work thumbnail · Offer page
    Plays a ~2.8s replay of "a phone call becomes a priced offer" over the real
-   SENTRY OPS screen. Rest state = finished screen (poster). Hover / focus plays,
+   NGFT OPS screen. Rest state = finished screen (poster). Hover / focus plays,
    leaving restores the poster. Touch: plays once when 60% in view.
    Reduced motion: never plays.
 
