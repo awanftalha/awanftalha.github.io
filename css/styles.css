@@ -980,8 +980,9 @@ button {
 }
 
 .contact__note {
-  max-width: 300px;
+  max-width: 340px;
   color: var(--color-ink-muted);
+  text-wrap: pretty;
 }
 
 /* H10 · Footer ----------------------------------------------------------- */
