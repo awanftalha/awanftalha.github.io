@@ -333,7 +333,7 @@ button {
   flex-direction: column;
   gap: 48px;
   padding-top: 56px;
-  padding-bottom: clamp(72px, 7.2vw, 104px);
+  padding-bottom: var(--home-section-gap);
 }
 
 .hero__head {
@@ -353,6 +353,17 @@ button {
   flex-wrap: wrap;
   align-items: center;
   column-gap: 0.24em; /* 22px at 92 */
+}
+
+/* The headline's quieter second voice: a step down in size, regular weight,
+   so it reads as a line of prose under the name. */
+.hero__lede {
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--color-ink-muted);
+  text-wrap: balance;
 }
 
 .hl-line--2 { column-gap: 0.26em; } /* 24px at 92 */
@@ -392,8 +403,13 @@ button {
 }
 
 .hero__sub {
-  max-width: 460px;
   color: var(--color-ink-muted);
+  white-space: nowrap;           /* the sector list reads as one run */
+}
+
+/* Narrow enough that one run would push the page sideways: let it wrap. */
+@media (max-width: 680px) {
+  .hero__sub { white-space: normal; }
 }
 
 .hero__ctas {
@@ -463,7 +479,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 56px;
-  padding-bottom: var(--section-end);
+  padding-bottom: var(--home-section-gap);
 }
 
 /* The team in a couple of lines, in place of a section heading: 14px mono,
@@ -484,7 +500,7 @@ button {
 .section-head > :is(h2, h3) { text-wrap: balance; }
 
 /* H3 · My work: the section heading, then the NGFT work. */
-.my-work { padding-bottom: 64px; }
+.my-work { padding-bottom: 32px; }
 
 .work__list {
   display: flex;
@@ -694,7 +710,7 @@ button {
 
 /* H7 · Approach ---------------------------------------------------------- */
 
-.approach { padding-bottom: var(--section-end); }
+.approach { padding-bottom: var(--home-section-gap); }
 
 .approach__head {
   display: flex;
@@ -732,7 +748,7 @@ button {
 
 /* H8 · About ------------------------------------------------------------- */
 
-.about { padding-bottom: var(--section-end); }
+.about { padding-bottom: var(--home-section-gap); }
 
 .about__portrait {
   position: relative;

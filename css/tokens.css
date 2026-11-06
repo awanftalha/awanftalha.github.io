@@ -53,6 +53,9 @@
   --gutter: 48px;
   --nav-h: 81px;
   --section-end: clamp(96px, 11.1vw, 160px);
+  /* The home page's one gap between sections — every section break uses it,
+     so the rhythm down the page is the same from the hero to the footer. */
+  --home-section-gap: clamp(128px, 13.3vw, 192px);
 
   /* Motion ---------------------------------------------------------------- */
   --dur-instant: 90ms;   /* press */
