@@ -36,7 +36,7 @@ export async function playIntro() {
   if (intro) {
     tl.set(intro, { opacity: 1 }, 0);
     if (has('SplitText')) {
-      const split = window.SplitText.create(intro, { type: 'lines' });
+      const split = window.SplitText.create(intro, { type: 'lines', aria: 'none' });
       tl.fromTo(split.lines, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.08 }, 0.25);
     } else {
       tl.fromTo(intro, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, 0.25);
@@ -67,7 +67,7 @@ export function initReveals() {
     gsap.utils.toArray('.habit').forEach((habit) => {
       const parts = habit.querySelectorAll('[data-reveal-lines]');
       const lines = [];
-      parts.forEach((p) => lines.push(...window.SplitText.create(p, { type: 'lines', mask: 'lines' }).lines));
+      parts.forEach((p) => lines.push(...window.SplitText.create(p, { type: 'lines', mask: 'lines', aria: 'none' }).lines));
       gsap.from(lines, {
         yPercent: 100,
         duration: 1,

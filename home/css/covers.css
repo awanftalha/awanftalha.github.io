@@ -20,6 +20,15 @@
   line-height: 1.3;
   letter-spacing: -0.01em;
   color: var(--text);
+  /* Inside a cover, muted text is a touch darker so it clears AA on the grey ground. */
+  --text-muted: color-mix(in srgb, var(--text) 68%, var(--surface));
+}
+/* Project-coloured text: deeper in light, lighter in dark, AA both ways.
+   Declared on each coloured part so it uses that part's own --c. */
+.cv-chip--c, .cv-avatar, .cv-ref, .cv-chip.is-repeat { --cv-fg: color-mix(in srgb, var(--c) 78%, var(--text)); }
+:root[data-theme="dark"] :is(.cv-chip--c, .cv-avatar, .cv-ref, .cv-chip.is-repeat) { --cv-fg: color-mix(in srgb, var(--c) 45%, var(--text)); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) :is(.cv-chip--c, .cv-avatar, .cv-ref, .cv-chip.is-repeat) { --cv-fg: color-mix(in srgb, var(--c) 45%, var(--text)); }
 }
 .cv b { font-weight: 600; }
 
@@ -75,7 +84,7 @@
 }
 .cv-chip--c {
   background: color-mix(in srgb, var(--c) 16%, var(--surface));
-  color: color-mix(in srgb, var(--c) 78%, var(--text));
+  color: var(--cv-fg);
 }
 .cv-ck { width: 1em; height: 1em; flex: none; }
 .cv-wide { justify-content: center; width: 100%; padding-block: 0.5em; }
@@ -144,7 +153,7 @@
 }
 .cv-code { color: var(--text-muted); font-variant-numeric: tabular-nums; font-size: 0.9em; }
 .cv-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cv-ref { color: var(--c); font-weight: 600; font-size: 0.9em; text-align: right; }
+.cv-ref { color: var(--cv-fg); font-weight: 600; font-size: 0.9em; text-align: right; }
 .cv-chip[data-verdict] { justify-self: end; }
 
 /* HX Insight: a leave request flips Pending → Approved */
@@ -158,7 +167,7 @@
   height: 2.4em;
   border-radius: 50%;
   background: color-mix(in srgb, var(--c) 22%, var(--surface));
-  color: color-mix(in srgb, var(--c) 80%, var(--text));
+  color: var(--cv-fg);
   font-weight: 600;
   font-size: 0.9em;
 }
@@ -181,7 +190,7 @@
 /* NGFT Training: outcomes fill in; sign-off only once there are no gaps */
 .cv--tr .cv-row { grid-template-columns: 2em 1fr auto; }
 .cv--tr .cv-chip[data-outcome] { min-width: 4.4em; justify-content: center; }
-.cv-chip.is-repeat { background: color-mix(in srgb, #e5484d 15%, var(--surface)); color: color-mix(in srgb, #e5484d 80%, var(--text)); }
+.cv-chip.is-repeat { --c: #df2026; background: color-mix(in srgb, var(--c) 16%, var(--surface)); color: var(--cv-fg); }
 
 /* SnapGrid: job done, photos come in, one approved and rewarded, published */
 .cv-phone {
