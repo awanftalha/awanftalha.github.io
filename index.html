@@ -37,6 +37,7 @@
 <link rel="preload" href="home/fonts/general-sans-300.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="home/css/tokens.css">
 <link rel="stylesheet" href="home/css/home.css">
+<link rel="stylesheet" href="home/css/covers.css">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/CustomEase.min.js" defer></script>
@@ -55,6 +56,7 @@
   <symbol id="i-spark" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0c.4 3.9 1.9 6.1 6 8-4.1 1.9-5.6 4.1-6 8-.4-3.9-1.9-6.1-6-8 4.1-1.9 5.6-4.1 6-8z"/></symbol>
   <symbol id="i-menu" viewBox="0 0 16 16"><path d="M2 5.5h12M2 10.5h12" stroke="currentColor" stroke-width="1.3"/></symbol>
   <symbol id="i-close" viewBox="0 0 16 16"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-out" viewBox="0 0 16 16"><path d="M5 11l6-6M5.5 4.75H11.25V10.5" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
 </svg>
 
@@ -127,7 +129,19 @@
     <h2 class="section-title" data-reveal id="work-title"><span aria-hidden="true">/* </span>Featured Work<span aria-hidden="true"> */</span></h2>
     <div class="work-grid" id="selected-work">
       <a class="card" href="/work/priced-offer" data-cursor-text="View NGFT OPS case">
-        <div class="card__media placeholder"><span>Cover loop placeholder: NGFT OPS</span></div>
+        <div class="card__media cover" data-cover="ops" style="--c: #3b6ef5" aria-hidden="true">
+          <div class="cv cv--ops">
+          <div class="cv-win">
+            <div class="cv-head"><b>New offer</b><span class="cv-muted">Alpine Rescue</span></div>
+            <div class="cv-field"><span class="cv-label">Route</span><span class="cv-val" data-type>Bern → Zermatt</span></div>
+            <div class="cv-field"><span class="cv-label">Aircraft</span><span class="cv-val" data-type>H145</span></div>
+            <div class="cv-field"><span class="cv-label">Crew</span><span class="cv-val" data-type>2 pilots, 1 paramedic</span></div>
+            <div class="cv-field cv-field--total"><span class="cv-label">Total</span><b class="cv-val" data-type>CHF 37 050</b></div>
+            <span class="cv-btn" data-send>Send offer</span>
+          </div>
+          <div class="cv-timer"><span class="cv-label">Call to offer</span><b data-timer>20m</b></div>
+          </div>
+        </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Dispatch</li><li class="chip">Shipped</li></ul>
           <div>
@@ -137,7 +151,21 @@
         </div>
       </a>
       <a class="card" href="/work/safety-report" data-cursor-text="View NGFT SMS case">
-        <div class="card__media placeholder"><span>Cover loop placeholder: NGFT SMS</span></div>
+        <div class="card__media cover" data-cover="sms" style="--c: #e5484d" aria-hidden="true">
+          <div class="cv cv--sms">
+          <div class="cv-lanes">
+            <div class="cv-lane"><span class="cv-label">Intake</span></div>
+            <div class="cv-lane"><span class="cv-label">Risk</span></div>
+            <div class="cv-lane"><span class="cv-label">Closed</span></div>
+            <div class="cv-report" data-report>
+              <b>SR-2026-0142</b>
+              <span class="cv-muted">Hard landing</span>
+              <span class="cv-meter"><i data-meter></i></span>
+              <span class="cv-chip cv-chip--c" data-status><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Closed</span>
+            </div>
+          </div>
+          </div>
+        </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Risk</li><li class="chip">Shipped</li></ul>
           <div>
@@ -147,7 +175,17 @@
         </div>
       </a>
       <a class="card" href="/work/compliance-check" data-cursor-text="View NGFT AI Compliance Check case">
-        <div class="card__media placeholder"><span>Cover loop placeholder: NGFT AI Compliance Check</span></div>
+        <div class="card__media cover" data-cover="comp" style="--c: #7c5cfa" aria-hidden="true">
+          <div class="cv cv--comp">
+          <div class="cv-win cv-win--wide">
+            <div class="cv-head"><b>Ops manual vs EASA Part-ORO</b><span class="cv-muted"><span data-count>140</span> / 140</span></div>
+            <div class="cv-row"><span class="cv-code">GEN.200</span><span class="cv-text">Management system</span><span class="cv-chip cv-chip--c" data-verdict><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Covered</span><span class="cv-ref" data-ref>p. 14</span></div>
+            <div class="cv-row"><span class="cv-code">GEN.205</span><span class="cv-text">Contracted activities</span><span class="cv-chip cv-chip--c" data-verdict><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Covered</span><span class="cv-ref" data-ref>p. 22</span></div>
+            <div class="cv-row"><span class="cv-code">GEN.210</span><span class="cv-text">Personnel requirements</span><span class="cv-chip cv-chip--c" data-verdict><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Covered</span><span class="cv-ref" data-ref>p. 31</span></div>
+            <div class="cv-row"><span class="cv-code">GEN.220</span><span class="cv-text">Record-keeping</span><span class="cv-chip cv-chip--c" data-verdict><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Covered</span><span class="cv-ref" data-ref>p. 47</span></div>
+          </div>
+          </div>
+        </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">AI Native</li><li class="chip">Compliance</li><li class="chip">Beta</li></ul>
           <div>
@@ -157,7 +195,18 @@
         </div>
       </a>
       <a class="card" href="/work/hx-insight" data-cursor-text="View HX Insight case">
-        <div class="card__media placeholder"><span>Cover loop placeholder: HX Insight</span></div>
+        <div class="card__media cover" data-cover="hx" style="--c: #0e9f9a" aria-hidden="true">
+          <div class="cv cv--hx">
+          <div class="cv-win">
+            <div class="cv-head"><b>Annual leave</b><span class="cv-chip cv-chip--c" data-status><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Approved</span></div>
+            <div class="cv-person"><span class="cv-avatar">AK</span><span><b>Ayesha Khan</b><span class="cv-muted">14–16 Oct · 3 days</span></span></div>
+            <div class="cv-field"><span class="cv-label">Balance after</span><span>9 days</span></div>
+            <div class="cv-actions"><span class="cv-btn cv-btn--ghost">Decline</span><span class="cv-btn" data-approve>Approve</span></div>
+            <p class="cv-note" data-note><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Sent to payroll, nothing retyped</p>
+            <span class="cv-pointer" data-pointer></span>
+          </div>
+          </div>
+        </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">HR</li><li class="chip">B2B SaaS</li><li class="chip">Shipped</li></ul>
           <div>
@@ -167,7 +216,18 @@
         </div>
       </a>
       <a class="card" href="/work/training-record" data-cursor-text="View NGFT Training case">
-        <div class="card__media placeholder"><span>Cover loop placeholder: NGFT Training</span></div>
+        <div class="card__media cover" data-cover="tr" style="--c: #d97706" aria-hidden="true">
+          <div class="cv cv--tr">
+          <div class="cv-win">
+            <div class="cv-head"><b>AW139 type rating</b><span class="cv-muted"><span data-gaps>0</span> gaps</span></div>
+            <div class="cv-row"><span class="cv-code">S1</span><span class="cv-text">Normal procedures</span><span class="cv-chip cv-chip--c" data-outcome>Pass</span></div>
+            <div class="cv-row"><span class="cv-code">S2</span><span class="cv-text">Engine failure</span><span class="cv-chip cv-chip--c" data-outcome>Pass</span></div>
+            <div class="cv-row"><span class="cv-code">S3</span><span class="cv-text">Autorotation</span><span class="cv-chip cv-chip--c" data-outcome data-repeat>Pass</span></div>
+            <div class="cv-row"><span class="cv-code">S4</span><span class="cv-text">Emergency landing</span><span class="cv-chip cv-chip--c" data-outcome>Pass</span></div>
+            <span class="cv-btn" data-signoff>Sign off</span>
+          </div>
+          </div>
+        </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Training</li><li class="chip">Shipped</li></ul>
           <div>
@@ -177,7 +237,21 @@
         </div>
       </a>
       <a class="card" href="/work/snapgrid" data-cursor-text="View SnapGrid case">
-        <div class="card__media placeholder"><span>Cover loop placeholder: SnapGrid</span></div>
+        <div class="card__media cover" data-cover="sg" style="--c: #b4783c" aria-hidden="true">
+          <div class="cv cv--sg">
+          <div class="cv-phone">
+            <div class="cv-head"><b>Kitchen install</b><span class="cv-chip">Job done</span></div>
+            <p class="cv-msg" data-msg>Photo request sent to Maria</p>
+            <div class="cv-photos">
+              <span class="cv-photo" data-photo></span>
+              <span class="cv-photo cv-photo--b" data-photo><span class="cv-ok" data-ok><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg></span></span>
+              <span class="cv-photo cv-photo--c" data-photo></span>
+            </div>
+            <p class="cv-chip cv-chip--c cv-wide" data-reward><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Approved, reward sent</p>
+            <p class="cv-chip cv-wide" data-pub>Published with consent</p>
+          </div>
+          </div>
+        </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Product</li><li class="chip">Contracting</li></ul>
           <div>

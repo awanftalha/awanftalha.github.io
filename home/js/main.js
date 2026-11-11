@@ -6,6 +6,7 @@ import { initPockets } from './pockets.js';
 import { initScramble } from './scramble.js';
 import { initCursor } from './cursor.js';
 import { playIntro, initReveals } from './reveal.js';
+import { initCovers } from './covers.js';
 
 initTheme();
 initNav();
@@ -15,6 +16,7 @@ initScramble();
 initCursor();
 playIntro();
 initReveals();
+initCovers();
 
 /* "Email me" opens the mail app and also copies the address. */
 const toast = document.querySelector('[data-toast]');
