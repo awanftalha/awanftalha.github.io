@@ -31,6 +31,9 @@
 <link rel="preload" href="home/fonts/general-sans-300.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="home/css/tokens.css">
 <link rel="stylesheet" href="home/css/home.css">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/CustomEase.min.js" defer></script>
 <script type="module" src="home/js/main.js"></script>
 </head>
 <body id="top">
@@ -114,7 +117,7 @@
   <section id="work" aria-labelledby="work-title">
     <h2 class="section-title" id="work-title"><span aria-hidden="true">/* </span>Featured Work<span aria-hidden="true"> */</span></h2>
     <div class="work-grid" id="selected-work">
-      <a class="card" href="/work/priced-offer">
+      <a class="card" href="/work/priced-offer" data-cursor-text="View NGFT OPS case">
         <div class="card__media placeholder"><span>Cover loop placeholder: NGFT OPS</span></div>
         <div class="card__meta">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Dispatch</li><li class="chip">Shipped</li></ul>
@@ -124,7 +127,7 @@
           </div>
         </div>
       </a>
-      <a class="card" href="/work/safety-report">
+      <a class="card" href="/work/safety-report" data-cursor-text="View NGFT SMS case">
         <div class="card__media placeholder"><span>Cover loop placeholder: NGFT SMS</span></div>
         <div class="card__meta">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Risk</li><li class="chip">Shipped</li></ul>
@@ -134,7 +137,7 @@
           </div>
         </div>
       </a>
-      <a class="card" href="/work/compliance-check">
+      <a class="card" href="/work/compliance-check" data-cursor-text="View NGFT AI Compliance Check case">
         <div class="card__media placeholder"><span>Cover loop placeholder: NGFT AI Compliance Check</span></div>
         <div class="card__meta">
           <ul class="card__tags" aria-label="Tags"><li class="chip">AI Native</li><li class="chip">Compliance</li><li class="chip">Beta</li></ul>
@@ -144,7 +147,7 @@
           </div>
         </div>
       </a>
-      <a class="card" href="/work/hx-insight">
+      <a class="card" href="/work/hx-insight" data-cursor-text="View HX Insight case">
         <div class="card__media placeholder"><span>Cover loop placeholder: HX Insight</span></div>
         <div class="card__meta">
           <ul class="card__tags" aria-label="Tags"><li class="chip">HR</li><li class="chip">B2B SaaS</li><li class="chip">Shipped</li></ul>
@@ -154,7 +157,7 @@
           </div>
         </div>
       </a>
-      <a class="card" href="/work/training-record">
+      <a class="card" href="/work/training-record" data-cursor-text="View NGFT Training case">
         <div class="card__media placeholder"><span>Cover loop placeholder: NGFT Training</span></div>
         <div class="card__meta">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Training</li><li class="chip">Shipped</li></ul>
@@ -164,7 +167,7 @@
           </div>
         </div>
       </a>
-      <a class="card" href="/work/snapgrid">
+      <a class="card" href="/work/snapgrid" data-cursor-text="View SnapGrid case">
         <div class="card__media placeholder"><span>Cover loop placeholder: SnapGrid</span></div>
         <div class="card__meta">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Product</li><li class="chip">Contracting</li></ul>
@@ -181,7 +184,7 @@
   <section id="apps" aria-labelledby="apps-title">
     <h2 class="section-title" id="apps-title"><span aria-hidden="true">/* </span>Apps<span aria-hidden="true"> */</span></h2>
     <div class="apps">
-      <a class="pocket" href="/work/hx-timer" style="--app-a: #4f5bd5; --app-b: #a3aaf2">
+      <a class="pocket" href="/work/hx-timer" data-pocket data-cursor-text="View HX Insight Desktop Timer case" style="--app-a: #4f5bd5; --app-b: #a3aaf2">
         <div class="pocket__card">
           <div class="pocket__band" aria-hidden="true">
             <span class="pocket__icon pocket__icon--dark">HX</span>
@@ -195,7 +198,7 @@
         <span class="pocket__lip" aria-hidden="true"></span>
         <span class="pocket__action" aria-hidden="true"><svg><use href="#i-out"/></svg></span>
       </a>
-      <a class="pocket" href="/work/hx-mobile" style="--app-a: #1f9d6b; --app-b: #8fdcb9">
+      <a class="pocket" href="/work/hx-mobile" data-pocket data-cursor-text="View HX Insight App case" style="--app-a: #1f9d6b; --app-b: #8fdcb9">
         <div class="pocket__card">
           <div class="pocket__band" aria-hidden="true">
             <span class="pocket__icon pocket__icon--dark">HX</span>
@@ -209,7 +212,7 @@
         <span class="pocket__lip" aria-hidden="true"></span>
         <span class="pocket__action" aria-hidden="true"><svg><use href="#i-out"/></svg></span>
       </a>
-      <a class="pocket" href="/work/instructors" style="--app-a: #e0812f; --app-b: #f6c792">
+      <a class="pocket" href="/work/instructors" data-pocket data-cursor-text="View Instructor’s Tablet App case" style="--app-a: #e0812f; --app-b: #f6c792">
         <div class="pocket__card">
           <div class="pocket__band" aria-hidden="true">
             <span class="pocket__icon pocket__icon--dark">NG</span>

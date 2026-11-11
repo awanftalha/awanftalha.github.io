@@ -2,10 +2,12 @@
 import { initTheme } from './theme.js';
 import { initNav } from './nav.js';
 import { initClock } from './clock.js';
+import { initPockets } from './pockets.js';
 
 initTheme();
 initNav();
 initClock();
+initPockets();
 
 /* "Email me" opens the mail app and also copies the address. */
 const toast = document.querySelector('[data-toast]');
