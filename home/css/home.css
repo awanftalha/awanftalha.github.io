@@ -509,3 +509,37 @@ html:not(.gsap) .pocket.is-open .pocket__action svg { transform: rotate(45deg); 
 @media (max-width: 767px) {
   .footer__bottom { flex-direction: column-reverse; align-items: center; text-align: center; }
 }
+
+/* ---------------------------------------------------------------- Motion */
+
+/* Intro states, only while the intro is about to run (see the <head> script). */
+.motion .nav > *,
+.motion .hero__title,
+.motion .hero__intro,
+.motion .hero__media { opacity: 0; }
+
+/* Cursor label */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 80;
+  pointer-events: none;
+  padding: 6px 10px;
+  border-radius: var(--r);
+  background: var(--pill);
+  color: var(--pill-text);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  will-change: transform;
+}
+.cursor::after { content: " \203A"; }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor { display: none; }
+}
+
+/* SplitText masks keep descenders */
+.habit [data-reveal-lines] > div { padding-bottom: 0.08em; margin-bottom: -0.08em; }

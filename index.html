@@ -24,6 +24,12 @@
     d.setAttribute('data-theme', t);
     var m = document.querySelector('meta[name="theme-color"]');
     if (m) m.content = t === 'dark' ? '#0d0d0d' : '#fbfbfb';
+    /* Intro states only exist when motion will run them; if the scripts
+       have not started within 2.5s, show everything. */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      d.classList.add('motion');
+      setTimeout(function () { if (!window.__motion) d.classList.remove('motion'); }, 2500);
+    }
   })(document.documentElement);
 </script>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -34,6 +40,9 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/CustomEase.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrambleTextPlugin.min.js" defer></script>
 <script type="module" src="home/js/main.js"></script>
 </head>
 <body id="top">
@@ -56,10 +65,10 @@
   <a class="nav__brand" href="#top">Talha Farooq Awan <span class="chip">Product Designer</span></a>
   <nav aria-label="Primary">
     <ul class="nav__links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#apps">Apps</a></li>
-      <li><a href="#approach">Approach</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#work" data-scramble-hover>Work</a></li>
+      <li><a href="#apps" data-scramble-hover>Apps</a></li>
+      <li><a href="#approach" data-scramble-hover>Approach</a></li>
+      <li><a href="#about" data-scramble-hover>About</a></li>
     </ul>
   </nav>
   <div class="nav__actions">
@@ -70,7 +79,7 @@
       <svg class="i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
       <svg class="i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
     </button>
-    <a class="pill" href="#contact"><svg aria-hidden="true"><use href="#i-spark"/></svg>Get in touch</a>
+    <a class="pill" href="#contact"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-scramble-hover>Get in touch</span></a>
   </div>
   <button class="icon-btn nav__menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu" data-menu-open>
     <svg aria-hidden="true"><use href="#i-menu"/></svg>
@@ -96,30 +105,30 @@
       <svg class="i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
       <svg class="i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
     </button>
-    <a class="pill" href="#contact"><svg aria-hidden="true"><use href="#i-spark"/></svg>Get in touch</a>
+    <a class="pill" href="#contact"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-scramble-hover>Get in touch</span></a>
   </div>
 </div>
 
 <main id="main">
 
   <!-- Hero -->
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero" aria-labelledby="hero-title" data-cursor-text="Hi from Lahore">
     <div class="hero__media placeholder" role="img" aria-label="Placeholder for the hero video">
       <span>Hero media placeholder<br>Video (A) or 3D desk (B)</span>
     </div>
     <div class="hero__text">
-      <h1 class="hero__title" id="hero-title">Talha Farooq Awan</h1>
-      <p class="hero__intro">I help teams turn complicated products into software people trust.</p>
+      <h1 class="hero__title" id="hero-title" data-scramble="load">Talha Farooq Awan</h1>
+      <p class="hero__intro" data-intro-lines>I help teams turn complicated products into software people trust.</p>
     </div>
   </section>
 
   <!-- Featured Work -->
   <section id="work" aria-labelledby="work-title">
-    <h2 class="section-title" id="work-title"><span aria-hidden="true">/* </span>Featured Work<span aria-hidden="true"> */</span></h2>
+    <h2 class="section-title" data-reveal id="work-title"><span aria-hidden="true">/* </span>Featured Work<span aria-hidden="true"> */</span></h2>
     <div class="work-grid" id="selected-work">
       <a class="card" href="/work/priced-offer" data-cursor-text="View NGFT OPS case">
         <div class="card__media placeholder"><span>Cover loop placeholder: NGFT OPS</span></div>
-        <div class="card__meta">
+        <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Dispatch</li><li class="chip">Shipped</li></ul>
           <div>
             <h3 class="card__title">NGFT OPS</h3>
@@ -129,7 +138,7 @@
       </a>
       <a class="card" href="/work/safety-report" data-cursor-text="View NGFT SMS case">
         <div class="card__media placeholder"><span>Cover loop placeholder: NGFT SMS</span></div>
-        <div class="card__meta">
+        <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Risk</li><li class="chip">Shipped</li></ul>
           <div>
             <h3 class="card__title">NGFT SMS</h3>
@@ -139,7 +148,7 @@
       </a>
       <a class="card" href="/work/compliance-check" data-cursor-text="View NGFT AI Compliance Check case">
         <div class="card__media placeholder"><span>Cover loop placeholder: NGFT AI Compliance Check</span></div>
-        <div class="card__meta">
+        <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">AI Native</li><li class="chip">Compliance</li><li class="chip">Beta</li></ul>
           <div>
             <h3 class="card__title">NGFT AI Compliance Check</h3>
@@ -149,7 +158,7 @@
       </a>
       <a class="card" href="/work/hx-insight" data-cursor-text="View HX Insight case">
         <div class="card__media placeholder"><span>Cover loop placeholder: HX Insight</span></div>
-        <div class="card__meta">
+        <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">HR</li><li class="chip">B2B SaaS</li><li class="chip">Shipped</li></ul>
           <div>
             <h3 class="card__title">HX Insight</h3>
@@ -159,7 +168,7 @@
       </a>
       <a class="card" href="/work/training-record" data-cursor-text="View NGFT Training case">
         <div class="card__media placeholder"><span>Cover loop placeholder: NGFT Training</span></div>
-        <div class="card__meta">
+        <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Training</li><li class="chip">Shipped</li></ul>
           <div>
             <h3 class="card__title">NGFT Training</h3>
@@ -169,7 +178,7 @@
       </a>
       <a class="card" href="/work/snapgrid" data-cursor-text="View SnapGrid case">
         <div class="card__media placeholder"><span>Cover loop placeholder: SnapGrid</span></div>
-        <div class="card__meta">
+        <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Product</li><li class="chip">Contracting</li></ul>
           <div>
             <h3 class="card__title">SnapGrid</h3>
@@ -182,7 +191,7 @@
 
   <!-- Apps: pocket cards. Gradient colours and icon tiles are placeholders. -->
   <section id="apps" aria-labelledby="apps-title">
-    <h2 class="section-title" id="apps-title"><span aria-hidden="true">/* </span>Apps<span aria-hidden="true"> */</span></h2>
+    <h2 class="section-title" data-reveal id="apps-title"><span aria-hidden="true">/* </span>Apps<span aria-hidden="true"> */</span></h2>
     <div class="apps">
       <a class="pocket" href="/work/hx-timer" data-pocket data-cursor-text="View HX Insight Desktop Timer case" style="--app-a: #4f5bd5; --app-b: #a3aaf2">
         <div class="pocket__card">
@@ -231,29 +240,29 @@
 
   <!-- Approach -->
   <section id="approach" aria-labelledby="approach-title">
-    <h2 class="section-title" id="approach-title"><span aria-hidden="true">/* </span>Approach<span aria-hidden="true"> */</span></h2>
+    <h2 class="section-title" data-reveal id="approach-title"><span aria-hidden="true">/* </span>Approach<span aria-hidden="true"> */</span></h2>
     <ol class="approach">
       <li class="habit">
         <span class="habit__no">01</span>
-        <h3 class="habit__title">Diagnose before pixels</h3>
-        <p class="habit__body">I find out what people are actually trying to do, and where they get stuck, before a single screen changes.</p>
+        <h3 class="habit__title" data-reveal-lines>Diagnose before pixels</h3>
+        <p class="habit__body" data-reveal-lines>I find out what people are actually trying to do, and where they get stuck, before a single screen changes.</p>
       </li>
       <li class="habit">
         <span class="habit__no">02</span>
-        <h3 class="habit__title">Design every state</h3>
-        <p class="habit__body">Empty, loading, error, offline. Each one gets a screen and a way forward, decided before anything is built.</p>
+        <h3 class="habit__title" data-reveal-lines>Design every state</h3>
+        <p class="habit__body" data-reveal-lines>Empty, loading, error, offline. Each one gets a screen and a way forward, decided before anything is built.</p>
       </li>
       <li class="habit">
         <span class="habit__no">03</span>
-        <h3 class="habit__title">Design it to ship</h3>
-        <p class="habit__body">Components, tokens and specs engineers can build without guessing. New patterns only when the work earns them.</p>
+        <h3 class="habit__title" data-reveal-lines>Design it to ship</h3>
+        <p class="habit__body" data-reveal-lines>Components, tokens and specs engineers can build without guessing. New patterns only when the work earns them.</p>
       </li>
     </ol>
   </section>
 
   <!-- Kind Words -->
   <section id="testimonials" aria-labelledby="words-title">
-    <h2 class="section-title" id="words-title"><span aria-hidden="true">/* </span>Kind Words<span aria-hidden="true"> */</span></h2>
+    <h2 class="section-title" data-reveal id="words-title"><span aria-hidden="true">/* </span>Kind Words<span aria-hidden="true"> */</span></h2>
     <div class="words">
       <figure class="word">
         <blockquote class="word__quote"><p>“Working with Talha was a pleasure. He designed our Dispatch system and cut offer planning from hours to about 20 minutes, moved Techlog from paper to digital, brought SMS report analysis down from two days to a few hours, and built the design system that made every team faster. He listens well and really cares about the details. I’d happily work with him again.”</p></blockquote>
@@ -289,11 +298,11 @@
   <section class="cta" id="contact" aria-labelledby="cta-title">
     <h2 class="cta__title" id="cta-title" aria-label="Let’s simplify your next product">
       <span class="cta__line" aria-hidden="true">Let’s simplify your next</span>
-      <span class="cta__line" aria-hidden="true"><svg class="cta__arrow" viewBox="0 0 36 28"><path d="M2 14h30M20 3l12 11-12 11" fill="none" stroke="currentColor" stroke-width="3.2"/></svg><span data-cta-word>product</span></span>
+      <span class="cta__line" aria-hidden="true"><svg class="cta__arrow" viewBox="0 0 36 28"><path d="M2 14h30M20 3l12 11-12 11" fill="none" stroke="currentColor" stroke-width="3.2"/></svg><span data-scramble="loop" data-scramble-words="product|workflow|hire">product</span></span>
     </h2>
     <div class="cta__actions">
-      <a class="btn-line" href="mailto:talhafawan@gmail.com" data-copy-email="talhafawan@gmail.com">Email me</a>
-      <a class="btn-line" href="#book" title="Placeholder until the booking link arrives">Book a call</a>
+      <a class="btn-line" href="mailto:talhafawan@gmail.com" data-copy-email="talhafawan@gmail.com" data-scramble-hover>Email me</a>
+      <a class="btn-line" href="#book" title="Placeholder until the booking link arrives" data-scramble-hover>Book a call</a>
     </div>
     <p class="cta__note">Send me the screen, or the idea. I’ll reply within 48 hours with what I’d do first.</p>
   </section>
@@ -319,12 +328,13 @@
   <div class="footer__bottom">
     <p class="muted">v.3.0 · Updated 11 Nov 2026</p>
     <p class="footer__links">
-      <a class="text-link" href="https://www.linkedin.com/in/talhafawan/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="text-link" href="assets/talha-farooq-awan-resume.pdf">Resume (PDF)</a>
+      <a class="text-link" href="https://www.linkedin.com/in/talhafawan/" target="_blank" rel="noopener" data-scramble-hover>LinkedIn</a>
+      <a class="text-link" href="assets/talha-farooq-awan-resume.pdf" data-scramble-hover>Resume (PDF)</a>
     </p>
   </div>
 </footer>
 
+<div class="cursor" aria-hidden="true" data-cursor><span data-cursor-label></span></div>
 <p class="toast" role="status" hidden data-toast>Copied</p>
 
 </body>
