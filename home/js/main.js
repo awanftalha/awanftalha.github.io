@@ -7,6 +7,8 @@ import { initScramble } from './scramble.js';
 import { initCursor } from './cursor.js';
 import { playIntro, initReveals } from './reveal.js';
 import { initCovers } from './covers.js';
+import { initPlayer } from './player.js';
+import { initSounds } from './sounds.js';
 
 initTheme();
 initNav();
@@ -17,6 +19,8 @@ initCursor();
 playIntro();
 initReveals();
 initCovers();
+initPlayer();
+initSounds();
 
 /* "Email me" opens the mail app and also copies the address. */
 const toast = document.querySelector('[data-toast]');

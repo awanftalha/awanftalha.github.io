@@ -473,7 +473,7 @@ html:not(.gsap) .pocket.is-open .pocket__action svg { transform: rotate(45deg); 
 /* Footer */
 .footer {
   position: relative;
-  padding: 120px var(--gutter) var(--gutter);
+  padding: 120px var(--gutter) calc(var(--gutter) + 54px);   /* room for the player */
   text-align: center;
   border-top: var(--hairline);
 }
@@ -543,3 +543,54 @@ html:not(.gsap) .pocket.is-open .pocket__action svg { transform: rotate(45deg); 
 
 /* SplitText masks keep descenders */
 .habit [data-reveal-lines] > div { padding-bottom: 0.08em; margin-bottom: -0.08em; }
+
+/* ---------------------------------------------------------------- Music player */
+
+.player {
+  position: fixed;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 12px 0 4px;
+  border-radius: 999px;
+  background: var(--pill);
+  color: var(--pill-text);
+  font-size: 12px;
+  box-shadow: var(--shadow-soft);
+}
+.player__btn {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--pill-text);
+  color: var(--pill);
+  transition: transform var(--d-micro) var(--ease);
+}
+.player__btn:active { transform: scale(0.92); }
+.player__btn:focus-visible { outline-color: var(--pill-text); border-radius: 50%; }
+.player__btn svg { width: 11px; height: 11px; }
+.player__pause,
+.player.is-playing .player__play { display: none; }
+.player.is-playing .player__pause { display: block; }
+.player__status { font-weight: 600; min-width: 4.6em; }
+.player__divider { width: 1px; height: 14px; background: currentColor; opacity: 0.3; }
+.player__track {
+  width: 9.5em;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0.75;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.player__marquee { display: inline-flex; will-change: transform; }
+@media (max-width: 767px) {
+  .player__divider,
+  .player__track { display: none; }
+  .player { padding-right: 14px; }
+}
