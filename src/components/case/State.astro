@@ -16,6 +16,6 @@ if (src && !video && !onDisk(src)) warn(`State image not found: ${src}`);
       <img src={src} alt={alt} width={size?.width} height={size?.height} loading="lazy" decoding="async" />
     </button>
   ))}
-  <h4 class="cs-state__title">{title}</h4>
+  <h3 class="cs-state__title">{title}</h3>
   <div class="cs-state__body"><slot /></div>
 </article>
