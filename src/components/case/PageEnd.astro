@@ -1,0 +1,18 @@
+---
+// The end of every case-study page: the series nav again (if any), and the
+// next-case link, generated from `next` and that page's own title and chips.
+import { getEntry } from 'astro:content';
+import SeriesNav from './SeriesNav.astro';
+
+const { entry } = Astro.props;
+const next = await getEntry('work', entry.data.next);
+if (!next) throw new Error(`${entry.id}.mdx: next "${entry.data.next}" is not a case study`);
+---
+{entry.data.series && <div class="cs-series-end"><SeriesNav entry={entry} /></div>}
+<nav class="cs-next" aria-label="Next case study">
+  <a class="cs-next__link" href={`/work/${next.id}`} data-cursor-text={`View ${next.data.title}`}>
+    <span class="cs-next__label">Next case study</span>
+    <ul class="cs-next__chips" aria-hidden="true">{next.data.eyebrow.map((e) => <li class="chip">{e}</li>)}</ul>
+    <span class="cs-next__title">{next.data.title}<svg class="cs-next__arrow" aria-hidden="true" viewBox="0 0 36 28"><path d="M2 14h30M20 3l12 11-12 11" fill="none" stroke="currentColor" stroke-width="2.6" /></svg></span>
+  </a>
+</nav>

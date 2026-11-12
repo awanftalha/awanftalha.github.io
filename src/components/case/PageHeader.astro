@@ -1,0 +1,36 @@
+---
+// The top of every case-study page: chips, title, intro, meta row, series.
+// Case pages show Role · Team · Timeline · Research; app pages show
+// Role · Platform · People. Both then show Status, Updated and Reading.
+import SeriesNav from './SeriesNav.astro';
+import { readingTimes } from '../../lib/reading.js';
+
+const { entry } = Astro.props;
+const d = entry.data;
+const rt = readingTimes(entry.id);
+const month = (dt) => dt.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+const STATUS = { shipped: 'Shipped', beta: 'Beta', trial: 'Trial', concept: 'Concept', 'in-use': 'In use' };
+const keys = d.format === 'app'
+  ? [['Role', 'role'], ['Platform', 'platform'], ['People', 'people'], ['Team', 'team'], ['Timeline', 'timeline'], ['Research', 'research']]
+  : [['Role', 'role'], ['Team', 'team'], ['Timeline', 'timeline'], ['Research', 'research'], ['Platform', 'platform'], ['People', 'people']];
+const meta = keys.map(([label, k]) => [label, d.meta[k]]).filter(([, v]) => v);
+---
+<header class="cs-head">
+  <ul class="cs-head__chips" aria-label="About this project">
+    {d.eyebrow.map((e) => <li class="chip">{e}</li>)}
+  </ul>
+  <h1 class="cs-head__title" id="cs-title">{d.title}</h1>
+  <p class="cs-head__intro">{d.intro}</p>
+  <dl class="cs-meta">
+    {meta.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+    <div>
+      <dt>Status</dt>
+      <dd>{STATUS[d.status]}{d.statusNote && <span class="cs-meta__soft"> · {d.statusNote}</span>}<span class="cs-meta__soft"> · Status as of {month(d.statusAsOf)}</span></dd>
+    </div>
+    <div><dt>Updated</dt><dd><time datetime={d.updated.toISOString().slice(0, 10)}>{month(d.updated)}</time></dd></div>
+    {rt && (rt.hasDeeper
+      ? <div><dt>Reading</dt><dd>{rt.skim} min skim · {rt.full} min full</dd></div>
+      : <div><dt>Reading</dt><dd>{rt.full} min</dd></div>)}
+  </dl>
+  <SeriesNav entry={entry} />
+</header>

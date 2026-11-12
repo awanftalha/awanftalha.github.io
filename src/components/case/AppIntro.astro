@@ -1,0 +1,12 @@
+---
+// App pages only: the summary cards and stats, placed after the device strip
+// at build time (mdx-prepare.mjs). Reads the page's own frontmatter.
+import { getEntry } from 'astro:content';
+import Summary from './Summary.astro';
+import Stats from './Stats.astro';
+
+interface Props { slug: string }
+const entry = await getEntry('work', Astro.props.slug);
+---
+{entry && <Summary summary={entry.data.summary} />}
+{entry && entry.data.stats.length > 0 && <Stats stats={entry.data.stats} />}

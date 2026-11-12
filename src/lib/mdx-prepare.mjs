@@ -53,6 +53,13 @@ export function prepare(code, file) {
   const count = (body.match(/<GoDeeper\b/g) || []).length;
   if (count) body = body.replace(/<GoDeeper\b/, `<DeeperIntro count="${count}" />\n\n<GoDeeper`);
 
+  // App pages: the summary cards and stats follow the device strip (§2.2).
+  if (/^format:\s*["']?app["']?\s*$/m.test(front)) {
+    const slug = path.basename(file, '.mdx');
+    const intro = `\n\n<AppIntro slug="${slug}" />\n\n`;
+    body = body.includes('</DeviceStrip>') ? body.replace('</DeviceStrip>', `</DeviceStrip>${intro}`) : intro + body;
+  }
+
   return front + body;
 }
 

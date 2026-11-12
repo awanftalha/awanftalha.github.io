@@ -605,8 +605,10 @@
 /* Body: contents rail on wide screens */
 .cs-body { margin-top: 120px; }
 .cs-rail { display: none; }
+.cs-page--app .cs-body { margin-top: 64px; }
+.cs-page--app .cs-content > .cs-summary { margin-top: 96px; }
 @media (min-width: 1200px) {
-  .cs-body {
+  .cs-body.has-rail {
     display: grid;
     grid-template-columns: 180px minmax(0, 1fr);
     gap: 40px;

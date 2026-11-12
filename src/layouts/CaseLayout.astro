@@ -1,62 +1,35 @@
 ---
 // format: "case" — the two-speed page (CASE_STUDY_SYSTEM.md §2.1).
 // Everything above the first Go deeper is the skim layer.
-import { getEntry, render } from 'astro:content';
+import { render } from 'astro:content';
 import Base from './Base.astro';
 import Cta from '../components/site/Cta.astro';
+import PageHeader from '../components/case/PageHeader.astro';
+import PageEnd from '../components/case/PageEnd.astro';
 import Loop from '../components/case/Loop.astro';
 import Summary from '../components/case/Summary.astro';
 import Stats from '../components/case/Stats.astro';
-import SeriesNav from '../components/case/SeriesNav.astro';
 import Snapshot from '../components/case/Snapshot.astro';
 import { components } from '../components/case/index.js';
-import { readingTimes, outline } from '../lib/reading.js';
+import { outline } from '../lib/reading.js';
 import '../styles/case.css';
 
 const { entry } = Astro.props;
 const d = entry.data;
 const { Content } = await render(entry);
-const rt = readingTimes(entry.id);
 const { sections, deeper } = outline(entry.body ?? '');
-const next = await getEntry('work', d.next);
-
-const month = (dt) => dt.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
-const STATUS = { shipped: 'Shipped', beta: 'Beta', trial: 'Trial', concept: 'Concept', 'in-use': 'In use' };
-const meta = [
-  ['Role', d.meta.role],
-  ['Team', d.meta.team],
-  ['Timeline', d.meta.timeline],
-  ['Research', d.meta.research],
-  ['Platform', d.meta.platform],
-  ['People', d.meta.people],
-].filter(([, v]) => v);
+const hasRail = sections.length > 0 || deeper.length > 0;
 ---
 <Base title={d.title} description={d.seo.description} path={`/work/${entry.id}`} ogImage={d.seo.ogImage}>
   <article class="cs-page cs-page--case" aria-labelledby="cs-title">
-    <header class="cs-head">
-      <ul class="cs-head__chips" aria-label="About this project">
-        {d.eyebrow.map((e) => <li class="chip">{e}</li>)}
-      </ul>
-      <h1 class="cs-head__title" id="cs-title">{d.title}</h1>
-      <p class="cs-head__intro">{d.intro}</p>
-      <dl class="cs-meta">
-        {meta.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
-        <div>
-          <dt>Status</dt>
-          <dd>{STATUS[d.status]}{d.statusNote && <span class="cs-meta__soft"> · {d.statusNote}</span>}<span class="cs-meta__soft"> · Status as of {month(d.statusAsOf)}</span></dd>
-        </div>
-        <div><dt>Updated</dt><dd><time datetime={d.updated.toISOString().slice(0, 10)}>{month(d.updated)}</time></dd></div>
-        {rt && <div><dt>Reading</dt><dd>{rt.skim} min skim · {rt.full} min full</dd></div>}
-      </dl>
-      <SeriesNav entry={entry} />
-    </header>
+    <PageHeader entry={entry} />
 
     <div class="cs-cover">
       <Loop src={d.cover.video} poster={d.cover.poster} alt={d.cover.alt} posterAlt={d.cover.alt} />
     </div>
 
-    <div class="cs-body">
-      {(sections.length > 0 || deeper.length > 0) && (
+    <div class:list={['cs-body', { 'has-rail': hasRail }]}>
+      {hasRail && (
         <nav class="cs-rail" aria-label="On this page" data-rail>
           <p class="cs-rail__label">On this page</p>
           <ol class="cs-rail__list">
@@ -78,19 +51,10 @@ const meta = [
         <Summary summary={d.summary} />
         <Stats stats={d.stats} />
         <Content components={components} />
-        {d.series && <div class="cs-series-end"><SeriesNav entry={entry} /></div>}
       </div>
     </div>
 
-    {next && (
-      <nav class="cs-next" aria-label="Next case study">
-        <a class="cs-next__link" href={`/work/${next.id}`} data-cursor-text={`View ${next.data.title}`}>
-          <span class="cs-next__label">Next case study</span>
-          <ul class="cs-next__chips" aria-hidden="true">{next.data.eyebrow.map((e) => <li class="chip">{e}</li>)}</ul>
-          <span class="cs-next__title">{next.data.title}<svg class="cs-next__arrow" aria-hidden="true" viewBox="0 0 36 28"><path d="M2 14h30M20 3l12 11-12 11" fill="none" stroke="currentColor" stroke-width="2.6" /></svg></span>
-        </a>
-      </nav>
-    )}
+    <PageEnd entry={entry} />
   </article>
 
   <Cta />

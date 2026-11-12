@@ -1,5 +1,6 @@
 // Every component the .mdx files may use, passed to <Content components>,
 // so the content files need no imports. Plus overrides for ## and tables.
+import AppIntro from './AppIntro.astro';
 import BeforeAfter from './BeforeAfter.astro';
 import Claim from './Claim.astro';
 import Claims from './Claims.astro';
@@ -23,7 +24,7 @@ import Table from './Table.astro';
 import Timeline from './Timeline.astro';
 
 export const components = {
-  BeforeAfter, Claim, Claims, Decision, DeeperIntro, DeviceStrip, Figure, Gallery,
+  AppIntro, BeforeAfter, Claim, Claims, Decision, DeeperIntro, DeviceStrip, Figure, Gallery,
   GoDeeper, Loop, Moment, MomentStrip, Need, Note, Quote, Snapshot, State, States, Timeline,
   h2: SectionTitle,
   table: Table,
