@@ -12,22 +12,6 @@ const SHOW = 'inset(0 0% 0 0)';
 
 /* Each scene adds its story to `tl`, starting from its own initial state. */
 const scenes = {
-  ops(root, tl) {
-    const vals = $$(root, '[data-type]');
-    const send = $(root, '[data-send]');
-    const timer = $(root, '[data-timer]');
-    const t = { m: 160 };
-    const fmt = (m) => (m >= 60 ? `${Math.floor(m / 60)}h ${String(Math.round(m % 60)).padStart(2, '0')}m` : `${Math.round(m)}m`);
-    tl.set(vals, { clipPath: HIDE })
-      .set(send, { opacity: 0.3 })
-      .set(t, { m: 160 })
-      .call(() => { timer.textContent = fmt(160); })
-      .to(vals, { clipPath: SHOW, duration: 0.45, stagger: 0.4, ease: 'none' }, 0.5)
-      .to(send, { opacity: 1, duration: 0.3 })
-      .to(send, { scale: 0.94, duration: 0.12, yoyo: true, repeat: 1 })
-      .to(t, { m: 20, duration: 1.2, onUpdate: () => { timer.textContent = fmt(t.m); } }, '-=0.1');
-  },
-
   sms(root, tl) {
     const report = $(root, '[data-report]');
     const status = $(root, '[data-status]');
@@ -62,24 +46,6 @@ const scenes = {
         .fromTo(v, { scale: 0.9 }, { scale: 1, duration: 0.3 }, at)
         .to(refs[i], { opacity: 1, x: 0, duration: 0.4 }, at + 0.1);
     });
-  },
-
-  hx(root, tl) {
-    const status = $(root, '[data-status]');
-    const approve = $(root, '[data-approve]');
-    const note = $(root, '[data-note]');
-    const pointer = $(root, '[data-pointer]');
-    const finalHTML = status.innerHTML;
-    tl.set(note, { opacity: 0, y: 6 })
-      .set(pointer, { opacity: 0, x: '-6em', y: '4em' })
-      .call(() => { status.textContent = 'Pending'; status.classList.remove('cv-chip--c'); })
-      .to(pointer, { opacity: 1, duration: 0.3 }, 0.6)
-      .to(pointer, { x: 0, y: 0, duration: 0.8 }, 0.6)
-      .to(approve, { scale: 0.92, duration: 0.12, yoyo: true, repeat: 1 })
-      .call(() => { status.innerHTML = finalHTML; status.classList.add('cv-chip--c'); })
-      .fromTo(status, { scale: 0.85 }, { scale: 1, duration: 0.35 })
-      .to(pointer, { opacity: 0, duration: 0.3 }, '+=0.1')
-      .to(note, { opacity: 1, y: 0, duration: 0.5 }, '<');
   },
 
   tr(root, tl) {
@@ -121,7 +87,26 @@ const scenes = {
   },
 };
 
+/* NGFT OPS: the demo in the card's iframe posts its clock (0 to 10, script
+   seconds). The timer counts the call-to-offer time down from 2h 40m to 20m
+   while the offer is built and sent, then resets with the loop. */
+function initOpsTimer() {
+  const timer = document.querySelector('[data-ops-timer]');
+  if (!timer) return;
+  const fmt = (m) => (m >= 60 ? `${Math.floor(m / 60)}h ${String(Math.round(m % 60)).padStart(2, '0')}m` : `${Math.round(m)}m`);
+  const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+  window.addEventListener('message', (e) => {
+    if (e.origin !== location.origin || !e.data || e.data.cover !== 'ngft-ops') return;
+    const t = e.data.t;
+    const u = Math.min(Math.max((t - 0.4) / (8.3 - 0.4), 0), 1);
+    const m = t >= 9.6 ? 160 : 160 - 140 * ease(u);
+    const text = fmt(m);
+    if (timer.textContent !== text) timer.textContent = text;
+  });
+}
+
 export function initCovers() {
+  initOpsTimer();
   if (!motionOn) return;
   document.querySelectorAll('[data-cover]').forEach((cover) => {
     const build = scenes[cover.dataset.cover];

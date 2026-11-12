@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HX Insight cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  /* HX Insight tokens, from the Figma file */
+  :root {
+    --text: #171b2e;
+    --text-2: #474d66;
+    --text-3: #5f6680;
+    --brand: #0070e0;
+    --brand-hover: #0060c2;
+    --brand-text: #005bbf;
+    --brand-subtle: #d6ebff;
+    --border: rgba(6, 7, 82, 0.1);
+    --border-subtle: rgba(6, 7, 82, 0.06);
+    --border-strong: rgba(6, 7, 82, 0.18);
+    --surface: #fff;
+    --display: "Plus Jakarta Sans", system-ui, sans-serif;
+    --body: "Geist", system-ui, sans-serif;
+    --mono: "Geist Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #e9ebf1; }
+  /* Embedded as a card cover (?embed): the frame fills the card, no page around it */
+  html.embed, html.embed body { background: transparent; }
+  body { font-family: var(--body); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  /* The thumbnail: 16:9 like the work cards on the homepage (694x390 at
+     1440, 934x525 at 1920, 4px corners). Designed at 960x540; ?scale=2
+     renders it at 1920x1080 for recording. */
+  .viewport { position: fixed; inset: 0; display: grid; place-items: center; overflow: hidden; }
+  .stage {
+    position: relative; flex: none;
+    width: 960px; height: 540px;
+    overflow: hidden; border-radius: 4px;
+    background: radial-gradient(120% 100% at 50% 40%, #f7f8fb 0%, #eceef3 100%);
+  }
+  /* Everything the camera moves. No will-change: that would freeze the text
+     as a bitmap and blur it when the camera zooms in. */
+  .scene { position: absolute; left: 0; top: 0; width: 1200px; height: 750px; transform-origin: 0 0; }
+
+  /* ---------------------------------------------------------------- Table */
+  .card {
+    position: absolute; left: 53px; top: 232px; width: 1094px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(6, 7, 82, 0.04);
+    overflow: hidden;
+  }
+  .toolbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+  .toolbar h3 { margin: 0; font: 600 17px/24px var(--display); letter-spacing: -0.2px; display: flex; align-items: center; gap: 8px; }
+  .count { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 999px; background: #eef0f5; font: 500 12px/1 var(--body); color: var(--text-2); }
+  .tools { display: flex; gap: 8px; }
+  .filter { height: 32px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--border-strong); font: 500 14px/1 var(--body); color: var(--text); background: #fff; }
+  .filter.is-on { background: #eaf4ff; border-color: var(--brand); color: var(--brand-text); }
+  .filter svg { width: 16px; height: 16px; }
+
+  .grid { display: grid; grid-template-columns: 230px 180px 420px 142px 120px; }
+  .thead { height: 40px; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+  .thead > div { display: flex; align-items: center; gap: 8px; padding: 0 16px; font: 400 14px/1 var(--body); color: var(--text-2); border-right: 1px solid var(--border-subtle); }
+  .thead > div:last-child { border-right: 0; }
+  .thead svg { width: 16px; height: 16px; color: var(--text-3); }
+  .row { height: 49px; border-bottom: 1px solid var(--border-subtle); }
+  .row > div { display: flex; align-items: center; padding: 0 16px; border-right: 1px solid var(--border-subtle); min-width: 0; }
+  .row > div:last-child { border-right: 0; }
+  .row.is-top { background: #f6f8fb; }
+  .person { gap: 10px; }
+  .avatar { flex: none; width: 28px; height: 28px; border-radius: 999px; display: grid; place-items: center; background: #e8f2ff; color: var(--brand-text); font: 500 12px/1 var(--body); }
+  .who b { display: block; font: 600 13px/16px var(--body); }
+  .who span, .match span { display: block; font: 400 12px/16px var(--body); color: var(--text-3); }
+  .match { flex-direction: column; align-items: flex-start !important; justify-content: center; }
+  .match b { font: 400 14px/18px var(--body); }
+  .weeks { gap: 4px; }
+  .chip {
+    width: 44px; height: 24px; flex: none; border-radius: 4px;
+    display: grid; place-items: center;
+    font: 400 12px/1 var(--mono); color: var(--brand-text);
+    background: #e6f2ff; border: 1px solid transparent;
+  }
+  .chip.v0 { background: #fff; border-color: var(--border-strong); color: var(--text-3); }
+  .chip.v50 { background: var(--brand-subtle); }
+  .chip.v75 { background: #c6e1ff; }
+  .chip.v100 { background: var(--brand); color: #fff; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 8px; border-radius: 6px; font: 500 12px/1 var(--body); }
+  .badge svg { width: 14px; height: 14px; }
+  .badge.good { background: #e7f6ec; color: #1a7f3c; }
+  .badge.warn { background: #fdf3e2; color: #b4580a; }
+  .badge.bad  { background: #fdeaea; color: #c0262d; }
+  .assign-cell { position: relative; }
+  .btn {
+    height: 32px; padding: 0 12px; border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    font: 500 14px/1 var(--body); border: 1px solid var(--border-strong); background: #fff; color: var(--text);
+    white-space: nowrap;
+  }
+  .btn.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .btn.primary.is-hover { background: var(--brand-hover); border-color: var(--brand-hover); }
+  .btn svg { width: 18px; height: 18px; }
+  .assigned { position: absolute; left: 16px; top: 8px; height: 32px; padding: 0 10px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; background: #e7f6ec; color: #1a7f3c; font: 500 14px/1 var(--body); opacity: 0; }
+  .assigned svg { width: 16px; height: 16px; }
+  .tfoot { height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font: 400 12px/1 var(--body); color: var(--text-3); }
+  .tfoot a { color: var(--brand-text); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; font-weight: 500; }
+  .tfoot svg { width: 14px; height: 14px; }
+
+  /* ---------------------------------------------------------------- Dialog */
+  .backdrop { position: absolute; inset: -400px; background: rgba(23, 27, 46, 0.2); opacity: 0; }
+  .modal {
+    position: absolute; left: 321px; top: 101px; width: 558px;
+    background: #fff; border-radius: 16px;
+    box-shadow: 0 8px 16px -4px rgba(6, 7, 82, 0.06), 0 32px 64px -16px rgba(6, 7, 82, 0.18);
+    opacity: 0; transform-origin: 50% 40%;
+  }
+  .m-head { position: relative; padding: 24px 24px 20px; border-bottom: 1px solid var(--border-subtle); }
+  .m-head h2 { margin: 0; font: 600 18px/26px var(--display); letter-spacing: -0.2px; }
+  .m-head p { margin: 2px 0 0; font: 400 12px/16px var(--body); color: var(--text-3); }
+  .m-close { position: absolute; right: 26px; top: 30px; width: 20px; height: 20px; color: var(--text-3); }
+  .m-body { padding: 24px; }
+  .facts { display: grid; grid-template-columns: 156px 1fr; row-gap: 16px; font: 400 14px/20px var(--body); }
+  .facts dt { color: var(--text-3); }
+  .facts dd { margin: 0; }
+  .m-label { margin: 20px 0 8px; font: 500 14px/20px var(--body); }
+  .m-weeks { display: grid; grid-template-columns: repeat(8, 44px); column-gap: 4px; row-gap: 4px; }
+  .m-weeks .d { font: 400 12px/16px var(--body); color: var(--text-3); text-align: center; white-space: nowrap; }
+  .m-note { margin: 10px 0 0; font: 400 12px/16px var(--body); color: var(--text-3); }
+  .opt { display: flex; align-items: center; gap: 8px; font: 400 14px/20px var(--body); margin-top: 8px; }
+  .radio { width: 16px; height: 16px; border-radius: 999px; border: 1px solid #8a91a7; flex: none; display: grid; place-items: center; }
+  .radio.on { border: 0; background: var(--brand); }
+  .radio.on::after { content: ""; width: 6px; height: 6px; border-radius: 999px; background: #fff; }
+  .check { width: 16px; height: 16px; border-radius: 4px; background: var(--brand); display: grid; place-items: center; flex: none; }
+  .check svg { width: 12px; height: 12px; color: #fff; }
+  .m-foot { display: flex; justify-content: flex-end; gap: 12px; padding: 16px 24px; border-top: 1px solid var(--border-subtle); }
+  .m-foot .btn { height: 40px; padding: 0 16px; }
+
+  /* ---------------------------------------------------------------- Toast */
+  .toast {
+    position: absolute; left: 767px; top: 545px; width: 380px; height: 64px;
+    display: flex; align-items: center; gap: 12px; padding: 0 16px;
+    background: #fff; border-radius: 12px; border: 1px solid var(--border-subtle);
+    box-shadow: 0 8px 16px -4px rgba(6, 7, 82, 0.06), 0 20px 40px -16px rgba(6, 7, 82, 0.18);
+    opacity: 0;
+  }
+  .toast .ok { width: 20px; height: 20px; color: #1a7f3c; flex: none; }
+  .toast .txt { flex: 1; }
+  .toast b { display: block; font: 600 14px/20px var(--body); }
+  .toast span { display: block; font: 400 12px/16px var(--body); color: var(--text-3); }
+  .toast .undo { font: 500 13px/1 var(--body); color: var(--brand-text); }
+  .toast .x { width: 16px; height: 16px; color: var(--text-3); }
+
+  /* ---------------------------------------------------------------- Phone */
+  .phone {
+    position: absolute; left: 1810px; top: -74px; width: 426px; height: 898px;
+    padding: 12px; border-radius: 68px; background: #16171b;
+    box-shadow: inset 0 0 0 1.5px #2c2e35, 0 40px 80px -30px rgba(23, 27, 46, 0.45);
+  }
+  .screen { position: relative; width: 402px; height: 874px; border-radius: 56px; overflow: hidden; background: #f3f4f8; }
+  .island { position: absolute; left: 50%; top: 11px; width: 120px; height: 34px; margin-left: -60px; border-radius: 20px; background: #000; z-index: 6; }
+  .sbar { position: absolute; left: 0; right: 0; top: 0; height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 6px 32px 0 40px; font: 600 17px/1 var(--body); z-index: 5; }
+  .sbar svg { height: 13px; }
+  .fab { position: absolute; left: 336px; top: 58px; width: 48px; height: 48px; border-radius: 999px; background: var(--brand); display: grid; place-items: center; box-shadow: 0 8px 20px -8px rgba(0, 112, 224, 0.6); }
+  .fab svg { width: 22px; height: 22px; color: #fff; }
+  .p-title { position: absolute; left: 17px; top: 112px; margin: 0; font: 700 34px/40px var(--display); letter-spacing: -0.6px; }
+  .p-sub { position: absolute; left: 17px; top: 158px; margin: 0; font: 400 14px/20px var(--body); color: var(--text-2); }
+  .p-card { position: absolute; left: 17px; width: 367px; background: #fff; border-radius: 18px; border: 1px solid var(--border-subtle); }
+  .bal { top: 196px; height: 132px; padding: 14px 16px; }
+  .p-small { font: 400 12px/16px var(--body); color: var(--text-2); }
+  .bal-row { display: flex; align-items: baseline; justify-content: space-between; margin-top: 4px; }
+  .bal-row b { font: 700 32px/40px var(--display); letter-spacing: -0.8px; }
+  .bal-row span { font: 400 14px/1 var(--body); color: var(--text-2); }
+  .pbar { height: 8px; border-radius: 99px; background: #e8eaf0; margin: 8px 0 8px; overflow: hidden; }
+  .pbar i { display: block; width: 62%; height: 100%; border-radius: 99px; background: var(--brand); }
+  .p-label { position: absolute; left: 17px; margin: 0; font: 500 14px/20px var(--body); color: var(--text-2); }
+  .bals { top: 382px; }
+  .li { height: 57px; display: flex; align-items: center; gap: 12px; padding: 0 16px; font: 400 16px/1 var(--body); border-bottom: 1px solid var(--border-subtle); }
+  .li:last-child { border-bottom: 0; }
+  .li .r { margin-left: auto; font-size: 14px; color: var(--text-2); }
+  .ico { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; flex: none; }
+  .ico svg { width: 18px; height: 18px; }
+  .ico.red { background: #fdecec; color: #d43a3a; }
+  .ico.orange { background: #fff3e2; color: #d9821b; }
+  .ico.blue { background: #e8f2ff; color: var(--brand-text); }
+  .p-btn { position: absolute; left: 17px; top: 520px; width: 367px; height: 48px; border-radius: 12px; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font: 500 16px/1 var(--body); }
+  .p-btn svg { width: 20px; height: 20px; }
+  .reqs { top: 620px; overflow: hidden; }
+  .req { height: 64px; }
+  .rt b { display: block; font: 500 16px/20px var(--body); }
+  .rt span { display: block; font: 400 12px/16px var(--body); color: var(--text-2); }
+  .pill { margin-left: auto; height: 22px; padding: 0 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; font: 500 12px/1 var(--body); }
+  .pill.pend { background: #fdf3e2; color: #b4580a; }
+  .pill.ok { background: #e7f6ec; color: #1a7f3c; }
+  .pill svg { width: 12px; height: 12px; }
+  .chev { width: 16px; height: 16px; color: var(--text-3); flex: none; }
+  .pnew { height: 0; overflow: hidden; }
+  .pnew .li { border-bottom: 1px solid var(--border-subtle); }
+  .tabbar { position: absolute; left: 20px; top: 781px; width: 362px; height: 66px; border-radius: 33px; background: rgba(255, 255, 255, 0.92); border: 1px solid var(--border-subtle); box-shadow: 0 8px 24px -10px rgba(6, 7, 82, 0.25); display: flex; align-items: center; justify-content: space-around; padding: 0 6px; z-index: 3; }
+  .tab { width: 66px; height: 54px; border-radius: 27px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font: 500 12px/1 var(--body); color: var(--text); }
+  .tab svg { width: 22px; height: 22px; }
+  .tab.on { background: #e6f1ff; color: var(--brand-text); }
+  .home-ind { position: absolute; left: 50%; top: 858px; width: 140px; height: 5px; margin-left: -70px; border-radius: 3px; background: #111; z-index: 3; }
+  .ptoast { position: absolute; left: 17px; top: 698px; width: 366px; height: 62px; display: flex; align-items: center; gap: 12px; padding: 0 16px; background: #fff; border-radius: 16px; border: 1px solid var(--border-subtle); box-shadow: 0 12px 28px -12px rgba(6, 7, 82, 0.3); opacity: 0; z-index: 4; }
+  .ptoast .ok { width: 22px; height: 22px; color: #1a7f3c; flex: none; }
+  .ptoast .txt { flex: 1; }
+  .ptoast b { display: block; font: 600 15px/20px var(--body); }
+  .ptoast span { display: block; font: 400 13px/18px var(--body); color: var(--text-2); }
+  .ptoast .undo { font: 500 14px/1 var(--body); color: var(--brand-text); }
+  .ptoast .x { width: 16px; height: 16px; color: var(--text-3); }
+  .pdim { position: absolute; inset: 0; background: rgba(23, 27, 46, 0.42); opacity: 0; z-index: 7; }
+
+  /* Bottom sheet: Request leave, then Check and send */
+  .sheet { position: absolute; left: 8px; right: 8px; top: 265px; height: 601px; border-radius: 32px; background: #fff; z-index: 8; overflow: hidden; transform: translateY(640px); }
+  .grab { position: absolute; left: 50%; top: 7px; width: 36px; height: 5px; margin-left: -18px; border-radius: 3px; background: #d5d8e0; }
+  .sh { position: absolute; inset: 0; }
+  .sh h4 { position: absolute; left: 20px; top: 20px; margin: 0; font: 600 19px/26px var(--display); letter-spacing: -0.2px; }
+  .sh .s2 { position: absolute; left: 20px; top: 47px; margin: 0; font: 400 12px/16px var(--body); color: var(--text-2); }
+  .shx { position: absolute; left: 318px; top: 15px; width: 46px; height: 46px; border-radius: 999px; background: #fff; box-shadow: 0 2px 10px rgba(6, 7, 82, 0.12); display: grid; place-items: center; }
+  .shx svg { width: 18px; height: 18px; color: var(--text); }
+  .seg { position: absolute; left: 20px; top: 80px; width: 346px; height: 38px; border-radius: 19px; background: #eef0f5; display: grid; grid-template-columns: repeat(3, 1fr); padding: 3px; font: 400 15px/1 var(--body); }
+  .seg span { display: grid; place-items: center; border-radius: 16px; }
+  .seg .on { background: #fff; box-shadow: 0 1px 3px rgba(6, 7, 82, 0.12); }
+  .cal { position: absolute; left: 52px; top: 135px; width: 283px; height: 298px; border-radius: 12px; border: 1px solid var(--border-subtle); box-shadow: 0 6px 18px -10px rgba(6, 7, 82, 0.25); background: #fff; }
+  .cal-h { position: absolute; left: 0; right: 0; top: 18px; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font: 600 17px/22px var(--display); }
+  .cal-h svg { width: 16px; height: 16px; color: var(--text-2); }
+  .cal-g { position: absolute; left: 15px; top: 52px; display: grid; grid-template-columns: repeat(7, 36px); grid-auto-rows: 40px; }
+  .cal-g .wd { font: 400 13px/1 var(--body); color: var(--text-2); display: grid; place-items: center; height: 24px; }
+  .cal-g .wdr { height: 30px; }
+  .day { display: grid; place-items: center; font: 400 15px/1 var(--body); border-radius: 8px; width: 36px; height: 36px; align-self: center; }
+  .day.muted { color: #9aa0b4; }
+  .day.sel { background: var(--brand); color: #fff; font-weight: 500; }
+  .day.mid { background: #e6f1ff; color: var(--brand-text); border-radius: 0; }
+  .sum { position: absolute; left: 20px; top: 451px; width: 346px; height: 62px; border-radius: 12px; background: #eaf4ff; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+  .sum b { display: block; font: 500 14px/20px var(--body); }
+  .sum span { display: block; font: 400 12px/16px var(--body); color: var(--text-2); }
+  .sum .right { text-align: right; }
+  .sum .right b { color: var(--brand-text); font-weight: 600; }
+  .s-btn { position: absolute; left: 20px; width: 346px; height: 48px; border-radius: 12px; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font: 500 16px/1 var(--body); }
+  .s-btn svg { width: 20px; height: 20px; }
+  .facts-m { position: absolute; left: 20px; top: 80px; width: 346px; border: 1px solid var(--border); border-radius: 14px; }
+  .facts-m div { height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font: 400 15px/1 var(--body); border-bottom: 1px solid var(--border-subtle); }
+  .facts-m div:last-child { border-bottom: 0; }
+  .facts-m span { color: var(--text-2); font-size: 14px; }
+  .s-label { position: absolute; left: 20px; margin: 0; font: 500 14px/20px var(--body); color: var(--text-2); }
+  .offs { position: absolute; left: 20px; top: 272px; width: 346px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #f6f8fb; }
+  .offs > div { height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 12px; border-bottom: 1px solid var(--border-subtle); font: 400 12px/16px var(--body); color: var(--text-2); }
+  .offs > div:last-child { border-bottom: 0; }
+  .offs .low { background: #fff7e6; }
+  .offs .dt { width: 54px; flex: none; white-space: nowrap; }
+  .offs .dt span { display: block; font-size: 11px; }
+  .offs .dt b { display: block; font: 600 14px/18px var(--body); color: var(--text); }
+  .avs { display: flex; flex: none; padding-right: 8px; }
+  .offs .tx { flex: 1; min-width: 0; }
+  .av { width: 28px; height: 28px; border-radius: 999px; border: 2px solid #fff; margin-right: -8px; display: grid; place-items: center; font: 600 10px/1 var(--body); color: #fff; }
+  .offs .st { margin-left: auto; white-space: nowrap; flex: none; display: inline-flex; align-items: center; gap: 4px; font: 500 12px/1 var(--body); padding: 4px 8px; border-radius: 6px; }
+  .st.ok { color: #1a7f3c; background: #e7f6ec; }
+  .st.warn { color: #b4580a; }
+  .st svg { width: 12px; height: 12px; }
+  .note { position: absolute; left: 20px; top: 460px; width: 346px; height: 102px; border: 1px solid var(--border-strong); border-radius: 10px; padding: 12px; font: 400 14px/20px var(--body); }
+
+  /* Fingertip for the phone */
+  .touch { position: absolute; left: 0; top: 0; width: 38px; height: 38px; margin: -19px 0 0 -19px; border-radius: 999px; background: rgba(23, 27, 46, 0.22); border: 2px solid rgba(255, 255, 255, 0.85); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18); opacity: 0; z-index: 11; }
+  .trip { position: absolute; left: 0; top: 0; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 999px; background: rgba(0, 112, 224, 0.25); opacity: 0; z-index: 10; }
+
+  /* ---------------------------------------------------------------- Cursor */
+  .cursor { position: absolute; left: 0; top: 0; width: 26px; height: 26px; transform-origin: 0 0; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25)); z-index: 10; }
+  .ripple { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 999px; background: rgba(0, 112, 224, 0.28); opacity: 0; z-index: 9; }
+</style>
+</head>
+<body>
+
+<div class="viewport">
+  <div class="stage" id="stage" aria-label="Animation: a resource manager assigns Zain Abbas to the Payroll revamp project in HX Insight" role="img">
+    <div class="scene" id="scene">
+
+      <!-- Suggested people -->
+      <section class="card" id="table">
+        <div class="toolbar">
+          <h3>Suggested people <span class="count">3</span></h3>
+          <div class="tools">
+            <span class="filter is-on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h12M4 8h8M6.5 12h3"/></svg>All 3 skills<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 4 4 4-4"/></svg></span>
+            <span class="filter">Team: Delivery<svg viewBox="0 0 16 16" fill="none" stroke="#5f6680" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 4 4 4-4"/></svg></span>
+          </div>
+        </div>
+        <div class="grid thead">
+          <div><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5.5" r="2.75"/><path d="M2.75 14c.6-2.6 2.7-4 5.25-4s4.65 1.4 5.25 4" stroke-linecap="round"/></svg>Person</div>
+          <div><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="5.5" r="2.75"/><path d="M1.5 14c.5-2.4 2.4-4 5-4 1 0 1.9.2 2.6.7M10.5 12.5l1.5 1.5 3-3"/></svg>Match</div>
+          <div><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>Booked per week from 2 Nov</div>
+          <div><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></svg>Fit</div>
+          <div></div>
+        </div>
+        <div id="rows"></div>
+        <div class="tfoot">
+          <span>Ranked by skills first, then by free time in each week of the request.</span>
+          <a>No good match? Raise a hiring request <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </section>
+
+      <div class="backdrop" id="backdrop"></div>
+
+      <!-- Assign dialog -->
+      <div class="modal" id="modal">
+        <div class="m-head">
+          <h2>Assign Zain Abbas to Payroll revamp</h2>
+          <p>Frontend Engineer, requested by Mariam Shah</p>
+          <svg class="m-close" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m5.5 5.5 9 9M14.5 5.5l-9 9"/></svg>
+        </div>
+        <div class="m-body">
+          <dl class="facts">
+            <dt>Dates</dt><dd>Mon 2 Nov to Fri 25 Dec 2026</dd>
+            <dt>Load</dt><dd>50%, about 20 hours a week</dd>
+            <dt>Line manager</dt><dd>Saad Mirza, Frontend lead</dd>
+          </dl>
+          <p class="m-label">Zain’s weeks with this booking</p>
+          <div class="m-weeks" id="mweeks"></div>
+          <p class="m-note" id="mnote">Peaks at 75% in 5 of 8 weeks. Nothing goes over 100%.</p>
+          <p class="m-label" style="margin-top:18px;margin-bottom:0">Booking</p>
+          <div class="opt"><span class="radio"></span>Tentative: hold Zain, release if the client does not sign off</div>
+          <div class="opt"><span class="radio on"></span>Confirmed: as requested by Mariam</div>
+          <div class="opt" style="margin-top:14px"><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2.5 6.2 2.2 2.2 4.8-4.8"/></svg></span>Tell Zain and his line manager now</div>
+        </div>
+        <div class="m-foot">
+          <span class="btn">Cancel</span>
+          <span class="btn primary" id="confirm"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="6.5" r="3"/><path d="M2.5 16.5c.6-3 2.8-4.75 5.5-4.75 1.1 0 2.1.3 2.9.8M12.5 14.5l2 2 3.5-3.75"/></svg>Assign Zain</span>
+        </div>
+      </div>
+
+      <!-- Success toast -->
+      <div class="toast" id="toast">
+        <svg class="ok" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="m6.5 10.2 2.4 2.3 4.6-4.8"/></svg>
+        <div class="txt"><b>Zain Abbas is on Payroll revamp</b><span>Mariam, Zain and Saad were told.</span></div>
+        <span class="undo">Undo</span>
+        <svg class="x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg>
+      </div>
+
+
+      <!-- Phone: Ayesha applies for leave -->
+      <div class="phone" id="phone">
+        <div class="screen">
+          <span class="island"></span>
+          <div class="sbar"><span>18:20</span><svg viewBox="0 0 74 13" fill="#111"><rect x="0" y="8" width="3.5" height="5" rx="1"/><rect x="5" y="5.5" width="3.5" height="7.5" rx="1"/><rect x="10" y="3" width="3.5" height="10" rx="1"/><rect x="15" y="0" width="3.5" height="13" rx="1"/><path d="M31 3.2a11 11 0 0 1 14 0l-1.6 1.7a8.7 8.7 0 0 0-10.8 0zM33.6 6a7 7 0 0 1 8.8 0l-1.6 1.7a4.7 4.7 0 0 0-5.6 0zM36.2 8.8a3 3 0 0 1 3.6 0L38 10.7z"/><rect x="50.5" y="0.5" width="21" height="12" rx="3.5" fill="none" stroke="#111" opacity=".4"/><rect x="52.5" y="2.5" width="15" height="8" rx="2"/><rect x="72.5" y="4.5" width="1.5" height="4" rx=".7" opacity=".4"/></svg></div>
+          <span class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          <h1 class="p-title">Leave</h1>
+          <p class="p-sub">Leave year Jan to Dec 2026</p>
+          <div class="p-card bal">
+            <span class="p-small">Annual leave</span>
+            <div class="bal-row"><b>12 days left</b><span>of 18</span></div>
+            <div class="pbar"><i></i></div>
+            <span class="p-small" id="balnote">6 used.</span>
+          </div>
+          <p class="p-label" style="top:354px">Other balances</p>
+          <div class="p-card bals">
+            <div class="li"><span class="ico red"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5v4a3.5 3.5 0 0 0 7 0v-4M7.5 10v1.5a3.5 3.5 0 0 0 7 0V10"/><circle cx="14.5" cy="8.5" r="1.5"/></svg></span>Sick leave<span class="r">8 of 10</span></div>
+            <div class="li"><span class="ico orange"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="3"/><path d="M9 1.8v1.6M9 14.6v1.6M1.8 9h1.6M14.6 9h1.6M3.9 3.9l1.1 1.1M13 13l1.1 1.1M3.9 14.1 5 13M13 5l1.1-1.1"/></svg></span>Casual leave<span class="r">3 of 5</span></div>
+          </div>
+          <span class="p-btn" id="preq"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="4" width="14" height="13" rx="2.5"/><path d="M3 8h14M7 2.5v3M13 2.5v3M10 10.5v4M8 12.5h4"/></svg>Request leave</span>
+          <p class="p-label" style="top:592px">Your requests</p>
+          <div class="p-card reqs">
+            <div class="pnew" id="pnew"><div class="li req"><span class="ico blue"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="3.5" width="13" height="12" rx="2"/><path d="M2.5 7h13M6 2v3M12 2v3M6 10h1M9 10h1M12 10h1M6 12.8h1M9 12.8h1"/></svg></span><span class="rt"><b>Annual leave</b><span>Mon 21 to Wed 23 Dec</span></span><span class="pill pend"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M3 1.5h6M3 10.5h6M3.5 1.5c0 2.5 5 2.5 5 4.5s-5 2-5 4.5M8.5 1.5c0 2.5-5 2.5-5 4.5"/></svg>Pending</span><svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></div></div>
+            <div class="li req"><span class="ico blue"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.5" y="3.5" width="13" height="12" rx="2"/><path d="M2.5 7h13M6 2v3M12 2v3M6 10h1M9 10h1M12 10h1M6 12.8h1M9 12.8h1"/></svg></span><span class="rt"><b>Annual leave</b><span>Mon 10 to Fri 14 Aug</span></span><span class="pill ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="4.8"/><path d="m4 6.1 1.4 1.4 2.6-2.8"/></svg>Approved</span><svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></div>
+            <div class="li req"><span class="ico red"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5v4a3.5 3.5 0 0 0 7 0v-4M7.5 10v1.5a3.5 3.5 0 0 0 7 0V10"/><circle cx="14.5" cy="8.5" r="1.5"/></svg></span><span class="rt"><b>Sick leave</b><span>Thu 2 Jul</span></span><span class="pill ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="4.8"/><path d="m4 6.1 1.4 1.4 2.6-2.8"/></svg>Approved</span><svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></div>
+          </div>
+          <div class="ptoast" id="ptoast">
+            <svg class="ok" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7.2 11.2 2.6 2.5 5-5.3"/></svg>
+            <div class="txt"><b>Sent to Bilal Ahmed</b><span>Usually answered within a day.</span></div>
+            <span class="undo">Undo</span>
+            <svg class="x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg>
+          </div>
+          <nav class="tabbar"><span class="tab"><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10 11 3.5l7.5 6.5V18a1 1 0 0 1-1 1h-4v-5h-5v5h-4a1 1 0 0 1-1-1z"/></svg>Home</span><span class="tab"><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M11 6.5V11l3 2"/></svg>Time</span><span class="tab on"><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="15" height="14" rx="2.5"/><path d="M3.5 8.5h15M7.5 2.5v3.5M14.5 2.5v3.5M7.5 12h1.5M10.5 12h1.5M13.5 12h1.5M7.5 15h1.5M10.5 15h1.5"/></svg>Leave</span><span class="tab"><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12.5 5.8 5a1.5 1.5 0 0 1 1.4-1h7.6a1.5 1.5 0 0 1 1.4 1l2.3 7.5V17a1.5 1.5 0 0 1-1.5 1.5h-12A1.5 1.5 0 0 1 3.5 17z"/><path d="M3.5 12.5h4.5l1 2h4l1-2h4.5"/></svg>Inbox</span><span class="tab"><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="7.5" r="3.5"/><path d="M4 19c.8-3.6 3.7-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>Me</span></nav>
+          <span class="home-ind"></span>
+          <div class="pdim" id="pdim"></div>
+
+          <div class="sheet" id="sheet">
+            <span class="grab"></span>
+            <div class="sh" id="sha">
+              <h4>Request leave</h4>
+              <p class="s2">Goes to Bilal Ahmed, your manager</p>
+              <span class="shx"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4.5 4.5 9 9M13.5 4.5l-9 9"/></svg></span>
+              <div class="seg"><span class="on">Annual</span><span>Sick</span><span>Casual</span></div>
+              <div class="cal" id="pcal">
+                <div class="cal-h"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>December 2026<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></div>
+                <div class="cal-g" id="calg"></div>
+              </div>
+              <div class="sum"><div><b id="sumA">Pick your dates</b><span id="sumB">Tap a start and an end day</span></div><div class="right"><b id="sumC">12 left</b><span id="sumD">this year</span></div></div>
+              <span class="s-btn" id="pcont" style="top:529px">Continue</span>
+            </div>
+            <div class="sh" id="shb" style="opacity:0">
+              <h4>Check and send</h4>
+              <p class="s2">Annual leave, goes to Bilal Ahmed</p>
+              <span class="shx"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4.5 4.5 9 9M13.5 4.5l-9 9"/></svg></span>
+              <div class="facts-m"><div>Dates<span>Mon 21 to Wed 23 Dec</span></div><div>Working days<span>3</span></div><div>Left after this<span>9 of 18</span></div></div>
+              <p class="s-label" style="top:245px">Who else in Product is off</p>
+              <div class="offs" id="pwho">
+                <div><span class="dt"><span>Mon</span><b>21 Dec</b></span><span class="avs"><span class="av" style="background:#4a8fe7">AK</span></span><span class="tx">Everyone else is in</span><span class="st ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="4.8"/><path d="m4 6.1 1.4 1.4 2.6-2.8"/></svg>Covered</span></div>
+                <div class="low" id="plow"><span class="dt"><span>Tue</span><b>22 Dec</b></span><span class="avs"><span class="av" style="background:#4a8fe7">AK</span><span class="av" style="background:#e3eefc;color:#005bbf">MK</span><span class="av" style="background:#8b5cf6">HI</span></span><span class="tx">Hamza Iqbal is off</span><span class="st warn"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1.5 11 10.5H1z"/><path d="M6 5v2.2M6 8.8v.1"/></svg>Low cover</span></div>
+                <div><span class="dt"><span>Wed</span><b>23 Dec</b></span><span class="avs"><span class="av" style="background:#4a8fe7">AK</span></span><span class="tx">Everyone else is in</span><span class="st ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="4.8"/><path d="m4 6.1 1.4 1.4 2.6-2.8"/></svg>Covered</span></div>
+              </div>
+              <p class="s-label" style="top:433px">Note for Bilal</p>
+              <div class="note">Family wedding. Hamza and I have split the design reviews.</div>
+              <span class="s-btn" id="psend" style="top:579px"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 2.5 8.6 11.4M17.5 2.5l-5.6 15-3.3-6.1-6.1-3.3z"/></svg>Send to Bilal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="trip" id="trip"></span>
+      <span class="touch" id="touch"></span>
+      <div class="ripple" id="ripple"></div>
+      <svg class="cursor" id="cursor" viewBox="0 0 24 24"><path d="M4 2.5v17l4.6-4.1 3 6.6 3-1.3-2.9-6.4 6.3-.2z" fill="#16181d" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // ---------------------------------------------------------------------
+  // Build the table rows and the dialog's weeks from data
+  // ---------------------------------------------------------------------
+  const ZAIN_NOW = [25, 25, 0, 0, 25, 25, 25, 0];
+  const ZAIN_AFTER = ZAIN_NOW.map((v) => v + 50);
+  const PEOPLE = [
+    { init: 'ZA', name: 'Zain Abbas', role: 'Frontend Engineer, Delivery', fits: 'Fits all 8 weeks', weeks: ZAIN_NOW, fit: ['good', 'Best fit'], primary: true },
+    { init: 'FN', name: 'Fatima Noor', role: 'Frontend Engineer, Delivery', fits: 'Fits 6 of 8 weeks', weeks: [50, 50, 50, 75, 75, 50, 50, 50], fit: ['warn', 'Overbooks'] },
+    { init: 'AR', name: 'Ali Raza', role: 'Senior Frontend, Delivery', fits: 'Fits 0 of 8 weeks', weeks: [100, 100, 100, 100, 100, 100, 100, 100], fit: ['bad', 'Fully booked'] },
+  ];
+  const ICON = {
+    good: '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="5.5"/><path d="m4.7 7.1 1.6 1.6 3-3.2"/></svg>',
+    warn: '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 1.8 12.6 11.8H1.4z"/><path d="M7 5.6v2.6M7 10v.1"/></svg>',
+    bad: '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="7" cy="7" r="5.5"/><path d="m5 5 4 4M9 5 5 9"/></svg>',
+  };
+  const chip = (v) => `<span class="chip v${v}">${v}%</span>`;
+  document.getElementById('rows').innerHTML = PEOPLE.map((p, i) => `
+    <div class="grid row${i === 0 ? ' is-top' : ''}">
+      <div class="person"><span class="avatar">${p.init}</span><span class="who"><b>${p.name}</b><span>${p.role}</span></span></div>
+      <div class="match"><b>3 of 3 skills</b><span>${p.fits}</span></div>
+      <div class="weeks"${i === 0 ? ' id="zweeks"' : ''}>${p.weeks.map(chip).join('')}</div>
+      <div><span class="badge ${p.fit[0]}">${ICON[p.fit[0]]}${p.fit[1]}</span></div>
+      <div class="assign-cell">
+        <span class="btn${p.primary ? ' primary' : ''}"${i === 0 ? ' id="assign"' : ''}>Assign</span>
+        ${i === 0 ? `<span class="assigned" id="assigned">${ICON.good.replace('viewBox="0 0 14 14"', 'viewBox="0 0 14 14" width="16" height="16"')}Assigned</span>` : ''}
+      </div>
+    </div>`).join('');
+
+  const DATES = ['2 Nov', '9 Nov', '16 Nov', '23 Nov', '30 Nov', '7 Dec', '14 Dec', '21 Dec'];
+  document.getElementById('mweeks').innerHTML =
+    DATES.map((d) => `<span class="d">${d}</span>`).join('') + ZAIN_NOW.map(chip).join('');
+
+  // December 2026, Monday first. The 25th is a holiday.
+  const cal = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((d) => `<span class="wd">${d}</span>`);
+  const days = [[30, 1]].concat(Array.from({ length: 31 }, (_, i) => [i + 1, 0])).concat([[1, 1], [2, 1], [3, 1]]);
+  days.forEach(([d, out], i) => {
+    if (i === 0) { cal.push(`<span class="day muted">30</span>`); return; }
+    const id = !out && (d === 21 || d === 22 || d === 23) ? ` id="d${d}"` : '';
+    cal.push(`<span class="day${out || d === 25 ? ' muted' : ''}"${id}>${d}</span>`);
+  });
+  document.getElementById('calg').innerHTML = cal.join('');
+
+  // ---------------------------------------------------------------------
+  // Elements and helpers
+  // ---------------------------------------------------------------------
+  const $ = (id) => document.getElementById(id);
+  const stage = $('stage'), scene = $('scene'), cursor = $('cursor'), ripple = $('ripple');
+  const backdrop = $('backdrop'), modal = $('modal'), toast = $('toast');
+  const assignBtn = $('assign'), assigned = $('assigned'), confirmBtn = $('confirm');
+  const zChips = [...$('zweeks').children];
+  const mChips = [...$('mweeks').querySelectorAll('.chip')];
+  const mNote = $('mnote');
+  const phone = $('phone'), sheet = $('sheet'), shA = $('sha'), shB = $('shb'), pdim = $('pdim');
+  const pReq = $('preq'), pCont = $('pcont'), pSend = $('psend'), pLow = $('plow');
+  const d21 = $('d21'), d22 = $('d22'), d23 = $('d23');
+  const pNew = $('pnew'), pToast = $('ptoast'), balNote = $('balnote');
+  const touch = $('touch'), trip = $('trip');
+
+  const DUR = 9;      // the script below, in script seconds: 5 desktop, 4 phone
+  const SLOW = 14 / DUR;   // playback stretch: the whole loop lasts 14s. Change 14 to retime it.
+  const W = 960, H = 540;   // the frame, in design pixels
+  let zoom = 1, lastT = null;
+  const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  // 0 → 1 between a and b, eased
+  const ramp = (t, a, b) => ease(clamp01((t - a) / (b - a)));
+  // 0 → 1 → 0 between a and b
+  const bump = (t, a, b) => { const u = clamp01((t - a) / (b - a)); return Math.sin(u * Math.PI); };
+  // Keyframes: [[time, {k: v}], ...], eased between neighbours, held at the ends
+  function track(keys, t) {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      const [t1, v1] = keys[i];
+      if (t <= t1) {
+        const [t0, v0] = keys[i - 1];
+        const u = ease((t - t0) / (t1 - t0 || 1));
+        const out = {};
+        for (const k in v1) out[k] = lerp(v0[k], v1[k], u);
+        if (keys[i][2] && 's' in out) out.s *= 1 - keys[i][2] * Math.sin(u * Math.PI);
+        return out;
+      }
+    }
+    return keys[keys.length - 1][1];
+  }
+  // Position of an element inside the scene, ignoring transforms
+  function box(el) {
+    let x = 0, y = 0, e = el;
+    while (e && e !== scene) { x += e.offsetLeft; y += e.offsetTop; e = e.offsetParent; }
+    return { x, y, w: el.offsetWidth, h: el.offsetHeight, cx: x + el.offsetWidth / 2, cy: y + el.offsetHeight / 2 };
+  }
+
+  // ---------------------------------------------------------------------
+  // The script: where the camera looks and where the cursor goes
+  // ---------------------------------------------------------------------
+  let CAM, CUR, TOUCH;
+  function plan() {
+    const a = box(assignBtn), row = box(assignBtn.closest('.row')), weeks = box($('zweeks'));
+    const m = box(modal), mw = box($('mweeks')), c = box(confirmBtn), t = box(toast);
+    const book = box(modal.querySelectorAll('.opt')[1]);
+
+    // Wide shots show the whole component; close-ups follow the work.
+    const card = box($('table'));
+    const camWide  = { s: (W - 64) / card.w, x: card.cx, y: card.cy };
+    const camRow   = { s: 1.22, x: (weeks.x + card.x + card.w) / 2, y: row.cy + 44 };
+    const camModal = { s: Math.min((H - 40) / m.h, 1), x: m.cx, y: m.cy };
+    const camWeeks = { s: 1.5, x: mw.cx + 10, y: mw.cy - 6 };
+    const camFoot  = { s: 1.2, x: m.x + m.w * 0.6, y: (book.cy + c.cy) / 2 - 10 };
+    const top = card.y, bottom = t.y + t.h;
+    const camAfter = { s: Math.min((W - 64) / card.w, (H - 48) / (bottom - top)), x: card.cx, y: (top + bottom) / 2 };
+    // Phone shots. Check-and-send sits 50px higher than the request sheet.
+    const ph = box(phone), pc = box($('pcal')), cont = box(pCont), who = box($('pwho'));
+    const phoneWide = { s: (H - 36) / ph.h, x: ph.cx, y: ph.cy };
+    const camSheet = { s: Math.min((H - 44) / (cont.y + cont.h - pc.y + 40), 1.2), x: ph.cx, y: (pc.y - 30 + cont.y + cont.h) / 2 };
+    const camCheck = { s: 1.3, x: ph.cx, y: who.cy - 50 - 10 };
+    // The third value zooms out mid-move, so desktop and phone are both
+    // in view on the way across: one continuous move, no cut.
+    CAM = [
+      [0, camWide], [0.35, camWide], [1.1, camRow], [1.45, camRow], [1.95, camModal], [2.1, camModal],
+      [2.55, camWeeks], [2.95, camWeeks], [3.3, camFoot], [3.72, camFoot],
+      [4.2, camAfter], [4.55, camAfter],
+      [5.4, phoneWide, 0.45], [5.62, phoneWide], [6.0, camSheet], [6.55, camSheet],
+      [6.95, camCheck], [7.2, camCheck], [7.5, phoneWide], [8.2, phoneWide],
+      [9.0, camWide, 0.45],
+    ];
+
+    const at = (el, dx = 0, dy = 0) => { const b = box(el); return { x: b.cx + dx, y: b.cy + dy }; };
+    const reqP = at(pReq, 50, 4), contP = at(pCont, 40, 4), sendP = at(pSend, 40, 4 - 50);
+    TOUCH = [
+      [5.2, { x: reqP.x + 70, y: reqP.y + 110 }], [5.52, reqP], [5.72, reqP],
+      [6.08, at(d21)], [6.2, at(d21)], [6.3, at(d23)], [6.42, at(d23)], [6.52, contP], [6.7, contP],
+      [7.25, { x: sendP.x + 30, y: sendP.y + 70 }], [7.52, sendP], [7.72, sendP], [7.95, { x: sendP.x + 40, y: sendP.y + 80 }],
+    ];
+
+    const chipAt = (i) => box(mChips[i]);
+    const off = { x: a.cx + 120, y: a.cy + 230 };
+    const onAssign = { x: a.cx + 6, y: a.cy + 4 };
+    const rest = { x: a.cx - 40, y: a.cy + 70 };
+    CUR = [
+      [0, off], [0.2, off], [1.15, onAssign], [1.6, onAssign],
+      [2.35, { x: chipAt(1).cx, y: chipAt(1).cy + 6 }],
+      [2.9, { x: chipAt(7).cx, y: chipAt(7).cy + 6 }],
+      [3.4, { x: c.cx + 10, y: c.cy + 4 }], [3.8, { x: c.cx + 10, y: c.cy + 4 }],
+      [4.3, rest], [6.0, rest], [6.5, off],
+    ];
+  }
+
+  const CLICKS = [1.38, 3.6];
+  const TAPS = [5.58, 6.15, 6.35, 6.56, 7.56];
+  const win = (t, a, b, f = 0.1) => ramp(t, a, a + f) * (1 - ramp(t, b - f, b));
+
+  // ---------------------------------------------------------------------
+  // Apply the state for time t (0..5). Pure function of t, so it loops cleanly.
+  // ---------------------------------------------------------------------
+  let last = { z: null, m: null };
+  function apply(t) {
+    lastT = t;
+    // Camera
+    const cam = track(CAM, t);
+    scene.style.transform = `translate(${(W / 2 - cam.x * cam.s) * zoom}px, ${(H / 2 - cam.y * cam.s) * zoom}px) scale(${cam.s * zoom})`;
+
+    // Cursor, kept the same size on screen whatever the zoom
+    const cur = track(CUR, t);
+    let press = 0, rip = null;
+    for (const c of CLICKS) {
+      press = Math.max(press, bump(t, c - 0.04, c + 0.16));
+      if (t >= c && t < c + 0.45) rip = (t - c) / 0.45;
+    }
+    const k = (0.85 / cam.s) * (1 - 0.14 * press);
+    cursor.style.transform = `translate(${cur.x}px, ${cur.y}px) scale(${k}) translate(-4.3px, -2.7px)`;
+    // The pointer leaves with the desktop and is back before the loop restarts
+    cursor.style.opacity = String(t < 6 ? 1 - ramp(t, 4.45, 4.7) : ramp(t, 8.55, 8.9));
+    if (rip !== null) {
+      ripple.style.opacity = String(0.9 * (1 - rip));
+      ripple.style.transform = `translate(${cur.x}px, ${cur.y}px) scale(${(0.3 + 1.2 * ease(rip)) * 0.85 / cam.s})`;
+    } else ripple.style.opacity = '0';
+
+    // Assign button in the table: hover, press
+    assignBtn.classList.toggle('is-hover', t > 1.05 && t < 1.55);
+    assignBtn.style.transform = `scale(${1 - 0.05 * bump(t, 1.34, 1.52)})`;
+
+    // Dialog opens, then closes after the booking
+    backdrop.style.opacity = String(ramp(t, 1.42, 1.75) * (1 - ramp(t, 3.7, 3.95)));
+    const mp = ramp(t, 1.45, 1.85) * (1 - ramp(t, 3.68, 3.9));
+    modal.style.opacity = String(mp);
+    modal.style.transform = `translateY(${(1 - mp) * 12}px) scale(${0.965 + 0.035 * mp})`;
+
+    // Zain's weeks in the dialog take on the new booking, one after another
+    const mState = mChips.map((_, i) => (t >= 2.45 + i * 0.06 ? 1 : 0)).join('');
+    if (mState !== last.m) {
+      mChips.forEach((el, i) => { const v = mState[i] === '1' ? ZAIN_AFTER[i] : ZAIN_NOW[i]; el.className = `chip v${v}`; el.textContent = `${v}%`; });
+      last.m = mState;
+    }
+    mChips.forEach((el, i) => { el.style.transform = `scale(${1 + 0.14 * bump(t, 2.45 + i * 0.06, 2.65 + i * 0.06)})`; });
+    mNote.style.opacity = String(0.35 + 0.65 * ramp(t, 2.85, 3.05));
+
+    // Confirm button: hover, press
+    confirmBtn.classList.toggle('is-hover', t > 3.3 && t < 3.75);
+    confirmBtn.style.transform = `scale(${1 - 0.05 * bump(t, 3.56, 3.74)})`;
+
+    // Back in the table: Zain's row shows the booking, then resets for the loop
+    const zState = zChips.map((_, i) => (t >= 3.95 + i * 0.05 && t < 6 ? 1 : 0)).join('');
+    if (zState !== last.z) {
+      zChips.forEach((el, i) => { const v = zState[i] === '1' ? ZAIN_AFTER[i] : ZAIN_NOW[i]; el.className = `chip v${v}`; el.textContent = `${v}%`; });
+      last.z = zState;
+    }
+    zChips.forEach((el, i) => { el.style.transform = `scale(${1 + 0.12 * bump(t, 3.95 + i * 0.05, 4.15 + i * 0.05)})`; });
+    const done = t < 6 ? ramp(t, 3.88, 4.08) : 0;   // resets while the phone is on screen
+    assigned.style.opacity = String(done);
+    assigned.style.transform = `scale(${0.92 + 0.08 * done})`;
+    assignBtn.style.opacity = String(1 - done);
+
+    // Toast
+    const tp = t < 6 ? ramp(t, 3.95, 4.25) : 0;
+    toast.style.opacity = String(tp);
+    toast.style.transform = `translateY(${(1 - tp) * 16}px)`;
+
+    // ---------------- Phone: Ayesha requests leave (5.4s to 8.2s)
+    const tc = track(TOUCH, t);
+    let tPress = 0, tRip = null;
+    for (const c of TAPS) {
+      tPress = Math.max(tPress, bump(t, c - 0.05, c + 0.12));
+      if (t >= c && t < c + 0.4) tRip = (t - c) / 0.4;
+    }
+    touch.style.opacity = String(Math.max(win(t, 5.25, 6.72), win(t, 7.25, 7.85)));
+    touch.style.transform = `translate(${tc.x}px, ${tc.y}px) scale(${1 - 0.22 * tPress})`;
+    trip.style.opacity = tRip !== null ? String(0.9 * (1 - tRip)) : '0';
+    trip.style.transform = `translate(${tc.x}px, ${tc.y}px) scale(${tRip !== null ? 0.4 + 1.3 * ease(tRip) : 0})`;
+
+    pReq.style.transform = `scale(${1 - 0.04 * bump(t, 5.53, 5.68)})`;
+    const up = ramp(t, 5.6, 5.92) * (1 - ramp(t, 7.62, 7.9));
+    const sw = ramp(t, 6.6, 6.9);                       // request sheet → check and send
+    pdim.style.opacity = String(up);
+    sheet.style.top = `${265 - 50 * sw}px`;
+    sheet.style.height = `${601 + 50 * sw}px`;
+    sheet.style.transform = `translateY(${(1 - up) * 680}px)`;
+    shA.style.opacity = String(1 - sw);
+    shA.style.transform = `translateX(${-28 * sw}px)`;
+    shB.style.opacity = String(sw);
+    shB.style.transform = `translateX(${28 * (1 - sw)}px)`;
+
+    const s1 = t >= 6.15, s2 = t >= 6.35;
+    d21.classList.toggle('sel', s1);
+    d23.classList.toggle('sel', s2);
+    d22.classList.toggle('mid', s2);
+    d21.style.transform = `scale(${1 + 0.12 * bump(t, 6.13, 6.3)})`;
+    d23.style.transform = `scale(${1 + 0.12 * bump(t, 6.33, 6.5)})`;
+    const sum = s2 ? ['Mon 21 to Wed 23 Dec', '3 working days', '9 left', 'after this']
+      : s1 ? ['Mon 21 Dec', '1 working day', '11 left', 'after this']
+      : ['Pick your dates', 'Tap a start and an end day', '12 left', 'this year'];
+    ['sumA', 'sumB', 'sumC', 'sumD'].forEach((id, i) => { const el = $(id); if (el.textContent !== sum[i]) el.textContent = sum[i]; });
+    pCont.style.transform = `scale(${1 - 0.04 * bump(t, 6.52, 6.66)})`;
+    pLow.style.boxShadow = `inset 0 0 0 ${2 * bump(t, 6.95, 7.45)}px rgba(217, 130, 27, 0.6)`;
+    pSend.style.transform = `scale(${1 - 0.04 * bump(t, 7.53, 7.68)})`;
+
+    // Sent: the request joins the list as pending, and a toast confirms it
+    pNew.style.height = `${65 * ramp(t, 7.75, 8.0)}px`;
+    const waiting = t >= 7.85 ? '6 used, 3 more waiting for approval.' : '6 used.';
+    if (balNote.textContent !== waiting) balNote.textContent = waiting;
+    const pt = ramp(t, 7.85, 8.1);
+    pToast.style.opacity = String(pt);
+    pToast.style.transform = `translateY(${(1 - pt) * 18}px)`;
+  }
+
+  // ---------------------------------------------------------------------
+  // Fit the frame to the window, and run
+  // ---------------------------------------------------------------------
+  // The frame keeps its 16:9 shape and is laid out at its real size (not
+  // scaled as a picture), so text stays sharp. ?scale=2 fixes the size
+  // (1920x1080 for recording); otherwise it fits the window.
+  const params = new URLSearchParams(location.search);
+  const embed = params.has('embed');
+  if (embed) document.documentElement.classList.add('embed');
+  function fit() {
+    const fixed = parseFloat(params.get('scale'));
+    const pad = embed ? 0 : 48;
+    zoom = fixed > 0 ? fixed : Math.min((innerWidth - pad) / W, (innerHeight - pad) / H, embed ? 4 : 2);
+    stage.style.width = `${W * zoom}px`;
+    stage.style.height = `${H * zoom}px`;
+    stage.style.borderRadius = embed ? '0' : `${4 * zoom}px`;
+  }
+  addEventListener('resize', () => { fit(); if (lastT !== null && CAM) apply(lastT); });
+  fit();
+
+  const frozen = params.has('t') ? parseFloat(params.get('t')) : null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.fonts.ready.then(() => {
+    plan();
+    // ?t= is in real seconds of playback
+    if (frozen !== null || reduce) { apply(((frozen ?? 4.2) / SLOW) % DUR); return; }
+    // Plays only while on screen (also when embedded in a page), and picks
+    // up where it left off.
+    let played = 0, last = null, raf = 0, visible = true;
+    const frame = (now) => {
+      if (last !== null) played += Math.min(now - last, 100);
+      last = now;
+      apply((played / 1000 / SLOW) % DUR);
+      raf = requestAnimationFrame(frame);
+    };
+    const run = () => { if (!raf && visible && !document.hidden) { last = null; raf = requestAnimationFrame(frame); } };
+    const halt = () => { cancelAnimationFrame(raf); raf = 0; };
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? run() : halt(); }).observe(stage);
+    document.addEventListener('visibilitychange', () => (document.hidden ? halt() : run()));
+    apply(0);
+    run();
+  });
+})();
+</script>
+</body>
+</html>

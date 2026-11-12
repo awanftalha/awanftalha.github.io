@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NGFT OPS cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* NGFT OPS tokens, from the Figma file */
+  :root {
+    --text: #292a2e;
+    --subtle: #505258;
+    --subtlest: #6b6e76;
+    --brand: #1868db;
+    --brand-hover: #1458bc;
+    --sel: #e9f2fe;
+    --border: rgba(11, 18, 14, 0.14);
+    --border-2: #dddee1;
+    --sunken: #f8f8f8;
+    --canvas: #f4f5f7;
+    --neutral: rgba(5, 21, 36, 0.06);
+    --ok: #6a9a23;
+    --ok-bold: #5b7f24;
+    --danger: #c9372c;
+    --warn: #e06c00;
+    --warn-text: #9e4c00;
+    --purple: #964ac0;
+    --orange: #bd5b00;
+    --font: "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #e9ebf1; }
+  html.embed, html.embed body { background: transparent; }
+  body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  /* 16:9 frame, like the homepage cards. Designed at 960x540. */
+  .viewport { position: fixed; inset: 0; display: grid; place-items: center; overflow: hidden; }
+  .stage { position: relative; flex: none; width: 960px; height: 540px; overflow: hidden; border-radius: 4px; background: radial-gradient(120% 100% at 50% 40%, #f7f8fa 0%, #eceef2 100%); }
+  /* What the camera moves. No will-change, so text re-renders sharp when zoomed. */
+  .scene { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
+
+  /* ---------------------------------------------------------------- App shell */
+  .app { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; background: #fff; border: 1px solid var(--border-2); box-shadow: 0 30px 70px -30px rgba(20, 24, 40, 0.35); overflow: hidden; font-size: 14px; }
+  .tn { height: 56px; display: flex; align-items: center; border-bottom: 1px solid var(--border-2); padding: 0 16px; }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; width: 130px; }
+  .brand svg { width: 18px; height: 20px; color: var(--brand); }
+  .navl { display: flex; height: 56px; }
+  .navl span { display: grid; place-items: center; padding: 0 22px; font-size: 14px; }
+  .navl .on { background: var(--sel); color: var(--brand); box-shadow: inset 0 -3px 0 var(--brand); }
+  .tn-r { margin-left: auto; display: flex; align-items: center; gap: 14px; color: var(--subtle); }
+  .tn-r svg { width: 18px; height: 18px; }
+  .me { width: 28px; height: 28px; background: var(--border-2); display: grid; place-items: center; font-size: 11px; position: relative; }
+  .me::after { content: ""; position: absolute; right: -2px; bottom: -2px; width: 8px; height: 8px; background: var(--ok-bold); }
+  .bc { height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border-bottom: 1px solid var(--border-2); font-size: 14px; }
+  .bc a { color: var(--brand); }
+  .bc .sep { color: var(--subtlest); }
+  .badge { font-size: 11px; font-weight: 600; letter-spacing: 1px; padding: 3px 6px; background: var(--neutral); color: var(--subtle); }
+  .badge.sent { background: var(--sel); color: var(--brand); }
+  .bc-r { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .bc-r .chf { font-size: 11px; color: var(--subtle); }
+  .bc-r b { font-size: 19px; font-weight: 700; letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
+  .btn { height: 30px; padding: 0 12px; display: inline-flex; align-items: center; gap: 6px; background: var(--neutral); color: var(--text); font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .btn svg { width: 14px; height: 14px; }
+  .btn.pri { background: var(--brand); color: #fff; }
+  .btn.pri.is-hover { background: var(--brand-hover); }
+  .btn.off { background: var(--neutral); color: #a5a8ae; }
+  .btn.purple { background: var(--purple); color: #fff; height: 24px; font-size: 12px; }
+  .btn.sm { height: 24px; font-size: 12px; padding: 0 8px; }
+
+  .body { position: absolute; left: 0; right: 0; top: 100px; bottom: 0; display: grid; grid-template-columns: 240px 1fr 290px; }
+
+  /* Left rail */
+  .rail { position: relative; background: var(--sunken); border-right: 1px solid var(--border-2); padding: 14px 8px; }
+  .r-lab { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--subtle); padding: 6px 12px; }
+  .r-it { height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 12px; font-size: 14px; border: 1px solid transparent; }
+  .r-it b { font-weight: 600; }
+  .r-it .m { color: var(--subtlest); }
+  .r-it.on { background: #fff; border-color: var(--border); }
+  .r-it svg { width: 14px; height: 14px; flex: none; }
+  .r-it .ok { color: var(--ok); }
+  .r-it .bad { color: var(--danger); }
+  .r-it .wr { color: var(--warn); }
+  .r-it .idle { color: #a5a8ae; }
+  .r-add { border: 1px dashed var(--border-2); color: var(--subtle); margin: 2px 0 4px; }
+  .ready { position: absolute; left: 8px; right: 8px; bottom: 30px; background: #fff; border: 1px solid var(--border); padding: 12px; }
+  .ready-t { display: flex; justify-content: space-between; align-items: center; }
+  .ready b { font-size: 15px; font-weight: 600; }
+  .ready span { font-size: 13px; color: var(--subtle); }
+  .ready .cnt { font-size: 12px; color: var(--text); }
+  .rbar { height: 3px; background: var(--border-2); margin-top: 12px; }
+  .rbar i { display: block; height: 100%; background: var(--danger); width: 50%; }
+  .saved { position: absolute; left: 16px; bottom: 8px; font-size: 11px; color: var(--subtle); display: flex; align-items: center; gap: 6px; }
+  .saved::before { content: ""; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--ok); }
+
+  /* Centre canvas with three panes */
+  .canvas { position: relative; background: var(--canvas); overflow: hidden; }
+  .pane { position: absolute; inset: 0; padding: 16px 20px; }
+  .p-h { display: flex; align-items: center; gap: 10px; height: 30px; margin-bottom: 12px; }
+  .p-h h2 { margin: 0; font-size: 17px; font-weight: 600; }
+  .p-h .r { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+  .card { background: #fff; padding: 14px 16px; margin-bottom: 10px; }
+  .ov { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--subtle); margin-bottom: 10px; display: flex; justify-content: space-between; }
+  .ov .n { font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--subtle); }
+  .row { display: grid; grid-template-columns: 108px 1fr; align-items: center; gap: 10px; margin-bottom: 9px; }
+  .row:last-child { margin-bottom: 0; }
+  .lab { font-size: 13px; color: var(--subtle); }
+  .f { position: relative; height: 32px; border: 1px solid var(--border); display: flex; align-items: center; padding: 0 8px; font-size: 14px; background: #fff; white-space: nowrap; overflow: hidden; }
+  .f.sel::after { content: ""; position: absolute; right: 10px; top: 12px; width: 6px; height: 6px; border-right: 1.5px solid var(--subtle); border-bottom: 1.5px solid var(--subtle); transform: rotate(45deg); }
+  .f.ph { color: #8c8f97; }
+  .f.focus { border: 2px solid var(--brand); padding: 0 7px; }
+  .f.flash { background: var(--sel); }
+  .f.der { border-style: dashed; color: var(--subtle); font-size: 13px; }
+  .f.der::after { content: "DERIVED"; position: absolute; right: 8px; font-size: 9px; letter-spacing: 0.6px; color: var(--subtlest); }
+  .caret { display: inline-block; width: 1.5px; height: 17px; background: var(--brand); margin-left: 1px; vertical-align: middle; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* Job & client */
+  .job-grid { display: grid; grid-template-columns: 1fr 300px; gap: 12px; align-items: start; }
+  .client { display: flex; gap: 14px; border-top: 1px solid var(--border-2); border-bottom: 1px solid var(--border-2); padding: 12px 0; margin-top: 10px; opacity: 0; }
+  .av { width: 40px; height: 40px; flex: none; background: var(--neutral); display: grid; place-items: center; font-weight: 600; font-size: 13px; color: var(--subtle); }
+  .client b { font-size: 16px; font-weight: 600; }
+  .client .tag { font-size: 12px; background: var(--neutral); padding: 2px 6px; margin-left: 8px; }
+  .client p { margin: 4px 0 0; font-size: 13px; color: var(--subtle); }
+  .client p a { color: var(--brand); }
+  .offno { margin-top: 8px; font-size: 12px; color: var(--subtle); opacity: 0; }
+  .offno b { color: var(--text); font-size: 14px; }
+  .person { display: flex; gap: 12px; align-items: center; border-top: 1px solid var(--border-2); border-bottom: 1px solid var(--border-2); padding: 10px 0; }
+  .person b { display: block; font-size: 15px; font-weight: 600; }
+  .person span { display: block; font-size: 13px; color: var(--subtle); margin-top: 2px; }
+  .note { border: 1px solid var(--border-2); border-width: 1px 0; padding: 10px 8px; font-size: 13px; line-height: 19px; }
+  .cap { font-size: 11px; color: var(--subtle); margin: 6px 0 12px; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { background: var(--neutral); font-size: 12px; padding: 5px 8px; }
+
+  /* FL1 */
+  .dg { background: #f8d3cf; color: var(--danger); font-size: 10px; font-weight: 700; padding: 3px 6px; }
+  .tabs { display: flex; gap: 2px; font-size: 12px; }
+  .tabs span { padding: 5px 10px; }
+  .tabs .on { background: #fff; border: 1px solid var(--border-2); }
+  .fl-card { background: #fff; }
+  .sec { padding: 12px 16px; border-bottom: 1px solid var(--border-2); }
+  .sec:last-child { border-bottom: 0; }
+  .grid5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .fl { font-size: 10px; font-weight: 600; letter-spacing: 0.8px; color: var(--subtle); margin-bottom: 5px; }
+  .crew-r { display: grid; grid-template-columns: 150px 260px 1fr; align-items: center; height: 32px; border-bottom: 1px solid var(--border-2); font-size: 13px; }
+  .crew-r:last-of-type { border-bottom: 0; }
+  .crew-r .rl { color: var(--subtle); }
+  .who { display: flex; align-items: center; gap: 8px; }
+  .who .ini { width: 24px; height: 24px; background: var(--neutral); display: grid; place-items: center; font-size: 11px; color: var(--subtle); }
+  .avail { color: var(--ok-bold); font-size: 12px; display: inline-flex; align-items: center; gap: 4px; }
+  .avail svg { width: 11px; height: 11px; }
+  .dash { color: #a5a8ae; }
+  .seq-h, .leg { display: grid; grid-template-columns: 22px 120px 160px 150px 150px 48px 40px 60px 1fr; align-items: center; }
+  .seq-h { height: 28px; background: var(--sunken); border: 1px solid var(--border-2); font-size: 10px; font-weight: 600; letter-spacing: 0.6px; color: var(--subtle); }
+  .legs { border: 1px solid var(--border-2); border-top: 0; }
+  .leg { height: 0; overflow: hidden; font-size: 13px; border-top: 1px solid transparent; }
+  .leg.in { border-top-color: var(--border-2); }
+  .leg .grip { color: #b3b6bd; text-align: center; font-size: 12px; }
+  .leg .num { text-align: right; padding-right: 10px; font-variant-numeric: tabular-nums; }
+  .leg .tot { text-align: right; font-weight: 600; padding-right: 10px; font-variant-numeric: tabular-nums; }
+  .leg .pin { color: var(--subtle); }
+  .leg .ft { color: var(--subtlest); font-size: 11px; }
+  .addl { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--subtle); margin-top: 10px; padding: 4px 6px; }
+  .addl.is-hover { background: var(--neutral); color: var(--text); }
+
+  /* Compose & send */
+  .stepper { background: #fff; height: 40px; display: flex; align-items: center; gap: 18px; padding: 0 14px; font-size: 13px; color: var(--subtle); margin-bottom: 12px; }
+  .stepper span { display: inline-flex; align-items: center; gap: 7px; }
+  .stepper span::before { content: ""; width: 8px; height: 8px; background: #6b6e76; }
+  .stepper .on { color: var(--text); }
+  .stepper .on::before { background: var(--brand); }
+  .stepper .done::before { background: var(--ok-bold); }
+  .stepper .chev { color: #b3b6bd; }
+  .stepper .chev::before { display: none; }
+  .banner { position: absolute; left: 20px; right: 20px; top: 58px; height: 38px; background: #22252b; color: #fff; display: flex; align-items: center; gap: 10px; padding: 0 14px; font-size: 13px; opacity: 0; }
+  .banner svg { width: 14px; height: 14px; }
+  .banner .r { margin-left: auto; font-weight: 500; }
+  .co-rest { position: relative; }
+  .co-grid { display: grid; grid-template-columns: 250px 1fr; gap: 12px; align-items: start; }
+  .struct { background: #fff; padding: 10px; }
+  .seg2 { display: grid; grid-template-columns: 1fr 1fr; background: var(--sunken); padding: 3px; font-size: 13px; margin-bottom: 8px; }
+  .seg2 span { text-align: center; padding: 6px 0; color: var(--subtle); }
+  .seg2 .on { background: #fff; color: var(--text); font-weight: 500; }
+  .blk { display: grid; grid-template-columns: 16px 1fr auto; gap: 8px; padding: 7px 6px; font-size: 13px; }
+  .blk svg { width: 12px; height: 12px; color: var(--subtlest); margin-top: 3px; }
+  .blk b { display: block; font-weight: 500; }
+  .blk span { display: block; font-size: 11px; color: var(--subtle); margin-top: 1px; }
+  .blk a { color: var(--brand); font-size: 12px; }
+  .xb { border: 1px dashed var(--brand); margin: 4px 0; padding: 6px; }
+  .xb .ov { color: var(--brand); margin-bottom: 6px; }
+  .xb div { border: 1px solid var(--border-2); padding: 6px 8px; font-size: 12px; margin-top: 4px; display: flex; justify-content: space-between; }
+  .prev { background: #fff; }
+  .p-tool { height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 12px; border-bottom: 1px solid var(--border-2); font-size: 13px; color: var(--subtle); }
+  .p-tool .f { height: 28px; width: 150px; font-size: 13px; color: var(--text); }
+  .p-tool .pg { margin-left: auto; }
+  .docwrap { height: 330px; background: var(--canvas); overflow: hidden; padding: 16px 0 0; }
+  .doc { width: 470px; margin: 0 auto; background: #fff; box-shadow: 0 1px 1px rgba(30, 31, 33, 0.25), 0 0 1px rgba(30, 31, 33, 0.3); padding: 28px 34px; font-size: 10px; line-height: 15px; }
+  .doc .lh { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-2); padding-bottom: 12px; margin-bottom: 12px; }
+  .doc .lh b { font-size: 10px; letter-spacing: 1.5px; }
+  .doc .lh span { text-align: right; color: var(--subtlest); font-size: 8.5px; line-height: 12px; }
+  .doc p { margin: 0 0 8px; }
+  .doc h5 { margin: 10px 0 4px; font-size: 10.5px; }
+  .doc .tr { display: grid; grid-template-columns: 1fr 60px 60px 60px; border-bottom: 1px solid var(--border-2); padding: 3px 0; }
+  .doc .tr span:not(:first-child) { text-align: right; }
+  .doc .th { font-size: 7.5px; letter-spacing: 0.6px; color: var(--subtlest); }
+  .doc .tot { display: flex; justify-content: space-between; border-top: 1.5px solid var(--text); margin-top: 8px; padding-top: 4px; font-weight: 700; font-size: 11px; }
+  .db { opacity: 0; }
+  .mail { border-top: 1px solid var(--border-2); padding: 4px 14px 10px; }
+  .mr { display: grid; grid-template-columns: 64px 1fr; align-items: center; min-height: 36px; border-bottom: 1px solid var(--border-2); font-size: 13px; }
+  .mr .k { color: var(--subtle); }
+  .to { display: inline-flex; gap: 8px; align-items: center; background: var(--neutral); padding: 4px 8px; font-size: 12px; }
+  .to b { font-weight: 600; }
+  .to span { color: var(--subtle); }
+  .att { display: inline-flex; gap: 6px; }
+  .att span { border: 1px solid var(--border-2); padding: 3px 8px; font-size: 12px; }
+  .mfoot { display: flex; align-items: center; gap: 8px; padding-top: 10px; font-size: 12px; }
+  .mfoot .st { display: inline-flex; align-items: center; gap: 6px; }
+  .mfoot .st svg { width: 13px; height: 13px; }
+  .mfoot .ready-ok { color: var(--subtle); }
+  .mfoot .ready-ok svg { color: var(--ok); }
+  .mfoot .good { color: var(--ok-bold); position: absolute; opacity: 0; }
+  .mfoot .r { margin-left: auto; display: flex; gap: 6px; position: relative; }
+  .mfoot .rev { display: none; }
+
+  /* Right: commercial ledger */
+  .ledger { border-left: 1px solid var(--border-2); padding: 14px 0 0 16px; background: #fff; }
+  .lg-row { display: grid; grid-template-columns: 112px 1fr; align-items: center; margin-bottom: 6px; font-size: 12px; color: var(--subtle); }
+  .lg-row .f { height: 30px; font-size: 13px; color: var(--text); border-right: 0; }
+  .lg-row .ns { color: var(--warn-text); font-size: 12px; text-align: right; padding-right: 14px; }
+  .lg-sep { border-top: 1px solid var(--border-2); margin: 12px 16px 12px 0; }
+  .comp { display: flex; height: 6px; margin: 4px 16px 10px 0; gap: 2px; }
+  .comp i { display: block; height: 100%; }
+  .lg-l { display: grid; grid-template-columns: 12px 1fr auto 42px; align-items: center; font-size: 12px; color: var(--subtle); padding-right: 16px; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+  .lg-l .sq { width: 7px; height: 7px; }
+  .lg-l span:not(:nth-child(2)) { text-align: right; }
+  .lg-l .v { color: var(--text); }
+  .total { display: flex; justify-content: space-between; align-items: baseline; padding-right: 16px; }
+  .total span { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--subtle); }
+  .total b { font-size: 26px; font-weight: 700; letter-spacing: -0.6px; font-variant-numeric: tabular-nums; }
+  .chk { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; }
+  .chk i { width: 14px; height: 14px; background: var(--brand); display: grid; place-items: center; }
+  .chk svg { width: 10px; height: 10px; color: #fff; }
+
+  /* ---------------------------------------------------------------- Cursor */
+  .cursor { position: absolute; left: 0; top: 0; width: 26px; height: 26px; transform-origin: 0 0; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25)); z-index: 10; }
+  .ripple { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 999px; background: rgba(24, 104, 219, 0.28); opacity: 0; z-index: 9; }
+</style>
+</head>
+<body>
+
+<div class="viewport">
+  <div class="stage" id="stage" role="img" aria-label="Animation: a dispatcher fills in a job and client, plans flight FL1, then composes and sends the priced offer in NGFT OPS">
+    <div class="scene" id="scene">
+      <div class="app" id="app">
+
+        <!-- Top navigation -->
+        <header class="tn">
+          <span class="brand"><svg viewBox="0 0 18 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M9 1.5 16 4v6c0 4.2-3 7.2-7 8.5C5 17.2 2 14.2 2 10V4z"/></svg>NGFT OPS</span>
+          <nav class="navl"><span>Jobs</span><span>Flights</span><span>Calendar</span><span class="on">Offers</span><span>Invoices</span><span>Roster</span><span>Config</span><span>Map</span></nav>
+          <span class="tn-r">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="5.5"/><path d="m12.2 12.2 4 4"/></svg>
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 13V8a5 5 0 0 1 10 0v5l1.5 1.5h-13zM7.5 16.5h3"/></svg>
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="9" r="2.5"/><path d="M9 1.5v2.2M9 14.3v2.2M1.5 9h2.2M14.3 9h2.2M3.7 3.7l1.5 1.5M12.8 12.8l1.5 1.5M3.7 14.3l1.5-1.5M12.8 5.2l1.5-1.5"/></svg>
+            <span class="me">JM</span>
+          </span>
+        </header>
+
+        <!-- Breadcrumb bar -->
+        <div class="bc">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+          <a>Offers</a><span class="sep">›</span><a>Alpine Rescue &amp; Emergency Services</a><span class="sep">›</span><span>44532/10</span>
+          <span class="badge" id="bcBadge">DRAFT</span>
+          <span class="bc-r"><span class="chf">CHF</span><b id="bcTotal">19 475</b><span class="btn"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M8 1 3 8h4l-1 5 5-7H7z"/></svg>Quick capture</span><span class="btn pri" id="topSend">Send</span></span>
+        </div>
+
+        <div class="body">
+          <!-- Left rail -->
+          <aside class="rail">
+            <div class="r-lab">OFFER</div>
+            <div class="r-it" id="railJob"><span id="icJob"></span><b>Job &amp; client</b></div>
+            <div class="r-lab" style="margin-top:4px">FLIGHTS</div>
+            <div class="r-it" id="railFl1"><span id="icFl1"></span><b>FL1</b><span class="m" id="fl1Meta">· 21.03 · no aircraft</span></div>
+            <div class="r-it"><span><svg class="bad" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="3.5"/></svg></span><b>FL2</b><span class="m">· 25.03 · no aircraft</span></div>
+            <div class="r-it r-add">+ &nbsp;Add flight</div>
+            <div class="r-lab">DOCUMENT</div>
+            <div class="r-it" id="railCo"><span id="icCo"></span><b>Compose &amp; send</b></div>
+            <div class="ready">
+              <div class="ready-t"><div><b>Ready to send</b><br><span id="readyText">4 items outstanding</span></div><span class="cnt" id="readyCnt">4/8 &nbsp;⌄</span></div>
+              <div class="rbar"><i id="readyBar"></i></div>
+            </div>
+            <div class="saved">Saved 12:30 · autosaving</div>
+          </aside>
+
+          <!-- Centre -->
+          <main class="canvas">
+
+            <!-- 1. Job & client -->
+            <section class="pane" id="pJob">
+              <div class="p-h"><h2>Job &amp; client</h2><span class="r"><span class="btn sm">Duplicate job</span><span class="btn sm">Templates</span></span></div>
+              <div class="job-grid">
+                <div>
+                  <div class="card" id="cardJob">
+                    <div class="ov">JOB</div>
+                    <div class="row"><span class="lab">Project</span><span class="f sel ph" id="fProject">Choose a project</span></div>
+                    <div class="row"><span class="lab">Job name</span><span class="f ph" id="fJob">Job name</span></div>
+                    <div class="row"><span class="lab">Location</span><span class="f ph" id="fLoc">Site, address or coordinates</span></div>
+                    <div class="row"><span class="lab">Manager</span><span class="two"><span class="f sel">R. Rüesch</span><span class="f sel">English</span></span></div>
+                  </div>
+                  <div class="card" id="cardClient">
+                    <div class="ov">CLIENT</div>
+                    <div class="row"><span class="lab">Client</span><span class="f ph" id="fClient">Search company, contact name, or client no.</span></div>
+                    <div class="client" id="clientCard">
+                      <span class="av">AR</span>
+                      <div><b>Alpine Rescue &amp; Emergency Services</b><span class="tag">44532</span>
+                        <p>Thomas Bruger · Bern · +44 321 31 32 12</p>
+                        <p>9 previous offers · last 44532/09 &nbsp;<a>Start from it</a></p></div>
+                    </div>
+                    <div class="offno" id="offNo">Offer no. <b>44532/10</b> — client 44532 · offer 10 for this client</div>
+                  </div>
+                  <div class="card">
+                    <div class="ov">PEOPLE ON THIS JOB <span class="btn purple">+ New contact</span></div>
+                    <div class="row"><span class="lab">Client contact<br>commercial</span>
+                      <div class="person"><span class="av" id="pAv">—</span><div><b id="pName">Choose contact</b><span id="pMeta">—</span></div></div></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="card">
+                    <div class="ov">NOTES</div>
+                    <div class="ov" style="margin-bottom:6px">INTERNAL · JOB NOTE</div>
+                    <div class="note">Client will confirm exact LZ Friday. Second machine on standby if weather holds.</div>
+                    <div class="cap">Dispatch only — never printed, never sent.</div>
+                    <div class="ov" style="margin-bottom:6px">CREW NOTE</div>
+                    <div class="note">Approach from the south — cable crossing marked on the chart. Ground contact on 123.45.</div>
+                    <div class="cap" style="margin-bottom:0">Appears on the flight brief the crew carries.</div>
+                  </div>
+                  <div class="card"><div class="ov">ATTACHMENTS</div><div class="chips"><span class="chip">Landing brief.pdf</span><span class="chip">Landing zone.jpg</span><span class="chip">+</span></div></div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 2. FL1 -->
+            <section class="pane" id="pFl" style="opacity:0">
+              <div class="p-h"><h2>FL1</h2><span style="color:var(--subtle);font-size:13px">Wed 21 March 2026 · CW 2614</span><span class="dg">DG</span>
+                <span class="r tabs"><span class="on">FL1</span><span>FL2</span><span>+</span></span></div>
+              <div class="fl-card">
+                <div class="sec" id="secAir">
+                  <div class="ov">AIRCRAFT &amp; CONFIGURATION</div>
+                  <div class="grid5">
+                    <div><div class="fl">AIRCRAFT</div><span class="f sel ph" id="fAc">Choose aircraft</span></div>
+                    <div><div class="fl">LINE</div><span class="f sel ph" id="fLine">—</span></div>
+                    <div><div class="fl">HOOK</div><span class="f sel ph" id="fHook">—</span></div>
+                    <div><div class="fl">FUEL TYPE</div><span class="f sel ph" id="fFuel">—</span></div>
+                    <div><div class="fl">QUANTITY</div><span class="f ph" id="fQty">—</span></div>
+                  </div>
+                </div>
+                <div class="sec">
+                  <div class="ov">TIMING <span class="n">dashed = derived</span></div>
+                  <div class="grid4">
+                    <div><div class="fl">CLIENT REQUESTED</div><span class="f">12:00</span></div>
+                    <div><div class="fl">LEAD TIME</div><span class="f sel">45 min</span></div>
+                    <div><div class="fl">CREW CALL</div><span class="f der">11:15</span></div>
+                    <div><div class="fl">EST. BLOCK TIME</div><span class="f der">01:03</span></div>
+                  </div>
+                </div>
+                <div class="sec" id="secCrew">
+                  <div class="ov">CREW <span class="n">defaults from aircraft roster</span></div>
+                  <div class="crew-r"><span class="rl">Pilot</span><span class="who" data-crew="AF|Allen Finch"></span><span class="dash">—</span></div>
+                  <div class="crew-r"><span class="rl">TSOP</span><span class="who" data-crew="ET|Edward Twain"></span><span class="dash">—</span></div>
+                  <div class="crew-r"><span class="rl">Fuel truck driver</span><span class="who" data-crew="BH|Ben Hull"></span><span>Emergency landing · TW1 · 15:00</span></div>
+                  <div class="crew-r"><span class="rl">Logging specialist</span><span class="who" data-crew="AJ|Allen Johnson"></span><span>Emergency landing · TW1 · 15:00</span></div>
+                </div>
+                <div class="sec" id="secSeq">
+                  <div class="ov">SEQUENCE <span class="n">arrows move · ⌘↵ new leg</span></div>
+                  <div class="seq-h"><span></span><span>TYPE</span><span>PRODUCT</span><span>FROM</span><span>TO</span><span style="text-align:right;padding-right:10px">QTY</span><span>UNIT</span><span style="text-align:right;padding-right:10px">PRICE</span><span style="text-align:right;padding-right:10px">TOTAL</span></div>
+                  <div class="legs" id="legs">
+                    <div class="leg"><span class="grip">⠿</span><span>↗ Overflight</span><span>Overflight Zone A</span><span class="pin">◎ Pickup site 1 <span class="ft">450</span></span><span class="pin">◎ Pickup site 1 <span class="ft">450</span></span><span class="num">10</span><span class="pin">min</span><span class="num">800</span><span class="tot">8 000</span></div>
+                    <div class="leg"><span class="grip">⠿</span><span>◈ Local ops</span><span>Mountain Rescue</span><span class="pin">◎ Pickup site 1 <span class="ft">450</span></span><span class="pin">⬠ Drop-off site</span><span class="num">2</span><span class="pin">rot</span><span class="num">5 250</span><span class="tot">10 500</span></div>
+                  </div>
+                  <span class="addl" id="addLeg">+ &nbsp;Add leg</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- 3. Compose & send -->
+            <section class="pane" id="pCo" style="opacity:0">
+              <div class="p-h"><h2>Compose &amp; send</h2><span id="roTag" style="font-size:11px;letter-spacing:.6px;color:var(--subtle);opacity:0">READ-ONLY · V1 SENT</span></div>
+              <div class="banner" id="banner"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M13 1 1 6l5 2 2 5z"/></svg>Sent 17.08 at 09:12 to Thomas Bruger. Version 1 is frozen — the client is holding this copy.<span class="r">Revise (creates v2)</span></div>
+              <div class="co-rest" id="coRest">
+                <div class="stepper"><span id="stDraft" class="on">Draft</span><span class="chev">›</span><span id="stSent">Sent</span><span class="chev">›</span><span>Viewed</span><span class="chev">›</span><span>Accepted</span><span class="chev">›</span><span>Job</span></div>
+                <div class="co-grid">
+                  <div class="struct">
+                    <div class="seg2"><span class="on">Structure</span><span>Library</span></div>
+                    <div class="blk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="5.5" width="8" height="5.5"/><path d="M4 5.5V4a2 2 0 0 1 4 0v1.5"/></svg><div><b>Letterhead</b><span>company · offer no. · date · manager</span></div></div>
+                    <div class="blk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="5.5" width="8" height="5.5"/><path d="M4 5.5V4a2 2 0 0 1 4 0v1.5"/></svg><div><b>Salutation</b><span>Dear Mr. Bruger,</span></div><a>Change</a></div>
+                    <div class="blk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="5.5" width="8" height="5.5"/><path d="M4 5.5V4a2 2 0 0 1 4 0v1.5"/></svg><div><b>Flights &amp; pricing</b><span>generated from the offer · 2 flights</span></div></div>
+                    <div class="blk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="5.5" width="8" height="5.5"/><path d="M4 5.5V4a2 2 0 0 1 4 0v1.5"/></svg><div><b>Total</b><span id="stTotal">CHF 37 050</span></div></div>
+                    <div class="xb"><div class="ov" style="border:0;padding:0;margin:0 0 2px">EXTRA BLOCKS <span>+ Add</span></div><div>Crew duty limits <span>×</span></div><div>Access &amp; permits <span>×</span></div><div>Standby &amp; cancellation <span>×</span></div></div>
+                    <div class="blk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="5.5" width="8" height="5.5"/><path d="M4 5.5V4a2 2 0 0 1 4 0v1.5"/></svg><div><b>Conditions</b><span>VAT exclusion · weather minima</span></div><a>Change</a></div>
+                    <div class="blk"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="5.5" width="8" height="5.5"/><path d="M4 5.5V4a2 2 0 0 1 4 0v1.5"/></svg><div><b>Signature</b><span>project manager block</span></div></div>
+                  </div>
+                  <div class="prev">
+                    <div class="p-tool">Template <span class="f sel">Standard offer</span> Language <span class="f sel" style="width:110px">English</span><span class="pg">Page 1 of 2 &nbsp;‹ ›</span></div>
+                    <div class="docwrap"><div class="doc" id="doc">
+                      <div class="lh db"><b>ROTOR SOLUTIONS</b><span>Offer 44532/10 · v1 draft<br>Bern, 17 August 2026<br>Project manager R. Rüesch</span></div>
+                      <p class="db">Dear Mr. Bruger,</p>
+                      <p class="db">We are pleased to offer the following helicopter operations as specified below. Flight operations will be carried out subject to weather minima and crew duty limits.</p>
+                      <div class="db"><h5>FL1 · 21 March 2026 · HB-ZXA Airbus H125</h5>
+                        <div class="tr th"><span>SERVICE</span><span>QTY·UNIT</span><span>PRICE</span><span>TOTAL</span></div>
+                        <div class="tr"><span>Overflight Zone A</span><span>10 min</span><span>800</span><span>8 000</span></div>
+                        <div class="tr"><span>Mountain Rescue</span><span>2 rot</span><span>5 250</span><span>10 500</span></div></div>
+                      <div class="db"><h5>FL2 · 25 March 2026</h5>
+                        <div class="tr"><span>Overflight Zone A</span><span>10 min</span><span>800</span><span>8 000</span></div>
+                        <div class="tr"><span>Cargo sling — standard</span><span>3 rot</span><span>4 167</span><span>12 500</span></div>
+                        <div class="tot"><span>Total</span><span>CHF 37 050</span></div></div>
+                    </div></div>
+                    <div class="mail">
+                      <div class="mr"><span class="k">To</span><span><span class="to"><span>TB</span><b>Thomas Bruger</b><span>thomasbruger@alpine.com</span></span></span></div>
+                      <div class="mr"><span class="k">Subject</span><span>Offer 44532/10 — Mountain Rescue, 21 and 25 March</span></div>
+                      <div class="mr"><span class="k">Attach</span><span class="att"><span>Offer_44532-10_v1.pdf <small style="color:var(--subtlest)">AUTO</small></span><span>brief.pdf</span><span>landing zone.jpg</span></span></div>
+                      <div class="mfoot" id="mfoot">
+                        <span class="st ready-ok" id="mWarn"><svg viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6.5" r="5.2"/><path d="m4.3 6.6 1.6 1.6 2.9-3"/></svg>All checks passed · ready to send</span>
+                        <span class="st good" id="mGood"><svg viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6.5" r="5.2"/><path d="m4.3 6.6 1.6 1.6 2.9-3"/></svg>Delivered · awaiting client response</span>
+                        <span class="r"><span class="btn sm">Download PDF</span><span class="btn sm pri" id="sendOffer"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M8 1 3 8h4l-1 5 5-7H7z"/></svg>Send offer</span><span class="btn sm pri rev" id="revise">Revise (creates v2)</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+
+          <!-- Right: commercial ledger -->
+          <aside class="ledger">
+            <div class="ov" style="margin-bottom:12px">COMMERCIAL</div>
+            <div class="lg-row"><span>Currency</span><span class="f">CHF</span></div>
+            <div class="lg-row"><span>Exchange rate</span><span class="f">2.4</span></div>
+            <div class="lg-row"><span>VAT scheme</span><span class="ns">⚠ not set</span></div>
+            <div class="lg-row"><span>Fuel surcharge</span><span class="f">None</span></div>
+            <div class="lg-row"><span>Payment terms</span><span class="f">30 days net</span></div>
+            <div class="lg-row"><span>Discount</span><span class="f">5%</span></div>
+            <div class="lg-sep"></div>
+            <div class="ov">COMPOSITION</div>
+            <div class="comp"><i id="cb1" style="background:var(--brand)"></i><i id="cb2" style="background:var(--orange)"></i></div>
+            <div class="lg-l"><span class="sq" style="background:var(--brand)"></span><span>FL1 · 21.03</span><span class="v" id="lgFl1">0</span><span id="lgP1">0%</span></div>
+            <div class="lg-l"><span class="sq" style="background:var(--orange)"></span><span>FL2 · 25.03</span><span class="v">20 500</span><span id="lgP2">100%</span></div>
+            <div class="lg-sep"></div>
+            <div class="lg-l" style="grid-template-columns:1fr auto"><span>Subtotal</span><span class="v" id="lgSub">20 500</span></div>
+            <div class="lg-l" style="grid-template-columns:1fr auto"><span>Discount 5%</span><span class="v" id="lgDisc">− 1 025</span></div>
+            <div class="lg-sep" style="border-color:var(--text)"></div>
+            <div class="total"><span>TOTAL CHF</span><b id="lgTotal">19 475</b></div>
+            <div class="chk"><i><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 5.2 2 2 4-4.4"/></svg></i>Show total on offer</div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="ripple" id="ripple"></div>
+      <svg class="cursor" id="cursor" viewBox="0 0 24 24"><path d="M4 2.5v17l4.6-4.1 3 6.6 3-1.3-2.9-6.4 6.3-.2z" fill="#16181d" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const scene = $('scene'), stage = $('stage'), app = $('app'), cursor = $('cursor'), ripple = $('ripple');
+
+  // Icons for the rail
+  const IC = {
+    idle: '<svg class="idle" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="3.5"/></svg>',
+    bad: '<svg class="bad" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="3.5"/></svg>',
+    ok: '<svg class="ok" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3 7.3 2.6 2.6L11 4.4"/></svg>',
+    warn: '<svg class="wr" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M7 1.8 12.8 12H1.2z"/><path d="M7 5.6v2.8M7 10.2v.1"/></svg>',
+    tick: '<svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2 5.7 2.2 2.2L9 3"/></svg>',
+  };
+
+  // Crew rows start empty and fill from the roster
+  const crew = [...document.querySelectorAll('[data-crew]')];
+  crew.forEach((el) => {
+    const [ini, name] = el.dataset.crew.split('|');
+    el.innerHTML = `<span class="ini">${ini}</span><span>${name}</span><span class="avail">${IC.tick}available</span>`;
+  });
+  // A third leg is added in the animation
+  const legsEl = $('legs');
+  legsEl.insertAdjacentHTML('beforeend', '<div class="leg"><span class="grip">⠿</span><span>↗ Overflight <span class="ft">AUTO</span></span><span>Overflight Zone A</span><span class="pin">◎ Pickup site 1 <span class="ft">450</span></span><span class="pin">◎ Pickup site 1 <span class="ft">450</span></span><span class="num">10</span><span class="pin">min</span><span class="num">800</span><span class="tot">8 000</span></div>');
+  const legs = [...legsEl.children];
+  const docBlocks = [...document.querySelectorAll('#doc .db')];
+
+  // ---------------------------------------------------------------------
+  // Helpers (same engine as the HX thumbnail)
+  // ---------------------------------------------------------------------
+  const DUR = 10;            // script seconds
+  const SLOW = 16 / DUR;     // the loop lasts 16s. Change 16 to retime it.
+  const W = 960, H = 540;
+  let zoom = 1, lastT = null;
+  const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ramp = (t, a, b) => ease(clamp01((t - a) / (b - a)));
+  const bump = (t, a, b) => { const u = clamp01((t - a) / (b - a)); return Math.sin(u * Math.PI); };
+  function track(keys, t) {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      const [t1, v1] = keys[i];
+      if (t <= t1) {
+        const [t0, v0] = keys[i - 1];
+        const u = ease((t - t0) / (t1 - t0 || 1));
+        const out = {};
+        for (const k in v1) out[k] = lerp(v0[k], v1[k], u);
+        if (keys[i][2] && 's' in out) out.s *= 1 - keys[i][2] * Math.sin(u * Math.PI);
+        return out;
+      }
+    }
+    return keys[keys.length - 1][1];
+  }
+  function box(el) {
+    let x = 0, y = 0, e = el;
+    while (e && e !== scene) { x += e.offsetLeft; y += e.offsetTop; e = e.offsetParent; }
+    return { x, y, w: el.offsetWidth, h: el.offsetHeight, cx: x + el.offsetWidth / 2, cy: y + el.offsetHeight / 2 };
+  }
+  const setText = (el, s) => { if (el.textContent !== s) el.textContent = s; };
+  const setHTML = (el, s) => { if (el.dataset.h !== s) { el.innerHTML = s; el.dataset.h = s; } };
+  const num = (n) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  // A field: placeholder until `at`, then the value, briefly highlighted
+  function fill(el, value, placeholder, t, at) {
+    const on = t >= at;
+    setText(el, on ? value : placeholder);
+    el.classList.toggle('ph', !on);
+    el.classList.toggle('flash', on && t < at + 0.35);
+  }
+  // A typed field: characters appear between a and b, with a caret
+  function type(el, value, placeholder, t, a, b, focusFrom) {
+    const focused = t >= focusFrom && t < b + 0.15;
+    el.classList.toggle('focus', focused);
+    if (t < a) { setHTML(el, focused ? '<span class="caret"></span>' : placeholder); el.classList.toggle('ph', !focused); return; }
+    el.classList.remove('ph');
+    const n = Math.round(clamp01((t - a) / (b - a)) * value.length);
+    const shown = value.slice(0, n).replace(/&/g, '&amp;');
+    setHTML(el, focused ? `${shown}<span class="caret"></span>` : shown);
+  }
+
+  // ---------------------------------------------------------------------
+  // The script
+  // ---------------------------------------------------------------------
+  let CAM, CUR;
+  function plan() {
+    // Measure with all panes in their natural place
+    const job = box($('cardJob')), client = box($('cardClient'));
+    const air = box($('secAir')), crewB = box($('secCrew')), seq = box($('secSeq'));
+    const doc = box(document.querySelector('.docwrap')), send = box($('sendOffer'));
+    const wide = { s: Math.min((W - 40) / 1440, (H - 28) / 900), x: 720, y: 450 };
+    const camJob = { s: 1.45, x: job.cx + 10, y: job.cy };
+    const camClient = { s: 1.45, x: client.cx + 10, y: client.cy + 16 };
+    const camLeft = { s: 0.92, x: 480 + 30, y: 400 };
+    const camAir = { s: Math.min(1.25, (W - 60) / air.w), x: air.cx, y: air.cy + 30 };
+    const camCrew = { s: 1.4, x: crewB.x + 290, y: crewB.cy };
+    const camSeq = { s: Math.min(1.25, (W - 50) / seq.w), x: seq.cx, y: seq.cy + 18 };
+    const camDoc = { s: 1.15, x: doc.cx - 40, y: doc.cy + 10 };
+    const camSend = { s: 1.5, x: send.cx - 190, y: send.cy - 62 };
+    CAM = [
+      [0, wide], [0.4, wide], [0.95, camJob], [1.85, camJob], [2.3, camClient], [2.75, camClient],
+      [3.2, camLeft], [3.42, camLeft], [3.9, camAir], [4.3, camAir], [4.7, camCrew], [4.9, camCrew],
+      [5.25, camSeq], [5.75, camSeq], [6.2, wide], [6.5, wide], [6.95, camDoc], [7.3, camDoc],
+      [7.72, camSend], [8.15, camSend], [8.6, wide], [9.3, wide], [10, wide, 0.1],
+    ];
+
+    const at = (el, dx = 0, dy = 0) => { const b = box(el); return { x: b.cx + dx, y: b.cy + dy }; };
+    const off = { x: 1280, y: 860 };
+    const project = at($('fProject'), 40, 4), jobName = at($('fJob'), -60, 5), search = at($('fClient'), -40, 5);
+    const rFl1 = at($('railFl1'), -30, 4), rCo = at($('railCo'), -20, 4);
+    const ac = at($('fAc'), 20, 5), addLeg = at($('addLeg'), 4, 3);
+    const sendP = at($('sendOffer'), 6, 4);
+    CUR = [
+      [0, off], [0.3, off], [0.88, project], [1.0, project], [1.18, jobName], [1.85, jobName],
+      [2.22, search], [2.7, { x: search.x + 30, y: search.y + 40 }], [3.2, rFl1], [3.36, rFl1],
+      [3.78, ac], [4.3, { x: ac.x + 40, y: ac.y + 50 }], [4.8, { x: crewB.x + 420, y: crewB.cy + 30 }],
+      [5.16, addLeg], [5.4, addLeg], [6.35, rCo], [6.52, rCo], [7.05, { x: doc.cx + 60, y: doc.cy + 30 }],
+      [7.68, sendP], [7.95, sendP], [8.6, { x: sendP.x + 50, y: sendP.y + 70 }], [9.3, { x: sendP.x + 50, y: sendP.y + 70 }], [10, off],
+    ];
+  }
+  const CLICKS = [0.92, 1.22, 2.26, 3.28, 3.82, 5.24, 6.44, 7.82];
+
+  // ---------------------------------------------------------------------
+  // State for time t. The app resets to the start at 9.6s, hidden in a fade.
+  // ---------------------------------------------------------------------
+  function apply(t) {
+    lastT = t;
+    const s = t >= 9.6 ? 0 : t;   // state time
+    // Embedded in a homepage card: tell the page where we are, so the card's
+    // "Call to offer" timer counts down in step.
+    if (embed && parent !== window) parent.postMessage({ cover: 'ngft-ops', t }, location.origin);
+
+    // Camera
+    const cam = track(CAM, t);
+    scene.style.transform = `translate(${(W / 2 - cam.x * cam.s) * zoom}px, ${(H / 2 - cam.y * cam.s) * zoom}px) scale(${cam.s * zoom})`;
+    app.style.opacity = String(1 - 0.85 * bump(t, 9.35, 9.85));
+
+    // Cursor
+    const cur = track(CUR, t);
+    let press = 0, rip = null;
+    for (const c of CLICKS) {
+      press = Math.max(press, bump(t, c - 0.04, c + 0.15));
+      if (t >= c && t < c + 0.42) rip = (t - c) / 0.42;
+    }
+    const k = (0.85 / cam.s) * (1 - 0.14 * press);
+    cursor.style.transform = `translate(${cur.x}px, ${cur.y}px) scale(${k}) translate(-4.3px, -2.7px)`;
+    cursor.style.opacity = String(1 - ramp(t, 9.25, 9.45) + ramp(t, 9.8, 10));
+    ripple.style.opacity = rip !== null ? String(0.9 * (1 - rip)) : '0';
+    ripple.style.transform = `translate(${cur.x}px, ${cur.y}px) scale(${rip !== null ? (0.3 + 1.2 * ease(rip)) * 0.85 / cam.s : 0})`;
+
+    // Which screen is showing
+    const toFl = ramp(s, 3.3, 3.58), toCo = ramp(s, 6.46, 6.74);
+    const pJ = 1 - toFl, pF = toFl * (1 - toCo), pC = toCo;
+    $('pJob').style.opacity = String(pJ);
+    $('pJob').style.transform = `translateX(${-16 * toFl}px)`;
+    $('pFl').style.opacity = String(pF);
+    $('pFl').style.transform = `translateX(${16 * (1 - toFl) - 16 * toCo}px)`;
+    $('pCo').style.opacity = String(pC);
+    $('pCo').style.transform = `translateX(${16 * (1 - toCo)}px)`;
+
+    // Rail
+    $('railJob').classList.toggle('on', s < 3.3);
+    $('railFl1').classList.toggle('on', s >= 3.3 && s < 6.46);
+    $('railCo').classList.toggle('on', s >= 6.46);
+    setHTML($('icJob'), s >= 2.85 ? IC.ok : IC.idle);
+    setHTML($('icFl1'), s >= 4.3 ? IC.ok : IC.bad);
+    setText($('fl1Meta'), s >= 4.3 ? '· 21.03 · HB-ZXA' : '· 21.03 · no aircraft');
+    setHTML($('icCo'), s >= 8.0 ? IC.ok : IC.warn);
+    const ready = s >= 6.0 ? ['All checks passed', '8/8', 100, 'var(--ok-bold)'] : s >= 2.85 ? ['3 items outstanding', '5/8', 62, 'var(--danger)'] : ['4 items outstanding', '4/8', 50, 'var(--danger)'];
+    setText($('readyText'), ready[0]);
+    setText($('readyCnt'), `${ready[1]}  ⌄`);
+    $('readyBar').style.width = `${ready[2]}%`;
+    $('readyBar').style.background = ready[3];
+
+    // 1. Job & client: project, job name (typed), location derived, client found
+    $('fProject').classList.toggle('focus', s >= 0.9 && s < 1.1);
+    fill($('fProject'), 'Bern Rescue Q1 2026', 'Choose a project', s, 0.98);
+    type($('fJob'), 'Fährstrasse 37, 3004 Bern', 'Job name', s, 1.28, 1.78, 1.2);
+    fill($('fLoc'), 'Fährstrasse 37, 3004 Bern, Switzerland', 'Site, address or coordinates', s, 1.86);
+    type($('fClient'), 'Alpine', 'Search company, contact name, or client no.', s, 2.32, 2.5, 2.24);
+    const cp = ramp(s, 2.55, 2.8);
+    $('clientCard').style.opacity = String(cp);
+    $('clientCard').style.transform = `translateY(${(1 - cp) * 8}px)`;
+    $('offNo').style.opacity = String(ramp(s, 2.7, 2.9));
+    const contact = s >= 2.8;
+    setText($('pAv'), contact ? 'TB' : '—');
+    setText($('pName'), contact ? 'Thomas Bruger' : 'Choose contact');
+    setText($('pMeta'), contact ? 'Ops manager · +44 321 31 32 12' : '—');
+
+    // 2. FL1: aircraft, then its defaults; crew; a third leg; totals
+    $('fAc').classList.toggle('focus', s >= 3.8 && s < 4.0);
+    fill($('fAc'), 'HB-ZXA · Airbus H125', 'Choose aircraft', s, 3.88);
+    fill($('fLine'), '55 Electric', '—', s, 3.98);
+    fill($('fHook'), 'Single', '—', s, 4.06);
+    fill($('fFuel'), 'Drum', '—', s, 4.14);
+    fill($('fQty'), '200 L', '—', s, 4.22);
+    crew.forEach((el, i) => {
+      const p = ramp(s, 4.45 + i * 0.09, 4.62 + i * 0.09);
+      el.style.opacity = String(p);
+      el.style.transform = `translateX(${(1 - p) * -8}px)`;
+    });
+    $('addLeg').classList.toggle('is-hover', s > 5.0 && s < 5.4);
+    legs.forEach((el, i) => {
+      const at = i < 2 ? 4.95 + i * 0.12 : 5.32;
+      const p = ramp(s, at, at + 0.22);
+      el.style.height = `${34 * p}px`;
+      el.classList.toggle('in', p > 0.02 && i > 0);
+      el.style.opacity = String(p);
+    });
+    // Totals: FL1 is worth 18 500 once its legs are priced
+    const r = ramp(s, 5.35, 5.95);
+    const fl1 = 18500 * r, sub = 20500 + fl1, disc = sub * 0.05, total = sub - disc;
+    setText($('lgFl1'), num(fl1));
+    setText($('lgP1'), `${Math.round((fl1 / sub) * 100)}%`);
+    setText($('lgP2'), `${Math.round((20500 / sub) * 100)}%`);
+    setText($('lgSub'), num(sub));
+    setText($('lgDisc'), `− ${num(disc)}`);
+    setText($('lgTotal'), num(total));
+    setText($('bcTotal'), num(total));
+    $('cb1').style.width = `${(fl1 / sub) * 100}%`;
+    $('cb2').style.width = `${(20500 / sub) * 100}%`;
+
+    // 3. Compose & send: the document builds, then it is sent
+    docBlocks.forEach((el, i) => {
+      const p = ramp(s, 6.72 + i * 0.12, 6.95 + i * 0.12);
+      el.style.opacity = String(p);
+      el.style.transform = `translateY(${(1 - p) * 6}px)`;
+    });
+    const sendBtn = $('sendOffer');
+    sendBtn.classList.toggle('is-hover', s > 7.6 && s < 7.95);
+    sendBtn.style.transform = `scale(${1 - 0.06 * bump(s, 7.78, 7.92)})`;
+    const sent = ramp(s, 7.95, 8.2);
+    // The send button gives way to Revise once the offer is out
+    const swapped = s >= 8.05;
+    sendBtn.style.display = swapped ? 'none' : '';
+    $('revise').style.display = swapped ? 'inline-flex' : 'none';
+    $('revise').style.opacity = String(ramp(s, 8.05, 8.25));
+    $('mWarn').style.opacity = String(1 - sent);
+    $('mGood').style.opacity = String(sent);
+    const bn = ramp(s, 8.25, 8.55);
+    $('banner').style.opacity = String(bn);
+    $('banner').style.transform = `translateY(${(1 - bn) * -8}px)`;
+    $('coRest').style.transform = `translateY(${46 * bn}px)`;
+    $('roTag').style.opacity = String(bn);
+    $('stSent').classList.toggle('on', s >= 8.3);
+    $('stDraft').classList.toggle('on', s < 8.3);
+    $('stDraft').classList.toggle('done', s >= 8.3);
+    const isSent = s >= 8.3;
+    setText($('bcBadge'), isSent ? 'SENT' : 'DRAFT');
+    $('bcBadge').classList.toggle('sent', isSent);
+    $('topSend').classList.toggle('off', isSent);
+    $('topSend').classList.toggle('pri', !isSent);
+  }
+
+  // ---------------------------------------------------------------------
+  // Fit and run (same as the HX thumbnail: ?t=, ?scale=, ?embed)
+  // ---------------------------------------------------------------------
+  const params = new URLSearchParams(location.search);
+  const embed = params.has('embed');
+  if (embed) document.documentElement.classList.add('embed');
+  function fit() {
+    const fixed = parseFloat(params.get('scale'));
+    const pad = embed ? 0 : 48;
+    zoom = fixed > 0 ? fixed : Math.min((innerWidth - pad) / W, (innerHeight - pad) / H, embed ? 4 : 2);
+    stage.style.width = `${W * zoom}px`;
+    stage.style.height = `${H * zoom}px`;
+    stage.style.borderRadius = embed ? '0' : `${4 * zoom}px`;
+  }
+  addEventListener('resize', () => { fit(); if (lastT !== null && CAM) apply(lastT); });
+  fit();
+
+  const frozen = params.has('t') ? parseFloat(params.get('t')) : null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.fonts.ready.then(() => {
+    // Measure with every pane laid out in place (panes overlap; opacity does not affect layout)
+    plan();
+    if (frozen !== null || reduce) { apply(((frozen ?? 8.8) / SLOW) % DUR); return; }
+    let played = 0, last = null, raf = 0, visible = true;
+    const frame = (now) => {
+      if (last !== null) played += Math.min(now - last, 100);
+      last = now;
+      apply((played / 1000 / SLOW) % DUR);
+      raf = requestAnimationFrame(frame);
+    };
+    const run = () => { if (!raf && visible && !document.hidden) { last = null; raf = requestAnimationFrame(frame); } };
+    const halt = () => { cancelAnimationFrame(raf); raf = 0; };
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? run() : halt(); }).observe(stage);
+    document.addEventListener('visibilitychange', () => (document.hidden ? halt() : run()));
+    apply(0);
+    run();
+  });
+})();
+</script>
+</body>
+</html>
