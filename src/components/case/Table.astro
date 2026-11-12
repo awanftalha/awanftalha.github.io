@@ -1,0 +1,7 @@
+---
+// 4.17 Markdown tables: wrapped so a wide table scrolls inside itself on
+// mobile, never the page. Keyboard users can focus and scroll it.
+---
+<div class="cs-table" tabindex="0" role="region" aria-label="Table, scroll sideways if needed">
+  <table><slot /></table>
+</div>

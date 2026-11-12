@@ -1,0 +1,57 @@
+---
+// 4.4 Loop: a muted, looping, inline video that plays only while at least
+// 40% visible. preload="none", poster first. If the video file doesn't exist
+// yet, the poster is shown on its own with posterAlt (alt describes a
+// recording that isn't made yet). When the video exists, its same-path .webp
+// first frame is preferred as the poster. Reduced motion: poster + a small
+// play button. Optional device frame drawn in CSS.
+import { onDisk, posterFor, dims, warn } from '../../lib/media.js';
+
+interface Props {
+  src?: string;
+  poster?: string;
+  alt: string;
+  posterAlt?: string;
+  caption?: string;
+  device?: 'none' | 'desktop' | 'tablet' | 'phone';
+  ratio?: string;          // e.g. "16/10"; defaults to the poster's own ratio
+}
+const { src, poster, alt, posterAlt, caption, device = 'none', ratio } = Astro.props;
+const hasVideo = onDisk(src);
+const posterSrc = hasVideo ? posterFor(src, poster) : poster;
+const size = posterSrc ? dims(posterSrc) : null;
+if (src && !hasVideo) warn(`Loop not made yet, showing poster: ${src}`);
+if (posterSrc && !onDisk(posterSrc)) warn(`Poster not found: ${posterSrc}`);
+const style = ratio ? `--ratio: ${ratio}` : size ? `--ratio: ${size.width} / ${size.height}` : undefined;
+---
+<figure class:list={['cs-loop', `device-${device}`]} style={style}>
+  <div class="cs-device">
+    {device === 'desktop' && <span class="cs-device__bar" aria-hidden="true"><i></i><i></i><i></i></span>}
+    <div class="cs-device__screen">
+      {hasVideo ? (
+        <>
+          <video
+            class="cs-loop__video"
+            data-loop
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster={posterSrc}
+            aria-label={alt}
+            width={size?.width}
+            height={size?.height}
+          >
+            <source src={src} type="video/mp4" />
+          </video>
+          <button class="cs-loop__play" type="button" data-loop-play hidden aria-label={`Play: ${alt}`}>
+            <svg aria-hidden="true" viewBox="0 0 16 16"><path fill="currentColor" d="M5 3.2v9.6L12.6 8z" /></svg>
+          </button>
+        </>
+      ) : (
+        posterSrc && <img src={posterSrc} alt={posterAlt ?? alt} width={size?.width} height={size?.height} loading="lazy" decoding="async" />
+      )}
+    </div>
+  </div>
+  {caption && <figcaption class="cs-caption">{caption}</figcaption>}
+</figure>

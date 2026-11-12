@@ -1,0 +1,22 @@
+---
+// 4.10 GoDeeper: native <details>/<summary>, so it works without JS. The
+// closed row: + icon, title, a one-line summary and its reading time. JS
+// adds the height animation, deep links (#id opens it) and print (all open).
+import { readingMinutes } from '../../lib/media.js';
+
+interface Props { id: string; title: string; summary?: string }
+const { id, title, summary } = Astro.props;
+const html = await Astro.slots.render('default');
+const min = readingMinutes(html);
+---
+<details class="cs-deeper is-wide" id={id} data-deeper>
+  <summary class="cs-deeper__row">
+    <span class="cs-deeper__icon" aria-hidden="true"></span>
+    <span class="cs-deeper__title">{title}</span>
+    {summary && <span class="cs-deeper__summary">{summary}</span>}
+    <span class="cs-deeper__time">{min} min</span>
+  </summary>
+  <div class="cs-deeper__body">
+    <Fragment set:html={html} />
+  </div>
+</details>

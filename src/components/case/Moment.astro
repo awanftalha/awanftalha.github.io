@@ -1,0 +1,32 @@
+---
+// 4.7 Moment: one step in a timestamped story. `time` shows in a chip (no
+// chip when absent). `src` may be an image or an .mp4 (played as a Loop).
+// Several in a row are grouped into a MomentStrip at build time; inside a
+// Timeline they become a compact vertical list.
+import Loop from './Loop.astro';
+import { isVideo, posterFor, dims, onDisk, warn } from '../../lib/media.js';
+
+interface Props { time?: string; title: string; src?: string; alt: string }
+const { time, title, src, alt } = Astro.props;
+const video = isVideo(src);
+const size = !video && src ? dims(src) : null;
+if (src && !video && !onDisk(src)) warn(`Moment image not found: ${src}`);
+---
+<article class="cs-moment">
+  {src && (
+    <div class="cs-moment__media">
+      {video ? (
+        <Loop src={src} poster={posterFor(src, undefined)} alt={alt} posterAlt={alt} />
+      ) : (
+        <button class="cs-open" type="button" data-open data-cursor-text="Open" data-caption={time ? `${time} · ${title}` : title}>
+          <img src={src} alt={alt} width={size?.width} height={size?.height} loading="lazy" decoding="async" />
+        </button>
+      )}
+    </div>
+  )}
+  <div class="cs-moment__text">
+    {time && <span class="chip cs-moment__time">{time}</span>}
+    <h4 class="cs-moment__title">{title}</h4>
+    <div class="cs-moment__body"><slot /></div>
+  </div>
+</article>

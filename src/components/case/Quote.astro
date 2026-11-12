@@ -1,0 +1,15 @@
+---
+// 4.6 Quote: large quote, attribution below. A note ("Paraphrased, not
+// verbatim") stays visible in italic muted text.
+interface Props { by?: string; note?: string }
+const { by, note } = Astro.props;
+---
+<figure class="cs-quote">
+  <blockquote><slot /></blockquote>
+  {(by || note) && (
+    <figcaption>
+      {by && <span class="cs-quote__by">{by}</span>}
+      {note && <em class="cs-quote__note">{note}</em>}
+    </figcaption>
+  )}
+</figure>

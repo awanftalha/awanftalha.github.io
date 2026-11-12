@@ -1,0 +1,11 @@
+---
+// 4.13 Need: a placeholder for a missing fact. Shown as an outlined box on
+// previews and locally. Production builds stop before this renders: the
+// prebuild step (scripts/check-needs.mjs) lists every remaining <Need>.
+interface Props { id: string }
+const { id } = Astro.props;
+---
+<aside class="cs-need" data-need={id}>
+  <strong class="cs-need__id">⟨NEED {id}⟩</strong>
+  <slot />
+</aside>

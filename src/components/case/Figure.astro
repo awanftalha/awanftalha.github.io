@@ -1,0 +1,21 @@
+---
+// 4.18 Figure: an image with a caption. Opens in the lightbox. `wide` breaks
+// out to the media width. Inside a DeviceStrip it gets that strip's frame.
+import { dims, onDisk, warn } from '../../lib/media.js';
+
+interface Props {
+  src: string;
+  alt: string;           // required: every image needs alt text
+  caption?: string;
+  wide?: boolean;
+}
+const { src, alt, caption, wide = false } = Astro.props;
+const size = dims(src);
+if (!onDisk(src)) warn(`Figure image not found: ${src}`);
+---
+<figure class:list={['cs-figure', { 'is-wide': wide }]}>
+  <button class="cs-open" type="button" data-open data-cursor-text="Open" data-caption={caption}>
+    <img src={src} alt={alt} width={size?.width} height={size?.height} loading="lazy" decoding="async" />
+  </button>
+  {caption && <figcaption class="cs-caption">{caption}</figcaption>}
+</figure>

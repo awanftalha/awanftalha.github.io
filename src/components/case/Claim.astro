@@ -1,0 +1,5 @@
+---
+interface Props { kind: 'can' | 'cannot' }
+const { kind } = Astro.props;
+---
+<div class:list={['cs-claim', `cs-claim--${kind}`]}><slot /></div>

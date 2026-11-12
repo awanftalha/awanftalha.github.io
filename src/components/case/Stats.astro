@@ -1,0 +1,36 @@
+---
+// 4.2 Stats: 3–4 tiles. Big value, label, and a small source label. A note,
+// when there is one, opens in a small popover on hover, focus or tap.
+interface Stat { value: string; label: string; source: string; note?: string }
+interface Props { stats: Stat[] }
+const { stats } = Astro.props;
+const SOURCE = {
+  measured: 'Measured',
+  logged: 'Logged',
+  reported: 'Reported',
+  combined: 'System + reported',
+  derived: 'Arithmetic',
+  count: 'Count',
+};
+const uid = Math.random().toString(36).slice(2, 7);
+---
+{stats.length > 0 && (
+  <section class="cs-stats is-wide" aria-label="In numbers">
+    {stats.map((s, i) => (
+      <div class="cs-stat">
+        <p class="cs-stat__value">{s.value}</p>
+        <p class="cs-stat__label">{s.label}</p>
+        {s.note ? (
+          <span class="cs-stat__source-wrap">
+            <button class="cs-stat__source" type="button" aria-expanded="false" aria-controls={`note-${uid}-${i}`} data-stat-note>
+              {SOURCE[s.source] ?? s.source}<span class="cs-stat__i" aria-hidden="true">i</span>
+            </button>
+            <span class="cs-stat__note" id={`note-${uid}-${i}`} role="note">{s.note}</span>
+          </span>
+        ) : (
+          <span class="cs-stat__source">{SOURCE[s.source] ?? s.source}</span>
+        )}
+      </div>
+    ))}
+  </section>
+)}

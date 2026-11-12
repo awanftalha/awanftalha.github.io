@@ -1,0 +1,16 @@
+---
+// 4.5 Decision: number, title and short body on one side, media (a Loop or
+// image, passed with slot="media") on the other, about 60% wide. Alternates
+// sides on desktop, stacks on mobile. Fades up 20px as it enters view.
+interface Props { n: string; title: string }
+const { n, title } = Astro.props;
+const flip = parseInt(n, 10) % 2 === 0;
+---
+<article class:list={['cs-decision', 'is-wide', { 'is-flipped': flip }]} data-reveal>
+  <div class="cs-decision__text">
+    <span class="cs-decision__n">{n}</span>
+    <h3 class="cs-decision__title">{title}</h3>
+    <div class="cs-decision__body"><slot /></div>
+  </div>
+  <div class="cs-decision__media"><slot name="media" /></div>
+</article>

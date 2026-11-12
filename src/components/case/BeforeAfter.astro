@@ -1,0 +1,62 @@
+---
+// 4.3 BeforeAfter. "slider": a handle reveals before/after; the control is a
+// real <input type="range">, so it works with the keyboard. Below 768px it
+// always stacks, labelled BEFORE / AFTER. If one of the two files doesn't
+// exist yet, the other is shown on its own with the caption.
+import { onDisk, dims, warn } from '../../lib/media.js';
+
+interface Props {
+  before: string;
+  after: string;
+  beforeAlt: string;
+  afterAlt: string;
+  caption?: string;
+  mode?: 'slider' | 'stack';
+}
+const { before, after, beforeAlt, afterAlt, caption, mode = 'slider' } = Astro.props;
+const hasBefore = onDisk(before);
+const hasAfter = onDisk(after);
+if (!hasBefore) warn(`BeforeAfter: "before" not made yet: ${before}`);
+if (!hasAfter) warn(`BeforeAfter: "after" not made yet: ${after}`);
+const b = dims(before);
+const a = dims(after);
+const both = hasBefore && hasAfter;
+const single = !both && (hasBefore || hasAfter) ? (hasBefore ? { src: before, alt: beforeAlt, size: b } : { src: after, alt: afterAlt, size: a }) : null;
+const ratio = b ? `${b.width} / ${b.height}` : a ? `${a.width} / ${a.height}` : '16 / 10';
+---
+<figure class:list={['cs-ba', 'is-wide', `cs-ba--${both ? mode : 'single'}`]}>
+  {both && mode === 'slider' && (
+    <div class="cs-ba__stage" data-ba style={`--pos: 50%; --ratio: ${ratio}`} data-cursor-text="Drag">
+      <img class="cs-ba__img" src={before} alt={beforeAlt} width={b?.width} height={b?.height} loading="lazy" decoding="async" />
+      <div class="cs-ba__after">
+        <img class="cs-ba__img" src={after} alt={afterAlt} width={a?.width} height={a?.height} loading="lazy" decoding="async" />
+      </div>
+      <span class="cs-ba__line" aria-hidden="true"><span class="cs-ba__knob"></span></span>
+      <span class="cs-ba__tag cs-ba__tag--before" aria-hidden="true">Before</span>
+      <span class="cs-ba__tag cs-ba__tag--after" aria-hidden="true">After</span>
+      <input class="cs-ba__range" type="range" min="0" max="100" value="50" step="1" aria-label="Compare before and after: left shows more of before, right shows more of after" data-ba-range />
+    </div>
+  )}
+  {both && (
+    <div class:list={['cs-ba__stack', { 'is-mobile-only': mode === 'slider' }]}>
+      <div class="cs-ba__item">
+        <span class="cs-ba__label">Before</span>
+        <button class="cs-open" type="button" data-open data-cursor-text="Open" data-caption="Before">
+          <img src={before} alt={beforeAlt} width={b?.width} height={b?.height} loading="lazy" decoding="async" />
+        </button>
+      </div>
+      <div class="cs-ba__item">
+        <span class="cs-ba__label">After</span>
+        <button class="cs-open" type="button" data-open data-cursor-text="Open" data-caption="After">
+          <img src={after} alt={afterAlt} width={a?.width} height={a?.height} loading="lazy" decoding="async" />
+        </button>
+      </div>
+    </div>
+  )}
+  {single && (
+    <button class="cs-open" type="button" data-open data-cursor-text="Open" data-caption={caption}>
+      <img src={single.src} alt={single.alt} width={single.size?.width} height={single.size?.height} loading="lazy" decoding="async" />
+    </button>
+  )}
+  {caption && <figcaption class="cs-caption">{caption}</figcaption>}
+</figure>

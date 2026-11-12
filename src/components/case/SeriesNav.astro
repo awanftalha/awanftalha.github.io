@@ -1,0 +1,28 @@
+---
+// 4.14 SeriesNav: generated from every case study sharing series.name.
+// "Part 1 of 2 · <this> → Part 2 · <next part>".
+import { getCollection } from 'astro:content';
+
+interface Props { entry: { id: string; data: { title: string; series?: { name: string; part: number; of: number } } } }
+const { entry } = Astro.props;
+const series = entry.data.series;
+const parts = series
+  ? (await getCollection('work', (e) => e.data.series?.name === series.name)).sort((a, b) => a.data.series.part - b.data.series.part)
+  : [];
+---
+{series && parts.length > 1 && (
+  <nav class="cs-series" aria-label={`${series.name}, part ${series.part} of ${series.of}`}>
+    <span class="cs-series__name">{series.name}</span>
+    <ol class="cs-series__parts">
+      {parts.map((p) => (
+        <li>
+          {p.id === entry.id ? (
+            <span aria-current="page"><span class="cs-series__part">Part {p.data.series.part} of {series.of}</span> {p.data.title}</span>
+          ) : (
+            <a href={`/work/${p.id}`} data-cursor-text={`View ${p.data.title}`}><span class="cs-series__part">Part {p.data.series.part}</span> {p.data.title}</a>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

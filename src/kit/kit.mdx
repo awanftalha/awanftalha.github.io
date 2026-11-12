@@ -1,0 +1,153 @@
+{/* Component test page for /work/_kit. Placeholder words only; the images
+    are existing screens from public/assets. Not linked anywhere, noindex.
+    Like the case studies, it imports nothing: components come from the
+    page's `components` prop. */}
+
+## /* Before and after */
+
+Placeholder paragraph at reading width. This is body text in the homepage's typeface, set at the intro size for comfortable reading, about sixty-two characters to a line. It links to [a Go deeper section in another case study](/work/priced-offer#research), which the build checks exists.
+
+<BeforeAfter
+  mode="slider"
+  before="/assets/work/priced-offer/offer-base.webp"
+  beforeAlt="Placeholder: the offer screen with every field still empty."
+  after="/assets/work/priced-offer/offer-final.webp"
+  afterAlt="Placeholder: the same offer screen, filled in."
+  caption="BeforeAfter, slider mode. Drag, or focus it and use the arrow keys. Below 768px it stacks."
+/>
+
+<BeforeAfter
+  mode="stack"
+  before="/media/_kit/not-made-yet.webp"
+  beforeAlt="Placeholder before image that does not exist yet."
+  after="/assets/work/compliance-check/compare.png"
+  afterAlt="Placeholder: the compare screen."
+  caption="BeforeAfter with one file missing: the other is shown on its own with this caption."
+/>
+
+## /* What we found */
+
+<Quote by="Placeholder person, placeholder role" note="Paraphrased, not verbatim. This note always stays visible.">
+Placeholder quote, set large and light, the way a research finding reads best when it is someone else's words.
+</Quote>
+
+<Note>Note: a small muted aside for arithmetic or method notes.</Note>
+
+## /* Key decisions */
+
+<Decision n="01" title="Placeholder decision with a loop">
+  <Loop slot="media" src="/media/_kit/not-made-yet.mp4" poster="/assets/work/priced-offer/hero.webp" alt="Placeholder: a recording that does not exist yet." posterAlt="Placeholder: the offer page, shown as a still until its loop exists." device="desktop" />
+
+Placeholder body under sixty words. The media sits on the right at about sixty per cent of the width. Because this loop's video file doesn't exist yet, its poster shows instead, inside a desktop frame drawn in CSS.
+</Decision>
+
+<Decision n="02" title="Placeholder decision, flipped">
+  <Loop slot="media" src="/media/_kit/not-made-yet.mp4" poster="/assets/work/instructors/01-my-day.png" alt="Placeholder: a tablet recording." posterAlt="Placeholder: the instructor's day screen on a tablet." device="tablet" />
+
+Even numbers swap sides on desktop. On mobile every decision stacks, text first.
+</Decision>
+
+<Decision n="03" title="Placeholder decision with an image">
+  <Figure slot="media" src="/assets/work/compliance-check/report.png" alt="Placeholder: the compliance report screen." caption="A Figure as decision media. Click to open the lightbox." />
+
+Media can also be a plain Figure. Images keep a 1px border so light screenshots don't melt into the light page.
+</Decision>
+
+## /* Outcome */
+
+<Claims>
+<Claim kind="can">Placeholder claim I can make, with its evidence.</Claim>
+<Claim kind="cannot">Placeholder claim I can't make yet, and why.</Claim>
+<Claim kind="can">A second claim that holds.</Claim>
+</Claims>
+
+| Placeholder column | Before | After | Source |
+| --- | --- | --- | --- |
+| Entry passes | 2 | 1 | Count |
+| A deliberately long row label that makes the table wider than a phone screen | 60+ fields | 4 contexts | Count |
+
+<Need id="K1">Placeholder for a missing fact. Shown as a bright outlined box on previews; production builds stop while any remain.</Need>
+
+<GoDeeper id="kit-moments" title="Moments in a row" summary="Consecutive Moments become one scroll-snap strip with a progress line">
+
+### A timestamped story
+
+<Moment time="09:12" title="Placeholder step one" src="/assets/work/hx-mobile/approve-1.webp" alt="Placeholder phone screen one.">
+One line about what happens at this moment.
+</Moment>
+<Moment time="11:40" title="Placeholder step two" src="/assets/work/hx-mobile/approve-2.webp" alt="Placeholder phone screen two.">
+One line about the next moment.
+</Moment>
+<Moment time="11:42" title="Placeholder step three" src="/assets/work/hx-mobile/approve-3.webp" alt="Placeholder phone screen three.">
+And the one after that.
+</Moment>
+<Moment title="A moment without a time" src="/assets/work/hx-mobile/approve-4.webp" alt="Placeholder phone screen four.">
+No chip when there is no time.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="kit-timeline" title="A day timeline" summary="Timeline with Moments, for app pages">
+
+<Timeline>
+<Moment time="09:02" title="Placeholder start of day" src="/assets/work/hx-timer/timer-01.webp" alt="Placeholder timer screen one.">
+A compact vertical timeline.
+</Moment>
+<Moment time="13:02" title="Placeholder lunch" src="/assets/work/hx-timer/timer-04.webp" alt="Placeholder timer screen four.">
+Each moment hangs off the line.
+</Moment>
+</Timeline>
+
+</GoDeeper>
+
+<GoDeeper id="kit-states" title="Failure and edge states" summary="A grid of states; each opens in the lightbox">
+
+<States>
+<State title="Placeholder state one" src="/assets/work/priced-offer/state-no-aircraft.webp" alt="Placeholder state screen one.">
+One or two lines on what went wrong and the route out.
+</State>
+<State title="Placeholder state two" src="/assets/work/priced-offer/state-crew-double-booked.webp" alt="Placeholder state screen two.">
+One or two lines.
+</State>
+<State title="Placeholder state three" src="/assets/work/priced-offer/state-autosave-offline.webp" alt="Placeholder state screen three.">
+One or two lines.
+</State>
+</States>
+
+</GoDeeper>
+
+<GoDeeper id="kit-gallery" title="The full screen set" summary="Gallery of Figures, with the lightbox (arrow keys move, Esc closes)">
+
+<Gallery>
+<Figure src="/assets/work/compliance-check/flow-01-upload-reference.png" alt="Placeholder gallery screen one." caption="Placeholder caption one" />
+<Figure src="/assets/work/compliance-check/flow-03-check-found.png" alt="Placeholder gallery screen two." caption="Placeholder caption two" />
+<Figure src="/assets/work/compliance-check/flow-05-comparing.png" alt="Placeholder gallery screen three." caption="Placeholder caption three" />
+<Figure src="/assets/work/compliance-check/flow-09-needs-review.png" alt="Placeholder gallery screen four." caption="Placeholder caption four" />
+</Gallery>
+
+<Figure src="/assets/work/compliance-check/flow-14-reports.png" alt="Placeholder wide figure." caption="Figure with wide: breaks out to the media width." wide />
+
+</GoDeeper>
+
+<GoDeeper id="kit-devices" title="Device strips" summary="Phone, tablet and desktop strips, each screen in a CSS frame">
+
+<DeviceStrip device="phone">
+<Figure src="/assets/work/hx-mobile/clock-1.webp" alt="Placeholder phone screen." caption="Phone one" />
+<Figure src="/assets/work/hx-mobile/clock-2.webp" alt="Placeholder phone screen." caption="Phone two" />
+<Figure src="/assets/work/hx-mobile/approve-1.webp" alt="Placeholder phone screen." caption="Phone three" />
+<Figure src="/assets/work/hx-mobile/approve-2.webp" alt="Placeholder phone screen." caption="Phone four" />
+<Figure src="/assets/work/hx-mobile/approve-3.webp" alt="Placeholder phone screen." caption="Phone five" />
+</DeviceStrip>
+
+<DeviceStrip device="tablet">
+<Figure src="/assets/work/instructors/01-my-day.png" alt="Placeholder tablet screen." caption="Tablet one" />
+<Figure src="/assets/work/instructors/03-running.png" alt="Placeholder tablet screen." caption="Tablet two" />
+<Figure src="/assets/work/instructors/07-sign.png" alt="Placeholder tablet screen." caption="Tablet three" />
+</DeviceStrip>
+
+<DeviceStrip device="desktop">
+<Figure src="/assets/work/hx-timer/timer-01.webp" alt="Placeholder desktop screen." caption="Desktop one" />
+<Figure src="/assets/work/hx-timer/timer-02.webp" alt="Placeholder desktop screen." caption="Desktop two" />
+</DeviceStrip>
+
+</GoDeeper>

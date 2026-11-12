@@ -1,0 +1,10 @@
+---
+// Placed before the first GoDeeper at build time (remark-case.mjs): the
+// "Go deeper" divider and an "Expand all" button (shown once JS runs).
+interface Props { count?: string }
+const { count } = Astro.props;
+---
+<div class="cs-deeper-intro is-wide" id="go-deeper">
+  <p class="cs-deeper-intro__rule"><span>Go deeper{count ? ` (${count})` : ''}</span></p>
+  <button class="cs-deeper-intro__all" type="button" data-expand-all hidden>Expand all</button>
+</div>

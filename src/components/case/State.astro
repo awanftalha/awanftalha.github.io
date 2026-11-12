@@ -1,0 +1,21 @@
+---
+import Loop from './Loop.astro';
+import { isVideo, posterFor, dims, onDisk, warn } from '../../lib/media.js';
+
+interface Props { title: string; src?: string; alt: string }
+const { title, src, alt } = Astro.props;
+const video = isVideo(src);
+const size = !video && src ? dims(src) : null;
+if (src && !video && !onDisk(src)) warn(`State image not found: ${src}`);
+---
+<article class="cs-state">
+  {src && (video ? (
+    <Loop src={src} poster={posterFor(src, undefined)} alt={alt} posterAlt={alt} />
+  ) : (
+    <button class="cs-open" type="button" data-open data-cursor-text="Open" data-caption={title}>
+      <img src={src} alt={alt} width={size?.width} height={size?.height} loading="lazy" decoding="async" />
+    </button>
+  ))}
+  <h4 class="cs-state__title">{title}</h4>
+  <div class="cs-state__body"><slot /></div>
+</article>

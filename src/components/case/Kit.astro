@@ -1,0 +1,52 @@
+---
+// /work/_kit: every component from CASE_STUDY_SYSTEM.md §4 on one page,
+// with placeholder content. noindex, linked from nowhere.
+import Base from '../../layouts/Base.astro';
+import Summary from './Summary.astro';
+import Stats from './Stats.astro';
+import SeriesNav from './SeriesNav.astro';
+import Snapshot from './Snapshot.astro';
+import { components } from './index.js';
+import { getEntry } from 'astro:content';
+import { Content } from '../../kit/kit.mdx';
+import '../../styles/case.css';
+
+const series = await getEntry('work', 'training-record');
+const summary = {
+  problem: 'Placeholder problem, one or two sentences long.',
+  role: 'Placeholder role: what I did, with whom, for how long.',
+  changed: 'Placeholder: the shape of the change in a sentence.',
+  result: 'Placeholder result, stated plainly, with its evidence.',
+};
+const stats = [
+  { value: '2–3 h → ~20 min', label: 'placeholder label for a logged figure', source: 'logged', note: 'Placeholder note: where the number comes from.' },
+  { value: '2 → 1', label: 'placeholder count', source: 'count' },
+  { value: '~50%', label: 'placeholder combined figure', source: 'combined', note: 'From the system plus what people reported.' },
+  { value: '16', label: 'placeholder derived figure', source: 'derived' },
+];
+---
+<Base title="Component kit" description="Case-study component test page." path="/work/_kit" noindex>
+  <div class="cs-page">
+    <div class="cs-content">
+      <ul class="kit-chips" aria-label="About this page"><li class="chip">Kit</li><li class="chip">Not linked</li><li class="chip">noindex</li></ul>
+      <h1 class="kit-title">Case-study components</h1>
+      <p>Every component from the system spec, styled like the homepage, with placeholder content. Toggle the theme in the nav to check dark.</p>
+
+      <h2 class="cs-section-title"><span aria-hidden="true">/* </span>Summary and stats<span aria-hidden="true"> */</span></h2>
+      <Summary summary={summary} />
+      <Stats stats={stats} />
+
+      <h2 class="cs-section-title"><span aria-hidden="true">/* </span>Series and snapshot<span aria-hidden="true"> */</span></h2>
+      {series && <SeriesNav entry={series} />}
+      <Snapshot />
+
+      <Content components={components} />
+    </div>
+  </div>
+  <script>import '../../scripts/case.js';</script>
+</Base>
+
+<style>
+  .kit-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .kit-title { margin-top: 24px !important; font-size: var(--fs-h1); line-height: 1; letter-spacing: var(--track-display); }
+</style>

@@ -1,0 +1,12 @@
+---
+// "## /* Key decisions */" in the MDX: the homepage's code-comment section
+// title. The /* */ marks are shown but hidden from screen readers. Gets an
+// id from its words, for the contents rail.
+const html = (await Astro.slots.render('default')).trim();
+const m = html.match(/^\/\*\s*([\s\S]*?)\s*\*\/$/);
+const inner = m ? m[1] : html;
+const id = inner.replace(/<[^>]+>/g, '').replace(/&[#\w]+;/g, '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+---
+<h2 class="cs-section-title" id={id} data-reveal data-rail={inner.replace(/<[^>]+>/g, '')}>
+  {m ? (<><span aria-hidden="true">/* </span><Fragment set:html={inner} /><span aria-hidden="true"> */</span></>) : <Fragment set:html={html} />}
+</h2>

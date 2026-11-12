@@ -1,0 +1,21 @@
+---
+// 4.1 Summary: four cards from frontmatter. A row on desktop, 2×2 on
+// tablet, stacked on mobile.
+interface Props { summary: { problem: string; role: string; changed: string; result: string } }
+const { summary } = Astro.props;
+const cards = [
+  ['Problem', summary.problem],
+  ['My role', summary.role],
+  ['What changed', summary.changed],
+  ['Result', summary.result],
+];
+---
+<section class="cs-summary is-wide" aria-labelledby="summary-title">
+  <h2 class="visually-hidden" id="summary-title">Summary</h2>
+  {cards.map(([label, text]) => (
+    <div class="cs-summary__card">
+      <h3 class="cs-summary__label">{label}</h3>
+      <p>{text}</p>
+    </div>
+  ))}
+</section>
