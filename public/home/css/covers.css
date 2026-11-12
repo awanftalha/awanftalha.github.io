@@ -27,9 +27,6 @@
    Declared on each coloured part so it uses that part's own --c. */
 .cv-chip--c, .cv-avatar, .cv-ref, .cv-chip.is-repeat { --cv-fg: color-mix(in srgb, var(--c) 78%, var(--text)); }
 :root[data-theme="dark"] :is(.cv-chip--c, .cv-avatar, .cv-ref, .cv-chip.is-repeat) { --cv-fg: color-mix(in srgb, var(--c) 45%, var(--text)); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) :is(.cv-chip--c, .cv-avatar, .cv-ref, .cv-chip.is-repeat) { --cv-fg: color-mix(in srgb, var(--c) 45%, var(--text)); }
-}
 .cv b { font-weight: 600; }
 
 /* Parts ------------------------------------------------------------------- */

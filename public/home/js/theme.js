@@ -1,14 +1,11 @@
-/* Theme: follows the system until the visitor picks one, then remembers it.
-   The inline script in <head> has already applied it before first paint. */
+/* Theme: light by default. The toggle switches to dark (and back), and the
+   choice is remembered across pages and visits. The inline script in
+   <head> has already applied it before first paint. */
 
 const root = document.documentElement;
-const system = matchMedia('(prefers-color-scheme: dark)');
 const COLOUR = { light: '#fbfbfb', dark: '#0d0d0d' };
 
-const saved = () => {
-  try { return localStorage.getItem('theme'); } catch { return null; }
-};
-const current = () => root.getAttribute('data-theme') || (system.matches ? 'dark' : 'light');
+const current = () => (root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
 function label(theme) {
   const next = theme === 'dark' ? 'light' : 'dark';
@@ -35,5 +32,4 @@ export function initTheme() {
       apply(next);
     });
   });
-  system.addEventListener('change', (e) => { if (!saved()) apply(e.matches ? 'dark' : 'light'); });
 }
