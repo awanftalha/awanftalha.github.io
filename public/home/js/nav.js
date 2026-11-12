@@ -4,7 +4,24 @@
 
 import { gsap, motionOn } from './motion.js';
 
+/* The bar is see-through over the first screen, then picks up a solid
+   background once the second screen reaches it. */
+function initNavSurface() {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  let queued = false;
+  const update = () => {
+    queued = false;
+    nav.classList.toggle('is-solid', scrollY > innerHeight - nav.offsetHeight);
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  update();
+}
+
 export function initNav() {
+  initNavSurface();
   const menu = document.querySelector('[data-menu]');
   const openBtn = document.querySelector('[data-menu-open]');
   if (!menu || !openBtn) return;

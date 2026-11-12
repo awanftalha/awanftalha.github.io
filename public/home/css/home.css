@@ -145,6 +145,12 @@ html.theme-switching *::after {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  transition: background-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+/* Solid once the visitor scrolls past the first screen (see nav.js). */
+.nav.is-solid {
+  background: var(--bg);
+  box-shadow: 0 1px 0 var(--border);
 }
 .nav__brand { display: flex; align-items: center; gap: 8px; font-weight: 600; white-space: nowrap; }
 .nav__links {
