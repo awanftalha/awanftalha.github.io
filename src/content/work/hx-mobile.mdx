@@ -1,0 +1,155 @@
+---
+title: "The quick jobs, in your pocket"
+format: "app"
+order: 8
+featured: false
+company: "HX Insight · Punjab Group"
+eyebrow: ["HX Insight", "Mobile app", "Shipped"]
+intro: "An iOS and Android app for what employees do between meetings: clock in, fix a missed punch, ask for leave, approve from a notification and get through the first week."
+oneLiner: "Clock in, fix a missed punch, ask for leave and approve from a notification, on iOS and Android."
+tags: ["HR", "iOS + Android", "Mobile"]
+meta:
+  role: "Lead product designer"
+  platform: "iOS and Android"
+  people: "Employee, line manager, new hire"
+status: "shipped"
+statusNote: "Shipped on iOS and Android"
+statusAsOf: 2026-11-11
+updated: 2026-11-11
+cover:
+  video: "/media/hx-mobile/cover.mp4"
+  poster: "/assets/work/hx-mobile/tab-home.webp"
+  alt: "Home: Good morning, Ayesha, with the clock card at 08:52 and Clock in, her annual and sick leave balances, and what is coming up."
+summary:
+  problem: "The quick HR jobs happen between meetings, away from a desk."
+  role: "Lead product designer. HX Insight mobile app, iOS and Android."
+  changed: "Four jobs start to finish: clock in, fix a missed punch, ask for leave and approve from a notification, plus the first week."
+  result: "Shipped on iOS and Android, and used by all employees. Liquid Glass for the controls, HX Insight for the content."
+stats:
+  - value: "4"
+    label: "jobs designed start to finish"
+    source: "count"
+    note: "Clock in, apply for leave, approve, and a new hire's first week."
+  - value: "All"
+    label: "employees use the app"
+    source: "reported"
+next: "instructors"
+nda: false
+seo:
+  description: "Clock in, fix a missed punch, ask for leave and approve from a notification, on iOS and Android."
+  ogImage: "/assets/og/hx-mobile.png"
+---
+
+<DeviceStrip device="phone">
+  <Figure src="/assets/work/hx-mobile/tab-home.webp" alt="Home: Good morning, Ayesha, with the clock card at 08:52 and Clock in, her annual and sick leave balances, and what is coming up." caption="Home" />
+  <Figure src="/assets/work/hx-mobile/tab-time.webp" alt="Time: week 47 at 24h 10m of 40h, then each day with its hours." caption="Time" />
+  <Figure src="/assets/work/hx-mobile/tab-leave.webp" alt="Leave: 9 days of annual leave left, other balances, Request leave, and her requests with their status." caption="Leave" />
+  <Figure src="/assets/work/hx-mobile/tab-inbox.webp" alt="Inbox: leave approved, a teammate off tomorrow, a payslip ready, a correction approved and a new joiner, with new items marked." caption="Inbox" />
+  <Figure src="/assets/work/hx-mobile/tab-me.webp" alt="Me: Ayesha's profile with her manager, team, shift and employee ID, and pay and documents." caption="Me" />
+</DeviceStrip>
+
+## /* Four jobs, start to finish */
+
+1. **Clock in.** From the lock screen, kept in view by a Live Activity, fixed in a sheet.
+2. **Apply for leave.** Balance first, then dates, then who else is off.
+3. **Approve.** Bilal decides from the notification, or opens it for the full picture.
+4. **First week.** A calm welcome, Face ID to sign, and a day one of people.
+
+## /* Key moments */
+
+<Decision n="01" title="Clock in from the lock screen">
+  <Loop slot="media" src="/media/hx-mobile/clock-in.mp4" poster="/assets/work/hx-mobile/clock-2.webp" alt="A lock-screen prompt at the office, Clock in now tapped, and the Live Activity keeping the working time and Start break in view." posterAlt="Lock screen at 13:04 with a Live Activity: working at the Gulberg office for 4h 08m, with Start break and Clock out." device="phone" />
+
+At 8:55, a notification says Ayesha is at the Gulberg office and her shift starts at 9:00. She clocks in from the lock screen, and a Live Activity keeps the working time, Start break and Clock out in view all day.
+</Decision>
+
+<Decision n="02" title="Fix a missed punch in a sheet">
+  <Loop slot="media" src="/media/hx-mobile/fix-punch.mp4" poster="/assets/work/hx-mobile/clock-4.webp" alt="Home leading with You did not clock out yesterday, the Fix sheet opening, the actual clock-out time entered with a reason, and the request sent to Bilal." posterAlt="The Fix Tue 10 Nov sheet over Home: what is on record, the actual clock-out time of 19:40, a reason, the 1h 40m of overtime it adds, and Send to Bilal." device="phone" />
+
+The next morning, Home leads with "You did not clock out yesterday". The fix is a sheet: what's on record, the actual time, a reason, and the overtime it adds, sent to Bilal and shown as pending.
+</Decision>
+
+<Decision n="03" title="Approve from the notification">
+  <Loop slot="media" src="/media/hx-mobile/approve.mp4" poster="/assets/work/hx-mobile/approve-2.webp" alt="Bilal's lock screen with a leave request, the notification expanded to show the days and who else is off, and Approve tapped, with a few seconds to undo." posterAlt="The expanded notification with the facts behind the request and Approve and Reject buttons." device="phone" />
+
+The request reaches Bilal's lock screen with how many days and whether anyone else is off. He can decide from the notification, or open it for the day-by-day cover. Done moves it out of his inbox, with a few seconds to undo.
+</Decision>
+
+## /* Where it stands */
+
+Shipped on iOS and Android. Liquid Glass for the controls, HX Insight for the content.
+
+All employees use it.
+
+Android uses the same look as iOS, built with custom design libraries, while the behaviour follows Android conventions.
+
+<GoDeeper id="clock" title="Clock in, every screen" summary="Lock-screen prompt, Live Activity, a missed punch flagged, fixed and sent">
+
+<Moment time="8:55" title="The prompt" src="/assets/work/hx-mobile/clock-1.webp" alt="Lock screen at 8:55: a notification that Ayesha is at the Gulberg office and her shift starts at 9:00, expanded to Clock in now, Not now and Open HX Insight.">
+A notification when she arrives, with Clock in now.
+</Moment>
+<Moment time="13:04" title="Live Activity" src="/assets/work/hx-mobile/clock-2.webp" alt="Lock screen at 13:04 with a Live Activity: working at the Gulberg office for 4h 08m, with Start break and Clock out.">
+Working time, Start break and Clock out stay in view.
+</Moment>
+<Moment title="A missed clock-out" src="/assets/work/hx-mobile/clock-3.webp" alt="Home the next morning, leading with You did not clock out yesterday: the clock stopped at 18:00, with a Fix Tue 10 Nov button.">
+Home leads with the miss the next morning.
+</Moment>
+<Moment title="Fixed in a sheet" src="/assets/work/hx-mobile/clock-4.webp" alt="The Fix Tue 10 Nov sheet over Home: what is on record, the actual clock-out time of 19:40, a reason, the 1h 40m of overtime it adds, and Send to Bilal.">
+What's on record, the real time, a reason and the overtime it adds.
+</Moment>
+<Moment title="Sent as pending" src="/assets/work/hx-mobile/clock-5.webp" alt="The Time tab with Tuesday shown as pending at the new hours, and a confirmation that it was sent to Bilal Ahmed.">
+Tuesday shows as pending at the new hours.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="leave" title="Apply for leave, every screen" summary="A sheet over the balance, who else is off, sent and approved">
+
+<Moment title="A sheet over the balance" src="/assets/work/hx-mobile/leave-1.webp" alt="The request leave sheet over Ayesha's balance: the leave type and dates dragged across the calendar, working days counted and the public holiday skipped, and what will be left.">
+Dates dragged across the calendar, working days counted, the public holiday skipped.
+</Moment>
+<Moment title="Who else is off" src="/assets/work/hx-mobile/leave-2.webp" alt="The request before sending: the dates in one place and who else in Product is off on those days, with a note for Bilal about cover.">
+Who else in Product is off, and a note for Bilal about cover.
+</Moment>
+<Moment title="Pending" src="/assets/work/hx-mobile/leave-3.webp" alt="Her leave list with the new request at the top as pending, and the balance showing the three days as booked.">
+The three days show as booked.
+</Moment>
+<Moment title="Approved" src="/assets/work/hx-mobile/leave-4.webp" alt="Lock screen the next morning: Bilal approved her annual leave, with her new balance.">
+The answer arrives on her lock screen, with the new balance.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="approve" title="Approve, every screen" summary="From the lock screen, expanded, opened in full, done with undo">
+
+<Moment title="On the lock screen" src="/assets/work/hx-mobile/approve-1.webp" alt="Bilal's lock screen with Ayesha's leave request: how many days and whether anyone else is off.">
+How many days, and whether anyone else is off.
+</Moment>
+<Moment title="Expanded" src="/assets/work/hx-mobile/approve-2.webp" alt="The expanded notification with the facts behind the request and Approve and Reject buttons.">
+The facts behind the request, with Approve and Reject.
+</Moment>
+<Moment title="Opened in full" src="/assets/work/hx-mobile/approve-3.webp" alt="The request opened in the app: the facts and the day-by-day cover, with Approve and Reject fixed within thumb reach.">
+Day-by-day cover, with the buttons fixed within thumb reach.
+</Moment>
+<Moment title="Done" src="/assets/work/hx-mobile/approve-4.webp" alt="Bilal's inbox with the request moved to Done and a few seconds to undo.">
+Moved to Done, with a few seconds to undo.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="first-week" title="First week, every screen" summary="A countdown, Face ID to sign, a first morning of people, a profile that's ready">
+
+<Moment title="A week before" src="/assets/work/hx-mobile/week-1.webp" alt="Hassan's Home a week before he starts: a countdown to his first morning, the few tasks that are his, and the three people who will look after him.">
+A countdown, the few tasks that are his, and the three people who will look after him.
+</Moment>
+<Moment title="Sign with Face ID" src="/assets/work/hx-mobile/week-2.webp" alt="The code of conduct sheet: the four points that matter most, a link to the full text, and Sign with Face ID.">
+The four points that matter most, then Face ID.
+</Moment>
+<Moment title="First Monday" src="/assets/work/hx-mobile/week-3.webp" alt="Home on his first Monday: where he needs to be next and who he is meeting, already clocked in at reception.">
+Where to be next and who he's meeting, already clocked in at reception.
+</Moment>
+<Moment title="By Friday" src="/assets/work/hx-mobile/week-4.webp" alt="The Me tab by Friday: onboarding complete, with his leave balance, shift, first payday, equipment and buddy.">
+Onboarding complete, with everything he needs on one tab.
+</Moment>
+
+</GoDeeper>

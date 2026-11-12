@@ -1,0 +1,333 @@
+---
+title: "Turning a phone call into a priced offer"
+format: "case"
+order: 1
+featured: true
+company: "NGFT"
+eyebrow: ["NGFT OPS", "Helicopter dispatch", "Shipped"]
+intro: "A dispatch platform used by helicopter operators across Europe. The offer page is where a dispatcher turns a phone call into a priced, sendable quote, and it was the screen they were avoiding in favour of a notepad."
+oneLiner: "Dispatchers quote while the client is still on the line. Offer to full dispatch plan in about 20 minutes, down from 2–3 hours."
+tags: ["Aviation", "Dispatch", "B2B SaaS"]
+meta:
+  role: "Sole designer, end to end"
+  team: "PM · engineering lead · me"
+  timeline: "3 months"
+  research: "5 dispatcher interviews · prototype tests built with Claude"
+status: "shipped"
+statusNote: "In daily use across 8 operators"
+statusAsOf: 2026-11-11
+updated: 2026-11-11
+cover:
+  video: "/media/priced-offer/cover.mp4"
+  poster: "/assets/work/priced-offer/hero.webp"
+  alt: "The redesigned offer page, Job & client context: a left rail with the offer, its flights and the document; the job, client and people on the job in the centre; and the commercials with the running total on the right."
+summary:
+  problem: "One form served four tasks at once: 60+ fields across 12 parallel tables, so dispatchers wrote the offer on a notepad during the call and typed it in afterwards."
+  role: "Sole designer, end to end. Diagnosis through to shipped build, with a PM and an engineering lead, over 3 months."
+  changed: "One rail, one canvas and one ledger, with sixteen states designed, each given a route out."
+  result: "An offer becomes a full dispatch plan in about 20 minutes instead of 2–3 hours, and the notepad step stops being necessary."
+stats:
+  - value: "2–3 h → ~20 min"
+    label: "from offer to a complete dispatch plan"
+    source: "logged"
+    note: "From the system's logs and the team's own estimate."
+  - value: "2 → 1"
+    label: "entry passes per offer"
+    source: "count"
+  - value: "4 → 1"
+    label: "lifecycle stages the page serves"
+    source: "count"
+  - value: "16"
+    label: "states designed, each with a route out"
+    source: "count"
+next: "safety-report"
+nda: false
+seo:
+  description: "Offer to full dispatch plan in about 20 minutes, down from 2–3 hours, across 8 helicopter operators."
+  ogImage: "/assets/og/priced-offer.png"
+---
+
+## /* Before and after */
+
+<BeforeAfter
+  mode="slider"
+  before="/media/priced-offer/before-annotated.webp"
+  beforeAlt="The original offer page: one long form with 60+ fields across 12 parallel tables, annotated with the five causes from the diagnosis."
+  after="/assets/work/priced-offer/hero.webp"
+  afterAlt="The redesigned offer page: a left rail for structure and readiness, one context at a time in the centre, and the commercials on the right."
+  caption="Before: one 2,000px form serving four lifecycle stages at once. After: one rail, one canvas, one ledger."
+/>
+
+## /* What we found */
+
+I interviewed five dispatchers, each on a separate call, so nobody agreed with the loudest voice in the room. All five described the same workaround: they wrote the offer on paper during the call and typed it in afterwards.
+
+The software was competent at the phase where the dispatcher had time, and useless at the phase where they had none.
+
+## /* Key decisions */
+
+<Decision n="01" title="Capture gets its own front door">
+  <Loop slot="media" src="/media/priced-offer/quick-capture.mp4" poster="/assets/work/priced-offer/hero.webp" alt="Quick capture: client, date, route and passenger count entered in one pass, then the full offer structure opening behind it." posterAlt="The redesigned offer page, Job & client context: a left rail with the offer, its flights and the document; the job, client and people on the job in the centre; and the commercials with the running total on the right." device="desktop" />
+
+The page failed during the call, so the design starts there. A quick-capture path takes client, date, route and passenger count in one pass and opens the full structure behind it. The test I held it to was the notepad: can a dispatcher type into this as fast as they'd scribble?
+</Decision>
+
+<Decision n="02" title="Derive everything the system already knows">
+  <Loop slot="media" src="/media/priced-offer/location-field.mp4" poster="/assets/work/priced-offer/flight.webp" alt="One location field resolving a typed site name, pasted coordinates and a drawn area, with the glyph reporting what it found." posterAlt="The Flight context: aircraft, timing, crew, sequence and vehicles under one flight, with a banner flagging that Allen Johnson is also assigned to FL2 and a Reassign action." device="desktop" />
+
+Offer numbers, overflight legs, prices, crew and call times used to be typed by hand. Now they're derived and marked AUTO. Location became one field that detects whether you typed a site, pasted coordinates or drew an area, which removes about 12 modal round-trips per job.
+</Decision>
+
+<Decision n="03" title="Send is never a dead button">
+  <Loop slot="media" src="/media/priced-offer/send-checklist.mp4" poster="/assets/work/priced-offer/compose.webp" alt="Pressing Send with problems outstanding: the button names the count and the checklist expands, each row jumping to the field that needs it." posterAlt="Compose & send: the offer document assembled from the library and previewed as the client will receive it, with Send on the same screen." device="desktop" />
+
+Pressing Send with problems outstanding names the count and expands the checklist, and each row jumps to the offending field. A missing price shows a dash, never 0, because a zero sums silently into the offer as free work. It cost one character.
+</Decision>
+
+## /* How I prototyped it */
+
+I used Claude to build low- and mid-fidelity clickable prototypes of the offer flow, and tested them with four dispatchers, one session each. The final interactive prototype was tested with users too, before the build.
+
+Two of the four dispatchers struggled to tell what was still missing from an offer. So I added a check state: it checks each page and tells the dispatcher what is remaining in each part of the flow.
+
+## /* Outcome */
+
+An offer now becomes a complete dispatch plan in about 20 minutes, down from 2–3 hours, and the page is in daily use across eight operators.
+
+Three changes contribute. Every offer used to be entered twice, once on paper during the call and once into the system afterwards, and the redesign removes one of those passes. Fields the system already knew are derived instead of retyped. And locations no longer cost a modal round-trip each.
+
+Removing a transcription pass doesn't lower the transcription error rate; it takes that error population to zero. The by-product I value most: dispatchers learn the page by using it, so training is no longer a prerequisite.
+
+## /* Reflection */
+
+I'd run the interviews before doing any layout thinking at all. "The page is too dense" is a description of a screen, not of a task, and I started from the screen.
+
+<GoDeeper id="problem" title="The problem in full" summary="Three customer complaints, the platform in numbers, and what was fixed before I started">
+
+### Three complaints that turned out to be one complaint
+
+The redesign was triggered by customers, not by a roadmap. The operators who use this screen every day told us it was the problem, and they said three things.
+
+- **It's error-prone.** Mistakes were being made on a screen where mistakes are expensive.
+- **It's too hard to train on.** A new dispatcher could not simply be handed this page.
+- **Too much is updated by hand.** State the system already knew was being maintained manually. "A lot of work," as they put it.
+
+A screen that shows four lifecycle stages at once is necessarily a screen where a dispatcher hand-maintains fields belonging to stages they aren't in. That is both the manual-work burden and the error surface, and it's why the page can't be taught in a sitting: you can't explain it without explaining the whole job lifecycle.
+
+Two moves answered all three: separate the offer stage from the execution stages, and derive everything the system already knew.
+
+### The platform in numbers
+
+| | |
+|---|---|
+| Operator companies | 8 |
+| Dispatchers on the platform | 50–60 |
+| Calls per dispatcher per day | 10–20 |
+| Fields on the old page | 60+, across 12 parallel tables |
+
+<Note>Offers passing through this one screen: roughly 500–1,200 a day across the platform. This is arithmetic from the dispatcher and call figures above, not a logged count.</Note>
+
+### Fixed before I started
+
+- **The legacy data model stays.** No schema changes.
+- **The backend stays.** No new services, no re-architecture.
+- **It ships inside the existing app.** Same chrome, same navigation, same browser.
+
+These are why the redesign is a restructuring rather than a rebuild, and why most of the value was still available without a single backend change.
+
+</GoDeeper>
+
+<GoDeeper id="research" title="The research" summary="Five dispatchers, interviewed separately, all describing the same workaround">
+
+### They were not using the software during the call
+
+Five dispatchers, each interviewed on a separate call rather than together, so nobody was agreeing with the loudest voice in a group session. All five described the same workaround.
+
+<Quote by="Composite of five dispatcher interviews" note="A summary of what the five described, not a verbatim quote from one person. It's here because all five said a version of it, which makes it a finding rather than an anecdote.">
+When I'm taking the call I need to know where to put the information. The way it works now, I write it on paper and fill in the details afterwards. It would be much better if I could write straight into the system. And when I do enter it, I have to find things — everything is on one page and it's tiny.
+</Quote>
+
+### What the paper step explains
+
+- **The errors.** Every offer was entered twice, once by hand and once into the system. Double entry is a transcription-error machine, and validation on the second pass cannot catch a number copied correctly from a notepad that was written down wrong.
+- **The manual work.** The first transcription was itself manual work: an entire duplicate pass the software had made necessary by being unusable at the one moment it was most needed.
+- **The training difficulty.** You cannot learn a screen you don't use live. Dispatchers learned the page slowly, after the fact, then were expected to perform on it under pressure.
+
+A dense 2,000px form is survivable when you're transcribing from notes at your own pace. It is unusable while a client is talking, because the cost isn't typing, it's searching. "I have to find things" is the whole problem in four words. I had gone into those calls expecting a density problem I could solve by reorganising the page. What I got was a page that wasn't being used at the moment it existed for.
+
+</GoDeeper>
+
+<GoDeeper id="diagnosis" title="The diagnosis" summary="Five causes, ranked by what each cost the dispatcher; the first removed a third of the interface">
+
+### The brief was "everything is on one page." That's the symptom.
+
+I found five causes and ranked them by what each one cost the dispatcher. The first is the one that removed a third of the interface.
+
+| Column group | Meaning | When it's filled | By whom |
+|---|---|---|---|
+| OFFER | What we quote | Now | Dispatcher |
+| PLANNED | Estimated flight / extra time | Later | Ops |
+| WORK | Billing units | After the job | Billing |
+| FLOWN | Recorded actuals | After the flight | Pilot / ops |
+
+Three of the four column groups, three quarters of the widest and most cognitively expensive table on the page, were irrelevant to the person writing an offer, and sat there full of 00000 placeholders. Removing them deleted roughly a third of the interface before a pixel was redesigned.
+
+1. **The page served three lifecycle stages at once.** An offer is a commercial proposal; a job is an operational record. They share a data spine but are edited by different people, at different times, with different failure modes.
+2. **The hierarchy was flattened into parallel tables.** Crew Assignment sat at the bottom as a flat table with no flight column at all. The dispatcher held parent-child relationships in working memory, on a 2,000px page, while someone talked in their ear.
+3. **Nothing had primacy.** Every region carried identical weight. The total, the number the client asks about, was a small cell mid-table, below the fold. Three near-identical contact columns took about 30% of the first screen.
+4. **Colour was overloaded.** Six-plus hues carried at least four kinds of meaning, with no legend. When red means both "this field is invalid" and "this location is an area", red stops meaning anything.
+5. **The spatial task was trapped behind a button.** The map was a modal. Every location entry was: click icon → modal → find → confirm → close → context lost → repeat. Twelve times per job.
+
+The evidence behind this is behavioural and reported, not instrumented: three standing complaints and five independent accounts of the same workaround. A user who invents a paper process to avoid your software has already told you it failed, more reliably than any satisfaction score would.
+
+</GoDeeper>
+
+<GoDeeper id="reframing" title="Reframing: four tasks, not one form" summary="Capture, Shape, Resource, Compose & send, and why the answer wasn't a wizard">
+
+### One form, four tasks, and the users had already separated them
+
+The old page was built for one phase, Shape, and made the other three fit around it. Capture, the phase with zero friction tolerance, was the one it served worst. That is exactly why it got replaced by paper.
+
+| Phase | Time | When | Friction tolerance |
+|---|---|---|---|
+| Capture | 30–90 s | On the call | Zero. Any friction loses information. |
+| Shape | 3–10 min | On or after the call | Low. This is the craft work. |
+| Resource | 2–5 min | Later, possibly someone else | Medium. Depends on the roster. |
+| Compose & send | 1–3 min | Once, at the end | Low, but must feel safe. It's client-facing. |
+
+### The decision this forced: not a wizard
+
+A wizard is the obvious answer to "too much on one page", and it's wrong here. Wizards enforce an order the phone call doesn't have. Clients volunteer the return date before the aircraft type, and the passenger count halfway through describing the site. Wizards also punish the most common real case: cloning last month's job for a repeat client and changing the date. A wizard turns a 40-second edit into a nine-screen walk.
+
+But a flat 2,000px form was equally wrong. What people want from a wizard is rarely enforced order; it's knowing what's left and not facing everything at once. Those are separable from sequencing. A navigable structure with a completeness ledger delivers both without the cost.
+
+<Figure src="/media/priced-offer/rejected-directions.webp" alt="Two lo-fi wireframes of directions tried and dropped. A: the same single page regrouped into Client, Flights, Crew and Pricing sections. B: a nine-step wizard on step 3, Aircraft, with Back and Next." caption="Tried and dropped. A tidier single page still served four tasks at once; a wizard enforced an order the call doesn't have. Reconstructed wireframes, not the original files." wide />
+
+</GoDeeper>
+
+<GoDeeper id="design" title="The design in full" summary="The rail, canvas and ledger, derived fields, one location field and a locked document skeleton">
+
+### One rail, one canvas, one ledger
+
+- **Left rail.** Structure and validation state in one column. Every node carries a completeness marker, and a live "Ready to send: N items left" expands into a click-through list. This answers "what's missing?", a question the old page could not answer at all.
+- **Centre canvas.** One context at a time: Job & client, a Flight, or the Document. Not a wizard: you can jump anywhere, in any order, at any level of completeness.
+- **Right ledger.** Currency, VAT, discount, terms, a per-flight breakdown and the running total. Cause sits directly above effect.
+
+<Figure src="/assets/work/priced-offer/flight.webp" alt="The Flight context: aircraft, timing, crew, sequence and vehicles under one flight, with a banner flagging that Allen Johnson is also assigned to FL2 and a Reassign action." caption="A flight, with a crew conflict surfaced inline. Crew, vehicles, points of interest and special requirements are re-parented under the flight they belong to, which turns an invisible scheduling error into a visible one: the logging specialist is already committed to FL2 at 16:00, and the row says so at the moment of assignment, with a Reassign route out." wide />
+
+### Derive everything the system already knows
+
+| Field | Was | Became |
+|---|---|---|
+| Offer number | Typed by hand | Derived: client number + sequence (44532/10) |
+| Overflight legs | Hand-entered | Generated from the legs either side, marked AUTO |
+| Unit and price | Retyped each time | Filled from the product, contract rate where one exists |
+| Crew | Re-selected per flight | Defaulted from the aircraft's roster, with availability |
+| Crew call time | Worked out mentally | Derived: requested time − lead time |
+
+The offer number is my favourite finding. The old form already showed 44532 beside the contact columns and 44532/10 in the header. It was client number + sequence all along; the form just never said so, and presented the result as a field you could type into. Every row here is also a row removed from the notepad.
+
+### One location field, three kinds
+
+The old form made the dispatcher choose a type (saved site, coordinates or area) before entering anything. The new field auto-detects: type a name and it's a saved site; paste 46.94, 7.44 and it's coordinates; draw and it's an area. The glyph reports what it resolved to rather than asking. That removes about 12 type-decisions and 12 modal round-trips per job.
+
+### A locked skeleton with one free zone
+
+Dispatchers need to vary wording job to job, but a freely rearrangeable document stops being an offer. A client who reads twenty of these a year should find the price in the same place every time. So: a fixed skeleton with exactly one arrangeable zone.
+
+Locked means unmovable, not uneditable. Only the extra blocks carry drag handles, so the affordance teaches the rule and no error message is needed.
+
+<Figure src="/assets/work/priced-offer/compose.webp" alt="Compose & send: the offer document assembled from the library and previewed as the client will receive it, with Send on the same screen." caption="Compose & send. The document is assembled from the library, previewed as the client will receive it, and sent from the same screen." wide />
+
+</GoDeeper>
+
+<GoDeeper id="states" title="Sixteen states, each with a route out" summary="Empty, conflicts, missing data, offline, edited by someone else, sent and accepted">
+
+Most of the design work was not the happy path: empty, healthy, no aircraft, aircraft unavailable, crew double-booked, dangerous goods with an uncertified pilot, leg missing product, leg missing price, unresolved location, autosave failed, edited by someone else, send blocked, block untranslated, send failed, sent, accepted. Specifying failure at design time, when the answer is still a design decision, is most of what separates a screen that survives real use from one that demos well.
+
+<States>
+  <State title="No aircraft selected" src="/assets/work/priced-offer/state-no-aircraft.webp" alt="Flight with no aircraft selected: a red banner explains the flight cannot be priced or crewed until one is chosen, and the crew rows are empty.">
+    The banner explains the consequence and never repeats the label: this flight cannot be priced or crewed until one is chosen. The crew rows empty at the same time, showing the cause, because roster defaults come from the aircraft.
+  </State>
+  <State title="Crew double-booked" src="/assets/work/priced-offer/state-crew-double-booked.webp" alt="Crew double-booked: the logging specialist row is flagged as already assigned to another flight, with a Reassign action.">
+    The conflict existed in the old build too; it was simply unseeable, because crew rows sat detached from any flight. Re-parenting crew under the flight is what makes it visible.
+  </State>
+  <State title="Autosave failed · offline" src="/assets/work/priced-offer/state-autosave-offline.webp" alt="Autosave failed while offline: an amber banner says changes since 12:30 have not been saved, nothing is lost and edits are queued locally, with Retry now.">
+    A system failure, so the rail goes amber rather than red and every field stays clean. The message leads with "nothing is lost" before offering Retry. On a twenty-call day, the first fear is losing the call you just took.
+  </State>
+</States>
+
+</GoDeeper>
+
+<GoDeeper id="system" title="System work" summary="Five components the screen needed, one missing token, and squaring every corner">
+
+### Extending a system without fragmenting it
+
+The design system already existed. My job was not to build one. It was to add what this screen genuinely needed and nothing else, which is the harder discipline of the two.
+
+| Component | Why it had to exist |
+|---|---|
+| Field cell | Dense grid input at a row height the existing text field couldn't reach |
+| Location cell | The three-kinds-of-location behaviour |
+| Sequence leg row | The offer-stage leg: type, product, price, derived state |
+| Crew row | Crew under a flight, with availability and certification |
+| Result row | Search results for client, product and contact pickers |
+
+### A border-subtlest token
+
+Existing borders were too heavy at this density: fine on a form with twelve fields, oppressive on a grid with sixty. Rather than override strokes locally, I added the token the system was missing, bound it in both themes, and repointed the components. The local override would have been faster, and would have started the fragmentation this system had so far avoided.
+
+### Squaring every corner
+
+Auditing components for this screen, I found the system was square-cornered by convention (buttons, fields, selects, tags, menus, modals), but a handful had drifted to pills and circles. I did a full pass to bring them back, including rebuilding the readiness rings as linear meters. The value wasn't the corners; it was that the convention became enforced rather than merely prevalent.
+
+</GoDeeper>
+
+<GoDeeper id="validation" title="Validation" summary="Interviews before, prototype testing during, daily use after">
+
+- **Before.** Five interviews, which produced the finding the whole design rests on, and killed my density-reorganisation instinct before it cost anything to build.
+- **During.** Low- and mid-fidelity clickable prototypes built with Claude and tested with four dispatchers, one session each; two of them struggled to see what was missing, which added the check state. Then a full interactive prototype in light and dark, pressure-tested against real job shapes rather than a happy path (multi-flight jobs, overflight legs, area locations, repeat clients), and tested with users before the build.
+- **After.** Shipped, and in daily use across the eight operators.
+
+</GoDeeper>
+
+<GoDeeper id="outcomes" title="Outcomes in full" summary="How each of the three complaints was answered, and why a sent offer becomes read-only">
+
+| The complaint | What changed | Result |
+|---|---|---|
+| Error-prone | Lifecycle stages separated; derived fields replaced retyped ones; conflicts surfaced on the flight | Fewer places to be wrong, and the errors that remain are visible where they happen |
+| Too hard to train on | One context at a time, a rail that states what's left, affordances that teach the rule | Dispatchers learn it by using it; training is no longer a prerequisite |
+| Too much manual updating | Execution-stage fields removed; the system derives what it already knows | The dispatcher maintains the offer, not the whole job lifecycle |
+
+<Figure src="/assets/work/priced-offer/sent.webp" alt="A sent offer: read-only, with fields disabled, actions removed and the sent version frozen and labelled v1." caption="Once sent, the offer is a fact. Delivered offers go read-only: fields disabled, actions removed, the version frozen and labelled. A document the client is holding is not a draft, and the interface should stop pretending otherwise." />
+
+The training outcome is the one I did not design for directly and value most. It was a by-product of two decisions taken for other reasons: showing one context at a time, and making completeness explicit in the rail. Together they mean a new dispatcher is never looking at a field whose purpose isn't established by what's around it. That is what "self-teaching" means in practice.
+
+</GoDeeper>
+
+<GoDeeper id="reflection" title="Reflection, and what's still unresolved" summary="What I'd do differently, three lessons, and four open items">
+
+### What I'd do differently
+
+I'd run the interviews before doing any layout thinking at all. I spent real time reorganising a page whose actual failure was that it went unused during the call, and the fix for that isn't reorganisation. The order was recoverable here because the project was three months, not three weeks. The lesson is that "the page is too dense" is a description of a screen, not a description of a task, and I started from the screen.
+
+### What I learned
+
+- **Their workarounds are the spec.** The notepad wasn't a complaint; it was a design already in production. Users who do a task twenty times a day will have solved your problem for you, badly, in a way that tells you exactly what the software owes them.
+- **Speed for experts is retrieval, not input.** They type quickly and know the domain cold. What costs them is finding where things go, which makes layout stability, predictable position and derivation worth far more than shortcuts or clever input.
+- **Density is not the enemy.** Undifferentiated density is. This is still a dense screen, for professionals who want information on screen, not a spacious wizard. What changed is that the density is ordered by phase and hierarchy, so three quarters of it can be ignored at any moment.
+
+### Still unresolved
+
+- The read-only sent state is designed for the document but not fully specified across every screen.
+- Only one of the two flight layouts has a complete scenario set; the second still leans on the first.
+- One legacy component remains circular by necessity rather than convention: a documented exception in a system that otherwise has none, which is the kind of small debt that quietly becomes a precedent.
+- Some domain abbreviations inherited from the old table were carried forward on the operators' terms rather than renamed. Renaming them touches a vocabulary ops and billing also use, so it belongs in a wider conversation than this screen.
+
+</GoDeeper>
+
+<GoDeeper id="artefacts" title="Artefacts" summary="What exists behind this case study">
+
+Original screen · annotated diagnosis · interactive prototype in light and dark · Figma: 4 screens, 16 labelled scenario frames, 5 overlays, 5 new components · a field-accounting table showing every original field kept, moved or deferred.
+
+</GoDeeper>

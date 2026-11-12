@@ -1,0 +1,320 @@
+---
+title: "The record that decides who is allowed to fly"
+format: "case"
+order: 5
+featured: true
+company: "NGFT"
+eyebrow: ["NGFT Training", "Compliance records", "Shipped"]
+intro: "Helicopter operators have to prove every pilot on every flight is trained, current and signed off. Two of them kept that proof in Excel, written first on paper in the air. I designed the training module, inside the operations platform, that replaced the spreadsheet."
+oneLiner: "Check outcomes recorded against the training syllabus, so sign-off cannot happen with gaps."
+tags: ["Aviation", "Training", "Compliance"]
+meta:
+  role: "Solo designer and product owner"
+  team: "Me, one frontend, one backend"
+  timeline: "2 months design · 2 months build"
+  research: "8 instructors and 7 trainees interviewed, plus recordings of real sessions"
+status: "shipped"
+statusNote: "Adopted by both operators after their three-month evaluation"
+statusAsOf: 2026-11-11
+updated: 2026-11-11
+cover:
+  video: "/media/training-record/cover.mp4"
+  poster: "/assets/work/training-record/hero.png"
+  alt: "The training dashboard: a banner naming a blocked enrollment, three counts with the action beside each (countersigns waiting, sessions running today, enrollments blocked), today's sessions, sheets waiting for a countersign, and validity written back to the roster."
+summary:
+  problem: "Two operators kept training records in Excel: remarks written on paper during the flight, typed up at a desk afterwards, and never connected to the roster that decides who flies tomorrow."
+  role: "Solo designer and product owner, with one frontend and one backend. Two months design, two months build."
+  changed: "One loop, six moves: check outcomes are recorded against the syllabus, so sign-off cannot happen with gaps."
+  result: "Shipped and adopted by both operators. Write-up time went from a reported 30–40 minutes per trainee to a logged 10–12."
+stats:
+  - value: "30–40 → 10–12 min"
+    label: "write-up time per trainee"
+    source: "logged"
+    note: "The before figure is what instructors reported about the Excel process; a spreadsheet has no timestamps. The after figure is the system's logged average across two months."
+  - value: "15"
+    label: "people interviewed: 8 instructors, 7 trainees"
+    source: "count"
+  - value: "2 of 2"
+    label: "operators adopted it after a 3-month evaluation"
+    source: "count"
+  - value: "3"
+    label: "new components across 16 screens"
+    source: "count"
+series:
+  name: "NGFT Training"
+  part: 1
+  of: 2
+next: "snapgrid"
+nda: false
+seo:
+  description: "Check outcomes recorded against the training syllabus, so sign-off cannot happen with gaps. Adopted by both operators."
+  ogImage: "/assets/og/training-record.png"
+---
+
+## /* Before and after */
+
+<BeforeAfter
+  mode="slider"
+  before="/media/training-record/before-paper-excel.webp"
+  beforeAlt="A diagram of the old process: a printed question sheet with remarks in the margin during the session, typed again into an Excel record at a desk, and not connected to the crew roster."
+  after="/assets/work/training-record/running-session.png"
+  afterAlt="Running the session: outcomes recorded in fixed status columns, and a rail that counts what is recorded and names what is missing, with End session disabled and the reason beside it."
+  caption="Before: a margin note in the air, then a spreadsheet cell at a desk. After: a graded outcome against a named exercise, recorded once."
+/>
+
+## /* What we found */
+
+I had assumed a web application, because instructors filled in their records at a desk afterwards. Then I watched recordings of real sessions. The instructor had a printed question sheet in front of him and was writing remarks in the margin, while flying and while teaching. The spreadsheet came later.
+
+<Quote by="Instructor, paraphrased from interview">
+During flight our attention is divided between the trainee and the writing.
+</Quote>
+
+The record was being written twice, and the first pass was happening in the air, under load.
+
+## /* The reframe */
+
+The brief said training management. But training flights are operational flights: same aircraft, same crew, same duty hours, same roster. So the real question isn't "what training has this pilot done?" but "is this pilot allowed on tomorrow's flight, and can the operator prove it?" It is not a training database. It is a gate on the roster.
+
+## /* Key decisions */
+
+<Decision n="01" title="A disabled button says why">
+  <Loop slot="media" src="/media/training-record/session-rail.mp4" poster="/assets/work/training-record/running-session.png" alt="Trying to end a session with exercises ungraded: End session stays disabled, and the rail names the three missing exercises with a way to each." posterAlt="Running the session: outcomes recorded in fixed status columns, and a rail that counts what is recorded and names what is missing, with End session disabled and the reason beside it." device="desktop" />
+
+There are four places where the module refuses to continue: an incomplete syllabus, a blocking eligibility check, an unacknowledged brief, ungraded outcomes. In every one, the reason sits beside the button in a sentence, with the route to fix it. A greyed-out control with no explanation is the design equivalent of hanging up.
+</Decision>
+
+<Decision n="02" title="Name the irreversible moment, once">
+  <Loop slot="media" src="/media/training-record/sign-off.mp4" poster="/assets/work/training-record/sign-off.png" alt="Signing a session: the signature cascade with one actionable step, the statement of what is about to be written to the roster, and the signature landing." posterAlt="Sign-off: a signature cascade with one actionable step, beside a statement of what is about to be written to the roster and that it cannot be undone from here." device="desktop" />
+
+Only two things in this product can't be undone: approving a syllabus version and signing a session. Both get a full-width statement of what is about to become unchangeable. A correction afterwards becomes a second, linked entry, not an edit. Spending that space is only affordable because everything else is quiet.
+</Decision>
+
+<Decision n="03" title="Show what the system will write, before it writes it">
+  <Loop slot="media" src="/media/training-record/validity-written.mp4" poster="/assets/work/training-record/validity-written.png" alt="Completing the loop: the four records the system created, with the licence endorsement marked OUTSIDE NGFT because the authority still signs on paper." posterAlt="Validity written: the four records the loop produced, with the licence endorsement marked OUTSIDE NGFT because the authority still signs on paper." device="desktop" />
+
+Every screen that causes a record to exist says what record it will be. The enrollment screen lists the six sessions it is about to create; the completion screen lists the four records it created. The alternative is a success toast and a user who checks the spreadsheet anyway.
+</Decision>
+
+## /* Outcome */
+
+Write-up fell from a reported 30–40 minutes per trainee to a logged average of 10–12. Both operators adopted the module after their three-month evaluation, and the Excel sheets have stopped.
+
+The drop comes from removing a pass. The Excel route was two passes over the same information: paper in the air, then typing at a desk. The module removes the second pass and structures the first.
+
+<Claims>
+  <Claim kind="can">Write-up fell from a reported 30–40 minutes to a logged 10–12.</Claim>
+  <Claim kind="can">Both operators adopted it after a three-month evaluation, and stopped filling in Excel.</Claim>
+  <Claim kind="can">Two instructors who resisted it now prefer it, in their words because it is less hassle.</Claim>
+  <Claim kind="cannot">No auditor has looked at a record the system produced yet.</Claim>
+  <Claim kind="cannot">No trainee has their own view of the record yet.</Claim>
+</Claims>
+
+## /* Reflection */
+
+I shipped the wrong half first. The strongest finding was that instructors write on paper in the air, and I built a web module used at a desk afterwards. I would have shipped release one tablet-responsive from day one, so the paper could have stopped months earlier. Release two, the tablet app, is [Part 2](/work/instructors).
+
+<GoDeeper id="context" title="Context and constraints" summary="A training system that had to live inside dispatch, and the four things fixed before I started">
+
+### A training system that had to live inside dispatch
+
+NGFT builds dispatch and operations software for helicopter operators. Training was not part of it. The two operators in this project kept their training records in Excel: an instructor wrote remarks on paper during the flight, next to a printed question sheet, and typed them into a spreadsheet afterwards. Nothing connected that spreadsheet to the roster the same company used to decide who flew tomorrow.
+
+1. **Two months of design.** The window was fixed before the scope was. Everything below is a consequence of deciding what fitted inside it.
+2. **It had to live inside the existing operations platform.** Training flights are also operational flights: same aircraft, same crew, same duty hours. A training record kept outside the operations system is a record nobody checks before rostering someone. This single constraint is why the module writes validity back to the crew roster instead of storing it on its own.
+3. **The authority signs on paper.** Licence endorsements leave the system and come back as a scan. No design decision could pretend that loop was closed, so the screens say so on their face.
+4. **The company's design system already existed.** I did not build the library. Anything new had to earn its place against what was already there.
+
+</GoDeeper>
+
+<GoDeeper id="research" title="The research" summary="Four sources that didn't agree: interviews, trainees, session recordings and the BA's requirements">
+
+### Fifteen people, and a stack of session recordings
+
+I interviewed eight instructors and seven trainees across the two operators by video call. Separately I watched recordings of real training sessions, and the business analysis team ran a requirements pass with each client. Three sources: what people say, what they do, and what the company says it needs. They did not agree, which is the useful part.
+
+- **8 instructors.** Line and type-rating instructors at both operators. They are the people who hold the record while it is being made, and the people who were writing on paper.
+- **7 trainees.** The other end of the same record. They never saw it until it was finished, and could not tell you what they had been marked down on until the next session.
+- **Recordings of real sessions.** The most useful source, and the one that contradicted the interviews. What people described doing and what they were doing were not the same thing.
+- **BA requirements, per client.** What each operator said it needed, gathered independently of me. Useful as a boundary: it told me what could not be dropped, not what should be built.
+
+### Not everyone wanted it changed
+
+Several instructors defended the paper and asked, plainly, why we were changing something that worked. Paper does not crash, does not need a login, and does not run out of battery at 1,500 feet.
+
+### Two of them changed their minds
+
+Two of the instructors who pushed back hardest now say they prefer the system, and the reason they give is that it is less hassle: one pass instead of two. I did not persuade them; using it did.
+
+</GoDeeper>
+
+<GoDeeper id="diagnosis" title="Diagnosis" summary="Four symptoms, one cause: the record lived where the rest of the operation couldn't see it">
+
+### Four symptoms, one cause
+
+The operators described four separate problems. They are one structural fact with four faces: the training record lived somewhere the rest of the operation could not see, in a format that could not hold what the regulation asks of it.
+
+1. **"It takes half an hour per trainee."** Because the record is written twice: once on paper in the air, once into Excel at a desk. The complaint is about typing. The cause is duplication.
+2. **"We cannot find what someone was marked down on."** Because a spreadsheet cell holds a sentence, not a graded outcome against a named exercise. There is nothing to search, so the answer lives in the instructor's memory.
+3. **"We only find out a rating expired when someone chases it."** Because the file that knows a pilot's validity and the system that rosters that pilot tomorrow are different files, owned by different people.
+4. **"Every instructor grades slightly differently."** Because nothing enforces a vocabulary. Pass, partial and repeat mean whatever the person typing them meant that day, and a later examiner has to guess.
+
+</GoDeeper>
+
+<GoDeeper id="reframe" title="The reframe in full" summary="Why validity, not the syllabus, is the thing the system exists to produce">
+
+### It is not a training database. It is a gate on the roster.
+
+Treated as training management, the job is to store syllabi and record outcomes, and a spreadsheet does most of that badly but adequately. That framing produces a filing cabinet, and a filing cabinet is exactly what they already had.
+
+The constraint pointed somewhere else. Training flights are operational flights, rostered by the same dispatcher, in the same system. So the module has to answer whether this pilot is allowed on tomorrow's flight, and whether the operator can prove it.
+
+That is a different product. It makes validity, not the syllabus and not the session, the thing the system exists to produce. Everything upstream is the chain of custody for one date on a crew roster: a syllabus is a promise about what validity requires, an enrollment is a claim that someone is eligible to attempt it, a session is evidence, and a signature is the moment the evidence becomes a permission. Design the chain and the filing cabinet comes free. Design the filing cabinet and the chain never appears.
+
+</GoDeeper>
+
+<GoDeeper id="design" title="The design: one loop, six moves" summary="Syllabus, approval, enrollment, scheduling, recording, sign-off">
+
+The module is one loop that runs from a syllabus to a date on the roster. Each step is a screen in the product, and each exists because of something in the diagnosis rather than because a training system usually has one.
+
+### 01 · Build and version a syllabus
+
+A syllabus is a promise about what validity requires, so it has to be versioned and approved like a document, not edited like a spreadsheet. Validity and the revalidation window can be changed until it is approved and not after, because the moment a trainee is enrolled, those two numbers are what the roster will eventually be told. The outline marks incomplete items, and a panel names the three things standing between this version and approval, each with a route to fix it.
+
+<Figure src="/assets/work/training-record/syllabus-builder.png" alt="Syllabus builder: a versioned outline with incomplete items marked, and a panel naming the three things standing between this version and approval." caption="05 · Syllabus builder" />
+
+### 02 · Approve a version by its diff
+
+The approver's real question is not "is this syllabus correct" but "what changed since the last one I approved". The screen answers that question instead of asking them to read the whole thing again. Comments anchor to the item they are about and stay on the version record, so a disagreement from six months ago is still attached to the line it was about.
+
+<Figure src="/assets/work/training-record/syllabus-approval.png" alt="Syllabus approval: the changes since the last approved version, with comments anchored to the items they are about." caption="09 · Syllabus approval" />
+
+### 03 · Enrol against checks, not a sentence
+
+Eligibility used to be free text in a table cell. It is now five named checks (licence, medical, prerequisites, recency, duplicate enrollment), each pass, watch or blocking. A blocking check can be overridden only by a named person who types a reason, and the reason is stored on the enrollment where the approver and the auditor can see it. The override is not hidden; it is the loudest thing on the screen.
+
+<Figure src="/assets/work/training-record/enrollment-eligibility.png" alt="Enrollment eligibility: five named checks, licence, medical, prerequisites, recency and duplicate enrollment, each pass, watch or blocking, with an override that needs a named person and a reason." caption="10 · Enrollment eligibility" />
+
+### 04 · Schedule in the mode the lesson demands
+
+One screen, not five. The delivery mode (classroom, FSTD, aircraft, web) decides which fields are required, and the screen states which fields a switch would replace so nobody loses typing. Because the module lives inside OPS, the same pass can check the device, the instructor, the trainee and duty-and-rest. The rest shortfall here is ten minutes, and the fix is one tap.
+
+<Figure src="/assets/work/training-record/schedule-session.png" alt="Schedule a session: the delivery mode decides the required fields, and checks on the device, instructor, trainee and duty-and-rest show a ten-minute rest shortfall with a one-tap fix." caption="11 · Schedule a session" />
+
+### 05 · Record outcomes in fixed columns
+
+This is the screen the whole thing exists for. Statuses are columns, not loose chips, so an instructor can read down one column and find everyone who was deferred. A rail counts what is recorded, names what is missing and on which item, and disables the end-session button with the reason written next to it. In the old spreadsheet there was no way to know you had missed one until someone asked.
+
+### 06 · Sign, and watch validity land
+
+Sign-off is its own screen with exactly one actionable step, because it is the irreversible moment in this product. Beside the cascade sits a statement of what is about to be written to the roster and the fact that it cannot be undone from here. A correction afterwards becomes a second, linked entry, not an edit.
+
+</GoDeeper>
+
+<GoDeeper id="decisions" title="Two more decisions" summary="Repeats stay on the record, and the design doesn't pretend the loop is closed">
+
+### Repeats stay on the record
+
+A repeated exercise is not a failure, and hiding it would make the record useless to the next examiner. The design shows repeats in the session, in the review, and on the completed record, with the session that cleared each one. The regulation wants the history; an instructor wants to know what to watch.
+
+### Do not pretend the loop is closed
+
+The authority signs licence endorsements on paper. The design could have shown a tidy green tick. Instead the completion screen carries a lozenge that reads OUTSIDE NGFT and a line explaining that the roster entry is provisional in the regulator's eyes until the scan comes back. Honest beats tidy in any system someone gets audited on.
+
+<Figure src="/assets/work/training-record/session-before-start.png" alt="A session before it starts: Start session is disabled, and the bar under it names the unmet item and offers the way past it." caption="12 · Session, before it starts. Start session is disabled, and the bar under it names the unmet item and offers the way past it." />
+
+</GoDeeper>
+
+<GoDeeper id="states" title="Where a training record goes wrong" summary="Six failure states, from a blocking check to a lapsed rating">
+
+This is a record an operator gets audited on. What the screens do when things go wrong matters more than what they do when everything is fine.
+
+| When | What the system does |
+|---|---|
+| A blocking eligibility check | The enrollment stops. Continue is disabled, the blocking check is named, and the only way past is a manager typing a reason that is stored on the record and shown to the approver. |
+| The trainee has not read the brief | The session can still start (an instructor is not going to stand in a sim bay arguing with software), but the reason is recorded on the session and shown to the approver. |
+| Outcomes are missing at the end | End session is disabled and the three missing exercises are named. Ending early is allowed, and marks them not flown rather than silently blank. |
+| An instructor disagrees with the plan mid-session | They cannot edit an approved syllabus from inside a running session. They file a suggestion against the exercise, with the session attached, and it reaches the syllabus owner as a comment on the version. |
+| A signed outcome turns out to be wrong | It is not edited. A correction becomes a second, linked entry stating what changed and why, and the original stays visible. This is the difference between a record and a document. |
+| The rating lapses before revalidation | The system proposes the longer renewal syllabus instead of the revalidation one, because a lapsed rating is legally a different training requirement, not the same one, late. |
+
+<Figure src="/assets/work/training-record/lesson-plan.png" alt="The lesson plan opened as a sheet over a running session, with a way to file a suggestion against an exercise instead of editing the approved syllabus." caption="13 · Lesson plan, opened mid-session. The instructor files a suggestion against the exercise, and the running session stays visible behind the sheet." />
+
+</GoDeeper>
+
+<GoDeeper id="system" title="System work" summary="Three new components across sixteen screens, and a reason for each">
+
+The company's design system already existed. I did not build it, and this module is not an excuse to fork it. Sixteen screens produced three new components. Everything else is existing Button, Text field, Textarea, Select, Checkbox, Toggle, Lozenge, Badge, Tag, Avatar, Side nav, Top nav and the Stepper.
+
+| Component | Variants | Why it exists |
+|---|---|---|
+| Outcome row | 6 states | One trainee's outcome for one item, with the five statuses in fixed columns. Forking the table row to hold five mutually exclusive controls would have made it a different component wearing the same name. |
+| Sign-off step | 4 states | One link in the signature cascade. Only the current step carries a button, a rule that is easier to enforce in a component than to remember on every screen. |
+| Outline node | 9 variants | Section, lesson and item, each with a selected and an incomplete state. The incomplete state is what lets the syllabus outline answer "why can I not submit this?" |
+
+<Figure src="/assets/work/training-record/outcome-row.png" alt="The outcome row component in its six states, with the five statuses in fixed columns." caption="Outcome row · six states. The component the whole module turns on." />
+
+</GoDeeper>
+
+<GoDeeper id="validation" title="Validation" summary="Fifteen people before, six instructors after, and what that sample is not">
+
+Before the design: eight instructors and seven trainees interviewed, plus recordings of real sessions and a requirements pass by the BA team at each client. That is where the paper finding came from, and it is the only reason the module is shaped around removing a duplicate pass rather than around making a form nicer.
+
+After the build: it went live at two operators with six instructors, three from each. Both companies run a mandatory three-month evaluation before adopting any new system. Both evaluations finished, and both operators adopted it.
+
+### What this is not
+
+Six instructors at two operators is a pilot, not a proof. Both companies chose to evaluate this software, which makes them a friendly sample. Nothing here has been tested against an operator that did not want it.
+
+### Where the minutes come from
+
+The before figure is what instructors reported about the Excel process; it could not be measured, because a spreadsheet does not have timestamps. The after figure is the average logged by the system across two months. Instructors independently describe it as "ten to fifteen minutes", which is close enough to the log to be worth saying.
+
+Removing one of the two passes is why the time fell. The drop itself, from a reported 30–40 minutes to a logged 10–12, takes write-up time to roughly a third of what it was.
+
+<Note>"Roughly a third" is arithmetic from the two figures above, not a separate measurement.</Note>
+
+</GoDeeper>
+
+<GoDeeper id="reflection" title="Reflection in full" summary="Why the web module came first, and what I'd change about release one">
+
+### I shipped the wrong half first
+
+The strongest finding in the research was that instructors write on paper in the air because their attention is divided. I then built a web module that is used at a desk afterwards, and put the fix for that finding in release two.
+
+There was a reason, and it is not a bad one. I wanted a solid base (a proven data model, a record structure the operators had signed off, and instructors who already knew the vocabulary) before putting anything in a cockpit. Familiarity first, then the harder surface. As product owner I made that call deliberately.
+
+What I would do differently is the shape of release one, not the order of the releases. I would have built the web module responsively for tablets from the start, the same product usable in the hand on day one, and then designed the dedicated tablet app properly as release two. That would have let instructors stop writing on paper months earlier, on a rougher tool, instead of waiting for the right one.
+
+</GoDeeper>
+
+<GoDeeper id="next" title="What came next" summary="Release two, the instructor tablet app, and the loop with the authority">
+
+Release two is the instructor tablet app: outcome capture in the aircraft and the sim, at the moment it happens, on a device held in one hand. It has its own case study: [Part 2 · The instructors put the paper down](/work/instructors).
+
+After that, the open question is the one the completion screen already admits to: the authority signs licence endorsements on paper, and until that changes, the roster entry the system produces is provisional in the regulator's eyes. Closing that loop is a conversation with a regulator, not a design problem, but the two screens that would change are already marked.
+
+</GoDeeper>
+
+<GoDeeper id="screens" title="All sixteen screens" summary="Fourteen web screens, plus the trainee phone and instructor tablet that became the next release">
+
+<Gallery>
+  <Figure src="/assets/work/training-record/set-01-dashboard.png" alt="01 Dashboard: counts with actions, today's sessions, countersigns waiting and validity written back." caption="01 Dashboard" />
+  <Figure src="/assets/work/training-record/set-02-syllabi.png" alt="02 Syllabi: the list of syllabi and their versions." caption="02 Syllabi" />
+  <Figure src="/assets/work/training-record/set-03-enrollments.png" alt="03 Enrollments: the list of enrollments and their status." caption="03 Enrollments" />
+  <Figure src="/assets/work/training-record/set-04-sessions.png" alt="04 Sessions: the list of scheduled and completed sessions." caption="04 Sessions" />
+  <Figure src="/assets/work/training-record/set-05-syllabus-builder.png" alt="05 Syllabus builder: a versioned outline with incomplete items marked." caption="05 Syllabus builder" />
+  <Figure src="/assets/work/training-record/set-06-running-session.png" alt="06 Running the session: outcomes in fixed status columns and a rail naming what is missing." caption="06 Running the session" />
+  <Figure src="/assets/work/training-record/set-07-sign-off.png" alt="07 Sign-off: the signature cascade and what will be written to the roster." caption="07 Sign-off" />
+  <Figure src="/assets/work/training-record/set-08-new-syllabus.png" alt="08 New syllabus: starting a new syllabus." caption="08 New syllabus" />
+  <Figure src="/assets/work/training-record/set-09-approval.png" alt="09 Approval: what changed since the last approved version." caption="09 Approval" />
+  <Figure src="/assets/work/training-record/set-10-eligibility.png" alt="10 Eligibility: five named checks, each pass, watch or blocking." caption="10 Eligibility" />
+  <Figure src="/assets/work/training-record/set-11-schedule.png" alt="11 Schedule: scheduling a session in the mode the lesson demands." caption="11 Schedule" />
+  <Figure src="/assets/work/training-record/set-12-session-scheduled.png" alt="12 Session scheduled: a scheduled session before it starts." caption="12 Session scheduled" />
+  <Figure src="/assets/work/training-record/set-13-lesson-plan.png" alt="13 Lesson plan: the plan opened as a sheet over a running session." caption="13 Lesson plan" />
+  <Figure src="/assets/work/training-record/set-14-validity-written.png" alt="14 Validity written: the records the loop produced." caption="14 Validity written" />
+  <Figure src="/assets/work/training-record/set-15-trainee-phone.png" alt="15 Trainee phone: the trainee's record on a phone." caption="15 Trainee phone" />
+  <Figure src="/assets/work/training-record/set-16-instructor-tablet.png" alt="16 Instructor tablet: outcome capture on a tablet." caption="16 Instructor tablet · became Part 2" />
+</Gallery>
+
+</GoDeeper>

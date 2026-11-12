@@ -1,0 +1,189 @@
+---
+title: "A two-day safety report, in one guided flow"
+format: "case"
+order: 2
+featured: true
+company: "NGFT"
+eyebrow: ["NGFT SMS", "Incident management", "In use"]
+intro: "Helicopter operators investigate every safety report by hand, across a spreadsheet, Word files and a legacy system. I designed a single flow where the AI does the first pass and the safety manager makes the decisions."
+oneLiner: "Safety report analysis down from 2–3 days to about 2 hours: the AI does the first pass, and the safety manager makes every decision."
+tags: ["Aviation", "Safety", "AI native"]
+meta:
+  role: "Sole product designer"
+  team: "Me, with a BA on research"
+  timeline: "2 months design"
+  research: "12 safety managers at 12 operators, interviewed and observed"
+status: "in-use"
+statusNote: "Built and in use at some of the operators"
+statusAsOf: 2026-11-11
+updated: 2026-11-11
+cover:
+  video: "/media/safety-report/cover.mp4"
+  poster: "/assets/work/safety-report/hero.png"
+  alt: "Screen 12: the ECCAIRS step for SR-2026-0142 with every matched value decided: 0 need a decision, 9 not in report, 83 matched, 5 corrected. A green banner confirms every value has a decision, above the corrections listed by entity."
+summary:
+  problem: "A safety report was rebuilt by hand three times, across a spreadsheet, Word files and a legacy system, so the same facts were typed again at every step."
+  role: "Sole product designer, with a BA on research. Two months, and twelve safety managers."
+  changed: "One guided flow: the first pass is done for you, and the safety manager still makes every decision."
+  result: "Built and in use at some of the operators. Analysis time fell from 2–3 days to about 2 hours, logged by the system."
+stats:
+  - value: "2–3 days → ~2 h"
+    label: "to analyse a safety report"
+    source: "logged"
+    note: "Logged by the system."
+  - value: "12"
+    label: "safety managers interviewed and observed"
+    source: "count"
+  - value: "19"
+    label: "states designed across six steps"
+    source: "count"
+next: "compliance-check"
+nda: false
+seo:
+  description: "Safety report analysis down from 2–3 days to about 2 hours, in one guided flow where the safety manager makes every decision."
+  ogImage: "/assets/og/safety-report.png"
+---
+
+## /* Before and after */
+
+<BeforeAfter
+  mode="stack"
+  before="/media/safety-report/before-three-tools.webp"
+  beforeAlt="The old process: a safety report read as free text, rated in a spreadsheet, recorded in Word, then re-entered field by field into the legacy system to produce the ECCAIRS record."
+  after="/assets/work/safety-report/hero.png"
+  afterAlt="The ECCAIRS step with every matched value decided: 0 need a decision, 9 not in report, 83 matched, 5 corrected."
+  caption="Before: the same facts typed into a spreadsheet, Word and a legacy system. After: one flow, where the manager reviews what the system found."
+/>
+
+## /* What we found */
+
+A BA visited twelve operators and interviewed the safety manager at each one, and observed each procedure closely, which shows the steps people skip when they describe their work. I had access to the legacy system and a recording of a manager using it.
+
+<Quote by="Safety manager, during research">
+A normal report takes about two days.
+</Quote>
+
+The same three pains came up across the operators: the re-typing into ECCAIRS, risk rated differently by every manager, and no view of what is open. They set the brief.
+
+## /* Key decisions */
+
+<Decision n="01" title="The AI does the first pass. The manager decides.">
+  <Loop slot="media" src="/media/safety-report/synopsis-source.mp4" poster="/assets/work/safety-report/review-synopsis.png" alt="Hovering a line of the AI synopsis highlights the sentence in the narrative or the flight data it came from, then a suggested hazard is kept." posterAlt="Review step: a synopsis where every line links to its source in the narrative or flight data, one value flagged as only in the flight data, and two suggested hazards from the taxonomy with a duplicate merged." device="desktop" />
+
+Analysis starts when the report opens. It writes a synopsis linked to the source sentences and suggests hazards from the taxonomy. Nothing is accepted without the manager: every suggestion can be kept, corrected or removed.
+</Decision>
+
+<Decision n="02" title="Review ECCAIRS by exception">
+  <Loop slot="media" src="/media/safety-report/eccairs-exceptions.mp4" poster="/assets/work/safety-report/eccairs-exceptions.png" alt="Working through the uncertain ECCAIRS values: one is kept, one is corrected with a one-tap reason, and the count of values needing a decision drops." posterAlt="ECCAIRS step: 97 attributes matched, 7 need a decision. Each uncertain value shows its confidence and the reason, such as a narrative that contradicts the database, with Keep it and Correct." device="desktop" />
+
+The system matches every ECCAIRS attribute from the report. The manager only sees the values it is unsure of, with its reason. Keep or correct each one, with a one-tap reason for the audit trail. This replaces the re-typing that research named as the biggest pain.
+</Decision>
+
+<Decision n="03" title="One screen for risk, one rule for everyone">
+  <Loop slot="media" src="/media/safety-report/risk-matrix.mp4" poster="/assets/work/safety-report/risk-assessment.png" alt="Rating a hazard: severity and probability chosen beside the ICAO 5×5 matrix, the cell turning intolerable, and a similar risk from the register linked." posterAlt="Risk step: severity and probability beside the ICAO 5×5 matrix with 3A marked intolerable, AI suggestions under each field, and similar risks from the register to link or use as a template." device="desktop" />
+
+Severity and probability sit side by side with the ICAO 5×5 matrix, so every manager reaches a rating the same way. Similar risks from the register appear alongside, so a recurring hazard is linked instead of assessed again from scratch.
+</Decision>
+
+## /* How I prototyped it */
+
+I designed the flow myself and prototyped it with Claude. Two safety managers tried the prototype, and it was the same version I showed at the concept review.
+
+The sessions didn't change the design. What both managers reacted to was how much the system did on its own.
+
+## /* Outcome */
+
+The flow is built and in use at some of the operators. The system's logs show the time to analyse a report down from 2–3 days to about 2 hours.
+
+The design goes after the re-typing first, because research named it the biggest pain. The ECCAIRS record is matched from the report itself, and the manager reviews only the exceptions instead of entering dozens of attributes one by one.
+
+<GoDeeper id="problem" title="The problem in full" summary="Every report rebuilt by hand three times, and the three pains research found">
+
+### Every report is rebuilt by hand, three times
+
+A safety report arrives as free text. The safety manager then reads it, rates the risk, keeps a record in Excel and Word, and re-enters it field by field into a legacy system to produce the ECCAIRS record the authority needs. Nothing connects those steps, so the same facts are typed again at every one.
+
+- **Re-typed into ECCAIRS.** Dozens of attributes entered one by one, from a report that already contains most of the answers.
+- **Risk rated differently.** Each manager applies the matrix their own way, so the same hazard gets different ratings.
+- **No view of what is open.** Nothing shows which reports are overdue, who owns them, or which carry an intolerable risk.
+
+</GoDeeper>
+
+<GoDeeper id="research" title="The research" summary="Twelve operators, watched as well as asked">
+
+### Twelve operators, watched as well as asked
+
+| | |
+|---|---|
+| Safety managers interviewed | 12. A BA visited twelve operators and interviewed the safety manager at each one. |
+| Procedures observed | 12. The BA also observed each procedure closely, which shows the steps people skip when they describe their work. |
+| Legacy system, first-hand | I had access to the old system and a recording of a manager using it, which showed exactly where time goes. |
+
+The same three pains came up across the operators. They set the brief: remove the re-typing, make risk consistent, and show what is open.
+
+</GoDeeper>
+
+<GoDeeper id="constraints" title="Constraints" summary="Nothing was fixed: built from scratch">
+
+Nothing was fixed before the design started. The system was built from scratch, with no legacy data model or existing screens to work within.
+
+</GoDeeper>
+
+<GoDeeper id="decisions" title="Two more decisions" summary="Start with what's urgent, and a real finish line">
+
+### Start with what's urgent
+
+The inbox puts what needs the safety manager first. Every row shows the risk level, days open, owner and due date. Counts for overdue reports and intolerable risks sit on top, so the riskiest report is never buried.
+
+<Figure src="/assets/work/safety-report/inbox.png" alt="Safety reports inbox: counts for Need you, Overdue, Intolerable risk open and Closed this month on top, then a table of open reports with stage, risk level, owner and days open." caption="01 · Inbox" />
+
+### A real finish line
+
+Closing shows what was decided, what is still open and one final action. It stays blocked until an intolerable risk has an accepted mitigation. A closed report locks, with every change and correction in its audit trail.
+
+<Figure src="/assets/work/safety-report/close-ready.png" alt="Close step: hazards with their risk and treatment, the ECCAIRS record summary, a Ready to close checklist at 6 of 6, and what happens on closing, with one Close report action." caption="17 · Close, ready to close" />
+
+</GoDeeper>
+
+<GoDeeper id="states" title="Every state designed" summary="19 states across six steps, including the ones usually left to engineering">
+
+19 states across six steps, including the ones that usually get left to engineering.
+
+<States>
+  <State title="AI analysis running" src="/assets/work/safety-report/state-analysis-running.png" alt="Analysing the report: a checklist of reading the narrative, extracting flight facts, identifying hazards and writing the synopsis, with a note that the manager can leave and will be notified.">
+    The manager can leave and will be notified when the first pass is ready.
+  </State>
+  <State title="Analysis partly failed" src="/assets/work/safety-report/state-analysis-failed.png" alt="The analysis finished without the flight data: the file could not be read at row 212, everything else was analysed, with Upload a new file, Retry and Continue without it.">
+    Everything else was analysed; the screen names the row that failed and offers three ways forward.
+  </State>
+  <State title="Re-run would overwrite decisions" src="/assets/work/safety-report/state-rerun-warning.png" alt="Re-run matching dialog: the manager has already decided 3 values, and chooses between keeping their decisions (recommended) or starting over.">
+    The manager's own decisions are kept by default.
+  </State>
+  <State title="Irreversible close, confirmed" src="/assets/work/safety-report/state-close-confirm.png" alt="Close report dialog: closing is final and reopening needs a reason; it lists the ECCAIRS submission, the recorded hazards, the tracked mitigation and the outcome sent to the reporter.">
+    Closing is final, and reopening needs a reason.
+  </State>
+</States>
+
+</GoDeeper>
+
+<GoDeeper id="response" title="The response" summary="Leadership first, then the people who do the work">
+
+I presented the concept to leadership, then to the safety managers it was designed for. The reaction was immediate, from safety managers and leadership alike.
+
+<Quote by="Safety manager, at the concept review" note="Paraphrased.">
+This is revolutionary.
+</Quote>
+
+</GoDeeper>
+
+<GoDeeper id="measures" title="How it's measured" summary="Three measures against the two-day baseline">
+
+| Measure | What it tells us |
+|---|---|
+| Time to close | From report received to closed. Analysis time is logged: 2–3 days before, about 2 hours now. |
+| ECCAIRS corrections | How many matched values a manager changes per report. This is the AI's real accuracy. |
+| Rating agreement | Two managers rate the same report. The matrix should make them agree. |
+
+<Note>Screens use invented data. Names, registrations and reference numbers are not real.</Note>
+
+</GoDeeper>

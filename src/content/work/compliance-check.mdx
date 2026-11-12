@@ -1,0 +1,296 @@
+---
+title: "Proving a manual answers the regulation"
+format: "case"
+order: 3
+featured: true
+company: "NGFT"
+eyebrow: ["NGFT AI", "Compliance check", "In use"]
+intro: "Helicopter operators must prove their operations manual answers every EASA requirement. They check by hand, page against page, for five to six days a pass. I designed the feature that does the comparison and records why each answer was accepted."
+oneLiner: "A company manual checked against the regulation, requirement by requirement, with every AI verdict traced to a page."
+tags: ["Aviation", "AI native", "Compliance"]
+meta:
+  role: "Product designer, end to end"
+  team: "Me and a domain expert"
+  timeline: "1 month to design and validate · 3 months to ship"
+  research: "10 people at 8 operators, interviewed, then tested on prototypes"
+status: "in-use"
+statusNote: "Built and in use inside the product"
+statusAsOf: 2026-11-11
+updated: 2026-11-11
+cover:
+  video: "/media/compliance-check/cover.mp4"
+  poster: "/assets/work/compliance-check/hero.png"
+  alt: "Check 10: a banner says revision 3 of the manual was uploaded, 11 requirements changed verdict and 4 already reviewed are affected, with Show only changes. Below, the requirement list marks what is now covered or changed, and GEN.120 is open beside the rewritten passage on page 19."
+summary:
+  problem: "Checking a manual against the regulation meant reading two documents side by side, which operators described as five to six days of work per check."
+  role: "Product designer, end to end, with a domain expert. One month to design and validate, three months to ship."
+  changed: "Five steps from reference document to a report that can be handed over, with four verdicts and every answer traced back to a page."
+  result: "Built and in use. Designed entirely from the existing design system, with no new components added while designing it."
+stats:
+  - value: "5–6 days"
+    label: "what one check takes today"
+    source: "reported"
+    note: "As described by the operators in research. Not yet measured against the new flow."
+  - value: "10 at 8"
+    label: "people interviewed and observed, at 8 operators"
+    source: "count"
+  - value: "4"
+    label: "verdicts: covered, partially, not covered, not applicable"
+    source: "count"
+  - value: "0"
+    label: "new components added while designing it"
+    source: "count"
+next: "hx-insight"
+nda: false
+seo:
+  description: "A company manual checked against 140 EASA requirements, where a manual review takes 5–6 days today. Every AI verdict traced to a page."
+  ogImage: "/assets/og/compliance-check.png"
+---
+
+## /* Before and after */
+
+<BeforeAfter
+  mode="stack"
+  before="/media/compliance-check/before-two-documents.webp"
+  beforeAlt="A diagram of the old process: the EASA reference document in one window, the operations manual in another, and the judgement joining them existing only in one person's head."
+  after="/assets/work/compliance-check/compare.png"
+  afterAlt="Step 04, compare side by side: requirements with their verdicts on the left; on the right the manual scrolled to Section 2.1, page 19, with the matched passage highlighted and a bar holding the verdict, Accept and Reject, a note field and Save and next."
+  caption="Before: two documents in two windows, and the judgement joining them in one person's head. After: the requirement, the passage that answers it and the verdict, in one view."
+/>
+
+## /* What we found */
+
+<Quote by="Operator, during a research session" note="Paraphrased from a research session, not a verbatim quote.">
+I know the system you are building is good, but I would also like a report at the end of the process, so I can keep it as evidence if the higher-ups ask for it.
+</Quote>
+
+I had been designing a comparison tool. He was describing an evidence tool. That moved the report out of the export menu and into the flow as a designed step, and it meant every verdict on it had to carry the passage that justifies it.
+
+## /* Key decisions */
+
+<Decision n="01" title="Verify before you compare">
+  <Loop slot="media" src="/media/compliance-check/check-found.mp4" poster="/assets/work/compliance-check/flow-03-check-found.png" alt="Correcting an extracted requirement before anything is compared, on the Check what was found step." posterAlt="Check what was found before we compare: 140 extracted requirements grouped by section, each editable, with a warning that 3 requirements split across a page break need a second look." device="desktop" />
+
+Extraction is the step most likely to be silently wrong, so a step exists only to let a person correct the requirements before anything is measured against them. A requirement filed under the wrong section gets checked against the wrong part of the manual, and the result still looks confident.
+</Decision>
+
+<Decision n="02" title="The evidence sits next to the verdict">
+  <Loop slot="media" src="/media/compliance-check/compare-scroll.mp4" poster="/assets/work/compliance-check/compare.png" alt="Selecting a requirement scrolls the manual to the matched passage on page 19 and highlights it, with the verdict, Accept, Reject and a note in one bar." posterAlt="Step 04, compare side by side: requirements with their verdicts on the left; on the right the manual scrolled to Section 2.1, page 19, with the matched passage highlighted and a bar holding the verdict, Accept and Reject, a note field and Save and next." device="desktop" />
+
+Clicking a requirement scrolls the manual to the passage that matched and highlights it. Verdict, passage and comment live in one bar, so nothing about a judgement is more than a glance away from the thing that justifies it.
+</Decision>
+
+<Decision n="03" title="Confidence is a sentence, not a score">
+  <Loop slot="media" src="/media/compliance-check/weak-match.mp4" poster="/assets/work/compliance-check/flow-09-needs-review.png" alt="A weak match on a requirement row, described in words: the closest section and page, and its confidence." posterAlt="The compare screen filtered to the 18 requirements that are partially covered or not covered, with the manual open beside them." device="desktop" />
+
+"Closest match in Section 2.1, page 19 · medium confidence" tells you what to do next. "0.62" does not. These are people who will be asked to defend the answer, not to tune a model.
+</Decision>
+
+## /* How I prototyped it */
+
+At the end of the month I went back to the same ten people with rough prototypes, assembled quickly with Claude: enough to be operable, not enough to be admired. On calls, I asked them to do the task while I watched what they clicked, where they hesitated and what they expected to happen next.
+
+That is the part I would defend hardest. Asking someone whether they like a screen produces a compliment. Asking them to complete a job produces a design change. The improved prototype then went to development as the specification.
+
+One thing changed because of those sessions: I added the reason behind each AI match, so people could see why the system reached its verdict and decide whether to trust it.
+
+## /* Outcome */
+
+The feature is built and in use inside the product. Here is the honest split.
+
+<Claims>
+  <Claim kind="can">The full five-step flow, built and in use.</Claim>
+  <Claim kind="can">The report the research asked for: a designed step of the flow, not an export tucked in a menu.</Claim>
+  <Claim kind="can">Fifteen screens covering the whole path, including every failure state.</Claim>
+  <Claim kind="cannot">Whether it removes the five to six days. There's no instrumentation and no before-and-after measurement yet.</Claim>
+  <Claim kind="cannot">Whether it reduces the back-and-forth with the authority. That needs a full submission cycle to play out.</Claim>
+  <Claim kind="cannot">Whether it wins accounts. Far too early to say.</Claim>
+</Claims>
+
+I would rather name these gaps than borrow a number.
+
+## /* Reflection */
+
+The report wasn't my idea. I had designed a comparison tool, and one sentence from one participant showed me I'd designed the middle of the job and stopped before the end of it.
+
+<GoDeeper id="context" title="Context and constraints" summary="A brief from inside the building, and the only two real constraints: time and coherence">
+
+### A brief from inside the building
+
+NGFT builds software for eight helicopter operators across Europe. It also runs pilot training, which means it writes and revises its own manuals under exactly the rules its customers work to. The brief did not arrive as a customer ticket: leadership had lived the problem and believed there was a product in it. The commercial goals were to reduce support load and to win new accounts.
+
+| What was fixed | What that meant |
+|---|---|
+| Three months from brief to shipped MVP | I spent the first month on design and validation, and treated the tested prototype as the specification handed to engineering. |
+| It had to live inside the existing AI product | No new navigation model and no new visual language. The check is a section of a product these people already have open. |
+| The existing design system | I set myself a harder version of this constraint: build the entire feature without adding a single component to the library. |
+| Nothing else | No frozen data model, no backend limit, no legacy screen to preserve. Worth saying plainly: the constraints here were time and coherence, not technology. |
+
+</GoDeeper>
+
+<GoDeeper id="user" title="Understanding the user" summary="Ten people at eight operators: who owns a manual, what they do today, and what goes wrong">
+
+### Ten people at eight operators
+
+I spoke to ten people across the eight operators the company already works with. Later in the month I went back to the same ten with rough prototypes and watched them try to use it, which turned out to be the more useful half of the research.
+
+### Who does this
+
+Accountable Managers, Chief Pilots, Safety Managers, Maintenance Managers. Usually one person owns a manual; on a long one, a team splits the parts between them.
+
+They are pilots and seasoned safety managers, expert in the regulation in a way I will never be, and not a software audience. They open the product to discharge a legal responsibility, not to explore a tool.
+
+### What they do today
+
+Download the reference document from the EASA website. Write the manual. Then read both documents side by side and verify the manual question by question, requirement by requirement.
+
+When they are satisfied, they send it to the authority. Five to six days per pass, repeated every time a manual is written or revised.
+
+### What goes wrong
+
+Back and forth with the authority, and rework whenever a requirement turns out not to be covered.
+
+The expensive part is not the reading. It is discovering the gap after submission, when the fix costs a revision cycle instead of an afternoon, and nobody can reconstruct why the requirement was ticked in the first place.
+
+</GoDeeper>
+
+<GoDeeper id="finding" title="The finding that moved the design" summary="Why the report became a step of the flow, and what that did to the compare screen">
+
+### One sentence changed what I was building
+
+The comparison is only the means. The thing these people are actually accountable for is a document they can hand to someone else and defend months later.
+
+That moved the report out of the "export" menu and into the flow as a designed step. It also changed the compare screen, because if the report is the deliverable, then every verdict on it has to carry the passage that justifies it. Otherwise the report is an opinion with a percentage on top.
+
+<Figure src="/assets/work/compliance-check/report.png" alt="The compliance report, ready to print: operator, reference and manual details, counts of 118 covered, 12 partially covered, 6 not covered and 4 not applicable, then every requirement that is not fully covered with the section and page or a note." caption="What the quote produced. The report is a step of the flow rather than an export in a menu. Counts first, then every requirement that is not fully covered, each with the section and page that answers it or the note saying why it does not, and a signature block, because someone has to sign it." wide />
+
+</GoDeeper>
+
+<GoDeeper id="diagnosis" title="Diagnosis" summary="Three symptoms, one cause: the requirement and the evidence never sit in the same place">
+
+### Three symptoms, one cause
+
+The operators named three problems. They are not three problems.
+
+- **Five to six days** of reading two documents against each other.
+- **Back and forth** with the authority after submission.
+- **Rework** whenever a requirement turns out not to be covered.
+
+The cause is that the requirement and the evidence never sit in the same place. The reference document is in one window, the manual is in another, and the judgement joining them exists only in one person's head until it is typed into a submission. Nothing records why a requirement was considered answered, so nothing can be re-checked, handed over or defended.
+
+That is also why the cost lands after submission rather than during the reading. A person can read carefully for five days and still have no artefact proving they did.
+
+So the problem is not "compare two documents faster". It is "make every judgement traceable to the passage that supports it", and the speed follows from that, rather than the other way round.
+
+</GoDeeper>
+
+<GoDeeper id="design" title="The design: five steps" summary="Upload, verify, upload, compare, report, and why verification comes second">
+
+### Five steps, and an argument about which one comes second
+
+The obvious flow is upload, upload, compare, report. I put a verification step second instead, before the manual is even uploaded.
+
+1. **Upload the reference document.** The EASA document that lists what the manual has to answer. Previously used ones can be picked instead of uploaded again.
+2. **Check what was found.** The system extracts every requirement and shows them, grouped by section, before anything is compared. The user corrects them here.
+3. **Upload your manual.** Their own document, with a reminder of what it is about to be measured against.
+4. **Compare, side by side.** Requirements on the left, the manual on the right. Clicking a requirement scrolls the manual to the passage that matched it.
+5. **Report.** Counts, then every requirement that is not fully covered, with the section and page that answers it or the note saying why it does not.
+
+</GoDeeper>
+
+<GoDeeper id="decisions" title="Two more decisions" summary="Four verdicts instead of pass/fail, and the person always decides">
+
+### Four verdicts, not two
+
+Covered, Partially covered, Not covered, Not applicable. Pass/fail would have been simpler and useless. "Partially covered" is where the actual work is, and "not applicable" is how an operator says a requirement belongs to someone else without pretending it passed.
+
+### The person decides, always
+
+Every verdict can be changed, every match accepted or rejected, and when the system finds nothing the user can point at the passage themselves. The system brings the candidate and the evidence together. The signature at the bottom of the report is human.
+
+</GoDeeper>
+
+<GoDeeper id="states" title="Six states where things go wrong" summary="Unreadable files, no match, weak matches, a revised manual, empty and sent">
+
+This is a document that gets submitted to a regulator. What the product does when it is unsure matters more than what it does when it is right, so the failure states were designed at the same time as the happy path, not bolted on after.
+
+| When | What the person sees | The way out |
+|---|---|---|
+| The document cannot be read | Named plainly: the file is a photo of the pages, not text. Nothing was lost and nothing was charged. | Three routes, each a real option: use the published EASA version, run text recognition with an honest warning about accuracy, or upload a different file. |
+| Nothing matched a requirement | "No matching passage found in 214 pages": the scope of the search is stated, so the absence means something. | Point at the passage yourself. The verdict updates from the person, not the system. |
+| The match is weak | Said in words on the row: closest match, section, page, medium or low confidence. | Accept, reject, or select a different passage. |
+| The manual was revised mid-review | A banner naming how many verdicts changed and how many of those you had already reviewed. | Show only the changes. Regressions are marked as clearly as improvements. |
+| Nothing to review yet | An empty reports list that explains what will appear here. | The one action that matters: start a check. |
+| The report has been sent | The check locks. Actions are removed rather than greyed out, and the record of what was submitted stays intact. | Start a new revision. The old report survives as evidence. |
+
+<States>
+  <State title="The document cannot be read" src="/assets/work/compliance-check/state-unreadable.png" alt="We could not read this document: a red banner says the EASA PDF is a photo of the pages, not text, and that nothing was lost or charged. Three routes follow: use the published version from EASA, run text recognition first, or upload a different file.">
+    A scanned PDF has no text layer, so no requirement can be pulled out of it. The screen says that plainly, states that nothing was lost or charged, and offers three real routes rather than one greyed-out retry.
+  </State>
+  <State title="The manual was revised mid-review" src="/assets/work/compliance-check/flow-10-manual-revised.png" alt="A banner says revision 3 of the manual was uploaded, 11 requirements changed verdict and 4 already reviewed are affected, with Show only changes; changed rows carry Changed and Now covered tags.">
+    Eleven verdicts changed and four you had already reviewed are affected. Improvements and regressions are marked equally.
+  </State>
+</States>
+
+</GoDeeper>
+
+<GoDeeper id="system" title="System work" summary="Fifteen screens, no new components while designing, and one added afterwards">
+
+### Nothing new in the library
+
+Fifteen screens, and not one new component while the feature was being designed. That was a constraint I set for myself, and it is the reason the feature looks like the rest of the product rather than like a bolt-on.
+
+### The seven-column problem
+
+The reports table needs seven columns. The library's Table row has five fixed cells. I composed the row from existing atoms (Avatar, Lozenge, Button) instead of forking the component. Forking would have been faster and would have started the fragmentation the library had so far avoided.
+
+### Tokens, not values
+
+Every colour is bound to a theme variable and every gap to a spacing token, so the whole feature re-themes in dark mode without a single manual edit.
+
+### One component, added afterwards
+
+Five screens were each hand-drawing their own step rail. That is the moment a pattern has earned a component, so a Stepper went into the library and replaced every hand-built rail. Adding it during the design would have been premature; adding it once five screens repeated it was maintenance.
+
+</GoDeeper>
+
+<GoDeeper id="reflection" title="Reflection in full" summary="What the order of the work cost, and why users name outcomes rather than features">
+
+### The order of the work
+
+Design and validation ran a month ahead of engineering, and the tested prototype became the specification. For a fixed three-month window that was the right trade: ten sessions happened before a line of code was written, so what shipped had already been shaped by the people who would use it.
+
+What it cost was a loop during the build. Things I would have changed after seeing them running had to wait for the next release. Next time I would hold a week of design capacity back for the build phase instead of spending all of it up front.
+
+### The report was not my idea
+
+I had designed a comparison tool. One sentence from one participant showed me I had designed the middle of the job and stopped before the end of it.
+
+What users ask for often names the outcome they are accountable for rather than the feature they want. He asked for a report; what he meant was that he is the person who has to answer for the manual. That is worth listening for.
+
+</GoDeeper>
+
+<GoDeeper id="next" title="What's next" summary="The authority side, user feedback, and the report page itself">
+
+Today the operator produces the report and the authority signs it outside the system, on paper or as a PDF. That is the seam the MVP deliberately left alone.
+
+- **The authority side.** I am designing a way for the authority to receive the report and sign it inside the product, so the submission and the signature stop being two different systems.
+- **User feedback.** Operators using it are telling us what is missing. That queue is what the next release is built from.
+- **The report page itself.** It is deliberately temporary. It lives inside the product as an MVP and will be revisited once there is evidence of how people actually use the output.
+
+</GoDeeper>
+
+<GoDeeper id="flow" title="The full flow" summary="The rest of the fifteen screens, from an empty upload box to every check the company has run">
+
+<Gallery>
+  <Figure src="/assets/work/compliance-check/flow-01-upload-reference.png" alt="Start a new compliance check: a name field, a manual type, a drop zone for the reference document and a list of reference documents used before." caption="01 · Upload the reference document. Name the check, pick a manual type, drop the EASA document." />
+  <Figure src="/assets/work/compliance-check/flow-03-check-found.png" alt="Check what was found before we compare: 140 extracted requirements grouped by section, each editable, with a warning that 3 requirements split across a page break need a second look." caption="03 · Check what was found. Every extracted requirement, grouped by section, editable before anything is compared against it." />
+  <Figure src="/assets/work/compliance-check/flow-05-comparing.png" alt="Comparing your manual against 140 requirements: 86 checked, with live counts of 71 covered, 9 partially covered, 4 not covered and 2 not applicable." caption="05 · Comparing. Live counts by verdict while it runs. Nothing is final until a person reviews it." />
+  <Figure src="/assets/work/compliance-check/flow-09-needs-review.png" alt="The compare screen filtered to the 18 requirements that are partially covered or not covered, with the manual open beside them." caption="09 · Filtered to what needs review. The filter is the working view." />
+  <Figure src="/assets/work/compliance-check/flow-10-manual-revised.png" alt="A banner says revision 3 of the manual was uploaded, 11 requirements changed verdict and 4 already reviewed are affected, with Show only changes; changed rows carry Changed and Now covered tags." caption="10 · The manual was revised mid-review." />
+  <Figure src="/assets/work/compliance-check/flow-14-reports.png" alt="Compliance reports: every check the operator has run, with manual, type, who compared it, when, coverage and status such as Ready to review, In review and Sent to LBA." caption="14 · Every check the company has run, and whether each report is ready to review or already with the authority." />
+</Gallery>
+
+<Note>Built in Figma from the company's design system. Every screen here is a real frame in the file, not a mockup of one.</Note>
+
+</GoDeeper>

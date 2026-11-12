@@ -1,0 +1,22 @@
+{
+  "name": "talha-design",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "prebuild": "node scripts/check-needs.mjs",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:needs": "node scripts/check-needs.mjs",
+    "check:skim": "node scripts/skim-words.mjs",
+    "media:check": "node scripts/media-check.mjs",
+    "loop": "node scripts/render-loop.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "8.1.2",
+    "astro": "7.4.4"
+  }
+}

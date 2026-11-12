@@ -1,25 +1,34 @@
 # Talha Farooq Awan — Portfolio
 
-Static site on Vercel: no build step. The homepage (v3) has its own files in `home/`; the
-case studies in `work/` keep theirs in `css/` and `js/`. `vercel.json` turns on clean URLs,
-so `/work/priced-offer.html` redirects to `/work/priced-offer`.
-
-The case studies were built from the Figma file **NGFT_design** (`wGsQoUHES7HZmTIF29Wod9`),
-page *05 Case study · Offer page*; see "Case studies" below.
+The homepage is a plain HTML file (`public/index.html` + `public/home/`). The case studies
+are built with **Astro** from the `.mdx` files in `src/content/work/` (spec:
+`docs/CASE_STUDY_SYSTEM.md`). Astro copies everything in `public/` into the site untouched,
+so the homepage is exactly as written. Vercel runs `npm run build` and serves `dist/`, with
+clean URLs: `/work/priced-offer.html` permanently redirects to `/work/priced-offer`.
 
 ## Run it
 
 ```bash
-python3 -m http.server 4175
+npm install
 ```
 
-Run that in this folder, then open <http://localhost:4175>. (Locally, links to
-`/work/<page>` need the `.html`; on Vercel clean URLs handle it.)
+once, then
+
+```bash
+npm run dev
+```
+
+and open the address it prints (usually <http://localhost:4321>). `npm run build` makes the
+finished site in `dist/`; it first runs `check:needs`, which stops a production build while
+any `<Need>` placeholder is left.
+
+Other checks: `npm run check:skim` (skim-layer word counts), `npm run media:check` (posters,
+loop sizes, loops still to make).
 
 ## Structure
 
 ```
-index.html            Homepage v3
+public/index.html     Homepage v3 (paths below under public/home/)
 home/css/tokens.css   Homepage tokens: colour (light + dark), type, space, radius, motion
 home/css/home.css     Homepage layout and components
 home/css/covers.css   The six coded project covers
@@ -28,10 +37,16 @@ home/js/*.js          One module per behaviour, started from main.js:
                       cursor (label), reveal (intro + scroll), covers, player, sounds,
                       audio (loads Howler on demand), motion (GSAP + the "main" ease)
 home/fonts/           General Sans 300 and 600 (Fontshare, self-hosted)
-work/*.html           The nine case studies
-css/, js/main.js      Case-study styles and script (tokens, styles, motion, main)
-assets/               Resume, OG images, portrait, testimonial photos, project screens
-og/                   Share-card generator for assets/og/*.png
+public/assets/        Resume, OG images, portrait, testimonial photos, project screens
+public/media/<slug>/  New loops and before/after images (named in docs/SHOT_LIST.md)
+src/content/work/     The nine case studies (.mdx) — content, not to be edited by code
+src/content.config.ts Collection + schema
+src/layouts/          Base.astro (the homepage's head, nav, footer, scripts)
+src/components/site/  Nav, footer and icons, copied from the homepage
+src/pages/work/       [slug].astro: one page per case study at /work/<slug>
+scripts/              check-needs, skim-words, media-check, render-loop
+docs/                 Briefs, checklists, shot list, diagrams
+og/                   Share-card generator for assets/og/*.png (not deployed)
 ```
 
 ## Homepage (v3)

@@ -1,0 +1,183 @@
+---
+title: "Taking HR off email and spreadsheets"
+format: "case"
+order: 4
+featured: true
+company: "HX Insight · Punjab Group"
+eyebrow: ["HX Insight", "Punjab Group", "Shipped"]
+intro: "HX Insight is the HR system for Punjab Group: 8,700 people in 32 subsidiaries. I led the redesign of four everyday flows (leave, project resourcing, onboarding and attendance) so requests go through one place and payroll gets the record without retyping it."
+oneLiner: "Four everyday HR flows for 8,700 people across 32 companies. Leave decided in hours, and nothing retyped for payroll."
+tags: ["HR", "B2B SaaS", "Web"]
+meta:
+  role: "Lead designer and part-time frontend developer"
+  team: "Dev team and HQ HR, cut mid-project"
+  timeline: "6 months, shipped June 2024"
+  research: "50 people across subsidiaries: interviews, surveys and workshops"
+status: "shipped"
+statusNote: "Shipped June 2024, used daily"
+statusAsOf: 2026-11-11
+updated: 2026-11-11
+cover:
+  video: "/media/hx-insight/cover.mp4"
+  poster: "/assets/work/hx-insight/leave-03.webp"
+  alt: "Approvals in HX Insight with Ayesha Khan's annual leave request open in a drawer: Wed 14 to Fri 16 Oct, 3 working days, 12 available and 9 after, team cover for each day with Thursday at low cover, her note, the approval route, and Reject and Approve."
+summary:
+  problem: "HR ran on email, chat and 32 spreadsheets. Leave went by email with HR in copy, and punch exports were retyped for payroll every month."
+  role: "Lead designer and part-time frontend developer, with the dev team and HQ HR. Six months, shipped June 2024."
+  changed: "Four everyday flows (leave, resourcing, onboarding and attendance), each sending only the exceptions to HR."
+  result: "Shipped and used daily. A leave decision takes about four hours, where it was about three days."
+stats:
+  - value: "4 h"
+    label: "leave decision time, was about 3 days"
+    source: "combined"
+    note: "From both system data and people's reports."
+  - value: "1 day"
+    label: "to staff an open role, was about a week of chat"
+    source: "combined"
+    note: "From both system data and people's reports."
+  - value: "9 in 10"
+    label: "new hires set up on day one, was about 4 in 10"
+    source: "combined"
+    note: "From both system data and people's reports."
+  - value: "32 → 0"
+    label: "sheets retyped for payroll"
+    source: "count"
+    note: "Approved leave and locked timesheets go to payroll directly."
+next: "training-record"
+nda: false
+seo:
+  description: "Four HR flows for 8,700 people in 32 companies. Leave decided in hours, not days, and nothing retyped for payroll."
+  ogImage: "/assets/og/hx-insight.png"
+---
+
+## /* What we found */
+
+I researched with 50 people across the subsidiaries, through interviews, surveys and workshops with HQ HR. Across 32 subsidiaries, everyday HR work ran on email, chat and Excel. Every request needed a chaser, every decision was typed in twice, and payroll and finance worked from data that was already out of date.
+
+Leave, resourcing, onboarding and attendance were the main pain points the research surfaced, so those became the four flows.
+
+## /* Four flows */
+
+<Decision n="01" title="Ayesha asks for three days off, and has her answer by lunch">
+  <Loop slot="media" src="/media/hx-insight/leave.mp4" poster="/assets/work/hx-insight/leave-03.webp" alt="Leave from request to answer: Ayesha requests three days with her balance and team cover shown, Bilal approves from the drawer, and Ayesha's notification arrives." posterAlt="Annual leave request drawer for Ayesha Khan: dates, working days, balance and notice, team cover for each day with Thursday at low cover, her note, the approval route, and Reject and Approve buttons." device="desktop" />
+
+Before, this was an email, two reminders and a sheet. Now Ayesha sees her balance and team cover before she asks, and Bilal decides with dates, cover and her note in one drawer. Approve is one click; a no needs a reason. HR and finance already have the record.
+</Decision>
+
+<Decision n="02" title="Mariam needs an engineer, and gets one the same day">
+  <Loop slot="media" src="/media/hx-insight/resourcing.mp4" poster="/assets/work/hx-insight/resourcing-03.webp" alt="Resourcing: Mariam requests a role with skills and dates, Omar sees three people ranked by skill match and free weeks, and books the best fit after checking his load." posterAlt="Frontend Engineer for Payroll revamp, as the resource manager sees it: the request summary, then three suggested people with their skill match and booked load per week. Zain Abbas is the best fit, one would overbook and one is fully booked." device="desktop" />
+
+Staff used to be requested by name over chat, so the same few people got overbooked. Now Mariam asks for a role, not a name. Omar sees people ranked by skill match first, then by their free weeks, and checks the load before he books.
+</Decision>
+
+<Decision n="03" title="Hassan signs his offer, and is ready before his first day">
+  <Loop slot="media" src="/media/hx-insight/onboarding.mp4" poster="/assets/work/hx-insight/onboarding-02.webp" alt="Onboarding: a plan starts from the signed offer, tasks land with HR, IT, the manager and the buddy, and the late ones are nudged in one go." posterAlt="Hassan Qureshi's onboarding plan: 61% ready for day one, 3 of 5 documents signed, 1 task late, and a task list with each task's owner from HR, IT, his manager or his buddy, due date and status." device="desktop" />
+
+Checklists used to sit with HR, IT and managers separately, and new hires waited for laptops. Now one plan starts from the signed offer, and every owner gets their part. One filter and one bulk nudge chase only what's late.
+</Decision>
+
+<Decision n="04" title="Ayesha forgets to clock out, and payroll never notices">
+  <Loop slot="media" src="/media/hx-insight/attendance.mp4" poster="/assets/work/hx-insight/attendance-03.webp" alt="Attendance: a missed clock-out is flagged, fixed with a request, and Bilal reviews only the exception days before locking the week for payroll." posterAlt="Attendance timesheets for the manager: 24 of 27 days clean, 3 that need a decision, and a list of those three, a clock-out correction, a late start and an off-site day, each with a Review button." device="desktop" />
+
+Punch records used to be retyped for payroll, and missed punches were fixed by email. Now the clock catches the miss, Ayesha fixes it with a request, and Bilal reviews only the exceptions before the week locks and goes to payroll.
+</Decision>
+
+## /* How I built it */
+
+I was the lead designer and also a part-time frontend developer on the project. I built the dashboards and the UI for leave management and employee assignment myself.
+
+## /* Outcome */
+
+Shipped in June 2024 and used daily. Every flow flags exceptions and sends only those to HR. Approved leave and locked weeks go straight to payroll and finance, in the columns they already used, which is why the 32 spreadsheets stopped being retyped.
+
+Leaders cut the team halfway through. I kept leading, ran tight sprints and wrote frontend part-time, and it still shipped in six months.
+
+<GoDeeper id="problem" title="The problem in full" summary="Email, chat and 32 spreadsheets across 32 subsidiaries">
+
+### HR ran on email, chat and 32 spreadsheets
+
+Across 32 subsidiaries, everyday HR work ran on email, chat and Excel. Every request needed a chaser, every decision was typed in twice, and payroll and finance worked from data that was already out of date.
+
+Leave went by email with HR in copy. Staff were requested by name over chat. New-hire checklists sat with HR, IT and managers separately. Punch exports were retyped for payroll every month.
+
+</GoDeeper>
+
+<GoDeeper id="leave" title="Leave, step by step" summary="09:12 Ayesha asks · 11:40 Bilal's inbox · 11:42 Bilal decides · 11:42 Ayesha knows">
+
+<Moment time="09:12" title="Ayesha asks" src="/assets/work/hx-insight/leave-01.webp" alt="Request leave drawer over the Leave page: annual leave from Wed 14 to Fri 16 Oct, 3 working days, 12 available and 9 left after approval, who else in Design is off each day with Thursday marked low cover, a note for the manager, and who it goes to.">
+Working days are counted, nine left after, and a thin Thursday is flagged before she sends.
+</Moment>
+<Moment time="11:40" title="Bilal's inbox" src="/assets/work/hx-insight/leave-02.webp" alt="Approvals list for Bilal Ahmed: eight requests waiting, each row with the request, dates, days, balance after, team cover and when it was submitted, with two selected and an Approve 2 bar at the bottom.">
+Oldest first, with balance and cover on every row, so the easy ones go in bulk.
+</Moment>
+<Moment time="11:42" title="Bilal decides" src="/assets/work/hx-insight/leave-03.webp" alt="Annual leave request drawer for Ayesha Khan: dates, working days, balance and notice, team cover for each day with Thursday at low cover, her note, the approval route, and Reject and Approve buttons.">
+Dates, cover and her note in one drawer. Approve is one click; a no needs a reason.
+</Moment>
+<Moment time="11:42" title="Ayesha knows" src="/assets/work/hx-insight/leave-04.webp" alt="Ayesha's Leave page with 9 days of annual leave left and the notifications panel open: her annual leave was approved by Bilal Ahmed just now. The request shows as Approved in her list.">
+Approved at once. HR and finance already have the record.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="resourcing" title="Resourcing, step by step" summary="Spot the gap · ask for a role · find the best fit · check the load, then book">
+
+<Moment title="Mariam spots the gap" src="/assets/work/hx-insight/resourcing-01.webp" alt="Payroll revamp project, Allocation tab: 3.5 FTE booked of 4 planned, one open role for a Frontend Engineer, and the team table with each person's allocation, dates and booking, the open role marked as a placeholder.">
+An open role sits in the team table, right where a person should be.
+</Moment>
+<Moment title="She asks for a role, not a name" src="/assets/work/hx-insight/resourcing-02.webp" alt="Request a resource drawer: Frontend Engineer with React, TypeScript and Design systems skills, 2 Nov to 25 Dec, 50% allocation, confirmed booking, context for the resource manager, and a note that 3 people match and 1 is free for all 8 weeks.">
+Skills, dates and load, with a live count of how many people match.
+</Moment>
+<Moment title="Omar finds the best fit" src="/assets/work/hx-insight/resourcing-03.webp" alt="Frontend Engineer for Payroll revamp, as the resource manager sees it: the request summary, then three suggested people with their skill match and booked load per week. Zain Abbas is the best fit, one would overbook and one is fully booked.">
+People ranked by skill match first, then by their free weeks.
+</Moment>
+<Moment title="He checks the load, then books" src="/assets/work/hx-insight/resourcing-04.webp" alt="Assign Zain Abbas to Payroll revamp dialog: dates, load and line manager, Zain's load for each of the 8 weeks with this booking, peaking at 75%, tentative or confirmed booking, and an option to tell Zain and his line manager now.">
+Zain's weeks after the booking, tentative or confirmed, before anyone is told.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="onboarding" title="Onboarding, step by step" summary="Start from the offer · one plan, every owner · chase only what's late · day one">
+
+<Moment title="Rabia starts from the offer" src="/assets/work/hx-insight/onboarding-01.webp" alt="Start onboarding drawer for Hassan Qureshi: offer details carried over from the signed offer, a plan template of 18 tasks, a suggested onboarding buddy, equipment to order, and a welcome email toggle.">
+Role, team, manager and start date come straight from the offer. A buddy is suggested.
+</Moment>
+<Moment title="One plan, every owner" src="/assets/work/hx-insight/onboarding-02.webp" alt="Hassan Qureshi's onboarding plan: 61% ready for day one, 3 of 5 documents signed, 1 task late, and a task list with each task's owner from HR, IT, his manager or his buddy, due date and status.">
+HR, IT, manager and buddy tasks with due dates, and a readiness score.
+</Moment>
+<Moment title="Chase only what's late" src="/assets/work/hx-insight/onboarding-03.webp" alt="The same plan filtered to late or due soon: three tasks selected, two late and one due tomorrow, with a Nudge 3 owners bar at the bottom.">
+One filter, and one bulk nudge to every owner who is behind.
+</Moment>
+<Moment title="Hassan's day one" src="/assets/work/hx-insight/onboarding-04.webp" alt="Hassan's dashboard on his first day: today's schedule of people to meet from 9:30 to 17:00, his email, Slack, Figma and Jira accounts all ready, and a checklist for the week.">
+A schedule of people to meet, accounts ready and a first-week list.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="attendance" title="Attendance, step by step" summary="Clock in · a missed clock-out flagged · only the exceptions reviewed · lock and pay">
+
+<Moment title="Ayesha clocks in" src="/assets/work/hx-insight/attendance-01.webp" alt="Clock sheet before clocking in: the current time, her 9:00 to 18:00 shift, a confirmation that she is inside the Gulberg office, a Clock in button, and the week so far.">
+Her shift, the site and whether she is inside it, before one tap.
+</Moment>
+<Moment title="A missed clock-out, flagged" src="/assets/work/hx-insight/attendance-02.webp" alt="Clock sheet the next morning: a warning that she did not clock out on Tue 10 Nov and the clock stopped at 18:00, a Fix Tue 10 Nov button, the day marked No clock out in the week, and a timeline of what happened.">
+The clock stops at shift end and the day is flagged the next morning.
+</Moment>
+<Moment title="Bilal sees only exceptions" src="/assets/work/hx-insight/attendance-03.webp" alt="Attendance timesheets for the manager: 24 of 27 days clean, 3 that need a decision, and a list of those three, a clock-out correction, a late start and an off-site day, each with a Review button.">
+Problem days come first. Clean days approve with the week.
+</Moment>
+<Moment title="Approve, lock, pay" src="/assets/work/hx-insight/attendance-04.webp" alt="Approve and lock week 46 dialog: 6 timesheets with 218h 56m worked and 3h overtime go to payroll today at 18:00, after which only HR can change them.">
+The week locks on the cut-off and goes to payroll with an audit trail.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="constraints" title="Constraints" summary="A team cut halfway, 32 ways of working, and payroll that trusted only its sheets">
+
+| Constraint | What I did |
+|---|---|
+| Leaders cut the team halfway | Kept leading, ran tight sprints and wrote frontend part-time. Shipped in six months. |
+| 32 subsidiaries, 32 ways of working | Agreed one set of rules with HQ HR, then checked it with 50 people across the subsidiaries. |
+| Payroll and finance trusted only their sheets | Approved leave and locked weeks go to them directly, in the columns they already used. |
+| Four flows, one design system | Few new components: a coverage row, a capacity strip and a clock card. |
+| HR needed control without busywork | Every flow flags exceptions and sends only those to HR. |
+
+</GoDeeper>

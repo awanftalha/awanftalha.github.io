@@ -1,0 +1,156 @@
+---
+title: "From finished job to first post"
+format: "case"
+order: 6
+featured: true
+company: "SnapGrid"
+eyebrow: ["SnapGrid", "Home services", "Shipped"]
+intro: "A web app for the office and a phone app for the crew, built for home-service companies. Ask customers for photos the moment a job is done, reward the ones you approve, and publish them with consent attached."
+oneLiner: "Ask customers for photos the moment a job is done, reward the approved ones, and publish them with consent attached."
+tags: ["B2B SaaS", "Web + iOS", "Home services"]
+meta:
+  role: "Lead product designer"
+  platform: "Web and iOS"
+  people: "Owner, crew, homeowner"
+status: "shipped"
+statusNote: "Client work, shipped and in use"
+statusAsOf: 2026-11-11
+updated: 2026-11-11
+cover:
+  video: "/media/snapgrid/cover.mp4"
+  poster: "/assets/work/snapgrid/hero-desktop.webp"
+  alt: "The SnapGrid web app on Home: counts for submissions to review, rewards to send, posts awaiting approval and invites that failed to send, a request funnel from invites delivered through to published, approval rate, cost per approved item and median time to upload, top contributors, and the latest submissions."
+summary:
+  problem: "The best proof of a finished job lived in customers' camera rolls and crews' phones, with no consent and no route to the website."
+  role: "Lead product designer. The office web app, the crew's iOS app and the design system they share."
+  changed: "One loop from the job site to the feed: capture, ask, review, reward, publish. Each step works on the screen where it happens."
+  result: "Shipped and in use, with the failure states designed as carefully as the happy path."
+stats:
+  - value: "5"
+    label: "steps from the job site to the feed"
+    source: "count"
+    note: "Capture, ask, review, reward, publish."
+  - value: "2"
+    label: "apps, office web and crew iOS, on one design system"
+    source: "count"
+  - value: "3"
+    label: "roles designed for: owner, crew and homeowner"
+    source: "count"
+next: "hx-timer"
+nda: false
+seo:
+  description: "Ask customers for photos the moment a job is done, reward the ones you approve, and publish them with consent attached."
+  ogImage: "/assets/og/snapgrid.png"
+---
+
+## /* Maria's kitchen, install to Instagram */
+
+<Moment time="2:14 PM" title="Capture" src="/assets/work/snapgrid/s1-b.webp" alt="The camera lining the after shot up against a faded ghost of the before shot.">
+The camera opens on the current job. The after shot lines up with a ghost of the before, and uploads carry on in the background.
+</Moment>
+<Moment time="2:20 PM" title="Ask" src="/assets/work/snapgrid/s2-b.webp" alt="The request preview showing exactly what the customer will receive, reward included.">
+Text, email, QR code or a link. The preview shows exactly what Maria will get, reward included.
+</Moment>
+<Moment time="7:02 PM" title="Upload" src="/assets/work/snapgrid/s3-b.webp" alt="The manager's inbox on the phone, with the new submission at the top.">
+Maria uploads from the link. The manager gets a push and can review it from the phone.
+</Moment>
+<Moment time="7:15 PM" title="Review" src="/assets/work/snapgrid/s4.webp" alt="The web app inbox reviewing Maria Lopez's kitchen remodel: four photos, two approved, one rejected as blurry with the reason menu open, consent recorded for website and social, and the reward tiers beside them with Approve 3 and queue $25.">
+Each photo is approved or sent back with a reason. Consent and the reward tier sit beside the photos.
+</Moment>
+<Moment time="7:16 PM" title="Reward" src="/assets/work/snapgrid/s5.webp" alt="The rewards screen with the queue of earned rewards, the amount already sent, the budget left, and a confirmation before any money moves.">
+Rewards wait in one queue and go out together. The budget left is shown before any money moves.
+</Moment>
+<Moment time="SUN 10:00 AM" title="Publish" src="/assets/work/snapgrid/s6.webp" alt="The publish screen composing a post from approved photos, with the consent state shown on each and a scheduling panel for when followers are most active.">
+Only approved photos with consent can be picked. The post goes out when followers are most active.
+</Moment>
+
+## /* Key decisions */
+
+<Decision n="01" title="The after shot lines up with the before">
+  <Loop slot="media" src="/media/snapgrid/ghost-camera.mp4" poster="/assets/work/snapgrid/s1-b.webp" alt="The crew camera showing a faded ghost of the before shot, the phone moved until the after shot lines up, and the photo taken." posterAlt="The camera lining the after shot up against a faded ghost of the before shot." device="phone" />
+
+The camera opens on the current job, with the shot list for the space. The after shot lines up against a faded ghost of the before, and uploads carry on in the background.
+</Decision>
+
+<Decision n="02" title="Consent and the reward sit beside the photos">
+  <Loop slot="media" src="/media/snapgrid/review.mp4" poster="/assets/work/snapgrid/s4.webp" alt="Reviewing a submission: two photos approved, one sent back as blurry with a reason, consent shown for website and social, and the reward tier queued." posterAlt="The web app inbox reviewing Maria Lopez's kitchen remodel: four photos, two approved, one rejected as blurry with the reason menu open, consent recorded for website and social, and the reward tiers beside them with Approve 3 and queue $25." device="desktop" />
+
+Each photo is approved or sent back with a reason. The consent the homeowner gave, and the reward tier the submission earns, are on the same screen as the decision.
+</Decision>
+
+<Decision n="03" title="Only consented photos can be published">
+  <Loop slot="media" src="/media/snapgrid/publish.mp4" poster="/assets/work/snapgrid/s6.webp" alt="Composing a post: only approved photos with consent can be picked, and the post is scheduled for when followers are most active." posterAlt="The publish screen composing a post from approved photos, with the consent state shown on each and a scheduling panel for when followers are most active." device="desktop" />
+
+The publish screen shows the consent state on every photo, and only approved photos with consent can be picked. The post is scheduled for when followers are most active.
+</Decision>
+
+## /* When it fails, nothing is lost */
+
+Most of the screens in this project are not the happy path. Every failure has a cause, a reassurance and a way out.
+
+1. **Reassure first.** Say what's safe before asking for a retry.
+2. **Warning, not error.** When the system fails, the user didn't. Amber, not red.
+3. **No dead buttons.** Blocked buttons say what's left, like "2 issues to fix".
+
+## /* Outcome */
+
+Shipped and in use, for a client building software for home-service companies: a web app for the office and an iOS app for the crew, on one design system.
+
+<GoDeeper id="story" title="Maria's kitchen, every screen" summary="All twelve screens from capture to publish">
+
+<Gallery>
+  <Figure src="/assets/work/snapgrid/s1-a.webp" alt="The crew app camera on the current job, with the shot list for the island." caption="2:14 PM · Capture. The shot list for the island." />
+  <Figure src="/assets/work/snapgrid/s1-b.webp" alt="The camera lining the after shot up against a faded ghost of the before shot." caption="2:14 PM · Capture. The after shot against a ghost of the before." />
+  <Figure src="/assets/work/snapgrid/s1-c.webp" alt="The job's photo set after shooting, with uploads continuing in the background." caption="2:14 PM · Capture. Uploads continue in the background." />
+  <Figure src="/assets/work/snapgrid/s2-a.webp" alt="Choosing how to reach the customer: text message, email, QR code or a copied link." caption="2:20 PM · Ask. Text, email, QR code or a link." />
+  <Figure src="/assets/work/snapgrid/s2-b.webp" alt="The request preview showing exactly what the customer will receive, reward included." caption="2:20 PM · Ask. Exactly what Maria will get." />
+  <Figure src="/assets/work/snapgrid/s2-c.webp" alt="A QR code for the customer to scan when the crew is still on site." caption="2:20 PM · Ask. A QR code while the crew is on site." />
+  <Figure src="/assets/work/snapgrid/s3-a.webp" alt="A lock screen notification that photos have arrived from the customer." caption="7:02 PM · Upload. The manager gets a push." />
+  <Figure src="/assets/work/snapgrid/s3-b.webp" alt="The manager's inbox on the phone, with the new submission at the top." caption="7:02 PM · Upload. The submission on top." />
+  <Figure src="/assets/work/snapgrid/s3-c.webp" alt="The uploaded photos opened on the phone, ready to approve or send back." caption="7:02 PM · Upload. Ready to approve or send back." />
+  <Figure src="/assets/work/snapgrid/s4.webp" alt="The web app inbox reviewing Maria Lopez's kitchen remodel: four photos, two approved, one rejected as blurry with the reason menu open, consent recorded for website and social, and the reward tiers beside them with Approve 3 and queue $25." caption="7:15 PM · Review." />
+  <Figure src="/assets/work/snapgrid/s5.webp" alt="The rewards screen with the queue of earned rewards, the amount already sent, the budget left, and a confirmation before any money moves." caption="7:16 PM · Reward." />
+  <Figure src="/assets/work/snapgrid/s6.webp" alt="The publish screen composing a post from approved photos, with the consent state shown on each and a scheduling panel for when followers are most active." caption="SUN 10:00 AM · Publish." />
+</Gallery>
+
+</GoDeeper>
+
+<GoDeeper id="loop" title="The rest of the loop" summary="Campaigns, the website gallery, and the crew's planner, rewards, updates and upload queue">
+
+<Figure src="/assets/work/snapgrid/r-d1.webp" alt="The new campaign builder on its audience step, with the steps for audience, template, reward, channels and schedule across the top, and a running summary and cost estimate beside it." caption="One campaign, five steps. Audience, template, reward, channels, send. The summary and the cost estimate update as you go." wide />
+
+<Figure src="/assets/work/snapgrid/r-d2.webp" alt="The publish screen's website widget settings beside a live preview of the gallery on the company's own site, with layout and filter options." caption="The website gallery. Approved, consented photos on the company's own site, filtered by service." wide />
+
+<Gallery>
+  <Figure src="/assets/work/snapgrid/r-p1.webp" alt="The crew planner listing jobs by state: changes requested, pending approval and scheduled." caption="Crew planner. Drafts, pending and changes requested, in one list." />
+  <Figure src="/assets/work/snapgrid/r-p2.webp" alt="The crew rewards screen with the amount earned, the amount on the way, progress towards the next gift card, and the reward history." caption="Crew rewards. Every 8 approved photos earns a $10 gift card. Progress stays in view." />
+  <Figure src="/assets/work/snapgrid/r-p3.webp" alt="The crew inbox listing approvals, change requests and rewards as they happen, newest first." caption="Crew updates. Approvals, change requests and rewards, as they happen." />
+  <Figure src="/assets/work/snapgrid/r-p4.webp" alt="The upload queue showing how many items have uploaded, a Wi-Fi only switch, and each item in progress with its size and its project." caption="Upload queue. Videos can wait for Wi-Fi. Every item shows its progress and its project." />
+</Gallery>
+
+</GoDeeper>
+
+<GoDeeper id="states" title="Failure states" summary="Saves that didn't go through, a disconnected payout provider, blocked sends, unfinished uploads">
+
+<States>
+  <State title="Inbox · couldn't save" src="/assets/work/snapgrid/f-main.webp" alt="The inbox after a save failed: the approvals stay on screen marked Not saved, with a dark message explaining the save did not go through and a Retry button beside it.">
+    Approvals stay on screen, marked Not saved, with Retry one click away. Nothing is lost.
+  </State>
+  <State title="Provider disconnected" src="/assets/work/snapgrid/f-d1.webp" alt="The rewards screen with the payout provider disconnected: earned rewards keep queueing, the amount held is shown, and reconnecting releases them.">
+    Rewards keep queueing. Reconnecting releases them, and nothing earned is lost.
+  </State>
+  <State title="Send blocked" src="/assets/work/snapgrid/f-d2.webp" alt="The campaign builder with sending blocked: the send button names how many issues remain, and each issue links straight to the field that fixes it.">
+    The button names the count, and each issue links straight to its fix.
+  </State>
+  <State title="Uploads that didn't finish" src="/assets/work/snapgrid/f-p1.webp" alt="The upload queue with uploads that did not finish, explaining why and offering Retry on each.">
+    Each one keeps the work and puts the next step in reach.
+  </State>
+  <State title="A review that didn't save" src="/assets/work/snapgrid/f-p2.webp" alt="A review on the phone that did not save, keeping the approvals on screen with Retry beside them.">
+    The approvals stay on screen, with Retry beside them.
+  </State>
+  <State title="A text that didn't send" src="/assets/work/snapgrid/f-p3.webp" alt="A photo request that did not send, listing the ways to ask again and a Try again button.">
+    The other ways to ask are listed, with Try again.
+  </State>
+</States>
+
+</GoDeeper>

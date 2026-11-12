@@ -1,0 +1,193 @@
+---
+title: "The instructors put the paper down"
+format: "app"
+order: 9
+featured: false
+company: "NGFT"
+eyebrow: ["NGFT Training", "Tablet app", "Shipped"]
+intro: "Helicopter instructors used to grade on a printed sheet while flying, then type it all again at a desk. Release one removed the desk pass. This release removed the paper: a tablet app used in the aircraft while the session is still running."
+oneLiner: "Training outcomes recorded on a tablet mid-session, not typed up from paper afterwards."
+tags: ["Aviation", "Tablet", "Training"]
+meta:
+  role: "Solo designer and product owner"
+  team: "Me, one frontend, one backend"
+  platform: "iPad Air portrait · 834 × 1194"
+  people: "Instructors"
+  research: "Builds on the research in Part 1"
+status: "shipped"
+statusNote: "Adopted by both operators after the trial"
+statusAsOf: 2026-11-11
+updated: 2026-11-11
+cover:
+  video: "/media/instructors/cover.mp4"
+  poster: "/assets/work/instructors/03-running.png"
+  alt: "Running the session: a pinned strip with the timer, nine progress segments, the exercise being flown with its tolerances and three grade buttons, and every other exercise below."
+summary:
+  problem: "The record was written twice, the first time badly: graded on paper in the cockpit, then typed up at a desk afterwards."
+  role: "Solo designer and product owner, with one frontend and one backend."
+  changed: "Seven screens with no product chrome at all (no top bar, no side nav, no module switcher) and two new components."
+  result: "Adopted by both operators after a trial with six instructors. Zero sheets of paper in the cockpit, by the instructors' own account."
+stats:
+  - value: "0"
+    label: "sheets of paper in the cockpit"
+    source: "reported"
+    note: "By the instructors' own account. This is the behaviour the original research found, and it has stopped."
+  - value: "6 of 6"
+    label: "trial instructors flying with it"
+    source: "count"
+    note: "Including the two who asked why we were changing anything."
+  - value: "2 → 1"
+    label: "passes over the record"
+    source: "count"
+  - value: "2"
+    label: "new components, nothing else forked for touch"
+    source: "count"
+series:
+  name: "NGFT Training"
+  part: 2
+  of: 2
+next: "priced-offer"
+nda: false
+seo:
+  description: "Training outcomes recorded on a tablet mid-session, not typed up from paper afterwards. Zero sheets of paper in the cockpit."
+  ogImage: "/assets/og/instructors.png"
+---
+
+<DeviceStrip device="tablet">
+  <Figure src="/assets/work/instructors/01-my-day.png" alt="My day: one unsigned sheet waiting above today's two sessions, a duty figure, and the rest of the week." caption="01 · My day" />
+  <Figure src="/assets/work/instructors/02-before-start.png" alt="A session before it starts: the people, readiness and carried-over items, with Start disabled because the trainee has not read the brief, and Start anyway beside it." caption="02 · Before the session starts" />
+  <Figure src="/assets/work/instructors/03-running.png" alt="Running the session: a pinned strip with the timer, nine progress segments, the exercise being flown with its tolerances and three grade buttons, and every other exercise below." caption="03 · Running the session" />
+  <Figure src="/assets/work/instructors/04-lesson-plan.png" alt="The lesson plan as a sheet over the running session, with the elapsed time in its footer and a way to suggest a change to an exercise." caption="04 · Lesson plan, over the session" />
+  <Figure src="/assets/work/instructors/05-grading.png" alt="Recording an outcome: Pass, Partial and Repeat, quick phrases for what happened, an option to fly it again in a later session, and a warning that the checklist has been flown from memory twice." caption="05 · Grading an exercise" />
+  <Figure src="/assets/work/instructors/06-review.png" alt="End of session review: counts, the nine outcomes, the session comment, and a card stating what signing will do." caption="06 · End of session, review" />
+  <Figure src="/assets/work/instructors/07-sign.png" alt="Sign: what is being attested, what signing closes for good, a signature pad, and a confirmation that the grades are the instructor's own." caption="07 · Sign" />
+</DeviceStrip>
+
+## /* Where this picks up */
+
+[Part 1](/work/training-record) replaced the spreadsheet with a structured record and cut write-up to a logged 10–12 minutes. But the margin notes were still being made in the air. Two months in, the instructors said so themselves: "we still have to do it on paper and then on the web." That sentence was the brief for this release.
+
+## /* Key moments */
+
+<Decision n="01" title="Running the session">
+  <Loop slot="media" src="/media/instructors/running.mp4" poster="/assets/work/instructors/03-running.png" alt="Grading during a running session: the exercise card's 64px Pass button tapped, the progress segment filling and the next exercise moving up." posterAlt="Running the session: a pinned strip with the timer, nine progress segments, the exercise being flown with its tolerances and three grade buttons, and every other exercise below." device="tablet" />
+
+The screen the release exists for. A pinned strip keeps the session and its timer present whatever else is open. Nine segments show recorded, flying now and not started. The exercise being flown has three 64px grades with the tolerances beside them; every other exercise is one tap below.
+</Decision>
+
+<Decision n="02" title="Grading an exercise">
+  <Loop slot="media" src="/media/instructors/grading.mp4" poster="/assets/work/instructors/05-grading.png" alt="Grading a Partial: the note field opens with quick phrases, one is tapped, and the repeat is moved to a later session." posterAlt="Recording an outcome: Pass, Partial and Repeat, quick phrases for what happened, an option to fly it again in a later session, and a warning that the checklist has been flown from memory twice." device="tablet" />
+
+Anything other than Pass asks for a note and offers quick phrases drawn from what instructors really write. A repeat names the session it moves to. And the screen volunteers what the instructor may not recall: this is the second time the checklist has been flown from memory.
+</Decision>
+
+<Decision n="03" title="Sign">
+  <Loop slot="media" src="/media/instructors/sign.mp4" poster="/assets/work/instructors/07-sign.png" alt="Signing the sheet: the attestation card, a finger signature on the pad, and the confirmation that the grades are the instructor's own." posterAlt="Sign: what is being attested, what signing closes for good, a signature pad, and a confirmation that the grades are the instructor's own." device="tablet" />
+
+The only screen with no tab bar, because it is not a place to browse from. What is being attested, what signing closes for good, a signature pad, and a footer that reads "this is the last reversible moment".
+</Decision>
+
+## /* What instructors say */
+
+<Quote by="Trial feedback" note="Paraphrased, not verbatim.">
+It is awesome — now they can enter the data and fill up the forms during the flight.
+</Quote>
+
+The paper stopped. Not reduced, stopped. It's the one outcome here that is a behaviour rather than an opinion, and it's the exact finding the original research produced two releases ago. During the trial, with the web version still running in parallel, nobody asked to go back to it.
+
+## /* Where it stands */
+
+Both operators adopted it after a trial with six instructors. Release one is instrumented; this release has no numbers yet. It will be judged against four measures: time to first outcome, share recorded in-session, session end to signature, and corrections per 100 outcomes.
+
+Two of the eight test cases are written to fail: a mis-tapped grade, and an outcome recorded with no signal. A friendly daylight trial won't find those on its own, and they're what the next release is for.
+
+## /* Reflection */
+
+Decide what a release has to prove before designing it, not after it ships. Release one was instrumented because the write-up time was obvious to measure. Release two changes more, and had no equivalent designed in from the start.
+
+<GoDeeper id="reframe" title="The reframe" summary="Release one made the record findable. This one makes it recordable.">
+
+As long as the record is made at a desk an hour after the flight, it is a recollection typed up neatly. Move the moment into the session and it becomes an observation. Same fields, same data model, same validity written back to the crew roster, but what goes into them is no longer filtered through memory and a note in a margin.
+
+That reframe decides the entire app. It is why there is no product navigation: the instructor is not visiting a system, they are inside one task. It is why every secondary surface is a sheet over a running session rather than a screen you navigate to. It is why signing is the only screen with no tab bar. And it is why the app is portrait: it is held, not propped.
+
+</GoDeeper>
+
+<GoDeeper id="screens" title="The other four screens" summary="My day, before the session starts, the lesson plan sheet and the end-of-session review">
+
+### My day
+
+A day, not a dashboard. Two sessions, a duty figure, and the one thing that needs the instructor: an unsigned sheet from six days ago, sitting above everything because the trainee it belongs to is flying this morning.
+
+### Session, before it starts
+
+People, readiness, and what was carried over from last time. Start is disabled and the bar beneath names the reason: the trainee has not read the brief. Start anyway sits next to it, because nobody argues with software in a sim bay. The reason is stored on the session.
+
+### Lesson plan, over the session
+
+On desktop the plan is a screen you navigate to. Here it is a sheet over a running session, with the elapsed time on the footer. An instructor cannot edit an approved syllabus mid-flight; they file a suggestion against the exercise, with the session attached.
+
+### End of session, review
+
+Five counts, nine outcomes, the comment, and a card stating what signing will do: two exercises move to Friday, one carried item clears, nothing reaches the roster until the skill test. Everything is still editable here, and the screen says so.
+
+</GoDeeper>
+
+<GoDeeper id="compare" title="Release one against release two" summary="Same data model, same records; what moved is where and when the record is made">
+
+| | Release one · web | Release two · tablet |
+|---|---|---|
+| Where the record is made | At a desk, after the flight, from margin notes | In the aircraft, while the session runs |
+| Passes over the record | Two: paper, then the web form | One |
+| Paper | Still used in the air | Stopped |
+| What an outcome is | A recollection, typed up neatly | An observation, recorded where it happened |
+| Navigation | OPS top bar, side nav, module switcher | None. Three tabs and the session you are in. |
+| The plan | A screen you navigate to | A sheet over a running session |
+| Grading | Five status cells in a table row | Three 64px buttons with conditional follow-up |
+
+</GoDeeper>
+
+<GoDeeper id="system" title="System work" summary="Two components, and a rule about not forking for touch">
+
+The company's design system already existed. Seven touch screens produced two new components; everything else is the existing library at its existing sizes.
+
+| Component | Variants | Why it exists |
+|---|---|---|
+| Grade button | 6 variants | Pass, Partial and Repeat, selected and unselected, at a 64px target with the grade colour built in. Button and Choice chip are both pointer-sized and neither carries grade semantics. |
+| Tab bar item | 2 variants + text property | A vertical touch target with no chrome around it. Top nav item and Side nav item are horizontal desktop patterns. |
+
+The temptation on a touch release is to build a parallel set of larger variants and call it a tablet kit. It is faster for one release and it splits the system for every release after.
+
+</GoDeeper>
+
+<GoDeeper id="proving" title="How we're proving it" summary="Four measures, and eight test cases, two of them written to fail">
+
+The paper stopping is a behaviour, and behaviours are the strongest evidence a trial produces. It is not a number. These are the measures and the tests the release is judged on.
+
+| Measure | What it tells us | Target |
+|---|---|---|
+| Time to first outcome | How far into a session the first grade is recorded. If the record is genuinely being made live, this is minutes, not hours. | Inside the first exercise |
+| Share recorded in-session | Outcomes timestamped before the session ends, against those added after. | Above 90% |
+| Session end to signature | Release one's equivalent was 10–12 minutes of write-up. Here the sheet should already be complete. | Same duty period, no write-up gap |
+| Corrections per 100 outcomes | A record made from memory should need more correcting than one made live. This is the accuracy claim, and the only one that can be falsified. | Lower than release one's rate |
+
+| Test | Task | Pass when |
+|---|---|---|
+| T1 | Record a pass one-handed while reading a checklist aloud | Graded in under 10 seconds without looking away twice |
+| T2 | Grade a partial with a note and a repeat target | Completed without leaving the running session |
+| T3 | Open the lesson plan mid-session, then return | The instructor notices the session is still running |
+| T4 | End a session with three exercises ungraded | The instructor finds all three from the refusal message alone |
+| T5 | Reach the sign screen with the wrong trainee selected | Caught before the signature, from the attestation card |
+| T6 | Undo a mis-tapped grade | Currently undesigned. This test is expected to fail and to produce a screen. |
+| T7 | First session for an instructor who has never seen it | Reaches first outcome recorded with no help |
+| T8 | Record three outcomes with no signal, then reconnect | Currently undesigned. Offline is the next thing to build. |
+
+</GoDeeper>
+
+<GoDeeper id="reflection" title="Reflection in full" summary="Why the web module still came first, and what each release has to prove">
+
+Building the web module first was the right call and I would make it again: it proved the record structure and taught six instructors the vocabulary before anything went near a cockpit. What I would change is shipping release one tablet-responsive from day one. The same screens, usable in the hand, on a rougher tool. The paper could have stopped two months earlier.
+
+The second thing is smaller and more useful: decide what a release has to prove before designing it, not after it ships. Release one is instrumented because the write-up time was obvious to measure. Release two changes more and had no equivalent designed in from the start, which is why the measures above are a plan rather than a chart.
+
+</GoDeeper>

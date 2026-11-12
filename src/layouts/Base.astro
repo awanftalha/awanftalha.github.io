@@ -1,0 +1,86 @@
+---
+// The page shell for every Astro page: the homepage's head, tokens, fonts,
+// nav, footer, theme toggle, cursor label and hover scramble. It loads the
+// homepage's own CSS and JS from /home/, so both stay one source.
+import Sprite from '../components/site/Sprite.astro';
+import Nav from '../components/site/Nav.astro';
+import Footer from '../components/site/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;            // e.g. "/work/priced-offer"
+  ogImage?: string;        // site-relative, e.g. "/assets/og/priced-offer.png"
+  ogType?: string;
+  noindex?: boolean;
+}
+const { title, description, path, ogImage = '/assets/og/home.png', ogType = 'article', noindex = false } = Astro.props;
+const site = 'https://www.talha.design';
+const canonical = new URL(path, site).href;
+const og = new URL(ogImage, site).href;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title} · Talha Farooq Awan</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+{noindex && <meta name="robots" content="noindex">}
+<meta property="og:type" content={ogType}>
+<meta property="og:url" content={canonical}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={og}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfbfb">
+<script is:inline>
+  /* Theme before first paint, as on the homepage: saved choice, else system. */
+  (function (d) {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    d.setAttribute('data-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.content = t === 'dark' ? '#0d0d0d' : '#fbfbfb';
+  })(document.documentElement);
+</script>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/home/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/home/fonts/general-sans-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/home/css/tokens.css">
+<link rel="stylesheet" href="/home/css/home.css">
+<slot name="head" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/CustomEase.min.js" defer></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" defer></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrambleTextPlugin.min.js" defer></script>
+<script is:inline type="module">
+  /* The homepage's own modules: theme toggle, mobile menu, Lahore clock,
+     hover scramble and cursor label. */
+  import { initTheme } from '/home/js/theme.js';
+  import { initNav } from '/home/js/nav.js';
+  import { initClock } from '/home/js/clock.js';
+  import { initScramble } from '/home/js/scramble.js';
+  import { initCursor } from '/home/js/cursor.js';
+  initTheme();
+  initNav();
+  initClock();
+  initScramble();
+  initCursor();
+</script>
+</head>
+<body id="top">
+<Sprite />
+<a class="skip" href="#main">Skip to content</a>
+<Nav />
+<main id="main">
+  <slot />
+</main>
+<Footer />
+</body>
+</html>
