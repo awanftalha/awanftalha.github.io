@@ -204,6 +204,15 @@ html.theme-switching *::after {
   transform: translate(-50%, -50%);
 }
 .hero__media.placeholder { position: absolute; }
+/* The orb. --orb-size is the sphere itself; the canvas is 1.6x wider so
+   the glow can fade out. */
+.hero__orb {
+  --orb-size: clamp(200px, 18vw, 300px);   /* 260 @1440 */
+  width: calc(var(--orb-size) * 1.6);
+  max-width: 100%;
+  aspect-ratio: 1;
+}
+.hero__orb canvas { display: block; width: 100%; height: 100%; }
 .hero__text {
   position: absolute;
   left: var(--gutter);
@@ -233,6 +242,7 @@ html.theme-switching *::after {
   }
   .hero__media { position: relative; left: auto; top: auto; transform: none; width: 70vw; margin-inline: auto; }
   .hero__media.placeholder { position: relative; }
+  .hero__orb { --orb-size: 200px; width: calc(var(--orb-size) * 1.6); }
   .hero__text { position: static; }
 }
 

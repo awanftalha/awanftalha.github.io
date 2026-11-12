@@ -9,6 +9,7 @@ import { playIntro, initReveals } from './reveal.js';
 import { initCovers } from './covers.js';
 import { initPlayer } from './player.js';
 import { initSounds } from './sounds.js';
+import { initOrb } from './orb.js';
 
 initTheme();
 initNav();
@@ -21,6 +22,7 @@ initReveals();
 initCovers();
 initPlayer();
 initSounds();
+initOrb();
 
 /* "Email me" opens the mail app and also copies the address. */
 const toast = document.querySelector('[data-toast]');
