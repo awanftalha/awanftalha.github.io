@@ -197,7 +197,39 @@ function reveals() {
   });
 }
 
+/* Contents rail: mark the section in view. Go deeper links open their
+   section through the hash handler in goDeeper(). */
+function rail() {
+  const nav = document.querySelector('[data-rail]');
+  if (!nav) return;
+  const links = $$('[data-rail-link]', nav);
+  const map = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+  const targets = [...map.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      links.forEach((l) => l.removeAttribute('aria-current'));
+      map.get(e.target.id)?.setAttribute('aria-current', 'true');
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  targets.forEach((t) => io.observe(t));
+}
+
+/* "Email me" in the shared CTA also copies the address, as on the homepage. */
+function copyEmail() {
+  const toast = document.querySelector('[data-toast]');
+  $$('[data-copy-email]').forEach((a) => a.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(a.dataset.copyEmail); } catch { return; }
+    if (!toast) return;
+    toast.hidden = false;
+    clearTimeout(toast.t);
+    toast.t = setTimeout(() => { toast.hidden = true; }, 1600);
+  }));
+}
+
 function init() {
+  rail();
+  copyEmail();
   loops();
   beforeAfter();
   lightbox();

@@ -5,6 +5,10 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Kit from '../../components/case/Kit.astro';
+import CaseLayout from '../../layouts/CaseLayout.astro';
+
+// Phase 3 pilot: only priced-offer uses the full layout until it's approved.
+const READY = new Set(['priced-offer']);
 
 export async function getStaticPaths() {
   const entries = await getCollection('work');
@@ -17,7 +21,7 @@ export async function getStaticPaths() {
 const { entry, kit } = Astro.props;
 const d = entry?.data;
 ---
-{kit ? <Kit /> : (
+{kit ? <Kit /> : READY.has(entry.id) ? <CaseLayout entry={entry} /> : (
   <Base title={d.title} description={d.seo.description} path={`/work/${entry.id}`} ogImage={d.seo.ogImage}>
     <section class="cs-stub">
       <ul class="cs-stub__chips" aria-label="About this project">
