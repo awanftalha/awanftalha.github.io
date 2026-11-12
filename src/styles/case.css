@@ -166,8 +166,8 @@
   border: var(--hairline);
   background: var(--surface);
 }
-.cs-ba__stage .cs-ba__img { position: absolute; inset: 0; height: 100%; object-fit: cover; border: 0; border-radius: 0; }
-.cs-ba__after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
+.cs-ba__stage .cs-ba__img { position: absolute; inset: 0; height: 100%; object-fit: contain; object-position: top center; border: 0; border-radius: 0; }
+.cs-ba__after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); background: var(--surface); }
 .cs-ba__line {
   position: absolute;
   top: 0; bottom: 0;

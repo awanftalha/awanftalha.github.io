@@ -53,7 +53,7 @@ seo:
   mode="stack"
   before="/media/compliance-check/before-two-documents.webp"
   beforeAlt="A diagram of the old process: the EASA reference document in one window, the operations manual in another, and the judgement joining them existing only in one person's head."
-  after="/assets/work/compliance-check/compare.png"
+  after="/assets/work/compliance-check/compare-trimmed.png"
   afterAlt="Step 04, compare side by side: requirements with their verdicts on the left; on the right the manual scrolled to Section 2.1, page 19, with the matched passage highlighted and a bar holding the verdict, Accept and Reject, a note field and Save and next."
   caption="Before: two documents in two windows, and the judgement joining them in one person's head. After: the requirement, the passage that answers it and the verdict, in one view."
 />
@@ -69,13 +69,13 @@ I had been designing a comparison tool. He was describing an evidence tool. That
 ## /* Key decisions */
 
 <Decision n="01" title="Verify before you compare">
-  <Loop slot="media" src="/media/compliance-check/check-found.mp4" poster="/assets/work/compliance-check/flow-03-check-found.png" alt="Correcting an extracted requirement before anything is compared, on the Check what was found step." posterAlt="Check what was found before we compare: 140 extracted requirements grouped by section, each editable, with a warning that 3 requirements split across a page break need a second look." device="desktop" />
+  <Loop slot="media" src="/media/compliance-check/check-found.mp4" poster="/assets/work/compliance-check/flow-03-check-found-trimmed.png" alt="Correcting an extracted requirement before anything is compared, on the Check what was found step." posterAlt="Check what was found before we compare: 140 extracted requirements grouped by section, each editable, with a warning that 3 requirements split across a page break need a second look." device="desktop" />
 
 Extraction is the step most likely to be silently wrong, so a step exists only to let a person correct the requirements before anything is measured against them. A requirement filed under the wrong section gets checked against the wrong part of the manual, and the result still looks confident.
 </Decision>
 
 <Decision n="02" title="The evidence sits next to the verdict">
-  <Loop slot="media" src="/media/compliance-check/compare-scroll.mp4" poster="/assets/work/compliance-check/compare.png" alt="Selecting a requirement scrolls the manual to the matched passage on page 19 and highlights it, with the verdict, Accept, Reject and a note in one bar." posterAlt="Step 04, compare side by side: requirements with their verdicts on the left; on the right the manual scrolled to Section 2.1, page 19, with the matched passage highlighted and a bar holding the verdict, Accept and Reject, a note field and Save and next." device="desktop" />
+  <Loop slot="media" src="/media/compliance-check/compare-scroll.mp4" poster="/assets/work/compliance-check/compare-trimmed.png" alt="Selecting a requirement scrolls the manual to the matched passage on page 19 and highlights it, with the verdict, Accept, Reject and a note in one bar." posterAlt="Step 04, compare side by side: requirements with their verdicts on the left; on the right the manual scrolled to Section 2.1, page 19, with the matched passage highlighted and a bar holding the verdict, Accept and Reject, a note field and Save and next." device="desktop" />
 
 Clicking a requirement scrolls the manual to the passage that matched and highlights it. Verdict, passage and comment live in one bar, so nothing about a judgement is more than a glance away from the thing that justifies it.
 </Decision>
@@ -162,7 +162,7 @@ The comparison is only the means. The thing these people are actually accountabl
 
 That moved the report out of the "export" menu and into the flow as a designed step. It also changed the compare screen, because if the report is the deliverable, then every verdict on it has to carry the passage that justifies it. Otherwise the report is an opinion with a percentage on top.
 
-<Figure src="/assets/work/compliance-check/report.png" alt="The compliance report, ready to print: operator, reference and manual details, counts of 118 covered, 12 partially covered, 6 not covered and 4 not applicable, then every requirement that is not fully covered with the section and page or a note." caption="What the quote produced. The report is a step of the flow rather than an export in a menu. Counts first, then every requirement that is not fully covered, each with the section and page that answers it or the note saying why it does not, and a signature block, because someone has to sign it." wide />
+<Figure src="/assets/work/compliance-check/report-trimmed.png" alt="The compliance report, ready to print: operator, reference and manual details, counts of 118 covered, 12 partially covered, 6 not covered and 4 not applicable, then every requirement that is not fully covered with the section and page or a note." caption="What the quote produced. The report is a step of the flow rather than an export in a menu. Counts first, then every requirement that is not fully covered, each with the section and page that answers it or the note saying why it does not, and a signature block, because someone has to sign it." wide />
 
 </GoDeeper>
 
@@ -227,7 +227,7 @@ This is a document that gets submitted to a regulator. What the product does whe
   <State title="The document cannot be read" src="/assets/work/compliance-check/state-unreadable.png" alt="We could not read this document: a red banner says the EASA PDF is a photo of the pages, not text, and that nothing was lost or charged. Three routes follow: use the published version from EASA, run text recognition first, or upload a different file.">
     A scanned PDF has no text layer, so no requirement can be pulled out of it. The screen says that plainly, states that nothing was lost or charged, and offers three real routes rather than one greyed-out retry.
   </State>
-  <State title="The manual was revised mid-review" src="/assets/work/compliance-check/flow-10-manual-revised.png" alt="A banner says revision 3 of the manual was uploaded, 11 requirements changed verdict and 4 already reviewed are affected, with Show only changes; changed rows carry Changed and Now covered tags.">
+  <State title="The manual was revised mid-review" src="/assets/work/compliance-check/flow-10-manual-revised-trimmed.png" alt="A banner says revision 3 of the manual was uploaded, 11 requirements changed verdict and 4 already reviewed are affected, with Show only changes; changed rows carry Changed and Now covered tags.">
     Eleven verdicts changed and four you had already reviewed are affected. Improvements and regressions are marked equally.
   </State>
 </States>
@@ -284,11 +284,11 @@ Today the operator produces the report and the authority signs it outside the sy
 
 <Gallery>
   <Figure src="/assets/work/compliance-check/flow-01-upload-reference.png" alt="Start a new compliance check: a name field, a manual type, a drop zone for the reference document and a list of reference documents used before." caption="01 · Upload the reference document. Name the check, pick a manual type, drop the EASA document." />
-  <Figure src="/assets/work/compliance-check/flow-03-check-found.png" alt="Check what was found before we compare: 140 extracted requirements grouped by section, each editable, with a warning that 3 requirements split across a page break need a second look." caption="03 · Check what was found. Every extracted requirement, grouped by section, editable before anything is compared against it." />
+  <Figure src="/assets/work/compliance-check/flow-03-check-found-trimmed.png" alt="Check what was found before we compare: 140 extracted requirements grouped by section, each editable, with a warning that 3 requirements split across a page break need a second look." caption="03 · Check what was found. Every extracted requirement, grouped by section, editable before anything is compared against it." />
   <Figure src="/assets/work/compliance-check/flow-05-comparing.png" alt="Comparing your manual against 140 requirements: 86 checked, with live counts of 71 covered, 9 partially covered, 4 not covered and 2 not applicable." caption="05 · Comparing. Live counts by verdict while it runs. Nothing is final until a person reviews it." />
   <Figure src="/assets/work/compliance-check/flow-09-needs-review.png" alt="The compare screen filtered to the 18 requirements that are partially covered or not covered, with the manual open beside them." caption="09 · Filtered to what needs review. The filter is the working view." />
-  <Figure src="/assets/work/compliance-check/flow-10-manual-revised.png" alt="A banner says revision 3 of the manual was uploaded, 11 requirements changed verdict and 4 already reviewed are affected, with Show only changes; changed rows carry Changed and Now covered tags." caption="10 · The manual was revised mid-review." />
-  <Figure src="/assets/work/compliance-check/flow-14-reports.png" alt="Compliance reports: every check the operator has run, with manual, type, who compared it, when, coverage and status such as Ready to review, In review and Sent to LBA." caption="14 · Every check the company has run, and whether each report is ready to review or already with the authority." />
+  <Figure src="/assets/work/compliance-check/flow-10-manual-revised-trimmed.png" alt="A banner says revision 3 of the manual was uploaded, 11 requirements changed verdict and 4 already reviewed are affected, with Show only changes; changed rows carry Changed and Now covered tags." caption="10 · The manual was revised mid-review." />
+  <Figure src="/assets/work/compliance-check/flow-14-reports-trimmed.png" alt="Compliance reports: every check the operator has run, with manual, type, who compared it, when, coverage and status such as Ready to review, In review and Sent to LBA." caption="14 · Every check the company has run, and whether each report is ready to review or already with the authority." />
 </Gallery>
 
 <Note>Built in Figma from the company's design system. Every screen here is a real frame in the file, not a mockup of one.</Note>

@@ -22,7 +22,11 @@ const b = dims(before);
 const a = dims(after);
 const both = hasBefore && hasAfter;
 const single = !both && (hasBefore || hasAfter) ? (hasBefore ? { src: before, alt: beforeAlt, size: b } : { src: after, alt: afterAlt, size: a }) : null;
-const ratio = b ? `${b.width} / ${b.height}` : a ? `${a.width} / ${a.height}` : '16 / 10';
+// The slider box takes the taller of the two shapes, and each image is fitted
+// whole inside it (never cropped), so two different-sized screens compare
+// cleanly.
+const tallest = [b, a].filter(Boolean).sort((x, y) => x.width / x.height - y.width / y.height)[0];
+const ratio = tallest ? `${tallest.width} / ${tallest.height}` : '16 / 10';
 ---
 <figure class:list={['cs-ba', 'is-wide', `cs-ba--${both ? mode : 'single'}`]}>
   {both && mode === 'slider' && (
