@@ -557,7 +557,7 @@
 /* ---------------------------------------------------------------- Print: Go deeper opens */
 
 @media print {
-  .nav, .menu, .cursor, .player, .cs-deeper-intro__all, .cs-strip__controls, .cs-rail { display: none !important; }
+  .nav, .menu, .cursor, .cs-deeper-intro__all, .cs-strip__controls, .cs-rail { display: none !important; }
   .cs-page { padding-top: 0; }
   details.cs-deeper::details-content { content-visibility: visible; display: block; }
   .cs-deeper__body { display: block !important; }

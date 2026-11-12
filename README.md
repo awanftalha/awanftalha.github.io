@@ -34,8 +34,8 @@ home/css/home.css     Homepage layout and components
 home/css/covers.css   The six coded project covers
 home/js/*.js          One module per behaviour, started from main.js:
                       theme, nav (scaling menu), clock, pockets (app cards), scramble,
-                      cursor (label), reveal (intro + scroll), covers, player, sounds,
-                      audio (loads Howler on demand), motion (GSAP + the "main" ease)
+                      cursor (label), reveal (intro + scroll), covers, orb (hero),
+                      motion (GSAP + the "main" ease)
 home/fonts/           General Sans 300 and 600 (Fontshare, self-hosted)
 public/assets/        Resume, OG images, portrait, testimonial photos, project screens
 public/media/<slug>/  New loops and before/after images (named in docs/SHOT_LIST.md)
@@ -52,13 +52,12 @@ og/                   Share-card generator for assets/og/*.png (not deployed)
 ## Homepage (v3)
 
 - Libraries load from jsDelivr at pinned versions: GSAP 3.15.1 with CustomEase,
-  ScrollTrigger, SplitText and ScrambleTextPlugin (in `<head>`), and Howler 2.2.4 (only when
-  the music player is first pressed).
+  ScrollTrigger, SplitText and ScrambleTextPlugin (in `<head>`).
 - Every animation is skipped under `prefers-reduced-motion`, and if GSAP fails to load: the
   page then shows everything as is.
 - Behaviours start from data attributes: `data-scramble="load"`, `data-scramble-hover`,
   `data-scramble="loop" data-scramble-words="a|b|c"`, `data-cursor-text`, `data-pocket`,
-  `data-reveal`, `data-sound-hover`, `data-sound-click`, `data-cover`.
+  `data-reveal`, `data-cover`, `data-orb`.
 - Anchors the case studies link back to: `#work`, `#approach`, `#about` (the footer) and
   `#contact` (the CTA). `#apps` and `#testimonials` also exist.
 - **Covers:** each project's cover is a coded scene in `home/css/covers.css`, played by
@@ -70,11 +69,8 @@ og/                   Share-card generator for assets/og/*.png (not deployed)
 
 | What | Where it goes |
 | --- | --- |
-| Hero video (A) or Three.js desk (B) | `.hero__media` in `index.html` |
 | Company logo SVGs (NGFT, Punjab Group, Decklaration, TenX, Toptal) | `.footer__logos`, use `currentColor` |
 | Booking link | "Book a call" `href="#book"` in the CTA |
-| Music track | `home/audio/lofi.webm` + `.mp3`; title in the player's `aria-label` and marquee |
-| UI sounds | `home/audio/hover.*`, `home/audio/click.*` (`.webm` + `.mp3`) |
 | App icon tiles and gradient colours | the three `.pocket` cards (`--app-a`, `--app-b`) |
 | Version line date | footer, "v.3.0 · Updated …" (typed by hand) |
 
