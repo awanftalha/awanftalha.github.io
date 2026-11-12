@@ -12,64 +12,6 @@ const SHOW = 'inset(0 0% 0 0)';
 
 /* Each scene adds its story to `tl`, starting from its own initial state. */
 const scenes = {
-  sms(root, tl) {
-    const report = $(root, '[data-report]');
-    const status = $(root, '[data-status]');
-    const meter = $(root, '[data-meter]');
-    const finalHTML = status.innerHTML;
-    tl.set(report, { xPercent: -200 })
-      .set(meter, { scaleX: 0 })
-      .call(() => { status.textContent = 'New'; status.classList.remove('cv-chip--c'); })
-      .to(report, { xPercent: -100, duration: 0.8 }, 0.9)
-      .call(() => { status.textContent = 'Assessing'; })
-      .to(meter, { scaleX: 1, duration: 1 }, '+=0.15')
-      .to(report, { xPercent: 0, duration: 0.8 }, '+=0.3')
-      .call(() => { status.innerHTML = finalHTML; status.classList.add('cv-chip--c'); });
-  },
-
-  comp(root, tl) {
-    const verdicts = $$(root, '[data-verdict]');
-    const refs = $$(root, '[data-ref]');
-    const count = $(root, '[data-count]');
-    const finalHTML = verdicts[0].innerHTML;
-    const c = { n: 0 };
-    tl.set(refs, { opacity: 0, x: -6 })
-      .set(c, { n: 0 })
-      .call(() => {
-        count.textContent = '0';
-        verdicts.forEach((v) => { v.textContent = 'Checking'; v.classList.remove('cv-chip--c'); });
-      })
-      .to(c, { n: 140, duration: 2.6, ease: 'none', onUpdate: () => { count.textContent = Math.round(c.n); } }, 0.4);
-    verdicts.forEach((v, i) => {
-      const at = 0.7 + i * 0.6;
-      tl.call(() => { v.innerHTML = finalHTML; v.classList.add('cv-chip--c'); }, null, at)
-        .fromTo(v, { scale: 0.9 }, { scale: 1, duration: 0.3 }, at)
-        .to(refs[i], { opacity: 1, x: 0, duration: 0.4 }, at + 0.1);
-    });
-  },
-
-  tr(root, tl) {
-    const outcomes = $$(root, '[data-outcome]');
-    const gaps = $(root, '[data-gaps]');
-    const sign = $(root, '[data-signoff]');
-    const repeat = $(root, '[data-repeat]');
-    const setGaps = (n) => () => { gaps.textContent = n; };
-    tl.set(outcomes, { opacity: 0, scale: 0.85 })
-      .set(sign, { opacity: 0.3 })
-      .call(setGaps(4))
-      .call(() => { repeat.textContent = 'Repeat'; repeat.classList.add('is-repeat'); repeat.classList.remove('cv-chip--c'); });
-    outcomes.forEach((o, i) => {
-      const at = 0.5 + i * 0.45;
-      tl.to(o, { opacity: 1, scale: 1, duration: 0.3 }, at);
-      if (o !== repeat) tl.call(setGaps(3 - i + (i > 2 ? 1 : 0)), null, at);
-    });
-    // The repeat is flown again and passes; only then can it be signed.
-    tl.call(() => { repeat.textContent = 'Pass'; repeat.classList.remove('is-repeat'); repeat.classList.add('cv-chip--c'); }, null, '+=0.6')
-      .fromTo(repeat, { scale: 0.85 }, { scale: 1, duration: 0.3 }, '<')
-      .call(setGaps(0))
-      .to(sign, { opacity: 1, duration: 0.4 }, '+=0.15');
-  },
-
   sg(root, tl) {
     const msg = $(root, '[data-msg]');
     const photos = $$(root, '[data-photo]');
@@ -105,21 +47,79 @@ function initOpsTimer() {
   });
 }
 
+/* Cards animate only while hovered (or focused from the keyboard). On a touch
+   screen there is no hover, so each plays once when it is mostly in view. */
+function onHover(card, { enter, leave, once }) {
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  card.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' || fine.matches) enter(); });
+  card.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' || fine.matches) leave(); });
+  card.addEventListener('focus', () => { if (card.matches(':focus-visible')) enter(); });
+  card.addEventListener('blur', leave);
+  if (!fine.matches) {
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { once(); io.disconnect(); } }, { threshold: 0.6 });
+    io.observe(card);
+  }
+}
+
 export function initCovers() {
   initOpsTimer();
+  // The live site's graphics (NGFT SMS, AI Compliance, Training) already play
+  // only on hover/focus, and once in view on touch.
+  const sms = document.querySelector('[data-sd="sms"]');
+  if (sms && window.SmsThumb) window.SmsThumb.mount(sms, { speed: 1.6 });
+  const comp = document.querySelector('[data-mg="compliance"]');
+  if (comp && window.ComplianceThumb) window.ComplianceThumb.mount(comp);
+  const trn = document.querySelector('[data-tr="training"]');
+  if (trn && window.TrainingThumb) window.TrainingThumb.mount(trn);
+
+  // The product demos (NGFT OPS, HX Insight) run in iframes: the card tells
+  // them when it is hovered. They rest on one frame and settle back to it.
+  document.querySelectorAll('.cover--embed iframe').forEach((frame) => {
+    const send = (msg) => { if (frame.contentWindow) frame.contentWindow.postMessage(msg, location.origin); };
+    onHover(frame.closest('a'), {
+      enter: () => send({ cmd: 'hover', on: true }),
+      leave: () => send({ cmd: 'hover', on: false }),
+      // The frame may still be loading: ask again once it has (a repeat is ignored)
+      once: () => { send({ cmd: 'once' }); frame.addEventListener('load', () => setTimeout(() => send({ cmd: 'once' }), 800), { once: true }); },
+    });
+  });
+
   if (!motionOn) return;
+  // The coded covers (GSAP): at rest the finished frame; hover plays the story
+  // on a loop; leaving fast-forwards to the finished frame and stops.
   document.querySelectorAll('[data-cover]').forEach((cover) => {
     const build = scenes[cover.dataset.cover];
     const stage = cover.querySelector('.cv');
     if (!build || !stage) return;
-    // Fade in, tell the story, hold the finished frame, fade out, repeat.
     const tl = gsap.timeline({ paused: true, repeat: -1 });
     tl.set(stage, { opacity: 0 });
     build(stage, tl);
     tl.to(stage, { opacity: 1, duration: 0.4 }, 0)
       .to({}, { duration: 2.2 })
       .to(stage, { opacity: 0, duration: 0.4 });
-    tl.progress(0);
-    new IntersectionObserver(([e]) => (e.isIntersecting ? tl.play() : tl.pause()), { rootMargin: '10% 0px' }).observe(cover);
+    const rest = tl.duration() - 0.4 - 2.0;   // inside the hold: the finished frame
+    tl.progress(0).time(rest);
+    let stopAt = null;
+    tl.eventCallback('onUpdate', () => {
+      if (stopAt === null || tl.totalTime() < stopAt) return;
+      const at = stopAt;
+      stopAt = null;
+      tl.pause().timeScale(1).totalTime(at);
+    });
+    onHover(cover.closest('a'), {
+      enter: () => {
+        // From rest, skip the rest of the hold: fade out and start the story now
+        if (tl.paused() && stopAt === null) tl.time(tl.duration() - 0.42);
+        stopAt = null;
+        tl.timeScale(1).play();
+      },
+      leave: () => {
+        if (tl.paused()) return;
+        const d = tl.duration(), t = tl.totalTime();
+        stopAt = t + ((rest - (t % d) + d) % d);
+        tl.timeScale(4);
+      },
+      once: () => { if (tl.paused()) { stopAt = tl.totalTime() + tl.duration(); tl.play(); } },
+    });
   });
 }

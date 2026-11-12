@@ -38,12 +38,19 @@
 <link rel="stylesheet" href="home/css/tokens.css">
 <link rel="stylesheet" href="home/css/home.css">
 <link rel="stylesheet" href="home/css/covers.css">
+<link rel="stylesheet" href="home/css/compliance-thumb.css">
+<link rel="stylesheet" href="home/css/sms-thumb.css">
+<link rel="stylesheet" href="home/css/training-thumb.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600&display=swap">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/CustomEase.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrambleTextPlugin.min.js" defer></script>
+<script src="home/js/compliance-thumb.js" defer></script>
+<script src="home/js/sms-thumb.js" defer></script>
+<script src="home/js/training-thumb.js" defer></script>
 <script type="module" src="home/js/main.js"></script>
 </head>
 <body id="top">
@@ -141,20 +148,241 @@
         </div>
       </a>
       <a class="card" href="/work/safety-report" data-cursor-text="View NGFT SMS case">
-        <div class="card__media cover" data-cover="sms" style="--c: #df2026" aria-hidden="true">
-          <div class="cv cv--sms">
-          <div class="cv-lanes">
-            <div class="cv-lane"><span class="cv-label">Intake</span></div>
-            <div class="cv-lane"><span class="cv-label">Risk</span></div>
-            <div class="cv-lane"><span class="cv-label">Closed</span></div>
-            <div class="cv-report" data-report>
-              <b>SR-2026-0142</b>
-              <span class="cv-muted">Hard landing</span>
-              <span class="cv-meter"><i data-meter></i></span>
-              <span class="cv-chip cv-chip--c" data-status><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Closed</span>
+        <div class="card__media sms-panel">
+          <!-- Copied as-is from the live site (talha.design): the NGFT SMS motion graphic.
+               At rest it is the closed report; hover, focus or (on touch) scrolling into
+               view plays the flow. home/css/sms-thumb.css + home/js/sms-thumb.js. -->
+          <span class="sms-chip">NGFT</span>
+          <div class="sd" data-sd="sms">
+              <svg class="sd-svg" viewBox="0 0 880 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <defs><filter id="sdc-lift" x="-10%" y="-40%" width="120%" height="200%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#14171A" flood-opacity="0.18"/></filter></defs>
+              <rect width="880" height="800" fill="#14171A"/>
+              <g class="sd-stepper">
+              <text class="sd-mono sd-step-t" data-i="0" x="64.0" y="72">INTAKE</text>
+              <rect x="64.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="0" x="64.0" y="84" width="144.0" height="4" fill="#F2F3F0"/>
+              <text class="sd-mono sd-step-t" data-i="1" x="216.0" y="72">REVIEW</text>
+              <rect x="216.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="1" x="216.0" y="84" width="144.0" height="4" fill="#F2F3F0"/>
+              <text class="sd-mono sd-step-t" data-i="2" x="368.0" y="72">ECCAIRS</text>
+              <rect x="368.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="2" x="368.0" y="84" width="144.0" height="4" fill="#F2F3F0"/>
+              <text class="sd-mono sd-step-t" data-i="3" x="520.0" y="72">RISK</text>
+              <rect x="520.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="3" x="520.0" y="84" width="144.0" height="4" fill="#F2F3F0"/>
+              <text class="sd-mono sd-step-t" data-i="4" x="672.0" y="72">CLOSE</text>
+              <rect x="672.0" y="84" width="144.0" height="4" fill="#2C3035"/>
+              <rect class="sd-step" data-i="4" x="672.0" y="84" width="144.0" height="4" fill="#E4521F"/>
+              </g>
+              <rect class="sd-card" x="64" y="116" width="752" height="628" rx="2" fill="#FBFBF9"/>
+              <g class="sd-inbox-head">
+              <text class="sd-h" x="96" y="166">Safety reports</text>
+              <text class="sd-mono sd-cap" x="96" y="190">12 OPEN · 3 NEED YOU TODAY · 2 OVERDUE</text>
+              </g>
+              <g class="sd-row" data-k="0" data-shift="92">
+              <rect x="72" y="215" width="736" height="91" fill="#FBFBF9"/>
+              <line x1="96" x2="784" y1="214" y2="214" stroke="#E7E9E4"/>
+              <text class="sd-mono sd-id" x="96" y="240">SR-2026-0150</text>
+              <text class="sd-title" x="96" y="268">Dangerous goods not declared on manifest</text>
+              <text class="sd-sub" x="96" y="290">Occurrence · Geneva</text>
+              <g class="sd-loz " data-right="784" ><rect x="675" y="228" width="109" height="22" fill="#F0F1F2"/><text class="sd-loz-t" x="684" y="243.5" fill="#505258">NOT ASSESSED</text></g>
+              </g>
+              <g class="sd-row" data-k="1" data-shift="92">
+              <rect x="72" y="307" width="736" height="91" fill="#FBFBF9"/>
+              <line x1="96" x2="784" y1="306" y2="306" stroke="#E7E9E4"/>
+              <text class="sd-mono sd-id" x="96" y="332">SR-2026-0149</text>
+              <text class="sd-title" x="96" y="360">Bird strike, main rotor blade</text>
+              <text class="sd-sub" x="96" y="382">Incident · Zurich</text>
+              <g class="sd-loz " data-right="784" ><rect x="675" y="320" width="109" height="22" fill="#FCE4A6"/><text class="sd-loz-t" x="684" y="335.5" fill="#9E4C00">2C TOLERABLE</text></g>
+              </g>
+              <g class="sd-row" data-k="2" data-shift="92">
+              <rect x="72" y="399" width="736" height="91" fill="#FBFBF9"/>
+              <line x1="96" x2="784" y1="398" y2="398" stroke="#E7E9E4"/>
+              <text class="sd-mono sd-id" x="96" y="424">SR-2026-0147</text>
+              <text class="sd-title" x="96" y="452">Laser illumination on approach</text>
+              <text class="sd-sub" x="96" y="474">Incident · Bern</text>
+              <g class="sd-loz " data-right="784" ><rect x="675" y="412" width="109" height="22" fill="#F0F1F2"/><text class="sd-loz-t" x="684" y="427.5" fill="#505258">NOT ASSESSED</text></g>
+              </g>
+              <g class="sd-row" data-k="3" data-shift="0">
+              <rect x="72" y="583" width="736" height="91" fill="#FBFBF9"/>
+              <line x1="96" x2="784" y1="582" y2="582" stroke="#E7E9E4"/>
+              <text class="sd-mono sd-id" x="96" y="608">SR-2026-0138</text>
+              <text class="sd-title" x="96" y="636">Hydraulic leak found on post-flight</text>
+              <text class="sd-sub" x="96" y="658">Observation · Bern</text>
+              <g class="sd-loz " data-right="784" ><rect x="675" y="596" width="109" height="22" fill="#FCE4A6"/><text class="sd-loz-t" x="684" y="611.5" fill="#9E4C00">3C TOLERABLE</text></g>
+              </g>
+              <g class="sd-head">
+              <rect class="sd-lift" x="72" y="135" width="736" height="91" rx="2" fill="#FBFBF9" filter="url(#sdc-lift)"/>
+              <rect x="72" y="135" width="736" height="91" fill="#FBFBF9"/>
+              <rect class="sd-attn" x="64" y="134" width="4" height="92" fill="#E4521F"/>
+              <text class="sd-mono sd-id" x="96" y="160">SR-2026-0142</text>
+              <text class="sd-title" x="96" y="188">Hard landing, nose gear collapse</text>
+              <text class="sd-sub" x="96" y="210">Incident · Lauterbrunnen · 12 Sep 2026</text>
+              <g class="sd-loz sd-risk" data-right="784" ><rect x="660" y="148" width="124" height="22" fill="#FFD5D2"/><text class="sd-loz-t" x="669" y="163.5" fill="#AE2E24">3A INTOLERABLE</text></g>
+              </g>
+              <line class="sd-divider" x1="96" x2="784" y1="232" y2="232" stroke="#D7DAD3"/>
+              <g class="sd-loz sd-status" data-right="784" data-s="review"><rect x="721" y="148" width="63" height="22" fill="#F8EEFE"/><text class="sd-loz-t" x="730" y="163.5" fill="#48245D">REVIEW</text></g>
+              <g class="sd-loz sd-status" data-right="784" data-s="eccairs"><rect x="713" y="148" width="71" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="722" y="163.5" fill="#123263">ECCAIRS</text></g>
+              <g class="sd-loz sd-status" data-right="784" data-s="risk"><rect x="736" y="148" width="48" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="745" y="163.5" fill="#123263">RISK</text></g>
+              <g class="sd-status sd-closed" data-s="close" data-right="784"><rect x="680" y="148" width="104" height="22" fill="#292A2E"/><g class="sd-lock-mini" transform="translate(689 152)"><rect x="0.5" y="6" width="10" height="8" rx="1" fill="#F2F3F0"/><path d="M2.5 6V4.2a3 3 0 0 1 6 0V6" fill="none" stroke="#F2F3F0" stroke-width="1.6"/></g><text class="sd-loz-t" x="704" y="163.5" fill="#F2F3F0">CLOSED</text></g>
+              <g class="sd-body" data-s="review">
+              <path class="sd-spark" d="M102 258 l2.2 5.3 5.3 2.2 -5.3 2.2 -2.2 5.3 -2.2 -5.3 -5.3 -2.2 5.3 -2.2z" fill="#964AC0"/>
+              <text class="sd-mono sd-cap" x="116" y="272">SYNOPSIS · EVERY LINE LINKS TO ITS SOURCE</text>
+              <g class="sd-syn" data-i="0">
+              <text class="sd-mono sd-lab" x="96" y="304">PHASE OF FLIGHT</text>
+              <text class="sd-val" x="96" y="328">Approach and landing at an unprepared helipad</text>
+              <g class="sd-loz sd-src" data-right="784" ><rect x="675" y="310" width="109" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="684" y="325.5" fill="#123263">Narrative ¶1</text></g>
+              </g>
+              <g class="sd-syn" data-i="1">
+              <text class="sd-mono sd-lab" x="96" y="362">LANDING SURFACE</text>
+              <text class="sd-val" x="96" y="386">Fresh snow on the helipad; markings not visible</text>
+              <g class="sd-loz sd-src" data-right="784" ><rect x="660" y="368" width="124" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="669" y="383.5" fill="#123263">NOTAM A1234/26</text></g>
+              </g>
+              <g class="sd-syn" data-i="2">
+              <text class="sd-mono sd-lab" x="96" y="420">DESCENT RATE</text>
+              <text class="sd-val" x="96" y="444">710 ft/min at touchdown</text>
+              <g class="sd-loz sd-src" data-right="784" ><rect x="675" y="426" width="109" height="22" fill="#E9F2FE"/><text class="sd-loz-t" x="684" y="441.5" fill="#123263">FDM 13:58:41</text></g>
+              </g>
+              <text class="sd-mono sd-cap" x="96" y="490">HAZARDS · 2 IDENTIFIED · 1 DUPLICATE MERGED</text>
+              <g class="sd-hz" data-i="0">
+              <rect x="96" y="506" width="688" height="50" rx="2" fill="#FFFFFF" stroke="#D7DAD3"/>
+              <rect x="110" y="522" width="18" height="18" rx="2" fill="#1868DB"/>
+              <path d="M114 531.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/>
+              <text class="sd-val sd-strong" x="142" y="537">Insufficient surface definition at landing site</text>
+              <text class="sd-mono sd-lab" x="768" y="536" text-anchor="end">HZ-AER-04 · 88%</text>
+              </g>
+              <g class="sd-hz" data-i="1">
+              <rect x="96" y="566" width="688" height="50" rx="2" fill="#FFFFFF" stroke="#D7DAD3"/>
+              <rect x="110" y="582" width="18" height="18" rx="2" fill="#1868DB"/>
+              <path d="M114 591.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/>
+              <text class="sd-val sd-strong" x="142" y="597">Hydraulic fluid release after hard landing</text>
+              <text class="sd-mono sd-lab" x="768" y="596" text-anchor="end">HZ-TEC-11 · 76%</text>
+              </g>
+              </g>
+              <g class="sd-body" data-s="eccairs">
+              <text class="sd-mono sd-cap" x="96" y="272">ECCAIRS · REVIEWED BY EXCEPTION</text>
+              <text class="sd-big" x="92" y="362">97</text>
+              <text class="sd-val sd-strong" x="196" y="330">attributes matched</text>
+              <text class="sd-mono sd-lab" x="196" y="354">13 ENTITIES · FROM THE REPORT ITSELF</text>
+              <g class="sd-tile" data-k="0">
+              <rect x="96.0" y="392" width="163.0" height="92" rx="2" fill="#FFFFFF" stroke="#D7DAD3" stroke-width="1"/>
+              <text class="sd-tnum" data-count="need" x="112.0" y="442" fill="#292A2E">0</text>
+              <text class="sd-sub" x="112.0" y="468">Need a decision</text>
+              </g>
+              <g class="sd-tile" data-k="1">
+              <rect x="271.0" y="392" width="163.0" height="92" rx="2" fill="#FFFFFF" stroke="#D7DAD3" stroke-width="1"/>
+              <text class="sd-tnum"  x="287.0" y="442" fill="#292A2E">9</text>
+              <text class="sd-sub" x="287.0" y="468">Not in report</text>
+              </g>
+              <g class="sd-tile" data-k="2">
+              <rect x="446.0" y="392" width="163.0" height="92" rx="2" fill="#FFFFFF" stroke="#D7DAD3" stroke-width="1"/>
+              <text class="sd-tnum"  x="462.0" y="442" fill="#4C6B1F">83</text>
+              <text class="sd-sub" x="462.0" y="468">Matched</text>
+              </g>
+              <g class="sd-tile" data-k="3">
+              <rect x="621.0" y="392" width="163.0" height="92" rx="2" fill="#FFFFFF" stroke="#1868DB" stroke-width="2"/>
+              <text class="sd-tnum" data-count="corr" x="637.0" y="442" fill="#1868DB">5</text>
+              <text class="sd-sub" x="637.0" y="468">Corrected</text>
+              </g>
+              <g class="sd-banner">
+              <rect x="96" y="506" width="688" height="58" rx="2" fill="#EFFFD6"/>
+              <rect x="96" y="506" width="4" height="58" fill="#5B7F24"/>
+              <circle cx="126" cy="535" r="10" fill="#5B7F24"/><path d="M121 535.5l3.5 3.5 6-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/>
+              <text class="sd-val sd-strong" x="148" y="532" fill="#37471F">All 97 values decided</text>
+              <text class="sd-sub" x="148" y="552" fill="#37471F">5 corrected · 2 kept</text>
+              </g>
+              </g>
+              <g class="sd-body" data-s="risk">
+              <text class="sd-mono sd-cap" x="96" y="272">RISK · ICAO 5×5 · HZ-AER-04</text>
+              <text class="sd-val sd-strong" x="96" y="300">Insufficient surface definition at landing site</text>
+              <text class="sd-mono sd-lab" x="151.0" y="334" text-anchor="middle">A</text>
+              <text class="sd-mono sd-lab" x="209.0" y="334" text-anchor="middle">B</text>
+              <text class="sd-mono sd-lab" x="267.0" y="334" text-anchor="middle">C</text>
+              <text class="sd-mono sd-lab" x="325.0" y="334" text-anchor="middle">D</text>
+              <text class="sd-mono sd-lab" x="383.0" y="334" text-anchor="middle">E</text>
+              <text class="sd-mono sd-lab" x="104" y="369" text-anchor="middle">5</text>
+              <g class="sd-cell" data-d="0"><rect x="124" y="344" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="151.0" y="369" text-anchor="middle" fill="#AE2E24">5A</text></g>
+              <g class="sd-cell" data-d="1"><rect x="182" y="344" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="209.0" y="369" text-anchor="middle" fill="#AE2E24">5B</text></g>
+              <g class="sd-cell" data-d="2"><rect x="240" y="344" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="267.0" y="369" text-anchor="middle" fill="#AE2E24">5C</text></g>
+              <g class="sd-cell" data-d="3"><rect x="298" y="344" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="325.0" y="369" text-anchor="middle" fill="#9E4C00">5D</text></g>
+              <g class="sd-cell" data-d="4"><rect x="356" y="344" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="383.0" y="369" text-anchor="middle" fill="#9E4C00">5E</text></g>
+              <text class="sd-mono sd-lab" x="104" y="413" text-anchor="middle">4</text>
+              <g class="sd-cell" data-d="1"><rect x="124" y="388" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="151.0" y="413" text-anchor="middle" fill="#AE2E24">4A</text></g>
+              <g class="sd-cell" data-d="2"><rect x="182" y="388" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="209.0" y="413" text-anchor="middle" fill="#AE2E24">4B</text></g>
+              <g class="sd-cell" data-d="3"><rect x="240" y="388" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="267.0" y="413" text-anchor="middle" fill="#9E4C00">4C</text></g>
+              <g class="sd-cell" data-d="4"><rect x="298" y="388" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="325.0" y="413" text-anchor="middle" fill="#9E4C00">4D</text></g>
+              <g class="sd-cell" data-d="5"><rect x="356" y="388" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="383.0" y="413" text-anchor="middle" fill="#9E4C00">4E</text></g>
+              <text class="sd-mono sd-lab" x="104" y="457" text-anchor="middle">3</text>
+              <g class="sd-cell" data-d="2"><rect x="124" y="432" width="54" height="40" rx="2" fill="#FFD5D2"/><text class="sd-cell-t" x="151.0" y="457" text-anchor="middle" fill="#AE2E24">3A</text></g>
+              <g class="sd-cell" data-d="3"><rect x="182" y="432" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="209.0" y="457" text-anchor="middle" fill="#9E4C00">3B</text></g>
+              <g class="sd-cell" data-d="4"><rect x="240" y="432" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="267.0" y="457" text-anchor="middle" fill="#9E4C00">3C</text></g>
+              <g class="sd-cell" data-d="5"><rect x="298" y="432" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="325.0" y="457" text-anchor="middle" fill="#9E4C00">3D</text></g>
+              <g class="sd-cell" data-d="6"><rect x="356" y="432" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="383.0" y="457" text-anchor="middle" fill="#4C6B1F">3E</text></g>
+              <text class="sd-mono sd-lab" x="104" y="501" text-anchor="middle">2</text>
+              <g class="sd-cell" data-d="3"><rect x="124" y="476" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="151.0" y="501" text-anchor="middle" fill="#9E4C00">2A</text></g>
+              <g class="sd-cell" data-d="4"><rect x="182" y="476" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="209.0" y="501" text-anchor="middle" fill="#9E4C00">2B</text></g>
+              <g class="sd-cell" data-d="5"><rect x="240" y="476" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="267.0" y="501" text-anchor="middle" fill="#9E4C00">2C</text></g>
+              <g class="sd-cell" data-d="6"><rect x="298" y="476" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="325.0" y="501" text-anchor="middle" fill="#4C6B1F">2D</text></g>
+              <g class="sd-cell" data-d="7"><rect x="356" y="476" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="383.0" y="501" text-anchor="middle" fill="#4C6B1F">2E</text></g>
+              <text class="sd-mono sd-lab" x="104" y="545" text-anchor="middle">1</text>
+              <g class="sd-cell" data-d="4"><rect x="124" y="520" width="54" height="40" rx="2" fill="#FCE4A6"/><text class="sd-cell-t" x="151.0" y="545" text-anchor="middle" fill="#9E4C00">1A</text></g>
+              <g class="sd-cell" data-d="5"><rect x="182" y="520" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="209.0" y="545" text-anchor="middle" fill="#4C6B1F">1B</text></g>
+              <g class="sd-cell" data-d="6"><rect x="240" y="520" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="267.0" y="545" text-anchor="middle" fill="#4C6B1F">1C</text></g>
+              <g class="sd-cell" data-d="7"><rect x="298" y="520" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="325.0" y="545" text-anchor="middle" fill="#4C6B1F">1D</text></g>
+              <g class="sd-cell" data-d="8"><rect x="356" y="520" width="54" height="40" rx="2" fill="#D3F1A7"/><text class="sd-cell-t" x="383.0" y="545" text-anchor="middle" fill="#4C6B1F">1E</text></g>
+              <g class="sd-cross"><line x1="118" x2="124" y1="452.0" y2="452.0" stroke="#292A2E" stroke-dasharray="3 3"/><line x1="151.0" x2="151.0" y1="340" y2="432" stroke="#292A2E" stroke-dasharray="3 3"/></g>
+              <rect class="sd-ring" x="121" y="473" width="60" height="46" rx="3" fill="none" stroke="#292A2E" stroke-width="2.5"/>
+              <text class="sd-mono sd-lab" x="442" y="358">SEVERITY</text>
+              <text class="sd-val" x="442" y="382">A — Catastrophic</text>
+              <text class="sd-mono sd-lab" x="442" y="418">PROBABILITY</text>
+              <text class="sd-val" x="442" y="442">3 — Remote</text>
+              <g class="sd-verdict-a"><rect x="442" y="470" width="150" height="30" fill="#FFD5D2"/><text class="sd-loz-t sd-loz-l" x="452" y="490" fill="#AE2E24">3A INTOLERABLE</text></g>
+              <g class="sd-verdict-b"><rect x="442" y="470" width="138" height="30" fill="#FCE4A6"/><text class="sd-loz-t sd-loz-l" x="452" y="490" fill="#9E4C00">2A TOLERABLE</text></g>
+              <text class="sd-sub sd-mitig" x="442" y="526">Mitigation M-032 · accepted by M. Frei</text>
+              </g>
+              <g class="sd-body sd-body-close" data-s="close">
+              <text class="sd-mono sd-cap" x="96" y="272">READY TO CLOSE?</text>
+              <text class="sd-mono sd-cap sd-ok" x="784" y="272" text-anchor="end">6 OF 6</text>
+              <g class="sd-check" data-i="0">
+              <line x1="96" x2="784" y1="292" y2="292" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="315" r="11" fill="#5B7F24"/><path d="M102 315.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="321">Required information complete</text>
+              </g>
+              <g class="sd-check" data-i="1">
+              <line x1="96" x2="784" y1="338" y2="338" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="361" r="11" fill="#5B7F24"/><path d="M102 361.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="367">Synopsis confirmed</text>
+              </g>
+              <g class="sd-check" data-i="2">
+              <line x1="96" x2="784" y1="384" y2="384" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="407" r="11" fill="#5B7F24"/><path d="M102 407.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="413">All 97 ECCAIRS values decided</text>
+              </g>
+              <g class="sd-check" data-i="3">
+              <line x1="96" x2="784" y1="430" y2="430" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="453" r="11" fill="#5B7F24"/><path d="M102 453.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="459">All 3 hazards assessed</text>
+              </g>
+              <g class="sd-check" data-i="4">
+              <line x1="96" x2="784" y1="476" y2="476" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="499" r="11" fill="#5B7F24"/><path d="M102 499.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="505">Intolerable risk mitigated and accepted</text>
+              </g>
+              <g class="sd-check" data-i="5">
+              <line x1="96" x2="784" y1="522" y2="522" stroke="#E7E9E4"/>
+              <g class="sd-tick"><circle cx="107" cy="545" r="11" fill="#5B7F24"/><path d="M102 545.5l3.6 3.6 6.4-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/></g>
+              <text class="sd-val" x="130" y="551">Feedback sent to the reporter</text>
+              </g>
+              <g class="sd-final">
+              <rect x="96" y="584" width="688" height="120" rx="2" fill="#292A2E"/>
+              <g transform="translate(124 614)"><g class="sd-lock"><path class="sd-shackle" d="M8 26V17a14 14 0 0 1 28 0v9" fill="none" stroke="#F2F3F0" stroke-width="5"/><rect x="0" y="26" width="44" height="34" rx="4" fill="#E4521F"/><circle cx="22" cy="41" r="4" fill="#292A2E"/><rect x="20" y="42" width="4" height="9" fill="#292A2E"/></g></g>
+              <text class="sd-final-t" x="192" y="638">Closed — read-only record</text>
+              <text class="sd-mono sd-final-s" x="192" y="664">ECCAIRS SENT TO FOCA · REOPENING NEEDS A REASON</text>
+              <text class="sd-mono sd-final-s" x="192" y="684">CLOSED AFTER 9 DAYS</text>
+              </g>
+              </g>
+              </svg>
             </div>
-          </div>
-          </div>
         </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Risk</li><li class="chip">Shipped</li></ul>
@@ -165,16 +393,147 @@
         </div>
       </a>
       <a class="card" href="/work/compliance-check" data-cursor-text="View NGFT AI Compliance Check case">
-        <div class="card__media cover" data-cover="comp" style="--c: #7857fa" aria-hidden="true">
-          <div class="cv cv--comp">
-          <div class="cv-win cv-win--wide">
-            <div class="cv-head"><b>Ops manual vs EASA Part-ORO</b><span class="cv-muted"><span data-count>140</span> / 140</span></div>
-            <div class="cv-row"><span class="cv-code">GEN.200</span><span class="cv-text">Management system</span><span class="cv-chip cv-chip--c" data-verdict><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Covered</span><span class="cv-ref" data-ref>p. 14</span></div>
-            <div class="cv-row"><span class="cv-code">GEN.205</span><span class="cv-text">Contracted activities</span><span class="cv-chip cv-chip--c" data-verdict><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Covered</span><span class="cv-ref" data-ref>p. 22</span></div>
-            <div class="cv-row"><span class="cv-code">GEN.210</span><span class="cv-text">Personnel requirements</span><span class="cv-chip cv-chip--c" data-verdict><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Covered</span><span class="cv-ref" data-ref>p. 31</span></div>
-            <div class="cv-row"><span class="cv-code">GEN.220</span><span class="cv-text">Record-keeping</span><span class="cv-chip cv-chip--c" data-verdict><svg class="cv-ck" aria-hidden="true"><use href="#i-check"/></svg>Covered</span><span class="cv-ref" data-ref>p. 47</span></div>
-          </div>
-          </div>
+        <div class="card__media mg-panel">
+          <!-- Copied from the live site (talha.design): the NGFT AI compliance motion graphic.
+               Only its viewBox is widened to 16:9 so it fills this card. At rest it is the
+               finished report; hover, focus or (on touch) scrolling into view replays it.
+               home/css/compliance-thumb.css + home/js/compliance-thumb.js. -->
+          <span class="sms-chip">NGFT</span>
+          <div class="mg" data-mg="compliance">
+              <svg class="mg-svg" viewBox="-64 34 896 504" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <defs><filter id="mgc-shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#14171A" flood-opacity="0.10"/></filter></defs>
+              <rect class="mg-bg" width="800" height="520" fill="#E7E9E4"/>
+              <g class="mg-reg">
+              <rect x="48" y="60" width="220" height="364" rx="2" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#mgc-shadow)"/>
+              <rect x="64" y="80" width="6" height="6" fill="#E4521F"/>
+              <text class="mg-mono mg-head" x="78" y="87">EASA PART-ORO</text>
+              <text class="mg-mono mg-sub" x="64" y="103">REFERENCE · 140 REQUIREMENTS</text>
+              <line x1="64" x2="252" y1="114" y2="114" stroke="#E7E9E4"/>
+              <g class="mg-row" data-i="0">
+              <rect class="mg-row-hl" x="56" y="122" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="138">GEN.110</text>
+              <rect class="mg-bar" x="64" y="146" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="155" width="112" height="5" rx="2.5"/>
+              </g>
+              <g class="mg-row" data-i="1">
+              <rect class="mg-row-hl" x="56" y="178" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="194">GEN.115</text>
+              <rect class="mg-bar" x="64" y="202" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="211" width="132" height="5" rx="2.5"/>
+              </g>
+              <g class="mg-row" data-i="2">
+              <rect class="mg-row-hl" x="56" y="234" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="250">GEN.120</text>
+              <rect class="mg-bar" x="64" y="258" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="267" width="96" height="5" rx="2.5"/>
+              </g>
+              <g class="mg-row" data-i="3">
+              <rect class="mg-row-hl" x="56" y="290" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="306">GEN.130</text>
+              <rect class="mg-bar" x="64" y="314" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="323" width="120" height="5" rx="2.5"/>
+              </g>
+              <g class="mg-row" data-i="4">
+              <rect class="mg-row-hl" x="56" y="346" width="204" height="44" rx="2" fill="#FBE6DC"/>
+              <text class="mg-mono mg-id" x="64" y="362">GEN.140</text>
+              <rect class="mg-bar" x="64" y="370" width="160" height="5" rx="2.5"/>
+              <rect class="mg-bar" x="64" y="379" width="84" height="5" rx="2.5"/>
+              </g>
+              <rect class="mg-scan" x="48" y="122" width="3" height="44" fill="#E4521F"/>
+              </g>
+              <g class="mg-man">
+              <rect class="mg-layer mg-layer-2" x="532" y="60" width="220" height="364" rx="2" fill="#EEF0EB" stroke="#D7DAD3" filter="url(#mgc-shadow)"/>
+              <rect class="mg-layer mg-layer-1" x="532" y="60" width="220" height="364" rx="2" fill="#F5F6F3" stroke="#D7DAD3"/>
+              <rect x="532" y="60" width="220" height="364" rx="2" fill="#FBFBF9" stroke="#D7DAD3"/>
+              <rect x="548" y="80" width="6" height="6" fill="#0F1113"/>
+              <text class="mg-mono mg-head" x="562" y="87">TRAINING MANUAL 2026</text>
+              <text class="mg-mono mg-sub" x="548" y="103">YOURS · 214 PAGES</text>
+              <line x1="548" x2="736" y1="114" y2="114" stroke="#E7E9E4"/>
+              <rect class="mg-hl" data-t="p8" x="580" y="130" width="160" height="28" rx="2" fill="#EFFFD6"/>
+              <rect class="mg-bar mg-mbar" x="588" y="135" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="143" width="116" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="151" width="128" height="5" rx="2.5"/>
+              <g class="mg-tag" data-t="p8"><rect x="544" y="135" width="30" height="18" rx="2" fill="#0F1113"/><text class="mg-mono mg-tagt" x="559" y="147.5" text-anchor="middle">P.8</text></g>
+              <rect class="mg-hl" data-t="p11" x="580" y="186" width="160" height="28" rx="2" fill="#EFFFD6"/>
+              <rect class="mg-bar mg-mbar" x="588" y="191" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="199" width="116" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="207" width="128" height="5" rx="2.5"/>
+              <g class="mg-tag" data-t="p11"><rect x="544" y="191" width="30" height="18" rx="2" fill="#0F1113"/><text class="mg-mono mg-tagt" x="559" y="203.5" text-anchor="middle">P.11</text></g>
+              <rect class="mg-hl" data-t="p14" x="580" y="234" width="160" height="28" rx="2" fill="#EFFFD6"/>
+              <rect class="mg-bar mg-mbar" x="588" y="239" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="247" width="116" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="255" width="128" height="5" rx="2.5"/>
+              <g class="mg-tag" data-t="p14"><rect x="544" y="239" width="30" height="18" rx="2" fill="#0F1113"/><text class="mg-mono mg-tagt" x="559" y="251.5" text-anchor="middle">P.14</text></g>
+              <rect class="mg-hl" data-t="p19" x="580" y="278" width="160" height="28" rx="2" fill="#E9F2FE"/>
+              <rect class="mg-bar mg-mbar" x="588" y="283" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="291" width="116" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="299" width="128" height="5" rx="2.5"/>
+              <g class="mg-tag" data-t="p19"><rect x="544" y="283" width="30" height="18" rx="2" fill="#0F1113"/><text class="mg-mono mg-tagt" x="559" y="295.5" text-anchor="middle">P.19</text></g>
+              <rect class="mg-bar mg-mbar" x="588" y="336" width="140" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="344" width="120" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="352" width="132" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="372" width="136" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="380" width="96" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="396" width="128" height="5" rx="2.5"/>
+              <rect class="mg-bar mg-mbar" x="588" y="404" width="110" height="5" rx="2.5"/>
+              <rect class="mg-sweep" x="540" y="116" width="204" height="18" fill="#FFECEB"/>
+              </g>
+              <g class="mg-threads" fill="none">
+              <path class="mg-thread" data-i="0" pathLength="1" d="M268 144 C400 144 400 144 532 144" stroke="#0F1113" stroke-opacity=".5" stroke-width="1.25"/>
+              <circle class="mg-dot" data-i="0" cx="532" cy="144" r="3" fill="#0F1113"/>
+              <path class="mg-thread" data-i="1" pathLength="1" d="M268 200 C400 200 400 200 532 200" stroke="#0F1113" stroke-opacity=".5" stroke-width="1.25"/>
+              <circle class="mg-dot" data-i="1" cx="532" cy="200" r="3" fill="#0F1113"/>
+              <path class="mg-thread" data-i="2" pathLength="1" d="M268 256 C400 256 400 292 532 292" stroke="#0F1113" stroke-opacity=".5" stroke-width="1.25"/>
+              <circle class="mg-dot" data-i="2" cx="532" cy="292" r="3" fill="#0F1113"/>
+              <path class="mg-thread mg-miss" data-i="3" d="M268 312 L498 312" stroke="#C9372C" stroke-opacity=".75" stroke-width="1.25" stroke-dasharray="4 4"/>
+              <path class="mg-miss-end" data-i="3" d="M503 308l8 8M511 308l-8 8" stroke="#C9372C" stroke-width="1.6" stroke-linecap="square"/>
+              <path class="mg-thread" data-i="4" pathLength="1" d="M268 368 C400 368 400 248 532 248" stroke="#0F1113" stroke-opacity=".5" stroke-width="1.25"/>
+              <circle class="mg-dot" data-i="4" cx="532" cy="248" r="3" fill="#0F1113"/>
+              </g>
+              <g transform="translate(280 134)"><g class="mg-chip" data-i="0" data-v="c">
+              <rect class="mg-chip-bg" width="78" height="20" rx="2" fill="#EFFFD6"/>
+              <path d="M7 10.4 9.6 13 14.6 7" fill="none" stroke="#5B7F24" stroke-width="1.8" stroke-linecap="square"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#37471F">COVERED</text>
+              </g></g>
+              <g transform="translate(280 190)"><g class="mg-chip" data-i="1" data-v="c">
+              <rect class="mg-chip-bg" width="78" height="20" rx="2" fill="#EFFFD6"/>
+              <path d="M7 10.4 9.6 13 14.6 7" fill="none" stroke="#5B7F24" stroke-width="1.8" stroke-linecap="square"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#37471F">COVERED</text>
+              </g></g>
+              <g transform="translate(280 246)"><g class="mg-chip" data-i="2" data-v="p">
+              <rect class="mg-chip-bg" width="146" height="20" rx="2" fill="#E9F2FE"/>
+              <circle cx="11" cy="10" r="4.4" fill="none" stroke="#1868DB" stroke-width="1.6"/><path d="M11 5.6a4.4 4.4 0 0 1 0 8.8z" fill="#1868DB"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#123263">PARTIALLY COVERED</text>
+              </g></g>
+              <g transform="translate(280 302)"><g class="mg-chip" data-i="3" data-v="n">
+              <rect class="mg-chip-bg" width="106" height="20" rx="2" fill="#FFECEB"/>
+              <path d="M7.6 6.6l6.8 6.8M14.4 6.6l-6.8 6.8" fill="none" stroke="#C9372C" stroke-width="1.8" stroke-linecap="square"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#5D1F1A">NOT COVERED</text>
+              </g></g>
+              <g transform="translate(280 358)"><g class="mg-chip" data-i="4" data-v="c">
+              <rect class="mg-chip-bg" width="78" height="20" rx="2" fill="#EFFFD6"/>
+              <path d="M7 10.4 9.6 13 14.6 7" fill="none" stroke="#5B7F24" stroke-width="1.8" stroke-linecap="square"/>
+              <text class="mg-chip-t" x="21" y="13.7" fill="#37471F">COVERED</text>
+              </g></g>
+              <text class="mg-count" x="48" y="494">140</text>
+              <text class="mg-mono mg-cl" x="120" y="481">REQUIREMENTS</text>
+              <text class="mg-mono mg-cl" x="120" y="494">CHECKED</text>
+              <rect x="330" y="484" width="422" height="8" rx="1" fill="#D7DAD3"/>
+              <rect class="mg-seg" data-s="0" x="330" y="484" width="354" height="8" fill="#5B7F24"/>
+              <rect class="mg-seg" data-s="1" x="686" y="484" width="34" height="8" fill="#1868DB"/>
+              <rect class="mg-seg" data-s="2" x="722" y="484" width="16" height="8" fill="#C9372C"/>
+              <rect class="mg-seg" data-s="3" x="740" y="484" width="12" height="8" fill="#6B6E76"/>
+              <g class="mg-leg" data-k="0"><rect x="330" y="466" width="6" height="6" fill="#5B7F24"/><text class="mg-mono mg-legt" x="340" y="472.5">118</text></g>
+              <g class="mg-leg" data-k="1"><rect x="374" y="466" width="6" height="6" fill="#1868DB"/><text class="mg-mono mg-legt" x="384" y="472.5">12</text></g>
+              <g class="mg-leg" data-k="2"><rect x="408" y="466" width="6" height="6" fill="#C9372C"/><text class="mg-mono mg-legt" x="418" y="472.5">6</text></g>
+              <g class="mg-leg" data-k="3"><rect x="434" y="466" width="6" height="6" fill="#6B6E76"/><text class="mg-mono mg-legt" x="444" y="472.5">4</text></g>
+              <g transform="translate(642 372) rotate(-8)"><g class="mg-stamp">
+              <rect x="-80" y="-21" width="160" height="42" rx="2" fill="#FBFBF9" fill-opacity=".9" stroke="#E4521F" stroke-width="2.5"/>
+              <rect x="-75" y="-16" width="150" height="32" rx="1" fill="none" stroke="#E4521F" stroke-width="1"/>
+              <text class="mg-stamp-t" x="0" y="6" text-anchor="middle">REPORT READY</text>
+              </g></g>
+              </svg>
+            </div>
         </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">AI Native</li><li class="chip">Compliance</li><li class="chip">Beta</li></ul>
@@ -198,17 +557,195 @@
         </div>
       </a>
       <a class="card" href="/work/training-record" data-cursor-text="View NGFT Training case">
-        <div class="card__media cover" data-cover="tr" style="--c: #af6005" aria-hidden="true">
-          <div class="cv cv--tr">
-          <div class="cv-win">
-            <div class="cv-head"><b>AW139 type rating</b><span class="cv-muted"><span data-gaps>0</span> gaps</span></div>
-            <div class="cv-row"><span class="cv-code">S1</span><span class="cv-text">Normal procedures</span><span class="cv-chip cv-chip--c" data-outcome>Pass</span></div>
-            <div class="cv-row"><span class="cv-code">S2</span><span class="cv-text">Engine failure</span><span class="cv-chip cv-chip--c" data-outcome>Pass</span></div>
-            <div class="cv-row"><span class="cv-code">S3</span><span class="cv-text">Autorotation</span><span class="cv-chip cv-chip--c" data-outcome data-repeat>Pass</span></div>
-            <div class="cv-row"><span class="cv-code">S4</span><span class="cv-text">Emergency landing</span><span class="cv-chip cv-chip--c" data-outcome>Pass</span></div>
-            <span class="cv-btn" data-signoff>Sign off</span>
-          </div>
-          </div>
+        <div class="card__media tr-panel">
+          <!-- Copied from the live site (talha.design): the NGFT training-record motion graphic.
+               Only its viewBox is widened to 16:9 so it fills this card. At rest it is the
+               complete record, signed off and written to the roster.
+               home/css/training-thumb.css + home/js/training-thumb.js. -->
+          <span class="sms-chip">NGFT</span>
+          <div class="tr" data-tr="training">
+              <svg class="tr-svg" viewBox="-64 16 896 504" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <defs><filter id="trc-sheet" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#14171A" flood-opacity="0.08"/></filter></defs>
+              <rect width="800" height="520" fill="#E7E9E4"/>
+              <g class="tr-rec">
+              <rect x="48" y="44" width="476" height="350" rx="2" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#trc-sheet)"/>
+              <rect x="66" y="64" width="6" height="6" fill="#E4521F"/>
+              <text class="tr-mono tr-head" x="80" y="71">TOMASZ BIELIK · AW139 TYPE RATING</text>
+              <line x1="66" x2="506" y1="84" y2="84" stroke="#E7E9E4"/>
+              <g class="tr-col" data-s="0">
+              <text class="tr-snum" x="104" y="124" text-anchor="middle">1</text>
+              <rect class="tr-slot" x="96.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="260" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="282" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="304" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="96.0" y="326" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="104" y="366" text-anchor="middle">SYSTEMS</text>
+              <text class="tr-mono tr-mode" x="104" y="380" text-anchor="middle">CLASSROOM</text>
+              </g>
+              <g class="tr-col" data-s="1">
+              <text class="tr-snum" x="174" y="124" text-anchor="middle">2</text>
+              <rect class="tr-slot" x="166.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="260" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="282" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="304" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="166.0" y="326" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="174" y="366" text-anchor="middle">NORMAL</text>
+              <text class="tr-mono tr-mode" x="174" y="380" text-anchor="middle">FSTD</text>
+              </g>
+              <g class="tr-col" data-s="2">
+              <text class="tr-snum" x="244" y="124" text-anchor="middle">3</text>
+              <rect class="tr-slot" x="236.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="260" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="282" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="304" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="236.0" y="326" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="244" y="366" text-anchor="middle">ABNORMAL</text>
+              <text class="tr-mono tr-mode" x="244" y="380" text-anchor="middle">FSTD</text>
+              </g>
+              <g class="tr-col" data-s="3">
+              <text class="tr-snum" x="314" y="124" text-anchor="middle">4</text>
+              <rect class="tr-slot" x="306.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="306.0" y="260" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="314" y="366" text-anchor="middle">NIGHT · IFR</text>
+              <text class="tr-mono tr-mode" x="314" y="380" text-anchor="middle">FSTD</text>
+              </g>
+              <g class="tr-col" data-s="4">
+              <text class="tr-snum" x="384" y="124" text-anchor="middle">5</text>
+              <rect class="tr-slot" x="376.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="376.0" y="172" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="376.0" y="194" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="376.0" y="216" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <rect class="tr-slot" x="376.0" y="238" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="384" y="366" text-anchor="middle">HANDLING</text>
+              <text class="tr-mono tr-mode" x="384" y="380" text-anchor="middle">AIRCRAFT</text>
+              </g>
+              <g class="tr-col" data-s="5">
+              <text class="tr-snum" x="454" y="124" text-anchor="middle">6</text>
+              <rect class="tr-slot" x="446.0" y="150" width="16" height="16" rx="2" fill="none" stroke="#D7DAD3"/>
+              <text class="tr-mono tr-sname" x="454" y="366" text-anchor="middle">SKILL TEST</text>
+              <text class="tr-mono tr-mode" x="454" y="380" text-anchor="middle">AIRCRAFT</text>
+              </g>
+              <rect class="tr-cell" data-s="0" data-r="0" data-o="P" x="96.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="1" data-o="P" x="96.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="2" data-o="P" x="96.0" y="194" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="3" data-o="P" x="96.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="4" data-o="P" x="96.0" y="238" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="5" data-o="P" x="96.0" y="260" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="6" data-o="P" x="96.0" y="282" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="7" data-o="P" x="96.0" y="304" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="0" data-r="8" data-o="P" x="96.0" y="326" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="0" data-o="P" x="166.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="1" data-o="P" x="166.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="2" data-o="R" x="166.0" y="194" width="16" height="16" rx="2" fill="#C9372C"/>
+              <rect class="tr-cell" data-s="1" data-r="3" data-o="P" x="166.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="4" data-o="P" x="166.0" y="238" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="5" data-o="P" x="166.0" y="260" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="6" data-o="R" x="166.0" y="282" width="16" height="16" rx="2" fill="#C9372C"/>
+              <rect class="tr-cell" data-s="1" data-r="7" data-o="P" x="166.0" y="304" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="1" data-r="8" data-o="P" x="166.0" y="326" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="0" data-o="P" x="236.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="1" data-o="P" x="236.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="2" data-o="P" x="236.0" y="194" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="3" data-o="P" x="236.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="4" data-o="R" x="236.0" y="238" width="16" height="16" rx="2" fill="#C9372C"/>
+              <rect class="tr-cell" data-s="2" data-r="5" data-o="P" x="236.0" y="260" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="6" data-o="P" x="236.0" y="282" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="7" data-o="P" x="236.0" y="304" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="2" data-r="8" data-o="P" x="236.0" y="326" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="0" data-o="P" x="306.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="1" data-o="P" x="306.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="2" data-o="P" x="306.0" y="194" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="3" data-o="P" x="306.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="4" data-o="P" x="306.0" y="238" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="3" data-r="5" data-o="P" x="306.0" y="260" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="0" data-o="P" x="376.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="1" data-o="P" x="376.0" y="172" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="2" data-o="P" x="376.0" y="194" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="3" data-o="P" x="376.0" y="216" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="4" data-r="4" data-o="P" x="376.0" y="238" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <rect class="tr-cell" data-s="5" data-r="0" data-o="P" x="446.0" y="150" width="16" height="16" rx="2" fill="#5B7F24"/>
+              <path class="tr-arc" data-k="0" pathLength="1" d="M182.0 202.0 C199.0 176.0 219.0 176.0 236.0 202.0" fill="none" stroke="#5B7F24" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="tr-clear" data-k="0" d="M170.0 202.5l2.8 2.8 5-5.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="square"/>
+              <path class="tr-arc" data-k="1" pathLength="1" d="M182.0 290.0 C234.0 192.0 254.0 192.0 306.0 224.0" fill="none" stroke="#5B7F24" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="tr-clear" data-k="1" d="M170.0 290.5l2.8 2.8 5-5.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="square"/>
+              <path class="tr-arc" data-k="2" pathLength="1" d="M252.0 246.0 C304.0 142.0 324.0 142.0 376.0 180.0" fill="none" stroke="#5B7F24" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="tr-clear" data-k="2" d="M240.0 246.5l2.8 2.8 5-5.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="square"/>
+              <g class="tr-legend">
+              <rect x="352" y="63" width="8" height="8" rx="1.5" fill="#5B7F24"/><text class="tr-mono tr-sub" x="364" y="70.5">PASS</text>
+              <rect x="398" y="63" width="8" height="8" rx="1.5" fill="#C9372C"/><text class="tr-mono tr-sub" x="410" y="70.5">REPEAT</text>
+              <path d="M454 71 q8 -10 16 0" fill="none" stroke="#5B7F24" stroke-width="1.6"/><text class="tr-mono tr-sub" x="474" y="70.5">CLEARED</text>
+              </g>
+              </g>
+              <g class="tr-gate">
+              <rect x="544" y="44" width="208" height="350" rx="2" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#trc-sheet)"/>
+              <text class="tr-mono tr-head" x="562" y="71">SIGN-OFF</text>
+              <line x1="562" x2="734" y1="84" y2="84" stroke="#E7E9E4"/>
+              <text class="tr-big" x="560" y="156">0</text>
+              <text class="tr-mono tr-sub" x="562" y="178">CHECKS OUTSTANDING</text>
+              <text class="tr-small" x="562" y="196">Sign-off waits until this is zero</text>
+              <g transform="translate(624 214)"><g class="tr-lock">
+              <path class="tr-shackle" d="M10 26V16a14 14 0 0 1 28 0v10" fill="none" stroke="#292A2E" stroke-width="5"/>
+              <rect class="tr-body" x="0" y="26" width="48" height="36" rx="5" fill="#5B7F24"/>
+              <circle cx="24" cy="41" r="4" fill="#FBFBF9"/><rect x="22" y="42" width="4" height="9" fill="#FBFBF9"/>
+              </g></g>
+              <rect x="562" y="292" width="172" height="58" fill="#F2F3F0"/>
+              <path class="tr-sig" pathLength="1" d="M576 334c6-18 12-20 14-6s6 12 12-2 10-16 14-4 6 10 12 0 8-10 12 0 10 6 18-4 8-4 14 2" fill="none" stroke="#1F2124" stroke-width="2" stroke-linecap="round"/>
+              <text class="tr-small" x="562" y="366">Capt. H. Iqbal · examiner</text>
+              <text class="tr-mono tr-sub" x="562" y="381">16 SEP 2026 · 14:52</text>
+              </g>
+              <g class="tr-roster">
+              <rect x="48" y="408" width="704" height="84" rx="2" fill="#FBFBF9" stroke="#D7DAD3" filter="url(#trc-sheet)"/>
+              <text class="tr-mono tr-head" x="64" y="430">WRITTEN TO THE ROSTER</text>
+              <rect x="64" y="447" width="520" height="6" rx="3" fill="#ECEDE9"/>
+              <line x1="64.0" x2="64.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="66.0" y="476">S</text>
+              <line x1="104.0" x2="104.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="106.0" y="476">O</text>
+              <line x1="144.0" x2="144.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="146.0" y="476">N</text>
+              <line x1="184.0" x2="184.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="186.0" y="476">D</text>
+              <line x1="224.0" x2="224.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="226.0" y="476">J</text>
+              <line x1="264.0" x2="264.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="266.0" y="476">F</text>
+              <line x1="304.0" x2="304.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="306.0" y="476">M</text>
+              <line x1="344.0" x2="344.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="346.0" y="476">A</text>
+              <line x1="384.0" x2="384.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="386.0" y="476">M</text>
+              <line x1="424.0" x2="424.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="426.0" y="476">J</text>
+              <line x1="464.0" x2="464.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="466.0" y="476">J</text>
+              <line x1="504.0" x2="504.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="506.0" y="476">A</text>
+              <line x1="544.0" x2="544.0" y1="458" y2="463" stroke="#C9CCC4"/>
+              <text class="tr-mono tr-month" x="546.0" y="476">S</text>
+              <rect class="tr-bar" x="84.0" y="447" width="480.0" height="6" rx="3" fill="#5B7F24"/>
+              <g class="tr-reval"><line x1="446.8" x2="446.8" y1="440" y2="459" stroke="#292A2E" stroke-width="1.2"/><text class="tr-mono tr-sub" x="451.8" y="440">REVALIDATION 18 JUN</text></g>
+              <g class="tr-valid"><circle cx="564.0" cy="450" r="4" fill="#5B7F24"/><text class="tr-mono tr-sub" x="244" y="430">VALID 16 SEP 2026 → 16 SEP 2027</text></g>
+              <g class="tr-ok"><rect x="598" y="430" width="146" height="46" rx="2" fill="#EFFFD6"/><circle cx="615" cy="453" r="9" fill="#5B7F24"/><path d="M610.5 453.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"/><text class="tr-ok-t" x="630" y="449">Can be rostered</text><text class="tr-ok-s" x="630" y="464">on AW139 from today</text></g>
+              </g>
+              </svg>
+            </div>
         </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">Aviation</li><li class="chip">Training</li><li class="chip">Shipped</li></ul>

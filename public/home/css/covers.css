@@ -103,46 +103,28 @@
 .cv-timer .cv-label { color: inherit; opacity: 0.7; }
 .cv-timer b { font-size: 2em; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 
-/* NGFT SMS: one report moving Intake → Risk → Closed */
-.cv-lanes {
-  position: relative;
-  width: 84%;
-  height: 62%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-.cv-lane {
-  padding: 0.8em;
-  border-left: 1px dashed var(--title-ghost);
-}
-.cv-lane:first-child { border-left: 0; }
-.cv-report {
-  position: absolute;
-  top: 26%;
-  left: calc(100% * 2 / 3);   /* finished frame: the Closed lane */
-  width: calc(100% / 3);
-  padding: 0 0.8em;
-}
-.cv-report > :not(.cv-chip):not(.cv-meter) { display: block; }
-.cv-report {
-  display: grid;
-  gap: 0.45em;
-}
-.cv-report::before {
-  content: "";
-  position: absolute;
-  inset: -0.9em 0.3em;
-  z-index: -1;
-  border-radius: 0.6em;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-soft);
-}
-.cv-report .cv-chip { justify-self: start; }
-.cv-meter { height: 0.4em; border-radius: 1em; background: var(--chip); overflow: hidden; }
-.cv-meter i { display: block; height: 100%; width: 100%; background: var(--c); transform-origin: left; }
+/* NGFT AI Compliance: the live site's motion graphic (compliance-thumb.css/.js)
+   on its light panel, with the NGFT chip. The SVG's viewBox is 16:9, so it fills. */
+.mg-panel { position: relative; background: #E7E9E4; border-radius: 2px; }
+.mg-panel .mg { aspect-ratio: auto; width: 100%; height: 100%; border-radius: 0; }
 
-/* NGFT AI Compliance: requirement rows ticking to Covered with a page ref */
+/* NGFT Training: the live site's motion graphic (training-thumb.css/.js), same treatment */
+.tr-panel { position: relative; background: #E7E9E4; border-radius: 2px; }
+.tr-panel .tr { aspect-ratio: auto; width: 100%; height: 100%; border-radius: 0; }
+
+/* NGFT SMS: the live site's motion graphic (sms-thumb.css/.js), on its dark
+   panel with the NGFT chip, as on talha.design. */
+.sms-panel { position: relative; background: #14171A; border-radius: 2px; }
+.sms-panel .sd { aspect-ratio: auto; width: 100%; height: 100%; border-radius: 0; }
+.sms-chip {
+  position: absolute; left: 16px; top: 16px; z-index: 2;
+  padding: 5px 9px; border-radius: 2px;
+  background: #1D4ED8; color: #F2F3F0;
+  font: 500 12px/16.8px "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.72px; text-transform: uppercase;
+}
+
+/* Rows with a code, text, verdict chip and page ref (NGFT Training uses them) */
 .cv-row {
   display: grid;
   grid-template-columns: 5.5em 1fr auto 3em;

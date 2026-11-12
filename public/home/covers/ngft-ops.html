@@ -731,6 +731,7 @@
   addEventListener('resize', () => { fit(); if (lastT !== null && CAM) apply(lastT); });
   fit();
 
+  const REST = 8.8;   // script time of the frame shown at rest in a card
   const frozen = params.has('t') ? parseFloat(params.get('t')) : null;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -738,18 +739,34 @@
     // Measure with every pane laid out in place (panes overlap; opacity does not affect layout)
     plan();
     if (frozen !== null || reduce) { apply(((frozen ?? 8.8) / SLOW) % DUR); return; }
-    let played = 0, last = null, raf = 0, visible = true;
+    // Script time, kept unwrapped so "the next time we reach REST" is easy.
+    // Standalone (this file opened on its own) it plays on a loop.
+    // Embedded in a card (?embed) it rests on REST and only plays while the card
+    // is hovered or focused; on leaving it fast-forwards to REST and stops there.
+    // The page can also ask for one full loop ('once', for touch screens).
+    let cur = embed ? REST : 0, target = null, fast = false, last = null, raf = 0, visible = true, playing = !embed;
     const frame = (now) => {
-      if (last !== null) played += Math.min(now - last, 100);
+      const dt = last === null ? 0 : Math.min(now - last, 100);
       last = now;
-      apply((played / 1000 / SLOW) % DUR);
-      raf = requestAnimationFrame(frame);
+      cur += (dt / 1000 / SLOW) * (fast ? 6 : 1);
+      if (target !== null && cur >= target) { cur = target; target = null; fast = false; playing = false; }
+      apply(((cur % DUR) + DUR) % DUR);
+      raf = playing ? requestAnimationFrame(frame) : 0;
     };
-    const run = () => { if (!raf && visible && !document.hidden) { last = null; raf = requestAnimationFrame(frame); } };
+    const run = () => { if (!raf && playing && visible && !document.hidden) { last = null; raf = requestAnimationFrame(frame); } };
     const halt = () => { cancelAnimationFrame(raf); raf = 0; };
+    const nextRest = () => cur + ((REST - (cur % DUR) + DUR) % DUR);
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? run() : halt(); }).observe(stage);
     document.addEventListener('visibilitychange', () => (document.hidden ? halt() : run()));
-    apply(0);
+    if (embed) {
+      window.addEventListener('message', (e) => {
+        if (e.origin !== location.origin || !e.data || !e.data.cmd) return;
+        if (e.data.cmd === 'hover' && e.data.on) { target = null; fast = false; playing = true; run(); }
+        else if (e.data.cmd === 'hover') { if (playing) { target = nextRest(); fast = true; } }
+        else if (e.data.cmd === 'once' && !playing) { target = cur + DUR; fast = false; playing = true; run(); }
+      });
+    }
+    apply(((cur % DUR) + DUR) % DUR);
     run();
   });
 })();

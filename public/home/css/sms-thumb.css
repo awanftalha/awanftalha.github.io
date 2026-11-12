@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Work thumbnail · SMS safety manager flow
+   Inline SVG, 880 x 800 user units, on the portfolio's dark panel.
+   At rest it is the closed report; sms-thumb.js replays the flow that got it there.
+   ========================================================================== */
+
+.sd {
+  /* portfolio tokens (css/tokens.css), with their values as a fallback */
+  --sd-panel: var(--color-surface-inverse, #14171A);
+  --sd-accent: var(--color-accent, #E4521F);
+  --sd-faint: var(--color-ink-faint, #8A8F96);
+  --sd-mono: var(--font-mono, "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace);
+  /* product (NGFT SMS) text colours */
+  --sd-ink: #292A2E;
+  --sd-muted: #505258;
+  --sd-app: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  position: relative;
+  display: block;
+  aspect-ratio: 880 / 800;
+  max-width: 100%;
+  background: var(--sd-panel);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.sd-svg { display: block; width: 100%; height: 100%; }
+.sd-svg g, .sd-svg rect, .sd-svg path, .sd-svg circle, .sd-svg text, .sd-svg line { transform-box: fill-box; }
+
+/* type */
+.sd-mono { font-family: var(--sd-mono); font-weight: 500; letter-spacing: 0.08em; }
+.sd-step-t { font-size: 13px; fill: #F2F3F0; }
+.sd-cap { font-size: 12.5px; fill: var(--sd-faint); }
+.sd-ok { fill: #4C6B1F; }
+.sd-id { font-size: 13px; fill: var(--sd-muted); }
+.sd-lab { font-size: 12px; fill: var(--sd-faint); }
+.sd-h { font: 600 24px var(--sd-app); fill: var(--sd-ink); letter-spacing: -0.01em; }
+.sd-title { font: 600 22px var(--sd-app); fill: var(--sd-ink); letter-spacing: -0.01em; }
+.sd-sub { font: 400 14px var(--sd-app); fill: var(--sd-muted); }
+.sd-val { font: 400 17px var(--sd-app); fill: var(--sd-ink); }
+.sd-strong { font-weight: 600; }
+.sd-big { font: 700 80px var(--sd-app); fill: var(--sd-ink); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.sd-tnum { font: 700 36px var(--sd-app); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.sd-loz-t { font: 600 12px var(--sd-app); letter-spacing: 0.06em; }
+.sd-loz-l { font-size: 14px; }
+.sd-cell-t { font: 600 13px var(--sd-app); }
+.sd-final-t { font: 600 22px var(--sd-app); fill: #F2F3F0; letter-spacing: -0.01em; }
+.sd-final-s { font-size: 11.5px; fill: #A9AEB5; }
+
+/* what is not part of the finished frame */
+.sd-inbox-head, .sd-row, .sd-attn, .sd-risk, .sd-lift,
+.sd-status:not(.sd-closed),
+.sd-body:not(.sd-body-close) { opacity: 0; }
+
+/* transform origins */
+.sd-step, .sd-divider, .sd-cross line { transform-origin: left center; }
+.sd-loz, .sd-src, .sd-tick, .sd-cell, .sd-ring, .sd-status, .sd-lock, .sd-spark { transform-origin: center; }
+.sd-hz, .sd-check, .sd-syn, .sd-tile { transform-origin: left center; }
+
+/* small cards: fewer words, same moments */
+.sd.is-compact .sd-sub,
+.sd.is-compact .sd-src,
+.sd.is-compact .sd-lab,
+.sd.is-compact .sd-final-s,
+.sd.is-compact .sd-cap:not(.sd-ok) { visibility: hidden; }
+
+a:focus-visible > .sd { outline: 2px solid var(--sd-accent); outline-offset: 3px; }
