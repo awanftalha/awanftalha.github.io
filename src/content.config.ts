@@ -40,7 +40,7 @@ const work = defineCollection({
     summary: z.object({ problem: z.string(), role: z.string(), changed: z.string(), result: z.string() }),
     stats: z.array(stat).max(4),
     series: z.object({ name: z.string(), part: z.number(), of: z.number() }).optional(),
-    next: z.string(),
+    next: z.string().optional(),   // no longer shown: pages have no "Next case study" link
     nda: z.boolean().default(false),
     seo: z.object({ description: z.string(), ogImage: z.string() }),
   }),
