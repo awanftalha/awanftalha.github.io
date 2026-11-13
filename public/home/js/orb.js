@@ -103,8 +103,26 @@ export function initOrb() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let time = 0, rotY = 0.6;
 
+  // The cursor parts the dots: they slide away from it and leave a small
+  // empty space. As the orb turns, fresh dots flow into that space and part
+  // too, so the gap follows the cursor across the turning surface.
+  const hole = { x: 0, y: 0, tx: 0, ty: 0, on: 0, want: 0 };
+  canvas.addEventListener('pointermove', (e) => {
+    const r = canvas.getBoundingClientRect();
+    hole.tx = e.clientX - r.left - r.width / 2;
+    hole.ty = e.clientY - r.top - r.height / 2;
+    if (!hole.want) { hole.x = hole.tx; hole.y = hole.ty; }   // appear where the cursor is
+    hole.want = 1;
+  });
+  canvas.addEventListener('pointerleave', () => { hole.want = 0; });
+
   function update(dt) {
     time += dt;
+    // Ease the gap after the cursor and in/out, so nothing snaps
+    const follow = 1 - Math.exp(-dt * 16), fade = 1 - Math.exp(-dt * (hole.want ? 7 : 4));
+    hole.x += (hole.tx - hole.x) * follow;
+    hole.y += (hole.ty - hole.y) * follow;
+    hole.on += (hole.want - hole.on) * fade;
     // Spins faster and eases off in a slow rhythm, like it's working
     // through something.
     const surge = 1 + 0.45 * Math.sin(time * 0.9) + 0.2 * Math.sin(time * 2.3 + 1);
@@ -140,6 +158,7 @@ export function initOrb() {
     const cx = Math.cos(tl), sx = Math.sin(tl);
     const D = CFG.perspective, K = Math.sqrt(D * D - 1) / D;
     const w2 = CFG.pulseWidth * CFG.pulseWidth;
+    const holeR = R * 0.22, holeReach = holeR * 1.9;
 
     for (let i = 0; i < N; i++) {
       const p = P[i];
@@ -174,7 +193,20 @@ export function initOrb() {
       const c1 = lerp(lerp(PEACH[1], ORANGE[1], ct), SPARK[1], hot);
       const c2 = lerp(lerp(PEACH[2], ORANGE[2], ct), SPARK[2], hot);
 
-      ix[i] = X * s * R; iy[i] = Y * s * R; ir[i] = r * R; ia[i] = a; ik[i] = Z;
+      let sxp = X * s * R, syp = Y * s * R;
+      if (hole.on > 0.001) {
+        // Push away from the cursor, hardest at its centre
+        let dx = sxp - hole.x, dy = syp - hole.y;
+        let d = Math.hypot(dx, dy);
+        if (d < holeReach) {
+          if (d < 0.5) { dx = sxp || 1; dy = syp; d = Math.hypot(dx, dy); }
+          const k = 1 - d / holeReach;
+          const push = holeR * Math.pow(k, 1.4) * hole.on;
+          sxp += (dx / d) * push;
+          syp += (dy / d) * push;
+        }
+      }
+      ix[i] = sxp; iy[i] = syp; ir[i] = r * R; ia[i] = a; ik[i] = Z;
       icol[i] = `rgba(${c0 | 0},${c1 | 0},${c2 | 0},`;
     }
 
