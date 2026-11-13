@@ -434,11 +434,14 @@ html:not(.gsap) .pocket.is-open .pocket__action svg { transform: rotate(45deg); 
 .word { display: flex; flex-direction: column; gap: 24px; }
 .word__quote { font-size: var(--fs-intro); line-height: 1.35; max-width: 40ch; }
 .word__quote p { text-indent: -0.4em; }
-.word__who { display: grid; grid-template-columns: 40px 1fr auto; gap: 0 12px; align-items: center; margin-top: auto; }
+.word__who { display: grid; grid-template-columns: 40px auto 1fr; gap: 0 12px; align-items: center; margin-top: auto; }
 .word__who img { width: 40px; height: 40px; border-radius: 50%; grid-row: span 2; }
 .word__name { font-weight: 600; }
-.word__role { grid-column: 2; color: var(--text-muted); }
-.word__who .icon-btn { grid-row: 1 / span 2; grid-column: 3; }
+.word__role { grid-column: 2 / span 2; color: var(--text-muted); }
+/* LinkedIn logo, right after the name */
+.word__in { grid-row: 1; grid-column: 3; justify-self: start; display: inline-flex; margin-left: -4px; border-radius: 3px; transition: opacity var(--d-micro) linear; }
+.word__in svg { width: 16px; height: 16px; display: block; }
+.word__in:hover { opacity: 0.8; }
 @media (max-width: 767px) {
   .words {
     grid-template-columns: none;
