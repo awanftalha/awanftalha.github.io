@@ -15,13 +15,17 @@ interface Props {
   caption?: string;
   device?: 'none' | 'desktop' | 'tablet' | 'phone';
   ratio?: string;          // e.g. "16/10"; defaults to the poster's own ratio
+  priority?: boolean;      // the page's cover: load it first, not lazily
 }
-const { src, poster, alt, posterAlt, caption, device = 'none', ratio } = Astro.props;
+const { src, poster, alt, posterAlt, caption, device = 'none', ratio, priority = false } = Astro.props;
 const hasVideo = onDisk(src);
 const posterSrc = hasVideo ? posterFor(src, poster) : poster;
 const size = posterSrc ? dims(posterSrc) : null;
 if (src && !hasVideo) warn(`Loop not made yet, showing poster: ${src}`);
 if (posterSrc && !onDisk(posterSrc)) warn(`Poster not found: ${posterSrc}`);
+// Phones get the 800px copy when there is one (scripts/small-posters.mjs)
+const small = posterSrc ? posterSrc.replace(/\.(png|webp|jpe?g)$/i, '-800w.webp') : null;
+const srcset = small && small !== posterSrc && onDisk(small) && size ? `${small} 800w, ${posterSrc} ${size.width}w` : undefined;
 const style = ratio ? `--ratio: ${ratio}` : size ? `--ratio: ${size.width} / ${size.height}` : undefined;
 ---
 <figure class:list={['cs-loop', `device-${device}`]} style={style}>
@@ -49,7 +53,7 @@ const style = ratio ? `--ratio: ${ratio}` : size ? `--ratio: ${size.width} / ${s
           </button>
         </>
       ) : (
-        posterSrc && <img src={posterSrc} alt={posterAlt ?? alt} width={size?.width} height={size?.height} loading="lazy" decoding="async" />
+        posterSrc && <img src={posterSrc} srcset={srcset} sizes={srcset ? '(max-width: 767px) 100vw, 1100px' : undefined} alt={posterAlt ?? alt} width={size?.width} height={size?.height} loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding="async" />
       )}
     </div>
   </div>

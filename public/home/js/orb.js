@@ -50,6 +50,8 @@ export function initOrb() {
   // ---------------------------------------------------------------------
   // Particles, in latitude bands on a sphere. Fixed at start-up.
   // ---------------------------------------------------------------------
+  // A smaller orb (phones) gets fewer dots: same look, about 40% less work.
+  if (wrap.clientWidth < 400) { CFG.bands = 22; CFG.perBand = 44; }
   const P = [];
   for (let b = 0; b < CFG.bands; b++) {
     const lat = -Math.PI / 2 + ((b + 0.5) / CFG.bands) * Math.PI;
@@ -68,8 +70,19 @@ export function initOrb() {
   const N = P.length;
   const ix = new Float32Array(N), iy = new Float32Array(N), ir = new Float32Array(N);
   const ia = new Float32Array(N), ik = new Float32Array(N);
-  const icol = new Array(N);
+  const icol = new Uint16Array(N);
   const order = Array.from({ length: N }, (_, i) => i);
+  // Dot colours, worked out once: 17 steps from peach to orange, each in 9
+  // steps towards the wave colour. Each frame just picks one (no new strings).
+  const CT = 16, HOT = 8;
+  const PALETTE = [];
+  for (let c = 0; c <= CT; c++) {
+    for (let h = 0; h <= HOT; h++) {
+      const ct = c / CT, hot = h / HOT;
+      const rgb = [0, 1, 2].map((k) => Math.round(lerp(lerp(PEACH[k], ORANGE[k], ct), SPARK[k], hot)));
+      PALETTE.push(`rgb(${rgb[0]},${rgb[1]},${rgb[2]})`);
+    }
+  }
 
   // Signal waves: each sweeps across the orb along its own direction.
   // Directions are in view space, so the waves read as activity on the
@@ -90,7 +103,7 @@ export function initOrb() {
   function resize() {
     const w = canvas.clientWidth;
     if (!w) return;
-    dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
     R = w / 3.2;
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(w * dpr);
@@ -188,10 +201,7 @@ export function initOrb() {
       const r = (0.006 + 0.012 * Math.pow(depth, 1.3)) * p.sizeVar * (1 + 0.7 * wave);
       const a = clamp01((0.1 + 0.9 * Math.pow(depth, 1.8)) * (1 + 0.6 * wave) + 0.08 * shimmer * depth);
       const ct = clamp01(depth * 1.15 - 0.05 + (p.tint - 0.5) * 0.35);
-      const hot = wave * (0.4 + 0.6 * depth);
-      const c0 = lerp(lerp(PEACH[0], ORANGE[0], ct), SPARK[0], hot);
-      const c1 = lerp(lerp(PEACH[1], ORANGE[1], ct), SPARK[1], hot);
-      const c2 = lerp(lerp(PEACH[2], ORANGE[2], ct), SPARK[2], hot);
+      const hot = clamp01(wave * (0.4 + 0.6 * depth));
 
       let sxp = X * s * R, syp = Y * s * R;
       if (hole.on > 0.001) {
@@ -207,19 +217,27 @@ export function initOrb() {
         }
       }
       ix[i] = sxp; iy[i] = syp; ir[i] = r * R; ia[i] = a; ik[i] = Z;
-      icol[i] = `rgba(${c0 | 0},${c1 | 0},${c2 | 0},`;
+      icol[i] = Math.round(ct * CT) * (HOT + 1) + Math.round(hot * HOT);
     }
 
-    // Back to front
-    order.sort((i, j) => ik[i] - ik[j]);
+    // Back to front. The order barely changes between frames, so an
+    // insertion sort on last frame's order is close to free.
+    for (let n = 1; n < N; n++) {
+      const v = order[n], key = ik[v];
+      let m = n - 1;
+      while (m >= 0 && ik[order[m]] > key) { order[m + 1] = order[m]; m--; }
+      order[m + 1] = v;
+    }
     for (let n = 0; n < N; n++) {
       const i = order[n];
       if (ia[i] < 0.004) continue;
-      ctx.fillStyle = icol[i] + ia[i].toFixed(3) + ')';
+      ctx.globalAlpha = ia[i];
+      ctx.fillStyle = PALETTE[icol[i]];
       ctx.beginPath();
       ctx.arc(ix[i], iy[i], ir[i], 0, TAU);
       ctx.fill();
     }
+    ctx.globalAlpha = 1;
   }
 
   // ---------------------------------------------------------------------
@@ -234,10 +252,17 @@ export function initOrb() {
     render();
     raf = requestAnimationFrame(frame);
   }
-  function start() { if (!raf && !reduce) { last = 0; raf = requestAnimationFrame(frame); } }
+  // The first frame is drawn straight away; the motion starts once the page
+  // has finished loading and the browser is idle, so it never competes with
+  // the page appearing.
+  let ready = false, visible = false;
+  function start() { if (ready && visible && !raf && !reduce) { last = 0; raf = requestAnimationFrame(frame); } }
   function stop() { cancelAnimationFrame(raf); raf = 0; }
+  const go = () => { ready = true; start(); };
+  const begin = () => ('requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 1500 }) : setTimeout(go, 300));
+  if (document.readyState === 'complete') begin(); else addEventListener('load', begin, { once: true });
 
   new ResizeObserver(resize).observe(canvas);
-  new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop())).observe(wrap);
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; visible ? start() : stop(); }).observe(wrap);
   resize();
 }

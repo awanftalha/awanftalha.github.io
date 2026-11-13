@@ -74,6 +74,17 @@ export function initCovers() {
 
   // The product demos (NGFT OPS, HX Insight) run in iframes: the card tells
   // them when it is hovered. They rest on one frame and settle back to it.
+  // Each demo loads only when its card comes within 300px of the screen,
+  // so it never competes with the top of the page.
+  const frames = [...document.querySelectorAll('.cover--embed iframe[data-src]')];
+  const load = (f) => { if (!f.src) f.src = f.dataset.src; };
+  if ('IntersectionObserver' in window) {
+    const near = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { load(e.target); near.unobserve(e.target); }
+    }), { rootMargin: '300px 0px' });
+    frames.forEach((f) => near.observe(f));
+  } else frames.forEach(load);
+
   document.querySelectorAll('.cover--embed iframe').forEach((frame) => {
     const send = (msg) => { if (frame.contentWindow) frame.contentWindow.postMessage(msg, location.origin); };
     onHover(frame.closest('a'), {

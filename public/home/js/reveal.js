@@ -8,7 +8,8 @@ import { noise } from './scramble.js';
 
 export async function playIntro() {
   const root = document.documentElement;
-  if (!motionOn) return;
+  // No intro states were set (reduced motion, or a phone): nothing to play
+  if (!motionOn || !root.classList.contains('motion')) return;
   const nav = document.querySelectorAll('.nav > *');
   const name = document.querySelector('[data-scramble="load"]');
   const intro = document.querySelector('[data-intro-lines]');

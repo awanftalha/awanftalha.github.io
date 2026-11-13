@@ -25,7 +25,7 @@ const hasRail = sections.length > 0 || deeper.length > 0;
     <PageHeader entry={entry} />
 
     <div class="cs-cover">
-      <Loop src={d.cover.video} poster={d.cover.poster} alt={d.cover.alt} posterAlt={d.cover.alt} />
+      <Loop src={d.cover.video} poster={d.cover.poster} alt={d.cover.alt} posterAlt={d.cover.alt} priority />
     </div>
 
     <div class:list={['cs-body', { 'has-rail': hasRail }]}>

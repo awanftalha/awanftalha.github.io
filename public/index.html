@@ -25,8 +25,9 @@
     var m = document.querySelector('meta[name="theme-color"]');
     if (m) m.content = t === 'dark' ? '#0d0d0d' : '#fbfbfb';
     /* Intro states only exist when motion will run them; if the scripts
-       have not started within 2.5s, show everything. */
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+       have not started within 2.5s, show everything. Phones skip the intro
+       (the name shows at once); wider screens keep the scramble. */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && matchMedia('(min-width: 768px)').matches) {
       d.classList.add('motion');
       setTimeout(function () { if (!window.__motion) d.classList.remove('motion'); }, 2500);
     }
@@ -41,7 +42,11 @@
 <link rel="stylesheet" href="home/css/compliance-thumb.css">
 <link rel="stylesheet" href="home/css/sms-thumb.css">
 <link rel="stylesheet" href="home/css/training-thumb.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600&display=swap">
+<!-- Fonts for the NGFT card graphics further down: loaded without holding up the first paint -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600&display=swap"></noscript>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/CustomEase.min.js" defer></script>
@@ -137,7 +142,7 @@
       <a class="card" href="/work/priced-offer" data-cursor-text="View NGFT OPS case">
         <div class="card__media cover cover--embed" aria-hidden="true">
           <!-- Product demo: job & client, then FL1, then compose and send the offer. -->
-          <iframe src="/home/covers/ngft-ops?embed" title="NGFT OPS product demo" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+          <iframe data-src="/home/covers/ngft-ops?embed" title="NGFT OPS product demo" tabindex="-1" aria-hidden="true"></iframe>
           <div class="cv cv--overlay"><div class="cv-timer"><span class="cv-label">Call to offer</span><b data-ops-timer>20m</b></div></div>
         </div>
         <div class="card__meta" data-reveal="fade">
@@ -547,7 +552,7 @@
       <a class="card" href="/work/hx-insight" data-cursor-text="View HX Insight case">
         <div class="card__media cover cover--embed" aria-hidden="true">
           <!-- Product demo: Omar assigns Zain on desktop, then Ayesha requests leave on her phone. -->
-          <iframe src="/home/covers/hx-insight?embed" title="HX Insight product demo" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+          <iframe data-src="/home/covers/hx-insight?embed" title="HX Insight product demo" tabindex="-1" aria-hidden="true"></iframe>
         </div>
         <div class="card__meta" data-reveal="fade">
           <ul class="card__tags" aria-label="Tags"><li class="chip">HR</li><li class="chip">B2B SaaS</li><li class="chip">Shipped</li></ul>
