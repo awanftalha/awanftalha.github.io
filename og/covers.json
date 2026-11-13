@@ -48,5 +48,10 @@
     "label": "SnapGrid  ·  Web and mobile app",
     "title": "From finished job to first post",
     "metric": "Photos asked for when the job is done, rewarded on approval, published with consent."
+  },
+  "coincase": {
+    "label": "CoinCase  ·  Mobile app",
+    "title": "Crypto that behaves like money",
+    "metric": "Send, swap and trade crypto with live, plain-language tracking, and re-skin the whole app for any bank."
   }
 }

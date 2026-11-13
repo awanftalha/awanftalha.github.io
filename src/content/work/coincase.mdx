@@ -1,0 +1,205 @@
+---
+title: "Crypto that behaves like money"
+format: "app"
+order: 10
+featured: false
+company: "CoinCase · Decklaration"
+eyebrow: ["CoinCase", "Mobile app", "White-label", "Shipped"]
+intro: "A white-label wallet for iOS and the web: send and receive with live, plain-language tracking, swap at a quote you can see counting down, trade with people through escrow, and get back in if you lose your phone. One design, re-skinned for any bank."
+oneLiner: "Send, swap and trade crypto with live, plain-language tracking, and re-skin the whole app for any bank."
+tags: ["Crypto wallet", "iOS + web", "White-label"]
+meta:
+  role: "Lead product designer"
+  platform: "iOS, plus a responsive web app (desktop and phone browser)"
+  people: "Wallet holder, P2P trader, partner bank (white-label)"
+status: "shipped"
+statusNote: "Shipped, then shut down after the IPO failed"
+statusAsOf: 2026-11-14
+updated: 2026-11-14
+cover:
+  poster: "/assets/work/coincase/tab-home.webp"
+  alt: "Home: Maya Okafor's total balance with a live badge, Send, Receive, Swap and Add, an In motion card with a payment to Daniyal mid-flight, and her assets."
+summary:
+  problem: "Crypto wallets talk like block explorers. A payment shows \"pending\" with a hash and no ETA. Lookalike addresses sneak into your history so you copy the wrong one. P2P trades happen over chat with nothing holding the money. And if you lose your phone, you often lose the wallet. Banks that want to offer crypto need all of this solved under their own name."
+  role: "Lead product designer at Decklaration. I designed the wallet end to end: the mobile app, the web companion, and the component library and Brand variables that let one design ship as several banks' apps."
+  changed: "A live, plain-language tracker on every transfer. Lookalike addresses caught at paste time and hidden from Activity. P2P trades through escrow, with an appeal path. Passkey sign-in, trusted-contact recovery and a one-tap freeze. Brand colours in one variable collection, so a bank re-skins the whole app."
+  result: "Shipped. The IPO failed and the product was shut down."
+stats:
+  - value: "77"
+    label: "mobile screens, every state included"
+    source: "count"
+  - value: "3"
+    label: "brands from one design"
+    source: "count"
+    note: "CoinCase, Halden Bank and Saffra. Halden Bank and Saffra are fictional examples."
+  - value: "36"
+    label: "web frames, desktop and phone browser"
+    source: "count"
+next: "hx-timer"
+nda: false
+seo:
+  description: "Send, swap and trade crypto with live, plain-language tracking, and re-skin the whole app for any bank."
+  ogImage: "/assets/og/coincase.png"
+---
+
+<DeviceStrip device="phone">
+  <Figure src="/assets/work/coincase/tab-home.webp" alt="Home: Maya Okafor's total balance with a live badge, Send, Receive, Swap and Add, an In motion card with a payment to Daniyal mid-flight, and her assets." caption="Home" />
+  <Figure src="/assets/work/coincase/tab-activity.webp" alt="Activity: a live feed with in-progress transfers on top, and zero-value lookalike payments folded away as 2 hidden transfers." caption="Activity" />
+  <Figure src="/assets/work/coincase/tab-move.webp" alt="Move money: one sheet for every way money moves: send, receive, swap, add money, cash out, request and the P2P market." caption="Move money" />
+  <Figure src="/assets/work/coincase/tab-contacts.webp" alt="Contacts: frequent and all contacts, each with saved, verified addresses per network." caption="Contacts" />
+  <Figure src="/assets/work/coincase/tab-profile.webp" alt="Profile: name and handle, and the way into security, notifications and sign-out." caption="Profile" />
+</DeviceStrip>
+
+## /* Four jobs, start to finish */
+
+1. **Get in.** Email, a 6-digit code, a passkey, done. No password.
+2. **Send.** Pick a person, see the amount in dollars and crypto, confirm with Face ID, watch it arrive.
+3. **Trade with people.** Buy or sell USDT for PKR with the crypto locked in escrow until payment is confirmed.
+4. **Stay safe.** Know every device, cap what can leave, freeze in one tap, recover with people you trust.
+
+## /* Key moments */
+
+<Decision n="01" title="Catch the fake address before it costs you">
+  <Loop slot="media" poster="/assets/work/coincase/fake-1.webp" alt="Send: This looks like a fake address, with Daniyal's saved address and the one just pasted side by side, the different middle highlighted." device="phone" />
+
+Scammers send tiny payments from addresses that start and end like a friend's, hoping you copy one from your history. When you paste one, CoinCase stops you and shows both addresses side by side with the different middle highlighted. In Activity, those zero-value payments are folded away as "2 hidden transfers" instead of sitting next to real ones.
+</Decision>
+
+<Decision n="02" title="A payment that tells you where it is">
+  <Loop slot="media" poster="/assets/work/coincase/send-tracker.webp" alt="On its way to Daniyal: 8 of 12 network checks done, about 20 seconds left." device="phone" />
+
+The confirm sheet says exactly what will happen ("this only sends 0.07832 ETH, no other changes to your wallet") and that it can't be reversed. Then a live tracker replaces "pending": checks done, time left, and a way to speed it up if it stalls. Home keeps the same tracker in its "In motion" card, and the payment ends at "Daniyal has your 0.07832 ETH".
+</Decision>
+
+<Decision n="03" title="Trade with a stranger, safely">
+  <Loop slot="media" poster="/assets/work/coincase/p2p-seller.webp" alt="The seller's screen: Hamza says he has paid, check your bank app before you release the USDT." device="phone" />
+
+The buyer sees the USDT locked in escrow before paying, with the exact Raast ID, amount and reference, and a warning never to write "crypto" in the bank note. The seller gets the hardest moment designed for them: check your bank app, not the SMS; the name must match; "nobody is rushing you." If the seller goes quiet, the buyer opens an appeal and the USDT stays locked until a specialist decides.
+</Decision>
+
+<DeviceStrip device="phone">
+  <Figure src="/assets/work/coincase/fake-1.webp" alt="Send: This looks like a fake address, Daniyal's saved address next to the one just pasted." caption="Fake address caught" />
+  <Figure src="/assets/work/coincase/tab-activity.webp" alt="Activity: 2 hidden transfers, zero-value payments from lookalike addresses folded away." caption="Hidden from Activity" />
+  <Figure src="/assets/work/coincase/send-confirm.webp" alt="Confirm payment: 0.07832 ETH to Daniyal Shah, network fee, arrival time and total, a plain-language check, and swipe to send with Face ID." caption="Confirm payment" />
+  <Figure src="/assets/work/coincase/send-tracker.webp" alt="On its way to Daniyal: 8 of 12 network checks, about 20 seconds left." caption="Live tracker" />
+  <Figure src="/assets/work/coincase/send-delivered.webp" alt="Delivered: Daniyal has your 0.07832 ETH." caption="Delivered" />
+  <Figure src="/assets/work/coincase/p2p-pay.webp" alt="Step 2 of 4: pay Bilal PKR 28,450, with 100 USDT locked in escrow." caption="Pay the seller" />
+  <Figure src="/assets/work/coincase/p2p-seller.webp" alt="Seller: Hamza says he has paid, check your bank app before you release." caption="Seller checks first" />
+  <Figure src="/assets/work/coincase/p2p-appeal.webp" alt="Open an appeal: a reason and a receipt, with the funds staying locked." caption="Open an appeal" />
+</DeviceStrip>
+
+## /* One product, three brands */
+
+Same screens, swapped brand tokens. Every brand colour lives in the Brand variable collection. A bank switches the mode, uploads a logo and name, and the whole app re-skins with no layout changes. Halden Bank and Saffra are fictional examples.
+
+<Gallery>
+  <Figure src="/assets/work/coincase/brand-coincase.webp" alt="CoinCase: the welcome screen, Home and the confirm payment sheet in CoinCase's own colours." caption="CoinCase" />
+  <Figure src="/assets/work/coincase/brand-halden.webp" alt="Halden Bank: the same welcome, Home and confirm screens in Halden Bank's colours." caption="Halden Bank" />
+  <Figure src="/assets/work/coincase/brand-saffra.webp" alt="Saffra: the same welcome, Home and confirm screens in Saffra's colours." caption="Saffra" />
+</Gallery>
+
+## /* Where it stands */
+
+Shipped on iOS, with a responsive web app covering the same flows on desktop and in a phone browser. The IPO failed and the product was shut down.
+
+Every flow includes its failure states: not enough balance, failed payment, expired quote, expired P2P order, ID photo too dark, frozen account.
+
+<GoDeeper id="get-in" title="Get in, every screen" summary="Email, code, passkey, a short setup, then identity verification that saves progress">
+
+<Moment title="Welcome" src="/assets/work/coincase/in-1.webp" alt="Welcome: Crypto that works like the rest of your money, with Create a wallet and I already have an account.">
+Crypto that works like the rest of your money.
+</Moment>
+<Moment title="Your email" src="/assets/work/coincase/in-2.webp" alt="What's your email? No passwords.">
+No passwords, just an email and a code.
+</Moment>
+<Moment title="A passkey" src="/assets/work/coincase/in-3.webp" alt="Create a passkey: it can't be phished.">
+A passkey that can't be phished.
+</Moment>
+<Moment title="Home, new user" src="/assets/work/coincase/in-4.webp" alt="Home for a new user: ETH already on the way, and a prompt to verify to unlock sending.">
+ETH already on the way; verify to unlock sending.
+</Moment>
+<Moment title="Verify your identity" src="/assets/work/coincase/in-5.webp" alt="Verify your identity: four steps, usually under 5 minutes, with progress saved.">
+Four steps, usually under 5 minutes, and you can finish later.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="send" title="Send, every screen" summary="From choosing a person to delivered, including the ways it can go wrong">
+
+<Moment title="Recipient" src="/assets/work/coincase/send-1.webp" alt="Send: choose a recipient by name, @handle or address.">
+Name, @handle or address.
+</Moment>
+<Moment title="Amount" src="/assets/work/coincase/send-2.webp" alt="Amount: $250 is about 0.07832 ETH at the live rate.">
+$250 ≈ 0.07832 ETH, at the live rate.
+</Moment>
+<Moment title="Not enough balance" src="/assets/work/coincase/send-3.webp" alt="Not enough balance: lower the amount or add money.">
+Lower it, or add money.
+</Moment>
+<Moment title="Live tracker" src="/assets/work/coincase/send-tracker.webp" alt="On its way to Daniyal: 8 of 12 network checks, about 20 seconds left.">
+Checks done and time left, instead of "pending".
+</Moment>
+<Moment title="Failed" src="/assets/work/coincase/send-5.webp" alt="Payment failed: it never left your wallet, and no fee was charged.">
+"Never left your wallet, no fee charged."
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="swap" title="Swap, every screen" summary="A quote with a visible countdown, and an honest sheet when the price moves">
+
+<Moment title="Live quote" src="/assets/work/coincase/swap-1.webp" alt="Swap: 120 USDT to about 0.03757 ETH, with 12 seconds left on the quote.">
+120 USDT → ~0.03757 ETH, 12s left.
+</Moment>
+<Moment title="Confirm swap" src="/assets/work/coincase/swap-2.webp" alt="The confirm swap sheet.">
+What you give, what you get, before you swap.
+</Moment>
+<Moment title="Price changed" src="/assets/work/coincase/swap-3.webp" alt="Price changed: check the new amount before you continue.">
+Check the new amount before going on.
+</Moment>
+<Moment title="Swap complete" src="/assets/work/coincase/swap-4.webp" alt="Swap complete: you got 0.03753 ETH.">
+You got 0.03753 ETH.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="p2p" title="Trade with people, every screen" summary="Buying 100 USDT from Bilal, end to end, plus what happens when it stalls">
+
+<Moment title="Market" src="/assets/work/coincase/p2p-1.webp" alt="P2P market: best price first, with escrow explained at the top.">
+Best price first, escrow explained up top.
+</Moment>
+<Moment title="Buy amount" src="/assets/work/coincase/p2p-2.webp" alt="Buy amount: PKR 28,450 for 100 USDT, with Bilal's terms.">
+PKR 28,450 → 100 USDT, on Bilal's terms.
+</Moment>
+<Moment title="Pay seller" src="/assets/work/coincase/p2p-pay.webp" alt="Step 2 of 4: pay Bilal PKR 28,450, with 100 USDT locked in escrow.">
+Step 2 of 4, with the USDT already in escrow.
+</Moment>
+<Moment title="Waiting for release" src="/assets/work/coincase/p2p-4.webp" alt="Waiting for the seller to release, with an appeal possible after 15 minutes.">
+Appeal after 15 minutes if it stalls.
+</Moment>
+<Moment title="Completed" src="/assets/work/coincase/p2p-5.webp" alt="Completed: 100 USDT received.">
+100 USDT received.
+</Moment>
+<Moment title="Appeal in review" src="/assets/work/coincase/p2p-6.webp" alt="Appeal in review, usually under 24 hours.">
+Usually decided in under 24 hours.
+</Moment>
+
+</GoDeeper>
+
+<GoDeeper id="safe" title="Stay safe, every screen" summary="See what's connected, catch a strange sign-in, stop everything, get back in">
+
+<Moment title="Security center" src="/assets/work/coincase/safe-1.webp" alt="Security center: recovery health, devices, approvals and limits.">
+Recovery health, devices, approvals and limits.
+</Moment>
+<Moment title="New sign-in" src="/assets/work/coincase/safe-2.webp" alt="New sign-in on a Pixel 9: new devices can't send for 24 hours.">
+New devices can't send for 24 hours.
+</Moment>
+<Moment title="Trusted contacts" src="/assets/work/coincase/safe-3.webp" alt="Trusted contacts: they approve recovery and never see your money.">
+They approve recovery, never see your money.
+</Moment>
+<Moment title="Account frozen" src="/assets/work/coincase/safe-4.webp" alt="Account frozen: nothing leaves, and money still arrives.">
+Nothing leaves; money still arrives.
+</Moment>
+<Moment title="Recovery waiting" src="/assets/work/coincase/safe-5.webp" alt="Recovery waiting: a 47h 12m safety wait, which any trusted device can cancel.">
+A 48-hour safety wait, cancellable from any trusted device.
+</Moment>
+
+</GoDeeper>
