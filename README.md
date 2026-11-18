@@ -70,7 +70,6 @@ og/                   Share-card generator for assets/og/*.png (not deployed)
 | What | Where it goes |
 | --- | --- |
 | Company logo SVGs (NGFT, Punjab Group, Decklaration, TenX, Toptal) | `.footer__logos`, use `currentColor` |
-| Booking link | "Book a call" `href="#book"` in the CTA |
 | App icon tiles and gradient colours | the three `.pocket` cards (`--app-a`, `--app-b`) |
 | Version line date | footer, "v.3.0 · Updated …" (typed by hand) |
 
